@@ -17,7 +17,6 @@ import {
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import EmplacementGrid from '@/components/EmplacementGrid';
 
 interface OrderAnalyticsProps {
   order: ParsedOrder;
@@ -70,13 +69,6 @@ const OrderAnalytics: React.FC<OrderAnalyticsProps> = ({ order }) => {
           value={`${fulfillmentRate}%`}
           color={fulfillmentRate >= 80 ? 'success' : fulfillmentRate >= 50 ? 'warning' : 'danger'}
         />
-      </div>
-
-      <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
-        <h4 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
-          <MapPin className="h-4 w-4 text-primary" /> Emplacements — Filtrer par lettre
-        </h4>
-        <EmplacementGrid lines={lines} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

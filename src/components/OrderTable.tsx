@@ -68,6 +68,24 @@ const QTY_TONES = [
   },
 ];
 
+const EMP_TONES = [
+  { idle: 'border-rose-200/60 bg-rose-50/40 text-rose-800 hover:bg-rose-100/70', active: 'border-rose-500/40 bg-rose-500/12 text-rose-800' },
+  { idle: 'border-pink-200/60 bg-pink-50/40 text-pink-800 hover:bg-pink-100/70', active: 'border-pink-500/40 bg-pink-500/12 text-pink-800' },
+  { idle: 'border-amber-200/60 bg-amber-50/40 text-amber-800 hover:bg-amber-100/70', active: 'border-amber-500/40 bg-amber-500/12 text-amber-800' },
+  { idle: 'border-sky-200/60 bg-sky-50/40 text-sky-800 hover:bg-sky-100/70', active: 'border-sky-500/40 bg-sky-500/12 text-sky-800' },
+  { idle: 'border-emerald-200/60 bg-emerald-50/40 text-emerald-800 hover:bg-emerald-100/70', active: 'border-emerald-500/40 bg-emerald-500/12 text-emerald-800' },
+  { idle: 'border-indigo-200/60 bg-indigo-50/40 text-indigo-800 hover:bg-indigo-100/70', active: 'border-indigo-500/40 bg-indigo-500/12 text-indigo-800' },
+  { idle: 'border-violet-200/60 bg-violet-50/40 text-violet-800 hover:bg-violet-100/70', active: 'border-violet-500/40 bg-violet-500/12 text-violet-800' },
+];
+
+function getFirstLetter(emplacement: string) {
+  const s = (emplacement || '').trim();
+  if (!s) return '';
+  const m = s.match(/^\p{L}/u);
+  if (m) return m[0].toUpperCase();
+  return s[0].toUpperCase();
+}
+
 const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [search, setSearch] = useState('');
   const [stockFilter, setStockFilter] = useState<StockFilter>('all');
@@ -77,6 +95,11 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [sortFilter, setSortFilter] = useState<SortFilter>('default');
   const [qtyFilter, setQtyFilter] = useState<string>('all');
   const [qtyMode, setQtyMode] = useState<QtyMode>('exact');
+  const [empFilter, setEmpFilter] = useState<string>('all');
+  const [empSections, setEmpSections] = useState<Set<string>>(new Set());
+  const [empRows, setEmpRows] = useState<Set<string>>(new Set());
+  const [empLevels, setEmpLevels] = useState<Set<string>>(new Set());
+  const [empEmplacements, setEmpEmplacements] = useState<Set<string>>(new Set());
 
   const qtyGroups = useMemo(() => {
     const map = new Map<number, number>();
@@ -85,6 +108,68 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       map.set(qty, (map.get(qty) ?? 0) + 1);
     });
     return [...map.entries()].sort((a, b) => a[0] - b[0]);
+  }, [lines]);
+
+  const sectionsAvailable = useMemo(() => {
+    const s = new Set<string>();
+    for (const l of lines) {
+      const letter = getFirstLetter(l.emplacement);
+      if (empFilter !== 'all' && letter !== empFilter) continue;
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      if (parts[1]) s.add(parts[1]);
+    }
+    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
+  }, [lines, empFilter]);
+
+  const rowsAvailable = useMemo(() => {
+    const s = new Set<string>();
+    for (const l of lines) {
+      const letter = getFirstLetter(l.emplacement);
+      if (empFilter !== 'all' && letter !== empFilter) continue;
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      if (empSections.size > 0 && !empSections.has(parts[1] || '')) continue;
+      if (parts[2]) s.add(parts[2]);
+    }
+    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
+  }, [lines, empFilter, empSections]);
+
+  const levelsAvailable = useMemo(() => {
+    const s = new Set<string>();
+    for (const l of lines) {
+      const letter = getFirstLetter(l.emplacement);
+      if (empFilter !== 'all' && letter !== empFilter) continue;
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      if (empSections.size > 0 && !empSections.has(parts[1] || '')) continue;
+      if (empRows.size > 0 && !empRows.has(parts[2] || '')) continue;
+      if (parts[3]) s.add(parts[3]);
+    }
+    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
+  }, [lines, empFilter, empSections, empRows]);
+
+  const emplacementsAvailable = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const l of lines) {
+      const letter = getFirstLetter(l.emplacement);
+      if (empFilter !== 'all' && letter !== empFilter) continue;
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      if (empSections.size > 0 && !empSections.has(parts[1] || '')) continue;
+      if (empRows.size > 0 && !empRows.has(parts[2] || '')) continue;
+      if (empLevels.size > 0 && !empLevels.has(parts[3] || '')) continue;
+      const key = (l.emplacement || '').trim();
+      if (!key) continue;
+      map.set(key, (map.get(key) || 0) + 1);
+    }
+    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
+  }, [lines, empFilter, empSections, empRows, empLevels]);
+
+  const letterGroups = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const l of lines) {
+      const letter = getFirstLetter(l.emplacement);
+      if (!letter) continue;
+      map.set(letter, (map.get(letter) ?? 0) + 1);
+    }
+    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
   }, [lines]);
 
   const stockCounts = useMemo(
@@ -109,6 +194,35 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
           l.designation.toLowerCase().includes(q) ||
           l.emplacement.toLowerCase().includes(q)
       );
+    }
+
+    if (empFilter !== 'all') {
+      result = result.filter((l) => getFirstLetter(l.emplacement) === empFilter);
+    }
+
+    if (empEmplacements.size > 0) {
+      result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
+    }
+
+    if (empSections.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empSections.has(parts[1] || '');
+      });
+    }
+
+    if (empRows.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empRows.has(parts[2] || '');
+      });
+    }
+
+    if (empLevels.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empLevels.has(parts[3] || '');
+      });
     }
 
     if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
@@ -164,7 +278,22 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     }
 
     return result;
-  }, [lines, search, stockFilter, stockMode, stockValueFilter, qtyFilter, qtyMode, emptyFilter, sortFilter]);
+  }, [
+    lines,
+    search,
+    stockFilter,
+    stockMode,
+    stockValueFilter,
+    qtyFilter,
+    qtyMode,
+    emptyFilter,
+    sortFilter,
+    empFilter,
+    empSections,
+    empRows,
+    empLevels,
+    empEmplacements,
+  ]);
 
   const hasActiveFilters =
     search.trim().length > 0 ||
@@ -174,7 +303,12 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     qtyFilter !== 'all' ||
     qtyMode !== 'exact' ||
     emptyFilter !== 'all' ||
-    sortFilter !== 'default';
+    sortFilter !== 'default' ||
+    empFilter !== 'all' ||
+    empSections.size > 0 ||
+    empRows.size > 0 ||
+    empLevels.size > 0 ||
+    empEmplacements.size > 0;
 
   const resetFilters = () => {
     setSearch('');
@@ -185,6 +319,11 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     setQtyMode('exact');
     setEmptyFilter('all');
     setSortFilter('default');
+    setEmpFilter('all');
+    setEmpSections(new Set());
+    setEmpRows(new Set());
+    setEmpLevels(new Set());
+    setEmpEmplacements(new Set());
   };
 
   const getRowClass = (stock: number, hasEmptyCell: boolean) => {
@@ -550,6 +689,188 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
             </div>
           </div>
 
+          <div className="rounded-lg border border-border bg-background/60 p-3">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs font-semibold text-foreground">Filtre Emplacement</p>
+              <div className="flex items-center gap-2">
+                {(empFilter !== 'all' || empSections.size > 0 || empRows.size > 0 || empLevels.size > 0) && (
+                  <div className="flex items-center gap-2">
+                    {empFilter !== 'all' && <span className="text-xs rounded-full px-2 py-0.5 bg-primary/10 text-primary font-semibold">Lettre: {empFilter}</span>}
+                    {empSections.size > 0 && <span className="text-xs rounded-full px-2 py-0.5 bg-sky-50 text-sky-700 font-semibold">Section: {Array.from(empSections).join(', ')}</span>}
+                    {empRows.size > 0 && <span className="text-xs rounded-full px-2 py-0.5 bg-emerald-50 text-emerald-700 font-semibold">Row: {Array.from(empRows).join(', ')}</span>}
+                    {empLevels.size > 0 && <span className="text-xs rounded-full px-2 py-0.5 bg-amber-50 text-amber-700 font-semibold">Level: {Array.from(empLevels).join(', ')}</span>}
+                  </div>
+                )}
+
+                <button
+                  onClick={() => {
+                    setEmpFilter('all');
+                    setEmpSections(new Set());
+                    setEmpRows(new Set());
+                    setEmpLevels(new Set());
+                    setEmpEmplacements(new Set());
+                  }}
+                  className="inline-flex items-center gap-1 px-2 py-1 rounded-full border bg-card text-muted-foreground text-xs hover:bg-primary/10 transition transform hover:scale-105"
+                >
+                  <X className="h-3 w-3" />
+                  Effacer
+                </button>
+              </div>
+            </div>
+
+            <div className="grid gap-2 [grid-template-columns:repeat(auto-fit,minmax(110px,1fr))]">
+              <button
+                onClick={() => {
+                  setEmpFilter('all');
+                  setEmpSections(new Set());
+                  setEmpRows(new Set());
+                  setEmpLevels(new Set());
+                }}
+                className={cn(
+                  'rounded-lg border p-2 text-center transform transition-all duration-150 hover:scale-105 active:scale-95',
+                  empFilter === 'all' ? 'border-primary/40 bg-primary/10 text-primary' : 'border-border bg-secondary/30 hover:bg-secondary/50 text-foreground'
+                )}
+              >
+                <p className="text-xs font-bold">Toutes</p>
+                <p className="text-[10px] opacity-80">{lines.length} articles</p>
+              </button>
+
+              {letterGroups.map(([letter, count], index) => {
+                const tone = EMP_TONES[index % EMP_TONES.length];
+                const isActive = empFilter === letter;
+                return (
+                  <button
+                    key={letter}
+                    onClick={() => {
+                      setEmpFilter(letter);
+                      setEmpSections(new Set());
+                      setEmpRows(new Set());
+                      setEmpLevels(new Set());
+                    }}
+                    className={cn(
+                      'rounded-lg border p-2 text-center transform transition-all duration-150 hover:scale-105 active:scale-95',
+                      isActive ? `${tone.active} shadow-sm ring-2 ring-current/20` : tone.idle
+                    )}
+                  >
+                    <p className="text-sm font-black">{letter}</p>
+                    <p className="text-[10px] opacity-80">{count} article{count > 1 ? 's' : ''}</p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {empFilter !== 'all' && (
+              <div className="mt-3">
+                <div className="mb-3">
+                  <p className="text-xs font-semibold text-foreground mb-2">Section (2ème)</p>
+                  <div className="flex flex-wrap gap-2">
+                    {sectionsAvailable.map((s) => {
+                      const sel = empSections.has(s);
+                      return (
+                        <button
+                          key={s}
+                          onClick={() => {
+                            const next = new Set(empSections);
+                            if (next.has(s)) next.delete(s);
+                            else next.add(s);
+                            setEmpSections(next);
+                            setEmpRows(new Set());
+                            setEmpLevels(new Set());
+                          }}
+                          className={cn(
+                            'text-sm px-3 py-1 rounded-full border transition-colors transform transition-all duration-150 hover:scale-105 active:scale-95',
+                            sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
+                          )}
+                        >
+                          {s}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="mb-3">
+                  <p className="text-xs font-semibold text-foreground mb-2">Row (3ème)</p>
+                  <div className="flex flex-wrap gap-2">
+                    {rowsAvailable.map((r) => {
+                      const sel = empRows.has(r);
+                      return (
+                        <button
+                          key={r}
+                          onClick={() => {
+                            const next = new Set(empRows);
+                            if (next.has(r)) next.delete(r);
+                            else next.add(r);
+                            setEmpRows(next);
+                            setEmpLevels(new Set());
+                          }}
+                          className={cn(
+                            'text-sm px-3 py-1 rounded-full border transition-colors transform transition-all duration-150 hover:scale-105 active:scale-95',
+                            sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
+                          )}
+                        >
+                          {r}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs font-semibold text-foreground mb-2">Level (4ème)</p>
+                  <div className="flex flex-wrap gap-2">
+                    {levelsAvailable.map((lv) => {
+                      const sel = empLevels.has(lv);
+                      return (
+                        <button
+                          key={lv}
+                          onClick={() => {
+                            const next = new Set(empLevels);
+                            if (next.has(lv)) next.delete(lv);
+                            else next.add(lv);
+                            setEmpLevels(next);
+                          }}
+                          className={cn(
+                            'text-sm px-3 py-1 rounded-full border transition-colors transform transition-all duration-150 hover:scale-105 active:scale-95',
+                            sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
+                          )}
+                        >
+                          {lv}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <p className="text-xs font-semibold text-foreground mb-2">Emplacements (complets)</p>
+                  <div className="flex flex-wrap gap-2">
+                    {emplacementsAvailable.map(([empl, count]) => {
+                      const sel = empEmplacements.has(empl);
+                      return (
+                        <button
+                          key={empl}
+                          onClick={() => {
+                            const next = new Set(empEmplacements);
+                            if (next.has(empl)) next.delete(empl);
+                            else next.add(empl);
+                            setEmpEmplacements(next);
+                          }}
+                          className={cn(
+                            'text-sm px-3 py-1 rounded-full border transition-colors transform transition-all duration-150 hover:scale-105 active:scale-95',
+                            sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
+                          )}
+                        >
+                          <span className="font-mono">{empl}</span>
+                          <span className="ml-2 text-[10px] text-muted-foreground">{count}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="grid grid-cols-1 gap-4">
             <div className="rounded-lg border border-border bg-background/60 p-3">
               <p className="text-xs font-semibold text-foreground mb-2">Cellules</p>
@@ -610,6 +931,11 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
         {stockValueFilter !== 'all' && (
           <span className="inline-flex items-center rounded-full px-2 py-0.5 bg-sky-500/10 text-sky-700 font-semibold">
             Stock actif: {stockMode === 'exact' ? '=' : stockMode === 'gt' ? '>' : '<'} {stockValueFilter}
+          </span>
+        )}
+        {empFilter !== 'all' && (
+          <span className="inline-flex items-center rounded-full px-2 py-0.5 bg-primary/10 text-primary font-semibold">
+            Emplacement: {empFilter}
           </span>
         )}
         {emptyFilter !== 'all' && (
