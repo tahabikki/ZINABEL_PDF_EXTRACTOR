@@ -10,7 +10,14 @@ interface OrderTableProps {
 
 type StockFilter = 'all' | 'positive' | 'zero' | 'negative';
 type EmptyFilter = 'all' | 'with-empty' | 'without-empty' | 'barcode-empty';
-type SortFilter = 'default' | 'stock-asc' | 'stock-desc';
+type SortFilter =
+  | 'default'
+  | 'stock-asc'
+  | 'stock-desc'
+  | 'qte-asc'
+  | 'qte-desc'
+  | 'emplacement-asc'
+  | 'emplacement-desc';
 type QtyMode = 'exact' | 'gt' | 'lt';
 type StockMode = 'exact' | 'gt' | 'lt';
 
@@ -32,6 +39,10 @@ const SORT_FILTER_LABELS: Record<SortFilter, string> = {
   default: 'Ordre PDF',
   'stock-asc': 'Stock ↑',
   'stock-desc': 'Stock ↓',
+  'qte-asc': 'Qté ↑',
+  'qte-desc': 'Qté ↓',
+  'emplacement-asc': 'Emplacement ↑',
+  'emplacement-desc': 'Emplacement ↓',
 };
 
 const QTY_TONES = [
@@ -126,10 +137,30 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
 
     if (sortFilter !== 'default') {
-      result = [...result].sort((a, b) => {
-        if (sortFilter === 'stock-asc') return a.stock - b.stock;
-        return b.stock - a.stock;
-      });
+        result = [...result].sort((a, b) => {
+          switch (sortFilter) {
+            case 'stock-asc':
+              return a.stock - b.stock;
+            case 'stock-desc':
+              return b.stock - a.stock;
+            case 'qte-asc':
+              return a.qte - b.qte;
+            case 'qte-desc':
+              return b.qte - a.qte;
+            case 'emplacement-asc': {
+              if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+              if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+              return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+            }
+            case 'emplacement-desc': {
+              if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+              if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+              return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+            }
+            default:
+              return 0;
+          }
+        });
     }
 
     return result;
@@ -247,6 +278,30 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       label: 'Stock ↓',
       activeClass: 'bg-indigo-500/12 text-indigo-700 border-indigo-400/50',
       idleClass: 'bg-indigo-50 text-indigo-700 border-indigo-200/60 hover:bg-indigo-100',
+    },
+    {
+      key: 'qte-asc',
+      label: 'Qté ↑',
+      activeClass: 'bg-emerald-500/12 text-emerald-700 border-emerald-400/50',
+      idleClass: 'bg-emerald-50 text-emerald-700 border-emerald-200/60 hover:bg-emerald-100',
+    },
+    {
+      key: 'qte-desc',
+      label: 'Qté ↓',
+      activeClass: 'bg-amber-500/12 text-amber-700 border-amber-400/50',
+      idleClass: 'bg-amber-50 text-amber-700 border-amber-200/60 hover:bg-amber-100',
+    },
+    {
+      key: 'emplacement-asc',
+      label: 'Emplacement ↑',
+      activeClass: 'bg-violet-500/12 text-violet-700 border-violet-400/50',
+      idleClass: 'bg-violet-50 text-violet-700 border-violet-200/60 hover:bg-violet-100',
+    },
+    {
+      key: 'emplacement-desc',
+      label: 'Emplacement ↓',
+      activeClass: 'bg-cyan-500/12 text-cyan-700 border-cyan-400/50',
+      idleClass: 'bg-cyan-50 text-cyan-700 border-cyan-200/60 hover:bg-cyan-100',
     },
   ];
 
