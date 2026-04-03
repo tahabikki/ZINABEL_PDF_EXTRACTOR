@@ -16,7 +16,7 @@ interface OrderViewProps {
 }
 
 const OrderView: React.FC<OrderViewProps> = ({ order }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const orderName =
     order.header.reference ||
