@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import type { ParsedOrder } from '@/types/order';
+import type { ParsedOrder, OrderLine } from '@/types/order';
 import OrderHeaderCard from './OrderHeaderCard';
 import SafeOrderTable from './SafeOrderTable';
 import OrderAnalytics from './OrderAnalytics';
-import { ChevronDown, FileText, Trash2, Download } from 'lucide-react';
+import { ChevronDown, FileText, Trash2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { downloadOrderPDF } from '@/lib/pdfExport';
@@ -19,8 +19,15 @@ interface OrderViewProps {
   onDelete?: (orderId: string) => void;
 }
 
-const OrderView: React.FC<OrderViewProps> = ({ order, onDelete }) => {
+const OrderView: React.FC<OrderViewProps> = ({ 
+  order, 
+  onDelete
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<'principal' | 'nonValidated' | 'validated'>('principal');
+  const [principalLines, setPrincipalLines] = useState<OrderLine[]>([]);
+  const [validatedLines, setValidatedLines] = useState<OrderLine[]>([]);
+  const [nonValidatedLines, setNonValidatedLines] = useState<OrderLine[]>([]);
   const { toast } = useToast();
 
   const orderName =
@@ -42,12 +49,58 @@ const OrderView: React.FC<OrderViewProps> = ({ order, onDelete }) => {
     }
   };
 
-  const handleDownload = (tab: 'principal' | 'non-validated' | 'validated') => {
+  const handleFiltersReady = (data: {
+    principal: OrderLine[];
+    nonValidated: OrderLine[];
+    validated: OrderLine[];
+    activeTab: 'principal' | 'nonValidated' | 'validated';
+  }) => {
+    setPrincipalLines(data.principal);
+    setNonValidatedLines(data.nonValidated);
+    setValidatedLines(data.validated);
+    setActiveTab(data.activeTab);
+  };
+
+  const handleDownloadPrincipal = () => {
     try {
-      downloadOrderPDF(order, tab);
+      downloadOrderPDF(order, 'principal', undefined, undefined, principalLines);
       toast({
         title: 'Succès',
-        description: `PDF ${tab} téléchargé avec succès.`,
+        description: 'PDF Principal téléchargé avec succès.',
+      });
+    } catch (error) {
+      console.error('Download error:', error);
+      toast({
+        title: 'Erreur',
+        description: 'Impossible de générer le PDF.',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleDownloadValidated = () => {
+    try {
+      downloadOrderPDF(order, 'validated', undefined, undefined, validatedLines);
+      toast({
+        title: 'Succès',
+        description: 'PDF Validés téléchargé avec succès.',
+      });
+    } catch (error) {
+      console.error('Download error:', error);
+      toast({
+        title: 'Erreur',
+        description: 'Impossible de générer le PDF.',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleDownloadNonValidated = () => {
+    try {
+      downloadOrderPDF(order, 'non-validated', undefined, undefined, nonValidatedLines);
+      toast({
+        title: 'Succès',
+        description: 'PDF Non Validés téléchargé avec succès.',
       });
     } catch (error) {
       console.error('Download error:', error);
@@ -107,12 +160,11 @@ const OrderView: React.FC<OrderViewProps> = ({ order, onDelete }) => {
                   size="sm"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleDownload('principal');
+                    handleDownloadPrincipal();
                   }}
-                  title="Télécharger l'onglet Principal"
-                  className="text-xs h-8 px-2 border-orange-300 text-orange-700 hover:bg-orange-50"
+                  className="text-orange-600 border-orange-200 hover:bg-orange-50 hover:text-orange-700 text-xs"
+                  title="Télécharger Principal"
                 >
-                  <Download className="h-3.5 w-3.5 mr-1" />
                   Principal
                 </Button>
                 <Button
@@ -120,12 +172,11 @@ const OrderView: React.FC<OrderViewProps> = ({ order, onDelete }) => {
                   size="sm"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleDownload('non-validated');
+                    handleDownloadNonValidated();
                   }}
+                  className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 text-xs"
                   title="Télécharger Non Validés"
-                  className="text-xs h-8 px-2 border-red-300 text-red-700 hover:bg-red-50"
                 >
-                  <Download className="h-3.5 w-3.5 mr-1" />
                   Non Validés
                 </Button>
                 <Button
@@ -133,15 +184,15 @@ const OrderView: React.FC<OrderViewProps> = ({ order, onDelete }) => {
                   size="sm"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleDownload('validated');
+                    handleDownloadValidated();
                   }}
+                  className="text-green-600 border-green-200 hover:bg-green-50 hover:text-green-700 text-xs"
                   title="Télécharger Validés"
-                  className="text-xs h-8 px-2 border-green-300 text-green-700 hover:bg-green-50"
                 >
-                  <Download className="h-3.5 w-3.5 mr-1" />
                   Validés
                 </Button>
               </div>
+
               <span className="inline-flex items-center gap-1 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground">
                 {isOpen ? 'Masquer' : 'Afficher'}
                 <ChevronDown
@@ -184,7 +235,7 @@ const OrderView: React.FC<OrderViewProps> = ({ order, onDelete }) => {
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-3">Details de la preparation</h3>
               <div className="min-h-[100px]">
-                <SafeOrderTable lines={order?.lines || []} />
+                <SafeOrderTable lines={order?.lines || []} order={order} onFiltersReady={handleFiltersReady} />
               </div>
             </div>
           </div>

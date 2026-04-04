@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
-import type { OrderLine } from '@/types/order';
+import type { OrderLine, ParsedOrder } from '@/types/order';
 import OrderTable from './OrderTable';
 
 interface SafeOrderTableProps {
   lines: OrderLine[];
+  order?: ParsedOrder;
+  onFiltersReady?: (data: {
+    principal: OrderLine[];
+    nonValidated: OrderLine[];
+    validated: OrderLine[];
+    activeTab: 'principal' | 'nonValidated' | 'validated';
+  }) => void;
 }
 
 /**
  * SafeOrderTable wraps OrderTable with additional error handling for mobile
  * Gracefully handles rendering errors by retrying or showing a minimal UI
  */
-const SafeOrderTable: React.FC<SafeOrderTableProps> = ({ lines }) => {
+const SafeOrderTable: React.FC<SafeOrderTableProps> = ({ lines, order, onFiltersReady }) => {
   const [renderError, setRenderError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
 
@@ -74,7 +81,7 @@ const SafeOrderTable: React.FC<SafeOrderTableProps> = ({ lines }) => {
   }
 
   try {
-    return <OrderTable key={retryCount} lines={lines} />;
+    return <OrderTable key={retryCount} lines={lines} order={order} onFiltersReady={onFiltersReady} />;
   } catch (err) {
     console.warn('SafeOrderTable render error:', err);
     setRenderError(true);

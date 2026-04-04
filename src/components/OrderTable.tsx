@@ -1,14 +1,22 @@
 ﻿import React, { useMemo, useState, useEffect, useRef } from 'react';
-import type { OrderLine } from '@/types/order';
+import type { OrderLine, ParsedOrder } from '@/types/order';
 import { cn } from '@/lib/utils';
 import { useDebounce } from '@/lib/performanceHooks';
 import { Input } from '@/components/ui/input';
 import { RotateCcw, Search, X, Check } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
 import TableRow from './TableRow';
 
 interface OrderTableProps {
   lines: OrderLine[];
+  order?: ParsedOrder;
+  onFiltersReady?: (data: {
+    principal: OrderLine[];
+    nonValidated: OrderLine[];
+    validated: OrderLine[];
+    activeTab: 'principal' | 'nonValidated' | 'validated';
+  }) => void;
 }
 
 type StockFilter = 'all' | 'positive' | 'zero' | 'negative';
@@ -139,7 +147,7 @@ function createSafeSetState<T>(setter: (value: T | ((prev: T) => T)) => void, na
   };
 }
 
-const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
+const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
   const [rawSearch, setRawSearch] = useState('');
   const search = useDebounce(rawSearch, 250); // debounce search for better performance
   const [stockFilter, setStockFilter] = useState<StockFilter>('all');
@@ -214,10 +222,8 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   }, [preserveValidatedAcrossUploads]);
 
   useEffect(() => {
-    try {
-      if (preserveValidatedAcrossUploads) localStorage.setItem('validatedRows', JSON.stringify(validatedRows));
-      else localStorage.removeItem('validatedRows');
-    } catch (e) {}
+    if (preserveValidatedAcrossUploads) localStorage.setItem('validatedRows', JSON.stringify(validatedRows));
+    else localStorage.removeItem('validatedRows');
   }, [validatedRows, preserveValidatedAcrossUploads]);
 
   const linesSignatureRef = useRef<string>('');
@@ -1464,6 +1470,16 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       idleClass: 'bg-amber-50 text-amber-700 border-amber-200/60 hover:bg-amber-100',
     },
   ];
+
+  // Notify parent of available filtered data
+  useEffect(() => {
+    onFiltersReady?.({
+      principal: filteredAll,
+      nonValidated: filteredNonValidated,
+      validated: filteredValidated,
+      activeTab: activeView,
+    });
+  }, [filteredAll, filteredNonValidated, filteredValidated, activeView, onFiltersReady]);
 
   return (
     <div className="space-y-4">
