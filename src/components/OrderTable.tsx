@@ -120,10 +120,13 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [sortFilter, setSortFilter] = useState<SortFilter>('default');
   const [qtyFilter, setQtyFilter] = useState<Set<string>>(new Set());
   const [qtyMode, setQtyMode] = useState<QtyMode>('exact');
-  const [empFilter, setEmpFilter] = useState<string>('all');
-  const [empSections, setEmpSections] = useState<Set<string>>(new Set());
-  const [empRows, setEmpRows] = useState<Set<string>>(new Set());
-  const [empLevels, setEmpLevels] = useState<Set<string>>(new Set());
+  const [empFilter, setEmpFilter] = useState<Set<string>>(new Set());
+  
+  // Per-letter selections - each letter has its own section/row/level choices
+  const [empSectionsByLetter, setEmpSectionsByLetter] = useState<Map<string, Set<string>>>(new Map());
+  const [empRowsByLetter, setEmpRowsByLetter] = useState<Map<string, Set<string>>>(new Map());
+  const [empLevelsByLetter, setEmpLevelsByLetter] = useState<Map<string, Set<string>>>(new Map());
+  
   const [empEmplacements, setEmpEmplacements] = useState<Set<string>>(new Set());
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [validatedRows, setValidatedRows] = useState<string[]>([]);
@@ -139,9 +142,6 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const safeSetQtyMode = createSafeSetState(setQtyMode, 'qtyMode');
   const safeSetEmptyFilter = createSafeSetState(setEmptyFilter, 'emptyFilter');
   const safeSetEmpFilter = createSafeSetState(setEmpFilter, 'empFilter');
-  const safeSetEmpSections = createSafeSetState(setEmpSections, 'empSections');
-  const safeSetEmpRows = createSafeSetState(setEmpRows, 'empRows');
-  const safeSetEmpLevels = createSafeSetState(setEmpLevels, 'empLevels');
   const safeSetEmpEmplacements = createSafeSetState(setEmpEmplacements, 'empEmplacements');
   const safeSetSelectedRows = createSafeSetState(setSelectedRows, 'selectedRows');
   const safeSetValidatedRows = createSafeSetState(setValidatedRows, 'validatedRows');
@@ -211,34 +211,35 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       );
     }
 
-    if (empFilter !== 'all') {
-      result = result.filter((l) => getFirstLetter(l.emplacement) === empFilter);
+    if (empFilter.size > 0) {
+      result = result.filter((l) => empFilter.has(getFirstLetter(l.emplacement)));
     }
 
     if (empEmplacements.size > 0) {
       result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
     }
 
-    if (empSections.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empSections.has(parts[1] || '');
-      });
-    }
+    // Apply per-letter section/row/level filters
+    result = result.filter((l) => {
+      const letter = getFirstLetter(l.emplacement);
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      const section = parts[1] || '';
+      const row = parts[2] || '';
+      const level = parts[3] || '';
 
-    if (empRows.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empRows.has(parts[2] || '');
-      });
-    }
+      // If letter is selected, check its specific filters
+      if (empFilter.has(letter)) {
+        const letterSections = empSectionsByLetter.get(letter) || new Set();
+        const letterRows = empRowsByLetter.get(letter) || new Set();
+        const letterLevels = empLevelsByLetter.get(letter) || new Set();
 
-    if (empLevels.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empLevels.has(parts[3] || '');
-      });
-    }
+        if (letterSections.size > 0 && !letterSections.has(section)) return false;
+        if (letterRows.size > 0 && !letterRows.has(row)) return false;
+        if (letterLevels.size > 0 && !letterLevels.has(level)) return false;
+      }
+
+      return true;
+    });
 
     if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
     else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
@@ -309,9 +310,9 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     emptyFilter,
     sortFilter,
     empFilter,
-    empSections,
-    empRows,
-    empLevels,
+    empSectionsByLetter,
+    empRowsByLetter,
+    empLevelsByLetter,
     empEmplacements,
   ]);
 
@@ -330,34 +331,35 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       );
     }
 
-    if (empFilter !== 'all') {
-      result = result.filter((l) => getFirstLetter(l.emplacement) === empFilter);
+    if (empFilter.size > 0) {
+      result = result.filter((l) => empFilter.has(getFirstLetter(l.emplacement)));
     }
 
     if (empEmplacements.size > 0) {
       result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
     }
 
-    if (empSections.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empSections.has(parts[1] || '');
-      });
-    }
+    // Apply per-letter section/row/level filters
+    result = result.filter((l) => {
+      const letter = getFirstLetter(l.emplacement);
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      const section = parts[1] || '';
+      const row = parts[2] || '';
+      const level = parts[3] || '';
 
-    if (empRows.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empRows.has(parts[2] || '');
-      });
-    }
+      // If letter is selected, check its specific filters
+      if (empFilter.has(letter)) {
+        const letterSections = empSectionsByLetter.get(letter) || new Set();
+        const letterRows = empRowsByLetter.get(letter) || new Set();
+        const letterLevels = empLevelsByLetter.get(letter) || new Set();
 
-    if (empLevels.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empLevels.has(parts[3] || '');
-      });
-    }
+        if (letterSections.size > 0 && !letterSections.has(section)) return false;
+        if (letterRows.size > 0 && !letterRows.has(row)) return false;
+        if (letterLevels.size > 0 && !letterLevels.has(level)) return false;
+      }
+
+      return true;
+    });
 
     if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
     else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
@@ -416,9 +418,9 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     emptyFilter,
     sortFilter,
     empFilter,
-    empSections,
-    empRows,
-    empLevels,
+    empSectionsByLetter,
+    empRowsByLetter,
+    empLevelsByLetter,
     empEmplacements,
   ]);
 
@@ -435,10 +437,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     qtyMode !== 'exact' ||
     emptyFilter !== 'all' ||
     sortFilter !== 'default' ||
-    empFilter !== 'all' ||
-    empSections.size > 0 ||
-    empRows.size > 0 ||
-    empLevels.size > 0 ||
+    empFilter.size > 0 ||
+    empSectionsByLetter.size > 0 ||
+    empRowsByLetter.size > 0 ||
+    empLevelsByLetter.size > 0 ||
     empEmplacements.size > 0;
 
   const validatedLines = useMemo(() => {
@@ -460,34 +462,35 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       );
     }
 
-    if (empFilter !== 'all') {
-      result = result.filter((l) => getFirstLetter(l.emplacement) === empFilter);
+    if (empFilter.size > 0) {
+      result = result.filter((l) => empFilter.has(getFirstLetter(l.emplacement)));
     }
 
     if (empEmplacements.size > 0) {
       result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
     }
 
-    if (empSections.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empSections.has(parts[1] || '');
-      });
-    }
+    // Apply per-letter section/row/level filters
+    result = result.filter((l) => {
+      const letter = getFirstLetter(l.emplacement);
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      const section = parts[1] || '';
+      const row = parts[2] || '';
+      const level = parts[3] || '';
 
-    if (empRows.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empRows.has(parts[2] || '');
-      });
-    }
+      // If letter is selected, check its specific filters
+      if (empFilter.has(letter)) {
+        const letterSections = empSectionsByLetter.get(letter) || new Set();
+        const letterRows = empRowsByLetter.get(letter) || new Set();
+        const letterLevels = empLevelsByLetter.get(letter) || new Set();
 
-    if (empLevels.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empLevels.has(parts[3] || '');
-      });
-    }
+        if (letterSections.size > 0 && !letterSections.has(section)) return false;
+        if (letterRows.size > 0 && !letterRows.has(row)) return false;
+        if (letterLevels.size > 0 && !letterLevels.has(level)) return false;
+      }
+
+      return true;
+    });
 
     if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
     else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
@@ -564,34 +567,35 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       );
     }
 
-    if (empFilter !== 'all') {
-      result = result.filter((l) => getFirstLetter(l.emplacement) === empFilter);
+    if (empFilter.size > 0) {
+      result = result.filter((l) => empFilter.has(getFirstLetter(l.emplacement)));
     }
 
     if (empEmplacements.size > 0) {
       result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
     }
 
-    if (empSections.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empSections.has(parts[1] || '');
-      });
-    }
+    // Apply per-letter section/row/level filters
+    result = result.filter((l) => {
+      const letter = getFirstLetter(l.emplacement);
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      const section = parts[1] || '';
+      const row = parts[2] || '';
+      const level = parts[3] || '';
 
-    if (empRows.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empRows.has(parts[2] || '');
-      });
-    }
+      // If letter is selected, check its specific filters
+      if (empFilter.has(letter)) {
+        const letterSections = empSectionsByLetter.get(letter) || new Set();
+        const letterRows = empRowsByLetter.get(letter) || new Set();
+        const letterLevels = empLevelsByLetter.get(letter) || new Set();
 
-    if (empLevels.size > 0) {
-      result = result.filter((l) => {
-        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-        return empLevels.has(parts[3] || '');
-      });
-    }
+        if (letterSections.size > 0 && !letterSections.has(section)) return false;
+        if (letterRows.size > 0 && !letterRows.has(row)) return false;
+        if (letterLevels.size > 0 && !letterLevels.has(level)) return false;
+      }
+
+      return true;
+    });
 
     if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
     else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
@@ -720,14 +724,100 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     return result;
   };
 
+  // For section/row/level options - exclude those filters so all options always available
+  const applyFiltersWithoutLocationStructure = (baseLines: OrderLine[]) => {
+    let result = baseLines;
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (l) =>
+          safeLower(l.codeABarre).includes(q) ||
+          safeLower(l.reference).includes(q) ||
+          safeLower(l.designation).includes(q) ||
+          safeLower(l.emplacement).includes(q)
+      );
+    }
+
+    if (empFilter.size > 0) {
+      result = result.filter((l) => empFilter.has(getFirstLetter(l.emplacement)));
+    }
+
+    if (empEmplacements.size > 0) {
+      result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
+    }
+
+    // NOTE: Section/Row/Level filters are NOT applied - intentional for showing all available options
+    // Skipping: empSections, empRows, empLevels
+
+    if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
+    else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
+    else if (stockFilter === 'negative') result = result.filter((l) => !l.emptyCells.stock && l.stock < 0);
+
+    const hasStockValue =
+      stockValueFilter !== 'all' && stockValueFilter.trim() !== '' && !Number.isNaN(Number(stockValueFilter));
+    if (hasStockValue) {
+      const targetStock = Number(stockValueFilter);
+      if (stockMode === 'exact') result = result.filter((l) => !l.emptyCells.stock && l.stock === targetStock);
+      else if (stockMode === 'gt') result = result.filter((l) => !l.emptyCells.stock && l.stock > targetStock);
+      else result = result.filter((l) => !l.emptyCells.stock && l.stock < targetStock);
+    }
+
+    const hasQtyValue = qtyFilter.size > 0;
+    if (hasQtyValue) {
+      if (qtyMode === 'exact') result = result.filter((l) => qtyFilter.has(String(Math.round(l.qte))));
+      else if (qtyMode === 'gt') result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty > Number(q));
+      });
+      else result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty < Number(q));
+      });
+    }
+
+    if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
+    else if (emptyFilter === 'without-empty') result = result.filter((l) => !l.hasEmptyCell);
+    else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
+
+    if (sortFilter !== 'default') {
+      result = [...result].sort((a, b) => {
+        switch (sortFilter) {
+          case 'stock-asc':
+            return a.stock - b.stock;
+          case 'stock-desc':
+            return b.stock - a.stock;
+          case 'qte-asc':
+            return a.qte - b.qte;
+          case 'qte-desc':
+            return b.qte - a.qte;
+          case 'emplacement-asc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          case 'emplacement-desc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return result;
+  };
+
   // filtered (existing) is the master-filtered list; compute a filtered view for validated lines
   const filteredValidated = useMemo(() => applyFilters(validatedLines), [
     validatedLines,
     search,
     empFilter,
-    empSections,
-    empRows,
-    empLevels,
+    empSectionsByLetter,
+    empRowsByLetter,
+    empLevelsByLetter,
     empEmplacements,
     stockFilter,
     stockMode,
@@ -745,9 +835,9 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     validatedLines,
     search,
     empFilter,
-    empSections,
-    empRows,
-    empLevels,
+    empSectionsByLetter,
+    empRowsByLetter,
+    empLevelsByLetter,
     empEmplacements,
     stockFilter,
     stockMode,
@@ -889,56 +979,123 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
         ? filteredValidatedWithoutEmp
         : activeView === 'nonValidated'
           ? filteredNonValidatedWithoutEmp
-          : filteredAllWithoutQtyFilter,
-    [activeView, filteredValidatedWithoutEmp, filteredNonValidatedWithoutEmp, filteredAllWithoutQtyFilter]
+          : filteredAllWithoutEmp,
+    [activeView, filteredValidatedWithoutEmp, filteredNonValidatedWithoutEmp, filteredAllWithoutEmp]
+  );
+
+  // For section/row/level options - exclude those filters so all always available
+  const filteredValidatedWithoutLocationStructure = useMemo(
+    () => applyFiltersWithoutLocationStructure(validatedLines),
+    [
+      validatedLines,
+      search,
+      empFilter,
+      empEmplacements,
+      stockFilter,
+      stockMode,
+      stockValueFilter,
+      qtyFilter,
+      qtyMode,
+      emptyFilter,
+      sortFilter,
+    ]
+  );
+
+  const filteredNonValidatedWithoutLocationStructure = useMemo(() => {
+    return applyFiltersWithoutLocationStructure(
+      filteredNonValidated instanceof Function ? filteredNonValidated() : filteredNonValidated
+    ).filter((l) => !validatedRows.includes(getRowId(l)));
+  }, [filteredNonValidated, validatedRows, search, empFilter, empEmplacements, stockFilter, stockMode, stockValueFilter, qtyFilter, qtyMode, emptyFilter, sortFilter]);
+
+  const baseForCountsWithoutLocationStructure = useMemo(
+    () =>
+      activeView === 'validated'
+        ? filteredValidatedWithoutLocationStructure
+        : activeView === 'nonValidated'
+          ? filteredNonValidatedWithoutLocationStructure
+          : applyFiltersWithoutLocationStructure(lines),
+    [
+      activeView,
+      filteredValidatedWithoutLocationStructure,
+      filteredNonValidatedWithoutLocationStructure,
+      search,
+      empFilter,
+      empEmplacements,
+      stockFilter,
+      stockMode,
+      stockValueFilter,
+      qtyFilter,
+      qtyMode,
+      emptyFilter,
+      sortFilter,
+    ]
   );
 
   const sectionsAvailable = useMemo(() => {
     const s = new Set<string>();
-    for (const l of baseForCountsWithoutEmp) {
+    for (const l of baseForCountsWithoutLocationStructure) {
+      const letter = getFirstLetter(l.emplacement);
       const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
       if (parts[1]) s.add(parts[1]);
     }
     return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [baseForCountsWithoutEmp]);
+  }, [baseForCountsWithoutLocationStructure]);
 
-  const rowsAvailable = useMemo(() => {
+  const getRowsForLetter = (letter: string) => {
     const s = new Set<string>();
-    for (const l of baseForCountsWithoutEmp) {
+    const letterSections = empSectionsByLetter.get(letter) || new Set();
+    
+    for (const l of baseForCountsWithoutLocationStructure) {
+      if (getFirstLetter(l.emplacement) !== letter) continue;
       const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      const section = parts[1] || '';
+      
+      // If sections selected for this letter, only show rows for selected sections
+      if (letterSections.size > 0 && !letterSections.has(section)) continue;
+      
       if (parts[2]) s.add(parts[2]);
     }
     return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [baseForCountsWithoutEmp]);
+  };
 
-  const levelsAvailable = useMemo(() => {
+  const getLevelsForLetter = (letter: string) => {
     const s = new Set<string>();
-    for (const l of baseForCountsWithoutEmp) {
+    const letterSections = empSectionsByLetter.get(letter) || new Set();
+    const letterRows = empRowsByLetter.get(letter) || new Set();
+    
+    for (const l of baseForCountsWithoutLocationStructure) {
+      if (getFirstLetter(l.emplacement) !== letter) continue;
       const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      const section = parts[1] || '';
+      const row = parts[2] || '';
+      
+      if (letterSections.size > 0 && !letterSections.has(section)) continue;
+      if (letterRows.size > 0 && !letterRows.has(row)) continue;
+      
       if (parts[3]) s.add(parts[3]);
     }
     return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [baseForCountsWithoutEmp]);
+  };
 
   const emplacementsAvailable = useMemo(() => {
     const map = new Map<string, number>();
-    for (const l of baseForCountsWithoutEmp) {
+    for (const l of baseForCounts) {
       const key = (l.emplacement || '').trim();
       if (!key) continue;
       map.set(key, (map.get(key) || 0) + 1);
     }
     return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
-  }, [baseForCountsWithoutEmp]);
+  }, [baseForCounts]);
 
   const letterGroups = useMemo(() => {
     const map = new Map<string, number>();
-    for (const l of baseForCounts) {
+    for (const l of baseForCountsWithoutEmp) {
       const letter = getFirstLetter(l.emplacement);
       if (!letter) continue;
       map.set(letter, (map.get(letter) ?? 0) + 1);
     }
     return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
-  }, [baseForCounts]);
+  }, [baseForCountsWithoutEmp]);
 
   const stockCounts = useMemo(
     () => ({
@@ -1042,14 +1199,14 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     setStockFilter('all');
     setStockMode('exact');
     setStockValueFilter('all');
-    setQtyFilter('all');
+    setQtyFilter(new Set());
     setQtyMode('exact');
     setEmptyFilter('all');
     setSortFilter('default');
-    setEmpFilter('all');
-    setEmpSections(new Set());
-    setEmpRows(new Set());
-    setEmpLevels(new Set());
+    setEmpFilter(new Set());
+    setEmpSectionsByLetter(new Map());
+    setEmpRowsByLetter(new Map());
+    setEmpLevelsByLetter(new Map());
     setEmpEmplacements(new Set());
   };
 
@@ -1459,24 +1616,30 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
             <div className="flex items-center justify-between mb-2">
               <p className="text-xs font-semibold text-foreground">Filtre Emplacement</p>
               <div className="flex items-center gap-2">
-                {(empFilter !== 'all' || empSections.size > 0 || empRows.size > 0 || empLevels.size > 0) && (
+                {(empFilter.size > 0 || empSectionsByLetter.size > 0 || empRowsByLetter.size > 0 || empLevelsByLetter.size > 0) && (
                   <div className="flex items-center gap-2">
-                    {empFilter !== 'all' && <span className="text-xs rounded-full px-2 py-0.5 bg-primary/10 text-primary font-semibold">Lettre: {empFilter}</span>}
-                    {empSections.size > 0 && <span className="text-xs rounded-full px-2 py-0.5 bg-sky-50 text-sky-700 font-semibold">Section: {Array.from(empSections).join(', ')}</span>}
-                    {empRows.size > 0 && <span className="text-xs rounded-full px-2 py-0.5 bg-emerald-50 text-emerald-700 font-semibold">Row: {Array.from(empRows).join(', ')}</span>}
-                    {empLevels.size > 0 && <span className="text-xs rounded-full px-2 py-0.5 bg-amber-50 text-amber-700 font-semibold">Level: {Array.from(empLevels).join(', ')}</span>}
+                    {empFilter.size > 0 && <span className="text-xs rounded-full px-2 py-0.5 bg-primary/10 text-primary font-semibold">Lettres: {Array.from(empFilter).sort().join(', ')}</span>}
+                    {empSectionsByLetter.size > 0 && Array.from(empSectionsByLetter.entries()).map(([letter, sections]) => 
+                      sections.size > 0 && <span key={`sec-${letter}`} className="text-xs rounded-full px-2 py-0.5 bg-sky-50 text-sky-700 font-semibold">{letter} Section: {Array.from(sections).join(', ')}</span>
+                    )}
+                    {empRowsByLetter.size > 0 && Array.from(empRowsByLetter.entries()).map(([letter, rows]) => 
+                      rows.size > 0 && <span key={`row-${letter}`} className="text-xs rounded-full px-2 py-0.5 bg-emerald-50 text-emerald-700 font-semibold">{letter} Row: {Array.from(rows).join(', ')}</span>
+                    )}
+                    {empLevelsByLetter.size > 0 && Array.from(empLevelsByLetter.entries()).map(([letter, levels]) => 
+                      levels.size > 0 && <span key={`lv-${letter}`} className="text-xs rounded-full px-2 py-0.5 bg-amber-50 text-amber-700 font-semibold">{letter} Level: {Array.from(levels).join(', ')}</span>
+                    )}
                   </div>
                 )}
 
                 <button
                   onClick={() => {
-                    setEmpFilter('all');
-                    setEmpSections(new Set());
-                    setEmpRows(new Set());
-                    setEmpLevels(new Set());
+                    setEmpFilter(new Set());
+                    setEmpSectionsByLetter(new Map());
+                    setEmpRowsByLetter(new Map());
+                    setEmpLevelsByLetter(new Map());
                     setEmpEmplacements(new Set());
                   }}
-                  className="inline-flex items-center gap-1 px-2 py-1 rounded-full border bg-card text-muted-foreground text-xs hover:bg-primary/10 transition transform hover:scale-105"
+                  className="inline-flex items-center gap-1 px-2 py-1 rounded-full border bg-card text-muted-foreground text-xs hover:bg-primary/10 transition"
                 >
                   <X className="h-3 w-3" />
                   Effacer
@@ -1487,14 +1650,14 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
             <div className="grid gap-2 [grid-template-columns:repeat(auto-fit,minmax(110px,1fr))]">
               <button
                 onClick={() => {
-                  setEmpFilter('all');
-                  setEmpSections(new Set());
-                  setEmpRows(new Set());
-                  setEmpLevels(new Set());
+                  setEmpFilter(new Set());
+                  setEmpSectionsByLetter(new Map());
+                  setEmpRowsByLetter(new Map());
+                  setEmpLevelsByLetter(new Map());
                 }}
                 className={cn(
-                  'rounded-lg border p-2 text-center transform transition-all duration-150 hover:scale-105 active:scale-95',
-                  empFilter === 'all' ? 'border-primary/40 bg-primary/10 text-primary' : 'border-border bg-secondary/30 hover:bg-secondary/50 text-foreground'
+                  'rounded-lg border p-2 text-center transition-colors duration-150',
+                  empFilter.size === 0 ? 'border-primary/40 bg-primary/10 text-primary' : 'border-border bg-secondary/30 hover:bg-secondary/50 text-foreground'
                 )}
               >
                 <p className="text-xs font-bold">Toutes</p>
@@ -1503,18 +1666,23 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
 
               {letterGroups.map(([letter, count], index) => {
                 const tone = EMP_TONES[index % EMP_TONES.length];
-                const isActive = empFilter === letter;
+                const isActive = empFilter.has(letter);
                 return (
                   <button
                     key={letter}
                     onClick={() => {
-                      setEmpFilter(letter);
-                      setEmpSections(new Set());
-                      setEmpRows(new Set());
-                      setEmpLevels(new Set());
+                      setEmpFilter((prev) => {
+                        const newSet = new Set(prev);
+                        if (newSet.has(letter)) {
+                          newSet.delete(letter);
+                        } else {
+                          newSet.add(letter);
+                        }
+                        return newSet;
+                      });
                     }}
                     className={cn(
-                      'rounded-lg border p-2 text-center transform transition-all duration-150 hover:scale-105 active:scale-95',
+                      'rounded-lg border p-2 text-center transition-colors duration-150',
                       isActive ? `${tone.active} shadow-sm ring-2 ring-current/20` : tone.idle
                     )}
                   >
@@ -1525,114 +1693,113 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
               })}
             </div>
 
-            {empFilter !== 'all' && (
-              <div className="mt-3">
-                <div className="mb-3">
-                  <p className="text-xs font-semibold text-foreground mb-2">Section (2ème)</p>
-                  <div className="flex flex-wrap gap-2">
-                    {sectionsAvailable.map((s) => {
-                      const sel = empSections.has(s);
-                      return (
-                        <button
-                          key={s}
-                          onClick={() => {
-                            const next = new Set(empSections);
-                            if (next.has(s)) next.delete(s);
-                            else next.add(s);
-                            setEmpSections(next);
-                            setEmpRows(new Set());
-                            setEmpLevels(new Set());
-                          }}
-                          className={cn(
-                            'text-sm px-3 py-1 rounded-full border transition-colors transform transition-all duration-150 hover:scale-105 active:scale-95',
-                            sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
-                          )}
-                        >
-                          {s}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+            {empFilter.size > 0 && (
+              <div className="mt-3 border-t border-border pt-3">
+                {Array.from(empFilter).sort().map((letter) => {
+                  const letterSections = empSectionsByLetter.get(letter) || new Set();
+                  const letterRows = empRowsByLetter.get(letter) || new Set();
+                  const letterLevels = empLevelsByLetter.get(letter) || new Set();
+                  const rowsForLetter = getRowsForLetter(letter);
+                  const levelsForLetter = getLevelsForLetter(letter);
 
-                <div className="mb-3">
-                  <p className="text-xs font-semibold text-foreground mb-2">Row (3ème)</p>
-                  <div className="flex flex-wrap gap-2">
-                    {rowsAvailable.map((r) => {
-                      const sel = empRows.has(r);
-                      return (
-                        <button
-                          key={r}
-                          onClick={() => {
-                            const next = new Set(empRows);
-                            if (next.has(r)) next.delete(r);
-                            else next.add(r);
-                            setEmpRows(next);
-                            setEmpLevels(new Set());
-                          }}
-                          className={cn(
-                            'text-sm px-3 py-1 rounded-full border transition-colors transform transition-all duration-150 hover:scale-105 active:scale-95',
-                            sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
-                          )}
-                        >
-                          {r}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+                  // Get sections available for this letter
+                  const sectionsForLetter = new Set<string>();
+                  for (const l of baseForCountsWithoutLocationStructure) {
+                    if (getFirstLetter(l.emplacement) === letter) {
+                      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+                      if (parts[1]) sectionsForLetter.add(parts[1]);
+                    }
+                  }
 
-                <div>
-                  <p className="text-xs font-semibold text-foreground mb-2">Level (4ème)</p>
-                  <div className="flex flex-wrap gap-2">
-                    {levelsAvailable.map((lv) => {
-                      const sel = empLevels.has(lv);
-                      return (
-                        <button
-                          key={lv}
-                          onClick={() => {
-                            const next = new Set(empLevels);
-                            if (next.has(lv)) next.delete(lv);
-                            else next.add(lv);
-                            setEmpLevels(next);
-                          }}
-                          className={cn(
-                            'text-sm px-3 py-1 rounded-full border transition-colors transform transition-all duration-150 hover:scale-105 active:scale-95',
-                            sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
-                          )}
-                        >
-                          {lv}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <p className="text-xs font-semibold text-foreground mb-2">Emplacements (complets)</p>
-                  <div className="flex flex-wrap gap-2">
-                    {emplacementsAvailable.map(([empl, count]) => {
-                      const sel = empEmplacements.has(empl);
-                      return (
-                        <button
-                          key={empl}
-                          onClick={() => {
-                            const next = new Set(empEmplacements);
-                            if (next.has(empl)) next.delete(empl);
-                            else next.add(empl);
-                            setEmpEmplacements(next);
-                          }}
-                          className={cn(
-                            'text-sm px-3 py-1 rounded-full border transition-colors transform transition-all duration-150 hover:scale-105 active:scale-95',
-                            sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
-                          )}
-                        >
-                          <span className="font-mono">{empl}</span>
-                          <span className="ml-2 text-[10px] text-muted-foreground">{count}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+                  return (
+                    <div key={letter} className="mb-4 pb-4 border-b border-border/50 last:border-0">
+                      <p className="text-xs font-bold text-primary mb-2.5">{letter}</p>
+                      
+                      <div className="mb-2">
+                        <p className="text-xs font-semibold text-foreground mb-1.5">Section (2ème)</p>
+                        <div className="flex flex-wrap gap-2">
+                          {Array.from(sectionsForLetter).sort().map((s) => {
+                            const sel = letterSections.has(s);
+                            return (
+                              <button
+                                key={s}
+                                onClick={() => {
+                                  const next = new Set(letterSections);
+                                  if (next.has(s)) next.delete(s);
+                                  else next.add(s);
+                                  setEmpSectionsByLetter(prev => new Map(prev).set(letter, next));
+                                  // Clear rows/levels when section changes
+                                  setEmpRowsByLetter(prev => new Map(prev).set(letter, new Set()));
+                                  setEmpLevelsByLetter(prev => new Map(prev).set(letter, new Set()));
+                                }}
+                                className={cn(
+                                  'text-sm px-3 py-1 rounded-full border transition-colors duration-150',
+                                  sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
+                                )}
+                              >
+                                {s}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      <div className="mb-2">
+                        <p className="text-xs font-semibold text-foreground mb-1.5">Row (3ème)</p>
+                        <div className="flex flex-wrap gap-2">
+                          {rowsForLetter.map((r) => {
+                            const sel = letterRows.has(r);
+                            return (
+                              <button
+                                key={r}
+                                onClick={() => {
+                                  const next = new Set(letterRows);
+                                  if (next.has(r)) next.delete(r);
+                                  else next.add(r);
+                                  setEmpRowsByLetter(prev => new Map(prev).set(letter, next));
+                                  // Clear levels when row changes
+                                  setEmpLevelsByLetter(prev => new Map(prev).set(letter, new Set()));
+                                }}
+                                className={cn(
+                                  'text-sm px-3 py-1 rounded-full border transition-colors duration-150',
+                                  sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
+                                )}
+                              >
+                                {r}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="text-xs font-semibold text-foreground mb-1.5">Level (4ème)</p>
+                        <div className="flex flex-wrap gap-2">
+                          {levelsForLetter.map((lv) => {
+                            const sel = letterLevels.has(lv);
+                            return (
+                              <button
+                                key={lv}
+                                onClick={() => {
+                                  const next = new Set(letterLevels);
+                                  if (next.has(lv)) next.delete(lv);
+                                  else next.add(lv);
+                                  setEmpLevelsByLetter(prev => new Map(prev).set(letter, next));
+                                }}
+                                className={cn(
+                                  'text-sm px-3 py-1 rounded-full border transition-colors duration-150',
+                                  sel ? 'bg-primary/10 border-primary text-primary' : 'bg-card border-border text-muted-foreground'
+                                )}
+                              >
+                                {lv}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -1705,9 +1872,9 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
             Stock actif: {stockMode === 'exact' ? '=' : stockMode === 'gt' ? '>' : '<'} {stockValueFilter}
           </span>
         )}
-        {empFilter !== 'all' && (
+        {empFilter.size > 0 && (
           <span className="inline-flex items-center rounded-full px-2 py-0.5 bg-primary/10 text-primary font-semibold">
-            Emplacement: {empFilter}
+            Emplacements: {Array.from(empFilter).sort().join(', ')}
           </span>
         )}
         {emptyFilter !== 'all' && (
