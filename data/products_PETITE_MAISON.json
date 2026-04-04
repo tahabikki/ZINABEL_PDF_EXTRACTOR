@@ -1,0 +1,330 @@
+[
+  {
+    "reference": "#21651",
+    "name": "PAPER BAG PETITE MAISON",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#21669",
+    "name": "FLOOR DISPLAY STAND CARTON â 4 LAYERS PETITE MAISON",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#21759",
+    "name": "SHAMPOING CHEVEUX ANTI-POLLUTION 300 ML PETITE MAISON",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#21760",
+    "name": "SHAMPOING VOLUMISANT 300 ML PETITE MAISON",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#21761",
+    "name": "SHAMPOING CHEVEUX LOSS 200 ML PETITE MAISON",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22118",
+    "name": "GEL DOUCHE PEONY DREAM 400ML PETITE MAISON",
+    "stock": 199,
+    "price": 199,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22119",
+    "name": "GEL DOUCHE POMEGRANATE 400ML PETITE MAISON",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22120",
+    "name": "GEL DOUCHE PINK GRAPEFRUIT 400ML PETITE MAISON",
+    "stock": 203,
+    "price": 203,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22321",
+    "name": "BRUME CORPORELLE PEONY DREAM 155ML PETITE MAISON",
+    "stock": 774,
+    "price": 774,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22322",
+    "name": "BRUME CORPORELLE PINK POMEGRANATE 155ML PETITE MAISON",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22323",
+    "name": "BRUME CORPORELLE PINK GRAPEFRUIT 155ML PETITE MAISON",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22645",
+    "name": "SAVON POUR LES MAINS PEONY DREAM 300ML PETITE MAISON",
+    "stock": 108,
+    "price": 108,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22646",
+    "name": "SAVON POUR LES MAINS POMEGRANATE 300ML PETITE MAISON",
+    "stock": 23,
+    "price": 23,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#22647",
+    "name": "SAVON POUR LES MAINS PINK GRAPEFRUIT 300ML PETITE MAISON",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#23272",
+    "name": "LOTION PEONY DREAM 255ML PETITE MAISON",
+    "stock": 15,
+    "price": 15,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#23273",
+    "name": "LOTION POMEGRANATE 255ML PETITE MAISON",
+    "stock": -7,
+    "price": -7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#23274",
+    "name": "LOTION PINK GRAPEFRUIT 255ML PETITE MAISON",
+    "stock": 554,
+    "price": 554,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#25362",
+    "name": "NOTEBOOK AGENDA PETITE MAISON",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#30246",
+    "name": "MINI BLOGGER BOX CARTON EMPTY PETITE MAISON",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#35437",
+    "name": "SHAMPOING CHEVEUX ENDOMMAGÃS 300 ML PETITE MAISON",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#35440",
+    "name": "SHAMPOO HAIR LOSS PRE 300 ML PETITE MAISON",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#35441",
+    "name": "APRÃS-SHAMPOING CHEVEUX ENDOMMAGÃS 200 ML PETITE MAISON",
+    "stock": -3,
+    "price": -3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#35442",
+    "name": "APRÃS-SHAMPOING VOLUMISANT 200 ML PETITE MAISON",
+    "stock": 413,
+    "price": 413,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#35443",
+    "name": "APRÃS-SHAMPOING CHEVEUX LOSS 200 ML PETITE MAISON",
+    "stock": 12,
+    "price": 12,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#35453",
+    "name": "APRÃS-SHAMPOING ANTI-POLLUTION 200 ML PETITE MAISON",
+    "stock": 611,
+    "price": 611,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#62167",
+    "name": "BOX BLOGGER EN CARTON PETITE MAISON",
+    "stock": 24,
+    "price": 24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#BOX.PEONY",
+    "name": "BOX BODY PEONY DREAM PETITE MAISON",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#BOX.POMEGRANAT",
+    "name": "BOX BODY POMEGRANATE PETITE MAISON",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.3.GRAPEFRUIT",
+    "name": "PACK BRUME + GEL + LOTION GRAPEFRUIT PM",
+    "stock": 93,
+    "price": 93,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.3BRUME.PM",
+    "name": "Pack 3 brumes petite maison",
+    "stock": -14,
+    "price": -14,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.GEL.BRUME.L",
+    "name": "PACK PETITE MAISON GRAPE FRUIT BODY",
+    "stock": -18,
+    "price": -18,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.GEL.BRUME.LO",
+    "name": "PACK PETITE MAISON PEONY DREAM BODY",
+    "stock": -26,
+    "price": -26,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.GEL.BRUME.LOT",
+    "name": "PACK PETITE MAISON POMEGRANANTE BODY",
+    "stock": -18,
+    "price": -18,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.GRA.PM",
+    "name": "PACK GRATUITE PETITE MAISON",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.PM.PAMPLEMOUS",
+    "name": "PACK PAMPLEMOUSSE PETITE MAISON GEL DOUCHE + LOTION + BRUME + SAVON M",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.SHAMPO.APRES.",
+    "name": "PACK SHAMP+APRES SHAMP VOLUMISANT PETITE MAISON",
+    "stock": -4,
+    "price": -4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK01.SH.AN-POLL",
+    "name": "PACK SHAMP+APRES SHAMP ANTI-POLLUTION PETITE MAISON",
+    "stock": -24,
+    "price": -24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#TEST.22321",
+    "name": "TESTEUR BRUME CORPORELLE PEONY DREAM 155ML PETITE MAISON",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#TEST.22322",
+    "name": "TESTEUR BRUME CORPORELLE PINK POMEGRANATE155ML PETITE MAISON",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#TEST.22323",
+    "name": "TESTEUR BRUME CORPORELLE PINK GRAPEFRUIT 155ML PETITE MAISON",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#VPM",
+    "name": "VENTES DES ARTICLES DE LA MARQUE PETITE MAISON",
+    "stock": -2,
+    "price": -2,
+    "quantity": 0,
+    "free_quantity": 0
+  }
+]

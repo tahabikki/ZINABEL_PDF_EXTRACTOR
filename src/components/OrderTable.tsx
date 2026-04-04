@@ -97,6 +97,35 @@ function safeLower(s?: string) {
   return (s || '').toLowerCase();
 }
 
+// Brand color palette
+const BRAND_COLORS = [
+  'bg-blue-100 text-blue-800 border-blue-200',
+  'bg-purple-100 text-purple-800 border-purple-200',
+  'bg-pink-100 text-pink-800 border-pink-200',
+  'bg-green-100 text-green-800 border-green-200',
+  'bg-yellow-100 text-yellow-800 border-yellow-200',
+  'bg-red-100 text-red-800 border-red-200',
+  'bg-indigo-100 text-indigo-800 border-indigo-200',
+  'bg-teal-100 text-teal-800 border-teal-200',
+  'bg-cyan-100 text-cyan-800 border-cyan-200',
+  'bg-orange-100 text-orange-800 border-orange-200',
+];
+
+// Hash function to generate consistent color index for brand
+function getBrandColorIndex(brand: string): number {
+  let hash = 0;
+  for (let i = 0; i < brand.length; i++) {
+    hash = ((hash << 5) - hash) + brand.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return Math.abs(hash) % BRAND_COLORS.length;
+}
+
+function getBrandColor(brand?: string): string {
+  if (!brand) return BRAND_COLORS[0];
+  return BRAND_COLORS[getBrandColorIndex(brand)];
+}
+
 /**
  * Mobile-safe setState wrapper that prevents crashes on filter interactions
  */
@@ -120,6 +149,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [sortFilter, setSortFilter] = useState<SortFilter>('default');
   const [qtyFilter, setQtyFilter] = useState<Set<string>>(new Set());
   const [qtyMode, setQtyMode] = useState<QtyMode>('exact');
+  const [brandFilter, setBrandFilter] = useState<Set<string>>(new Set());
   const [empFilter, setEmpFilter] = useState<Set<string>>(new Set());
   
   // Per-letter selections - each letter has its own section/row/level choices
@@ -130,6 +160,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [empEmplacements, setEmpEmplacements] = useState<Set<string>>(new Set());
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [validatedRows, setValidatedRows] = useState<string[]>([]);
+  const [qtePreparedMap, setQtePreparedMap] = useState<Map<string, number>>(new Map());
   const [removeValidatedFromMaster, setRemoveValidatedFromMaster] = useState<boolean>(false);
   const [autoValidateOnCheck, setAutoValidateOnCheck] = useState<boolean>(true);
 
@@ -140,6 +171,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const safeSetStockValueFilter = createSafeSetState(setStockValueFilter, 'stockValueFilter');
   const safeSetQtyFilter = createSafeSetState(setQtyFilter, 'qtyFilter');
   const safeSetQtyMode = createSafeSetState(setQtyMode, 'qtyMode');
+  const safeSetBrandFilter = createSafeSetState(setBrandFilter, 'brandFilter');
   const safeSetEmptyFilter = createSafeSetState(setEmptyFilter, 'emptyFilter');
   const safeSetEmpFilter = createSafeSetState(setEmpFilter, 'empFilter');
   const safeSetEmpEmplacements = createSafeSetState(setEmpEmplacements, 'empEmplacements');
@@ -148,6 +180,18 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const safeSetSortFilter = createSafeSetState(setSortFilter, 'sortFilter');
   const [activeView, setActiveView] = useState<'principal' | 'nonValidated' | 'validated'>('principal');
   const [preserveValidatedAcrossUploads, setPreserveValidatedAcrossUploads] = useState<boolean>(false);
+
+  const updateQtePrepared = (rowId: string, value: number) => {
+    setQtePreparedMap((prev) => {
+      const newMap = new Map(prev);
+      if (value <= 0) {
+        newMap.delete(rowId);
+      } else {
+        newMap.set(rowId, value);
+      }
+      return newMap;
+    });
+  };
 
   useEffect(() => {
     if (!preserveValidatedAcrossUploads) {
@@ -179,18 +223,32 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const linesSignatureRef = useRef<string>('');
   useEffect(() => {
     const sig = lines.map((l) => getRowId(l)).join('||');
-    if (linesSignatureRef.current && linesSignatureRef.current !== sig) {
-      // lines changed (new upload)
-      if (!preserveValidatedAcrossUploads) {
+    const isFirstLoad = !linesSignatureRef.current;
+    const hasChanged = linesSignatureRef.current && linesSignatureRef.current !== sig;
+    
+    if (isFirstLoad || hasChanged) {
+      // Initialize or reset on first load or when lines change
+      if (hasChanged && !preserveValidatedAcrossUploads) {
         setValidatedRows([]);
         try {
           localStorage.removeItem('validatedRows');
         } catch (e) {}
-      } else {
-        // keep only validated ids that exist in the new lines
+      } else if (hasChanged) {
+        // Keep only validated ids that exist in new lines
         setValidatedRows((prev) => prev.filter((id) => lines.some((l) => getRowId(l) === id)));
       }
-      setSelectedRows(new Set());
+      
+      if (hasChanged) {
+        setSelectedRows(new Set());
+      }
+      
+      // Initialize qtePreparedMap with default values (Qte Validée = Qte) - on first load AND on new uploads
+      const newQtePreparedMap = new Map<string, number>();
+      lines.forEach((line) => {
+        const rowId = getRowId(line);
+        newQtePreparedMap.set(rowId, line.qte);
+      });
+      setQtePreparedMap(newQtePreparedMap);
     }
     linesSignatureRef.current = sig;
   }, [lines, preserveValidatedAcrossUploads]);
@@ -207,7 +265,8 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
           safeLower(l.codeABarre).includes(q) ||
           safeLower(l.reference).includes(q) ||
           safeLower(l.designation).includes(q) ||
-          safeLower(l.emplacement).includes(q)
+          safeLower(l.emplacement).includes(q) ||
+          safeLower(l.brand).includes(q)
       );
     }
 
@@ -267,6 +326,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       });
     }
 
+    if (brandFilter.size > 0) {
+      result = result.filter((l) => brandFilter.has(l.brand || ''));
+    }
+
     if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
     else if (emptyFilter === 'without-empty') result = result.filter((l) => !l.hasEmptyCell);
     else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
@@ -307,6 +370,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     stockValueFilter,
     qtyFilter,
     qtyMode,
+    brandFilter,
     emptyFilter,
     sortFilter,
     empFilter,
@@ -458,7 +522,8 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
           safeLower(l.codeABarre).includes(q) ||
           safeLower(l.reference).includes(q) ||
           safeLower(l.designation).includes(q) ||
-          safeLower(l.emplacement).includes(q)
+          safeLower(l.emplacement).includes(q) ||
+          safeLower(l.brand).includes(q)
       );
     }
 
@@ -657,7 +722,8 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
           safeLower(l.codeABarre).includes(q) ||
           safeLower(l.reference).includes(q) ||
           safeLower(l.designation).includes(q) ||
-          safeLower(l.emplacement).includes(q)
+          safeLower(l.emplacement).includes(q) ||
+          safeLower(l.brand).includes(q)
       );
     }
 
@@ -867,6 +933,15 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       map.set(qty, (map.get(qty) ?? 0) + 1);
     });
     return [...map.entries()].sort((a, b) => a[0] - b[0]);
+  }, [baseForCountsWithoutQty]);
+
+  const brandGroups = useMemo(() => {
+    const map = new Map<string, number>();
+    baseForCountsWithoutQty.forEach((l) => {
+      const brand = l.brand || '';
+      map.set(brand, (map.get(brand) ?? 0) + 1);
+    });
+    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0]));
   }, [baseForCountsWithoutQty]);
 
   // For emplacement options - exclude all emplacement filters so all locations always available
@@ -1614,6 +1689,63 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
 
           <div className="rounded-lg border border-border bg-background/60 p-3">
             <div className="flex items-center justify-between mb-2">
+              <p className="text-xs font-semibold text-foreground">Filtre Marque</p>
+              {brandFilter.size > 0 && (
+                <span className="text-xs rounded-full px-2 py-0.5 bg-primary/10 text-primary font-semibold">
+                  {brandFilter.size} marque{brandFilter.size > 1 ? 's' : ''} sélectionnée{brandFilter.size > 1 ? 's' : ''}
+                </span>
+              )}
+            </div>
+
+            <div className="grid gap-2 [grid-template-columns:repeat(auto-fit,minmax(120px,1fr))]">
+              <button
+                onClick={() => setBrandFilter(new Set())}
+                className={cn(
+                  'rounded-lg border p-2 text-center transition-colors duration-150',
+                  brandFilter.size === 0
+                    ? 'border-primary/40 bg-primary/10 text-primary'
+                    : 'border-border bg-secondary/30 hover:bg-secondary/50 text-foreground'
+                )}
+              >
+                <p className="text-xs font-bold">Toutes</p>
+                <p className="text-[10px] opacity-80">{baseForCountsWithoutQty.length} articles</p>
+              </button>
+
+              {brandGroups.map(([brand, count]) => {
+                const isActive = brandFilter.has(brand);
+                const bgColor = isActive 
+                  ? 'border-blue-500/50 bg-blue-500/15 text-blue-800 shadow-sm ring-2 ring-blue-500/25'
+                  : 'border-border bg-secondary/30 hover:bg-secondary/50 text-foreground';
+
+                return (
+                  <button
+                    key={brand || 'empty'}
+                    onClick={() => {
+                      safeSetBrandFilter((prev) => {
+                        const newSet = new Set(prev);
+                        if (newSet.has(brand)) {
+                          newSet.delete(brand);
+                        } else {
+                          newSet.add(brand);
+                        }
+                        return newSet;
+                      });
+                    }}
+                    className={cn(
+                      'rounded-lg border p-2 text-center transition-colors duration-150',
+                      bgColor
+                    )}
+                  >
+                    <p className="text-xs font-bold truncate">{brand || '(N/A)'}</p>
+                    <p className="text-[10px] opacity-80">{count} articles</p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-border bg-background/60 p-3">
+            <div className="flex items-center justify-between mb-2">
               <p className="text-xs font-semibold text-foreground">Filtre Emplacement</p>
               <div className="flex items-center gap-2">
                 {(empFilter.size > 0 || empSectionsByLetter.size > 0 || empRowsByLetter.size > 0 || empLevelsByLetter.size > 0) && (
@@ -2018,6 +2150,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qté</th>
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Emplacement</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Stock</th>
+                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Marque</th>
+                  <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Carton Qté</th>
+                  <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qte Validée</th>
+                  <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qte Non Validée</th>
                 </tr>
               </thead>
               <tbody>
@@ -2025,6 +2161,8 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
                   const id = getRowId(line);
                   const isSelected = autoValidateOnCheck ? validatedRows.includes(id) : selectedRows.has(id);
                   const isValidated = validatedRows.includes(id);
+                  const qtePrepared = qtePreparedMap.get(id) || 0;
+                  const brandColor = getBrandColor(line.brand);
                   return (
                     <TableRow
                       key={id}
@@ -2035,13 +2173,16 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
                       getRowClass={getRowClass}
                       onRowClick={handleRowClick}
                       onCheckboxChange={toggleSelectRow}
+                      qtePrepared={qtePrepared}
+                      onQtePreparedChange={updateQtePrepared}
+                      brandColor={brandColor}
                     />
                   );
                 })}
 
                 {visible.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="px-3 py-8 text-center text-muted-foreground">
+                    <td colSpan={11} className="px-3 py-8 text-center text-muted-foreground">
                       Aucun article trouvé
                     </td>
                   </tr>

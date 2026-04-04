@@ -18,6 +18,9 @@ export interface OrderLine {
   qte: number;
   emplacement: string;
   stock: number;
+  brand?: string;
+  carton_Qte?: number;
+  qte_prepared?: number;
   emptyCells: {
     codeABarre: boolean;
     reference: boolean;

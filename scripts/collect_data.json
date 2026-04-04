@@ -1,0 +1,36 @@
+console.clear();
+
+(async function() {
+    const allProducts = [];
+    const pageSelect = document.querySelector('#pages');
+    const totalPages = pageSelect.options.length;
+
+    for (let i = 1; i <= totalPages; i++) {
+        // Go to page i
+        pageSelect.value = i;
+        pageSelect.dispatchEvent(new Event('change'));
+
+        // Wait for content to load (7 seconds for slow pages)
+        await new Promise(r => setTimeout(r, 7000));
+
+        // Extract products on current page
+        const products = [...document.querySelectorAll('.col-xxl-3.col-xl-3.col-sm-12')].map(card => ({
+            reference: card.querySelector('.col-12.text-white')?.textContent.trim(),
+            name: card.querySelector('.card-body .card-text')?.textContent.trim(),
+            stock: parseInt(card.querySelector('.card-body .text-primary')?.textContent.trim() || '0'),
+            price: parseFloat((card.querySelectorAll('.card-body .card-text')[1]?.textContent.trim() || '0').replace(',', '.')),
+            quantity: parseInt(card.querySelector('input[name="qte_devis"]')?.value || '0'),
+            free_quantity: parseInt(card.querySelector('input.qte-gratuite')?.value || '0')
+        }));
+
+        allProducts.push(...products);
+    }
+
+    console.log(JSON.stringify(allProducts, null, 2));
+
+    // Download JSON file automatically
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(allProducts, null, 2)], {type: 'application/json'}));
+    a.download = 'products.json';
+    a.click();
+})();

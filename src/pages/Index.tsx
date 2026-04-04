@@ -40,6 +40,14 @@ const Index = () => {
     setOrders([]);
   }, []);
 
+  const deleteOrder = useCallback((orderId: string) => {
+    setOrders((prev) => prev.filter((order) => order.id !== orderId));
+    toast({
+      title: 'Supprimée',
+      description: 'La commande a été supprimée.',
+    });
+  }, [toast]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -70,7 +78,7 @@ const Index = () => {
         {orders.length > 0 && (
           <div className="space-y-8">
             {orders.map((order) => (
-              <OrderView key={order.id} order={order} />
+              <OrderView key={order.id} order={order} onDelete={deleteOrder} />
             ))}
           </div>
         )}

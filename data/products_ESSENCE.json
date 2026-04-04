@@ -1,0 +1,8466 @@
+[
+  {
+    "reference": "#222054",
+    "name": "GLOSS SHINE SHINE SHINE 13 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#222159",
+    "name": "MASCARA STYLISTE  VOLUME  18H CURL & HOLD ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#222161",
+    "name": "MASCARA LASH PRINCESS SCULPTED VOLUME ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#224451",
+    "name": "ROUGE A LEVRES UTRA LAST INSTANT  COULEUR ESSENCE 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#224469",
+    "name": "ROUGE A LEVRES UTRA LAST INSTANT  COULEUR ESSENCE 19",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#225279",
+    "name": "FARD A JOUES METAL CHROME ESSENCE NÃÂ°10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#226189",
+    "name": "EYELINER SUPERLAST  WATERPROOF  ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#226203",
+    "name": "CRAYON SUPERLAST 24H SURCILS WATERPROOF 20 ESSENCE",
+    "stock": 83,
+    "price": 83,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#226204",
+    "name": "CRAYON SUPERLAST 24H SURCILS WATERPROOF 30 ESSENCE",
+    "stock": 35,
+    "price": 35,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#226265",
+    "name": "PINCEAU HOLOLIGHTER ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#226700",
+    "name": "POUDRE BRIGHTEN UP! BANANA  ESSENCE NÂ°10",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#227255",
+    "name": "ESSENCE MADE TO SPARKLE VELVET METALLIC LIQUID LIPSTICK 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#2948436",
+    "name": "AUTOCOLLANT POUR ONGLES HELLO KITTY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#33NWU003B",
+    "name": "CASSETTES GR VELVET MATTE LIPSTICK",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#520057",
+    "name": "EYELINER PEN EXTRA LONGLASTING ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#520058",
+    "name": "CRAYON SOURCILS DESIGNER 01 ESSENCE",
+    "stock": 177,
+    "price": 177,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#520059",
+    "name": "CRAYON SOURCILS DESIGNER 02 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#520071",
+    "name": "CRAYON YEUX KAJAL 01 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#520074",
+    "name": "CRAYON YEUX KAJAL 04 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#520929",
+    "name": "FLOOR 100 WITH SLIDING DOORS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#524694",
+    "name": "CRAYON YEUX LONG LASTING  01 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#524695",
+    "name": "CRAYON YEUX LONG LASTING  02 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#524698",
+    "name": "CRAYON YEUX LONG LASTING  05 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#525336",
+    "name": "FOND DE TEINT SOFT TOUCH MOUSSE 01 ESSENCE",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#525337",
+    "name": "FOND DE TEINT SOFT TOUCH MOUSSE 02 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#526867",
+    "name": "MASCARA MAXIMUM DEFINITION 01 ESSENCE",
+    "stock": 33,
+    "price": 33,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#527045",
+    "name": "CRAYON YEUX KAJAL 08 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#527118",
+    "name": "MASCARA GEL CILS ET SOURCILS ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#527161",
+    "name": "POUDRE MATTIFYING COMPACT 04 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#528129",
+    "name": "TESTEUR POUDRE MATTIFYING COMPACT 04 ESSENCE",
+    "stock": 662,
+    "price": 662,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#750124",
+    "name": "MASCARA LASH PRINCESS VOLUME ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#750138",
+    "name": "TAILLE CRAYON ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#751602",
+    "name": "MASCARA LASH PRINCESS FALSE LASH EFFECT ESSENCE",
+    "stock": 46,
+    "price": 46,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#752105",
+    "name": "EYELASH CURLER ESSENCE",
+    "stock": 69,
+    "price": 69,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#752829",
+    "name": "CRAYON A LEVRES LONGLASTING 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#752841",
+    "name": "MASCARA SOURCILS MAKE ME BROW EYEBROW GEL 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#752842",
+    "name": "MASCARA SOURCILS MAKE ME BROW EYEBROW GEL 02 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#754321",
+    "name": "MASCARA I LOVE EXTREME VOLUME WATERPROOF ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#755115",
+    "name": "BROSSE LEVRES MAKE ME PRETTY ESSENCE",
+    "stock": 10,
+    "price": 10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#756418",
+    "name": "SPRAY KEEP IT PERFECT  MAKE UP FIXING ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#756452",
+    "name": "ROUGE A LEVRES VELVET STICK MATT 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#756454",
+    "name": "ROUGE A LEVRES VELVET STICK MATT 04 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#756472",
+    "name": "ROUGE A LEVRES VELVET STICK MATT 05 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#756593",
+    "name": "DIP EYELINER ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#756603",
+    "name": "FARD A PAUPIERES & LINER 2 IN 1  01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#759389",
+    "name": "MASCARA EXTREME VOLUME & CURL ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#759429",
+    "name": "CRAYON YEUX EXTREME LASTING 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#770117",
+    "name": "EYELINER PEN 2 IN 1 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#770119",
+    "name": "PINCE A SOURCILS COULDN'T CARE MORE ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#770120",
+    "name": "BROSSE POUR FARD A PAUPIERES ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#770545",
+    "name": "EYELINER LIQUID INK ESSENCE",
+    "stock": 778,
+    "price": 778,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#770546",
+    "name": "EYELINER LIQUID INK WATERPROOF ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#772670",
+    "name": "EYELINER PEN SUPER FINE 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#773554",
+    "name": "POUDRE COMPACT FIXANTE ALL ABOUT MATTE ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#773908",
+    "name": "MASCARA I LOVE EXTREME CRAZY VOLUME ESSENCE",
+    "stock": 32,
+    "price": 32,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#774865",
+    "name": "ROUGE A LEVRES LONGLASTING 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#774867",
+    "name": "ROUGE A LEVRES LONGLASTING 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#777185",
+    "name": "CRAYON SOURCILS DESIGNER 05 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#777202",
+    "name": "MASCARA GET BIG LASHES VOLUME CURL ESSENCE",
+    "stock": 129,
+    "price": 129,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#777205",
+    "name": "CRAYON YEUX KAJAL 25 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#777217",
+    "name": "EYELINER PEN WATERPROOF ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#777320",
+    "name": "POUDRE MATTIFYING COMPACT 11 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#777321",
+    "name": "TESTEUR POUDRE MATTIFYING COMPACT 11 ESSENCE",
+    "stock": 690,
+    "price": 690,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#777598",
+    "name": "ROUGE A LEVRES LONGLASTING 11 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#841084",
+    "name": "FOND DE TEINT STAY ALL DAY 16H LONGLASTING 30 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#842382",
+    "name": "FOND DE TEINT SOFT TOUCH MOUSSE 04 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#844377",
+    "name": "PIPETTES SECHAGE EXPRESS DU VERNIS ESSENCE",
+    "stock": -69,
+    "price": -69,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#848751",
+    "name": "MASCARA I LOVE EXTREME VOLUME ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#849439",
+    "name": "MASCARA GET BIG LASHES VOLUME BOOST ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#849441",
+    "name": "MASCARA GET BIG LASHES VOLUME BOOST WATERPROOF ESSENCE",
+    "stock": 11,
+    "price": 11,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#849886",
+    "name": "CRAYON SOURCILS DESIGNER 04 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#900465",
+    "name": "BROSSE MAKE-UP BUFFER ESSENCE",
+    "stock": 15,
+    "price": 15,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#900469",
+    "name": "MAKE UP & BAKING SPONGE ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#900496",
+    "name": "MASCARA VOLUME HERO POWER BLACK ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#900497",
+    "name": "MASCARA SUPER CURL VOLUME EYE-OPENING ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#900498",
+    "name": "MASCARA HERO VOLUME WATERPROOF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#900512",
+    "name": "PINCEAU PAUPIERES BISEAUTE ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#902090",
+    "name": "F.D.T LIQUID INSTA PERFECT ESSENCE 10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#902091",
+    "name": "F.D.T LIQUID INSTA PERFECT ESSENCE 20",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#902201",
+    "name": "R.A.L VELVET MAT ESSENCE 05",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#902204",
+    "name": "R.A.L VELVET MAT ESSENCE 08",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903686",
+    "name": "MASCARA I NEED A MIRACLE VOLUME RENFENRCE ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903739",
+    "name": "F.A.P METAL CHROME ESSENCE 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903742",
+    "name": "F.A.P METAL CHROME ESSENCE 06",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903755",
+    "name": "COFFRET F.A.P MAKE YOUR OWN MAGIC ESSENCE 06",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903833",
+    "name": "CORRECTEUR CAMOUFLAGE+MAT ESSENCE 10",
+    "stock": 14,
+    "price": 14,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903834",
+    "name": "CORRECTEUR CAMOUFLAGE MAT ESSENCE 20",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903835",
+    "name": "CORRECTEUR CAMOUFLAGE MAT ESSENCE 30",
+    "stock": -4,
+    "price": -4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903871",
+    "name": "TESTEUR CORRECTEUR CAMOUFLAGE+MAT ESSENCE 10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903872",
+    "name": "TESTEUR CORRECTEUR CAMOUFLAGE MAT ESSENCE 20",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#903873",
+    "name": "TESTEUR CORRECTEUR CAMOUFLAGE MAT ESSENCE 30",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#904785",
+    "name": "POUDRE MATTIFYING COMPACT 43 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#904804",
+    "name": "FOND DE TEINT SOFT TOUCH MOUSSE 43 ESSENCE",
+    "stock": 12,
+    "price": 12,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#904806",
+    "name": "FOND DE TEINT SOFT TOUCH MOUSSE 56 ESSENCE",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919526",
+    "name": "VERNIS SHINE LAST & GO GEL ESSENCE 01",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919527",
+    "name": "VERNIS SHINE LAST & GO GEL ESSENCE 02",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919534",
+    "name": "VERNIS SHINE LAST & GO GEL ESSENCE 09",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919535",
+    "name": "VERNIS SHINE LAST & GO GEL ESSENCE 10",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919558",
+    "name": "VERNIS SHINE LAST & GO GEL ESSENCE 33",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919571",
+    "name": "VERNIS SHINE LAST & GO GEL ESSENCE 46",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919574",
+    "name": "VERNIS SHINE LAST & GO GEL ESSENCE 49",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919767",
+    "name": "FOND DE TEINT SOFT TOUCH MOUSSE 13 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919768",
+    "name": "FOND DE TEINT SOFT TOUCH MOUSSE 16 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919769",
+    "name": "TESTEUR FOND DE TEINT SOFT TOUCH MOUSSE 13 ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919855",
+    "name": "MASCARA YOU BETTER WORK ! LENGTH DEFINITION ESSENC",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#919861",
+    "name": "CRAYON  SOURCILS MICRO PRICEISE 01 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#920724",
+    "name": "MASCARA LASH PRINCESS FALSE LASH EFFECT WATERPROOF ESSENCE",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#920978",
+    "name": "ROUGE A LEVRES THIS IS ME ESSENCE 07",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#920979",
+    "name": "ROUGE A LEVRES THIS IS ME ESSENCE 08",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#921027",
+    "name": "VERNIS THIS IS ME ESSENCE 08",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#921810",
+    "name": "CORRECTEUR CAMOUFLAGE MAT ESSENCE 60",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#922829",
+    "name": "CRAYON SOURCILS DESIGNER 11 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#922830",
+    "name": "CRAYON SOURCILS DESIGNER 12 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#922831",
+    "name": "CRAYON SOURCILS DESIGNER 13 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#922850",
+    "name": "HIGHLIGHTER DROP LIQUIDE ILLUMINATEUR ESSENCE 20",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923162",
+    "name": "CORRECTEUR CAMOUFLAGE+MAT ESSENCE 23",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923163",
+    "name": "CORRECTEUR CAMOUFLAGE+MAT ESSENCE 26",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923164",
+    "name": "CORRECTEUR CAMOUFLAGE+MAT ESSENCE 40",
+    "stock": -7,
+    "price": -7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923195",
+    "name": "VERNIS SHINE LAST & GO 51 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923196",
+    "name": "VERNIS SHINE LAST & GO GEL ESSENCE 52",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923240",
+    "name": "TESTEUR CORRECTEUR CAMOUFLAGE+MAT ESSENCE 23",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923242",
+    "name": "TESTEUR CORRECTEUR CAMOUFLAGE+MAT ESSENCE 40",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923282",
+    "name": "FARD A JOUES THE BLUSH ESSENCE 10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923284",
+    "name": "FARD A JOUES THE BLUSH ESSENCE 30",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923285",
+    "name": "FARD A JOUES 40 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923286",
+    "name": "FARD A JOUES 50 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#923287",
+    "name": "FARD A JOUES THE BLUSH ESSENCE 60",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#924585",
+    "name": "PALETTE FAP THE NUDE 10 ESSENCE",
+    "stock": 70,
+    "price": 70,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#924586",
+    "name": "PALETTE FAP THE ROSE 20 ESSENCE",
+    "stock": 137,
+    "price": 137,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#924587",
+    "name": "TESTEUR PALETTE FAP THE NUDE 10 ESSENCE",
+    "stock": 522,
+    "price": 522,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#924588",
+    "name": "TESTEUR PALETTE FAP THE ROSE 20 ESSENCE",
+    "stock": 363,
+    "price": 363,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925363",
+    "name": "ROUGE A LEVRES PERFECT MATTE 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925365",
+    "name": "ROUGE A LEVRES PERFECT MATTE 04 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925366",
+    "name": "ROUGE A LEVRES PERFECT MATTE 05 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925392",
+    "name": "GLOSS STAY 8H MATTE 02 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925393",
+    "name": "GLOSS STAY 8H MATTE  03 ESSENCE",
+    "stock": 12,
+    "price": 12,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925394",
+    "name": "GLOSS STAY 8H MATTE 04 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925395",
+    "name": "GLOSS STAY 8H MATTE 05 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925397",
+    "name": "GLOSS STAY 8H MATTE 07 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925398",
+    "name": "GLOSS STAY 8H MATTE 08 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925399",
+    "name": "GLOSS STAY 8H MATTE 09 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925436",
+    "name": "EYELINER 24 EVER INK ESSENCE",
+    "stock": 177,
+    "price": 177,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925510",
+    "name": "PRIMER TEINTE MY SKIN PERFECTOR 30 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925541",
+    "name": "FARDS A PAUPIERES 15 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925545",
+    "name": "MASCARA SOURCILS MAKE ME BROW 05 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925546",
+    "name": "PALETTE HIGHLIGHTER CHOOSE YOUR GLOW ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925565",
+    "name": "VERNIS A ONGLES SHINE LAST & GO 60 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925569",
+    "name": "VERNIS SHINE LAST & GO 64 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#925985",
+    "name": "POUDRE LIBRE  FIXANTE MY SKIN PERFECTOR 30 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#926320",
+    "name": "BRUSH HOLDER IT'S BRUSH HOUR ESSENCE",
+    "stock": 24,
+    "price": 24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#927109",
+    "name": "PALETTE FARDS A PAUPIERES DAILY DOSE OF LOVE ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#927113",
+    "name": "FARD A PAUPIERES THE BROWN EDITION 30 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#927114",
+    "name": "TESTEUR FARD A PAUPIERES THE BROWN EDITION 30 ESSENCE",
+    "stock": 568,
+    "price": 568,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#927116",
+    "name": "POMADE ASOURCILS + BROSSE 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#927120",
+    "name": "POUDRE A SOURCILS AVEC PINCEAU 01 ESSENCE",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#927121",
+    "name": "POUDRE A SOURCILS AVEC PINCEAU ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#927126",
+    "name": "CREME TINTEE HELLO, GOOD STUFF! 10 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#927127",
+    "name": "CREME TINTEE HELLO, GOOD STUFF! 20 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928663",
+    "name": "FARDS A PAUPIERES 16 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928667",
+    "name": "FARDS A PAUPIERES 20 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928725",
+    "name": "MASCARA 24 EVER BOLD ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928735",
+    "name": "FOND DE TEINT HYDRATANT PRETTY NATURAL 040 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928741",
+    "name": "FOND DE TEINT HYDRATANT PRETTY NATURAL 110 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928742",
+    "name": "FOND DE TEINT HYDRATANT PRETTY NATURAL 190 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928743",
+    "name": "FOND DE TEINT HYDRATANT PRETTY NATURAL 240 ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928753",
+    "name": "FOND DE TEINT HYDRATANT PRETTY NATURAL 170 ESSENCE",
+    "stock": 77,
+    "price": 77,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928755",
+    "name": "FOND DE TEINT HYDRATANT PRETTY NATURAL 200 ESSENCE",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928796",
+    "name": "SERUM HELLO, GOOD STUFF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928817",
+    "name": "THE HIGHLIGHTER 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928824",
+    "name": "SPRAY FIXATEUR 18H ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928828",
+    "name": "ROUGE A LEVRES THIS IS ME  ESSENCE 23",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928842",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 02 ESSENCE",
+    "stock": 177,
+    "price": 177,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928843",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 21 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928844",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 22 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928846",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 24 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928847",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 06 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928858",
+    "name": "CRAYON A LEVRES STAY 8H WATERPROOF 03 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928859",
+    "name": "CRAYON A LEVRES STAY 8H WATERPROOF 04 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928863",
+    "name": "CRAYON A LEVRES STAY 8H WATERPROOF 08 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928870",
+    "name": "VERNIS SHINE LAST & GO 68 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#928872",
+    "name": "VERNIS SHINE LAST & GO 70 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930268",
+    "name": "CRÃME MAIN 24/7 HAND CREAM & MASK ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930273",
+    "name": "BROW WAX PEN 01 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930274",
+    "name": "VERNIS  PRETTY FAST NAIL POLISH 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930275",
+    "name": "VERNIS PRETTY FAST NAIL POLISH 02 ESSENCE",
+    "stock": 46,
+    "price": 46,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930276",
+    "name": "VERNIS PRETTY FAST NAIL POLISH 03 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930277",
+    "name": "VERNIS PRETTY FAST NAIL POLISH 04 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930278",
+    "name": "VERNIS PRETTY FAST NAIL POLISH 05 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930279",
+    "name": "VERNIS PRETTY FAST NAIL POLISH 06 ESSENCE",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930280",
+    "name": "EXTREME SHINE VOLUME LIPGLOSS 01 ESSENCE",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930282",
+    "name": "EXTREME SHINE VOLUME LIPGLOSS 03 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930289",
+    "name": "GLOSS EXTREME SHINE VOLUME LIPGLOSS 101 ESSENCE",
+    "stock": -90,
+    "price": -90,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930290",
+    "name": "GLOSS EXTREME SHINE VOLUME 102 ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930300",
+    "name": "HELLO, GOOD STUFF  MIL. FACE MOIST ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930301",
+    "name": "LASH APPLICATOR ESSENCE",
+    "stock": 10,
+    "price": 10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930310",
+    "name": "WHAT THE FAKE! PLUMP LIP FILLER 01 ESSENCE",
+    "stock": 33,
+    "price": 33,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930650",
+    "name": "LIQUID INK EYELINER WP BROWN 02 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930755",
+    "name": "SERUM HELLO, GOOD STUFF  DEPUFF EYE ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930756",
+    "name": "CRAYON INNER EYE BRIGHTENING PEN 01 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930758",
+    "name": "CRAYON KAJAL EYELINER 30",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930818",
+    "name": "FOND DE TEINT  STAY ALL DAY LONG-LAST. 10 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930831",
+    "name": "POUDRE SKIN LOVIN  SENS. MINERAL 01 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930832",
+    "name": "TESTEUR POUDRE SKIN LOVIN  SENS. MINERAL 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930838",
+    "name": "ANTICERNE SKIN LOVIN' SENSITIVE 10 ESSENCE",
+    "stock": -48,
+    "price": -48,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930839",
+    "name": "ANTICERNE SKIN LOVIN' SENSITIVE  20 ESSENCE",
+    "stock": -16,
+    "price": -16,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930841",
+    "name": "TESTEUR ANTICERNE SKIN LOVIN' SENSITIVE 10 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930842",
+    "name": "TESTEUR ANTICERNE SKIN LOVIN' SENSITIVE  20 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930843",
+    "name": "HELLO, GOOD STUFF  FACE MASK ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930853",
+    "name": "TESTEUR WHAT THE FAKE! PLUMP LIP FILLER 01 ESSENCE",
+    "stock": 417,
+    "price": 417,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#930867",
+    "name": "VERNIS SHINE LAST & GO 80 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932327",
+    "name": "EYEBROW BABY GOT BROW!PENCIL 20 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932328",
+    "name": "EYEBROW BABY GOT BROW! PENCIL 30 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932362",
+    "name": "EYE PATCHES HYDROGEL 01 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932364",
+    "name": "RAL HYDRATING NUDE 301 ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932369",
+    "name": "PALETTE I LIKE TO MAUVE IT  EYESH. ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932370",
+    "name": "PALETTE BRONZED THIS WAY EYESH. ESSENCE",
+    "stock": 41,
+    "price": 41,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932371",
+    "name": "PALETTE DANCING GREEN EYESH. ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932396",
+    "name": "LIP  WHAT THE FAKE! EX. PLUM. LIP FILLER ESSENCE",
+    "stock": 114,
+    "price": 114,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#932702",
+    "name": "MASCARA LASH PRINCESS CURL & VOLUME ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933591",
+    "name": "FARD A PAUPIERES SOFT TOUCH 06 ESSENCE",
+    "stock": -23,
+    "price": -23,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933711",
+    "name": "MASCARA DOUBLE TROUBLE  EXTRA BLACK ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933715",
+    "name": "MASCARA  DOUBLE TROUBLE WATERPROOF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933719",
+    "name": "Crayon pour les yeux longue tenue 34",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933723",
+    "name": "CRAYON YEUX LONG LASTING  35 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933727",
+    "name": "EYE PENCIL LONG-LASTING 36 ESSENCE",
+    "stock": 18,
+    "price": 18,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933793",
+    "name": "CRAYON SOURCILS WAX 05 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933797",
+    "name": "GEL CALMANT POUR LES SOURCILS COULDN'T CARE MORE ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933879",
+    "name": "SERUM HELLO, GOOD STUFF  PRIM. ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933909",
+    "name": "FOND DE TEINT STAY ALL DAY LONG-LAST 09 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933913",
+    "name": "FOND DE TEINT   STAY ALL DAY LONG-LAST. 40 ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933942",
+    "name": "TESTEUR LIP WHAT THE FAKE! EX. PLUM. LIP FILLER ESSENCE",
+    "stock": 408,
+    "price": 408,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933993",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 204 ESSENCE",
+    "stock": 128,
+    "price": 128,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#933997",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 205 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934001",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 301 ESSENCE",
+    "stock": -3,
+    "price": -3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934009",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 303 ESSENCE",
+    "stock": 38,
+    "price": 38,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934054",
+    "name": "VERNIS SHINE LAST & GO 82 ESSENCE",
+    "stock": 26,
+    "price": 26,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934155",
+    "name": "EYELINER LASH PRINCESS WATERPROOF ESSENCE",
+    "stock": -5,
+    "price": -5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934261",
+    "name": "GOMMAGE SOURCILS COULDN'T CARE MORE 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934339",
+    "name": "PALETTE EYESHADOW  Disney Rapunzel  ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934343",
+    "name": "PALETTE EYESHADOW  Disney Jasmine ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934360",
+    "name": "MASACARA DISNEY I LOVE EXTREME RAPUNZEL  ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934394",
+    "name": "PATCHE POUR LES YEUX DISNEY RAPUNZEL 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934402",
+    "name": "PATCHE POUR LES YEUX DISNEY MULAN 03 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934831",
+    "name": "POUDRE BANANA ESSENCE",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934832",
+    "name": "ROUGE A LEVRES ELECTRIC GLOW ESSENCE",
+    "stock": -7,
+    "price": -7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934833",
+    "name": "BAUME A LEVRES FRUITE HEART CORE 01 ESSENCE",
+    "stock": 67,
+    "price": 67,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934834",
+    "name": "BAUME A LEVRES FRUITE HEART CORE 02 ESSENCE",
+    "stock": -34,
+    "price": -34,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934835",
+    "name": "BAUME A LEVRES FRUITE HEART CORE 03 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934838",
+    "name": "ROUGE A LEVRES HYDRA MATTE 402 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934839",
+    "name": "ROUGE A LEVRES HYDRA MATTE 403 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934840",
+    "name": "ROUGE A LEVRES HYDRA MATTE 404 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934841",
+    "name": "RAL HYDRA MATTE 405 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934842",
+    "name": "ROUGE A LEVRES HYDRA MATTE 406 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934844",
+    "name": "ROUGE A LEVRES HYDRA MATTE 408 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934851",
+    "name": "FOND DE TEINT POUDRE 16H COVER & LAST 01 ESSENCE",
+    "stock": 23,
+    "price": 23,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934852",
+    "name": "FOND DE TEINT POUDRE 16H COVER & LAST 02 ESSENCE",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934854",
+    "name": "FOND DE TEINT POUDRE 16H COVER & LAST 04 ESSENCE",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934855",
+    "name": "FOND DE TEINT POUDRE 16H COVER & LAST 05 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934857",
+    "name": "FOND DE TEINT POUDRE 16H COVER & LAST 07 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934858",
+    "name": "FOND DE TEINT POUDRE 16H COVER & LAST 08 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934869",
+    "name": "MASCARA SENSITIVE BUT WOW ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934870",
+    "name": "PALETTE FAP WELCOME TO ROMA ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934871",
+    "name": "PALETTE FAP WELCOME TO LONDON ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934872",
+    "name": "VERNIS GEL 01 ESSENCE",
+    "stock": 18,
+    "price": 18,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934873",
+    "name": "VERNIS GEL 02 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934876",
+    "name": "VERNIS GEL 05 ESSENCE",
+    "stock": -10,
+    "price": -10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934877",
+    "name": "VERNIS GEL 06 ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934879",
+    "name": "VERNIS GEL 08 ESSENCE",
+    "stock": 15,
+    "price": 15,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934880",
+    "name": "VERNIS GEL 09 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934883",
+    "name": "VERNIS GEL 12 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934884",
+    "name": "VERNIS GEL 13 ESSENCE",
+    "stock": 230,
+    "price": 230,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934885",
+    "name": "VERNIS GEL 14 ESSENCE",
+    "stock": -3,
+    "price": -3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934887",
+    "name": "VERNIS GEL 16 ESSENCE",
+    "stock": -14,
+    "price": -14,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934891",
+    "name": "VERNIS GEL 20 ESSENCE",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934893",
+    "name": "VERNIS GEL 22 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934900",
+    "name": "VERNIS GEL 29 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934904",
+    "name": "VERNIS GEL 33 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934905",
+    "name": "VERNIS GEL 34 ESSENCE",
+    "stock": 965,
+    "price": 965,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934908",
+    "name": "SERUM AMPOULE POUR VISAGE BEAUTY SLEEP ESSENCE",
+    "stock": -3,
+    "price": -3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934909",
+    "name": "SERUM AMPOULE POUR VISAGE ENERGY ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934912",
+    "name": "VERNIS GEL 37 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934913",
+    "name": "Vernis Ã  ongles gel nail colour 38 ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934914",
+    "name": "VERNIS GEL 39 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934915",
+    "name": "VERNIS GEL 40 ESSENCE",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934918",
+    "name": "VERNIS GEL 43 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934919",
+    "name": "VERNIS GEL 44 ESSENCE",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934921",
+    "name": "VERNIS GEL 46 ESSENCE",
+    "stock": 16,
+    "price": 16,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934922",
+    "name": "VERNIS GEL 47 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934925",
+    "name": "VERNIS GEL 50 ESSENCE",
+    "stock": 11,
+    "price": 11,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934926",
+    "name": "BASE COAT LONG DUREE ESSENCE",
+    "stock": -24,
+    "price": -24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#934927",
+    "name": "TOP COAT PROTECTEUR D'ONGLES ESSENCE",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#935019",
+    "name": "MAGICAL EYES GIFT SET ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#935052",
+    "name": "FAUX CILS LASH PRINCESS VOLUME ESSENCE",
+    "stock": 24,
+    "price": 24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936011",
+    "name": "MASCARA ANOTHER VOLUME JUST BETTER ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936023",
+    "name": "GEL SOURCILS INK 02 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936027",
+    "name": "GEL SOURCILS INK 03ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936031",
+    "name": "GEL SOURCILS INK 04 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936049",
+    "name": "TESTEUR PALETTE FAP WELCOME TO ROMA ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936058",
+    "name": "EYELINER THE DIP MARRON ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936071",
+    "name": "SERUM HELLO GOOD STUFF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936078",
+    "name": "SPRAY HELLO GOOD STUFF HAPPY BLISS  ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936139",
+    "name": "TESTEUR FOND DE TEINT POUDRE 16H COVER & LAST 01 ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936145",
+    "name": "TESTEUR FOND DE TEINT POUDRE 16H COVER & LAST 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936157",
+    "name": "TESTEUR FOND DE TEINT POUDRE 16H COVER & LAST 04 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936163",
+    "name": "TESTEUR FOND DE TEINT POUDRE 16H COVER & LAST 05 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936223",
+    "name": "TESTEUR POUDRE BANANA ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936258",
+    "name": "CREME VISAGE MAGIC ALL IN ONE SKIN ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936320",
+    "name": "TESTEUR ROUGE A LEVRES HYDRA MATTE 402 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936323",
+    "name": "TESTEUR ROUGE A LEVRES HYDRA MATTE 403 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936326",
+    "name": "TESTEUR ROUGE A LEVRES HYDRA MATTE 404 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936332",
+    "name": "TESTEUR ROUGE A LEVRES HYDRA MATTE 406 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936338",
+    "name": "TESTEUR ROUGE A LEVRES HYDRA MATTE 408 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936344",
+    "name": "TESTEUR ROUGE A LEVRES ELECTRIC GLOW ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936359",
+    "name": "TESTEUR BAUME A LEVRES FRUITE HEART CORE 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936362",
+    "name": "TESTEUR BAUME A LEVRES FRUITE HEART CORE 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936365",
+    "name": "TESTEUR BAUME A LEVRES FRUITE HEART CORE 03 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936394",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 402 ESSENCE",
+    "stock": 29,
+    "price": 29,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936422",
+    "name": "ROUGE A LEVRES HYDRA MATTE 409 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936426",
+    "name": "TESTEUR ROUGE A LEVRES HYDRA MATTE 409 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936830",
+    "name": "SET PINCEAUX MAKE BEAUTY FUN ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936833",
+    "name": "PALETTE FARD A PAUPIERE MAKE BEAUTY FUN ESSENCE 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#936837",
+    "name": "EYELINER LASH PRINCESS ESSENCE",
+    "stock": -4,
+    "price": -4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937165",
+    "name": "GLOSS STAY 8H MATTE LIQUID 01 ESSENCE",
+    "stock": 620,
+    "price": 620,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937166",
+    "name": "GLOSS STAY 8H MATTE LIQUID 02 ESSENCE",
+    "stock": 244,
+    "price": 244,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937167",
+    "name": "GLOSS STAY 8H MATTE LIQUID 03 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937168",
+    "name": "GLOSS STAY 8H MATTE LIQUID 04 ESSENCE",
+    "stock": 533,
+    "price": 533,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937169",
+    "name": "GLOSS STAY 8H MATTE LIQUID 05 ESSENCE",
+    "stock": 58,
+    "price": 58,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937170",
+    "name": "GLOSS STAY 8H MATTE LIQUID 06 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937171",
+    "name": "GLOSS STAY 8H MATTE LIQUID 07 ESSENCE",
+    "stock": 61,
+    "price": 61,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937172",
+    "name": "GLOSS STAY 8H MATTE LIQUID 08 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937183",
+    "name": "MASCARA SOURCILS MAKE ME BROW 06 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937186",
+    "name": "PALETTE FAP WELCOME TO MARRAKECH ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937188",
+    "name": "PRIMER HYDRATANT HYDRO HYRO ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937189",
+    "name": "PRIMER  MATIFIANT PORELESS PARTNER ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937191",
+    "name": "DEMAQUILLANT YEUX REMOVE LIKE A BOSS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937194",
+    "name": "CRAYON SOURCIL WOW WATERPROOF 02",
+    "stock": 30,
+    "price": 30,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937195",
+    "name": "CRAYON SOURCIL WOW WATERPROOF 03",
+    "stock": 105,
+    "price": 105,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937196",
+    "name": "CRAYON SOURCIL WOW WATERPROOF 04",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#937259",
+    "name": "CUTE AS SHELL BAG & BRUSH SET ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938101",
+    "name": "FARD A JOUES STICK BABY GOT BLUSH 10 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938103",
+    "name": "FARD A JOUES STICK BABY GOT BLUSH 30 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938125",
+    "name": "MASCARA I LOVE EXTREME CRAZY WATERPROOF ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938165",
+    "name": "SERUM POUR LA POUSSE DES CILS ET SOURCILS ESSENCE",
+    "stock": 22,
+    "price": 22,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938169",
+    "name": "MASCARA LASH LIKE A BOSS ESSENCE",
+    "stock": 102,
+    "price": 102,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938173",
+    "name": "MASCARA LASH LIKE A BOSS WATERPROOF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938194",
+    "name": "MASCARA PRIMER LASH PRINCESS ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938237",
+    "name": "GEL SOURCIL TRABSPARENT FIXANT LIKE A BOSS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938241",
+    "name": "FARD A JOUES LIQUIDE JOUES ET LEVRES ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938251",
+    "name": "TESTEUR PRIMER HYDRATANT HYDRO HYRO ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938263",
+    "name": "TESTEUR PRIMER  MATIFIANT PORELESS PARTNER ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938266",
+    "name": "POUDRE LIBRE FIXANTE FIX & LAST 14H ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938286",
+    "name": "SERUM PORE MINIMIZING HELLO GOOD STUFF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938290",
+    "name": "TESTEUR SERUM PORE MINIMIZING HELLO GOOD STUFF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938314",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 01 ESSENCE",
+    "stock": 527,
+    "price": 527,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938320",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 02 ESSENCE",
+    "stock": 481,
+    "price": 481,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938326",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 03 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938332",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 04 ESSENCE",
+    "stock": 330,
+    "price": 330,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938338",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 05 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938344",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 06 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938350",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 07 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938356",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 08 ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938366",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 304 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938419",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 01 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938423",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 02 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938427",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 03 ESSENCE",
+    "stock": 15,
+    "price": 15,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938431",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 04 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938435",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 05 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938439",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 06 ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938443",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 07 ESSENCE",
+    "stock": 406,
+    "price": 406,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938447",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 08 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938451",
+    "name": "GLOSS STAY 8H MATTE LIQUID 09 ESSENCE",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938455",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 09 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938458",
+    "name": "TOP ET BASE COAT SUPER STRENGHT ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938727",
+    "name": "PALETTE EYESHADOW FANCYYYY 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938728",
+    "name": "PALETTE FARD A PAUPIERE VILLAINS EVIL QUEEN 01 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#938732",
+    "name": "PALETTE FARD A PAUPIERE VILLAINS SCAR 03 ESSENCE",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939115",
+    "name": "MASQUE FACIAL A L'ARGILE VILLAINS EVIL QUEEN 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939328",
+    "name": "PALETTE FAP BLOOMING WINGS 04 ESSENCE",
+    "stock": -5,
+    "price": -5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939331",
+    "name": "TESTEUR PALETTE FAP BLOOMING WINGS 04 ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939387",
+    "name": "MASCARA LASH PRINCESS FALSE LASH EFFECT BLACK BROWN ESSENCE",
+    "stock": 694,
+    "price": 694,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939419",
+    "name": "PALETTE PEACHY BLOSSOM FAJ & HIGHLIGHTER ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939420",
+    "name": "TESTEUR PALETTE PEACHY BLOSSOM FAJ & HIGHLIGHTER ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939422",
+    "name": "EYELINER SUPER FINE BRUSH WATERPROOF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939423",
+    "name": "ELECTRIC GLOW ESSENCE HUILE LEVRES ET JOUES ESSENCE",
+    "stock": 22,
+    "price": 22,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939426",
+    "name": "MASCARA LASH LIKE A BOSS INSTANT LIFT & CURL ESSENCE",
+    "stock": 122,
+    "price": 122,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939433",
+    "name": "FOND DE TEINT MOUSSE NATUREL MATTE 01 ESSENCE",
+    "stock": -9,
+    "price": -9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939434",
+    "name": "FOND DE TEINT MOUSSE NATUREL MATTE 02 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939436",
+    "name": "FOND DE TEINT MOUSSE NATUREL MATTE 04 ESSENCE",
+    "stock": 24,
+    "price": 24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939438",
+    "name": "FOND DE TEINT MOUSSE NATUREL MATTE 13 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939458",
+    "name": "GLOSS JUICY BOMB SHINY 103 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939459",
+    "name": "GLOSS JUICY BOMB SHINY 102 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939460",
+    "name": "GLOSS JUICY BOMB SHINY 101 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939463",
+    "name": "BRONZEUR STICK BABY GOT BRONZE 10 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939469",
+    "name": "HIGHLIGHTER GIMME LUMINOUS 10 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939470",
+    "name": "HIGHLIGHTER GIMME LUMINOUS 20 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939476",
+    "name": "MASCARA SOURCILS THICK & WOW 01 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939477",
+    "name": "MASCARA SOURCILS THICK & WOW 02 ESSENCE",
+    "stock": 75,
+    "price": 75,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939478",
+    "name": "MASCARA SOURCILS THICK & WOW 03 ESSENCE",
+    "stock": 850,
+    "price": 850,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939479",
+    "name": "MASCARA SOURCILS THICK & WOW 04 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939482",
+    "name": "TESTEUR ELECTRIC GLOW ESSENCE HUILE LEVRES ET JOUES ESSENCE",
+    "stock": 138,
+    "price": 138,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939484",
+    "name": "TESTEUR FOND DE TEINT MOUSSE NATUREL MATTE 01 ESSENCE",
+    "stock": 712,
+    "price": 712,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939485",
+    "name": "TESTEUR FOND DE TEINT MOUSSE NATUREL MATTE 02 ESSENCE",
+    "stock": 88,
+    "price": 88,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939487",
+    "name": "TESTEUR FOND DE TEINT MOUSSE NATUREL MATTE 04 ESSENCE",
+    "stock": 563,
+    "price": 563,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939489",
+    "name": "TESTEUR FOND DE TEINT MOUSSE NATUREL MATTE 13 ESSENCE",
+    "stock": 556,
+    "price": 556,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939505",
+    "name": "STICKERS ONGLES PARFUME HUGS & TEDDIES 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939506",
+    "name": "VERNIS MAT HUGS & TEDDIES 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939509",
+    "name": "CHOUCHOU HUGS & TEDDIES 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939512",
+    "name": "PALETTE YEUX ET VISAGE HUGS & TEDDIES 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939514",
+    "name": "TESTEUR HIGHLIGHTER GIMME LUMINOUS 10 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#939515",
+    "name": "TESTEUR HIGHLIGHTER GIMME LUMINOUS 20 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940472",
+    "name": "BANANA POWDER BRIGHTEN UP! 20 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940476",
+    "name": "TESTEUR BANANA POWDER BRIGHTEN UP! 20 ESSENCE",
+    "stock": 501,
+    "price": 501,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940524",
+    "name": "CRAYON YEUX STAY & PLAY 01 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940532",
+    "name": "CRAYON YEUX STAY & PLAY 03 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940544",
+    "name": "CRAYON YEUX STAY & PLAY 06 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940548",
+    "name": "CRAYON YEUX STAY & PLAY 07 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940566",
+    "name": "CONCEALER MULTITASK 10 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940570",
+    "name": "TESTEUR CONCEALER MULTITASK 10 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940573",
+    "name": "CONCEALER MULTITASK 15 ESSENCE",
+    "stock": 30,
+    "price": 30,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940577",
+    "name": "TESTEUR CONCEALER MULTITASK 15 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940580",
+    "name": "CONCEALER MULTITASK 20 ESSENCE",
+    "stock": 67,
+    "price": 67,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940584",
+    "name": "TESTEUR CONCEALER MULTITASK 20 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940716",
+    "name": "SPRAY FIXATEUR HELLO GOOD STUFF 48 H HYDRO ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940751",
+    "name": "TINTED kiss hydratante pour les lÃ¨vres LIP TINT 03",
+    "stock": -20,
+    "price": -20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940755",
+    "name": "TESTEUR TINTED kiss hydratante pour les lÃ¨vres LIP TINT 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940765",
+    "name": "ROUGE A LEVRES SPACE GLOW ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940787",
+    "name": "GLOSS EXTREME SHINE VOLUME 11 ESSENCE",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940795",
+    "name": "CRAYON A LEVRES SOFT & PRECISE 410 ESSENCE",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940799",
+    "name": "LIPSTICK HYDRA MATTE 410",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940803",
+    "name": "TESTEUR LIPSTICK HYDRA MATTE 410 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940806",
+    "name": "ROUGE A LEVRES HYDRA MATTE 411 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940810",
+    "name": "TESTEUR ROUGE A LEVRES HYDRA MATTE 411 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940813",
+    "name": "GLOSS STAY 8H MATTE LIQUID 10 ESSENCE",
+    "stock": 170,
+    "price": 170,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940817",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 10 ESSENCE",
+    "stock": 504,
+    "price": 504,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940820",
+    "name": "GLOSS STAY 8H MATTE LIQUID 11 ESSENCE",
+    "stock": 238,
+    "price": 238,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940824",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 11 ESSENCE",
+    "stock": 605,
+    "price": 605,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940827",
+    "name": "GLOSS STAY 8H MATTE LIQUID 12 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940831",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 12 ESSENCE",
+    "stock": 509,
+    "price": 509,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940851",
+    "name": "VERNIS DE SOIN DES ONGLES GROW & GLOW ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940886",
+    "name": "DURCISSEUR D'ONGLES THE EXTREME ESSENCE",
+    "stock": -27,
+    "price": -27,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940902",
+    "name": "VERNIS GEL 51 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940906",
+    "name": "VERNIS GEL 52 ESSENCE",
+    "stock": 119,
+    "price": 119,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940922",
+    "name": "VERNIS GEL 56 ESSENCE",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940955",
+    "name": "VERNIS GEL 57 ESSENCE",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#940959",
+    "name": "VERNIS GEL 58 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941232",
+    "name": "CRAYON POUR LES YEUX LONGUE TENUE 39 ESSENCE",
+    "stock": 348,
+    "price": 348,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941246",
+    "name": "PINCEAU EYELINER FLUFFY DREAMS",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941247",
+    "name": "PINCEAU ESTOMPEUR FARD A PAUPIERES FLUFFY DREAMS",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941249",
+    "name": "PINCEAU ESTOMPEUR SMUDGER FLUFFY DREAMS",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941250",
+    "name": "PINCEAU FOND DE TEINT BUFFER FLUFFY DREAMS",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941271",
+    "name": "Pinceau Eyeliner Disney The Lion King ESSENCE",
+    "stock": 55,
+    "price": 55,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941275",
+    "name": "Pinceau FAP Disney The Lion King ESSENCE",
+    "stock": 18,
+    "price": 18,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941279",
+    "name": "Fard Ã  paupiÃ¨res Disney The Lion King 01 ESSENCE",
+    "stock": 32,
+    "price": 32,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941283",
+    "name": "Fard Ã  paupieres Disney The Lion King 02 ESSENCE",
+    "stock": 42,
+    "price": 42,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941287",
+    "name": "Fard Ã  paupieres Disney The Lion King 03 ESSENCE",
+    "stock": 32,
+    "price": 32,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941300",
+    "name": "Fard Ã  paupieres primer Disney The Lion King ESSENCE",
+    "stock": 11,
+    "price": 11,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941311",
+    "name": "Fard a joue MAXI Disney The Lion King 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941315",
+    "name": "Fard a joue MAXI Disney The Lion King 02 ESSENCE",
+    "stock": 21,
+    "price": 21,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941325",
+    "name": "Shimmer Gel corps 01 The Lion King ESSENCE",
+    "stock": 19,
+    "price": 19,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941329",
+    "name": "Shimmer Gel corps 02 The Lion King ESSENCE",
+    "stock": 24,
+    "price": 24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941339",
+    "name": "Swirl Lip Gloss Disney The Lion King 01 ESSENCE",
+    "stock": 12,
+    "price": 12,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941343",
+    "name": "Swirl Lip Gloss Disney The Lion King 02 ESSENCE",
+    "stock": 16,
+    "price": 16,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941353",
+    "name": "Vernis Gel nail Disney The Lion King colour 01 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941357",
+    "name": "Vernis Gel nail Disney The Lion King colour 02 ESSENCE",
+    "stock": 19,
+    "price": 19,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941448",
+    "name": "Masque Visage Ananas Disney The Lion King HELLO, GOOD STUFF! ESSENCE",
+    "stock": 11,
+    "price": 11,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941452",
+    "name": "Cream Visage Peche Disney The Lion King HELLO, GOOD STUFF! ESSENCE",
+    "stock": 39,
+    "price": 39,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941453",
+    "name": "Mascara LASH LIKE A BOSS INSTANT Volume et Longueur Waterproof Disney",
+    "stock": 28,
+    "price": 28,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941492",
+    "name": "Gommage Visage Coco Disney The Lion King HELLO, GOOD STUFF! ESSENCE",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941501",
+    "name": "Palette fards a paupiere et eyeliners BLOOMIN BRIGHT",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941505",
+    "name": "BAUME A LEVRES NOURISSANT 02 BLOOMIN BRIGHT",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#941789",
+    "name": "Trousse Disney The Lion King essential tool & bag set essence",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942015",
+    "name": "FARDS A PAUPIERES WELCOME TO CAPE TOWN",
+    "stock": 24,
+    "price": 24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942033",
+    "name": "FARD A PAUPIERES 01 GOLDEN DAYS ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942034",
+    "name": "FARD A PAUPIERES TOPPER 01 GOLDEN DAYS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942035",
+    "name": "FAUX CILS 01 GOLDEN DAYS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942037",
+    "name": "PINCE A EPILER 01 GOLDEN DAYS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942038",
+    "name": "BODY TATTOOS 01 GOLDEN DAYS AHEAD ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942039",
+    "name": "HIGHLIGHTER VISAGE ET CORPS 01 GOLDEN DAYS ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942040",
+    "name": "FACE JEWELS 01 GOLDEN DAYS AHEAD ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942041",
+    "name": "HUILE A LEVRES HYDRATANTE 01 GOLDEN DAYS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942047",
+    "name": "TESTEUR EYESHADOW PALETTE GOLDEN DAYS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942071",
+    "name": "GOLDEN DAYS AHEAD hotspot EDITION LIMITE jewels",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942075",
+    "name": "GOLDEN DAYS AHEAD hotspot EID RAMADAN EDITION LIMITE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942088",
+    "name": "Eyeliner pen extra long-lasting 010",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942133",
+    "name": "MASCARA CILS SANS LIMITES ALLONGEMENT ET VOLUME EXTREME 01",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942134",
+    "name": "Dip eyeliner waterproof 24h long-lasting 01",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942138",
+    "name": "TESTEUR FARDS A PAUPIERES WELCOME TO CAPE TOWN",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942139",
+    "name": "TESTEUR PALETTE YEUX ET VISAGE BLOOM BABY BLOOM 01",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942140",
+    "name": "UNDER EYE STICK BRIGHT EYES 01 ESSENCE",
+    "stock": 470,
+    "price": 470,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942143",
+    "name": "PALETTE YEUX ET VISAGE BLOOM BABY BLOOM 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942149",
+    "name": "Eyeliner Superfin PEN 01 Essence",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942152",
+    "name": "PALETTE YEUX ET VISAGE BLOOM BABY BLOOM 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942153",
+    "name": "TESTEUR PALETTE YEUX ET VISAGE BLOOM BABY BLOOM 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942154",
+    "name": "TESTEUR Fond de teint I LOVE FLAWLESS SKIN 90 ESSENCE",
+    "stock": 423,
+    "price": 423,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942157",
+    "name": "PALETTE CORRECTEURS CONCEAL LIKE A PRO ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942158",
+    "name": "TESTEUR Fond de teint I LOVE FLAWLESS SKIN 70 ESSENCE",
+    "stock": 320,
+    "price": 320,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942159",
+    "name": "TESTEUR PALETTE LOVE THAT GLOW & BRONZE ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942162",
+    "name": "TESTEUR Fond de teint I LOVE FLAWLESS SKIN 30 ESSENCE",
+    "stock": 690,
+    "price": 690,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942164",
+    "name": "Fond de teint I LOVE FLAWLESS SKIN 20 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942167",
+    "name": "Fond de teint I LOVE FLAWLESS SKIN 90 ESSENCE",
+    "stock": 278,
+    "price": 278,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942172",
+    "name": "TESTEUR Fond de teint I LOVE FLAWLESS SKIN 50 ESSENCE",
+    "stock": 658,
+    "price": 658,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942175",
+    "name": "PALETTE LOVE THAT GLOW & BRONZE ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942176",
+    "name": "TESTEUR Fond de teint I LOVE FLAWLESS SKIN 60 ESSENCE",
+    "stock": 386,
+    "price": 386,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942178",
+    "name": "Fond de teint I LOVE FLAWLESS SKIN 50 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942180",
+    "name": "TESTEUR PALETTE CORRECTEURS CONCEAL LIKE A PRO ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942183",
+    "name": "Fond de teint I LOVE FLAWLESS SKIN 30 ESSENCE",
+    "stock": 111,
+    "price": 111,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942187",
+    "name": "Fond de teint I LOVE FLAWLESS SKIN 60 ESSENCE",
+    "stock": 147,
+    "price": 147,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942190",
+    "name": "TESTEUR Fond de teint I LOVE FLAWLESS SKIN 20 ESSENCE",
+    "stock": 537,
+    "price": 537,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942191",
+    "name": "Fond de teint I LOVE FLAWLESS SKIN 70 ESSENCE",
+    "stock": 187,
+    "price": 187,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942192",
+    "name": "TESTEUR Gloss WHAT THE FAKE! Extreme plumping lip filler 02 ESSENCE",
+    "stock": 350,
+    "price": 350,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942193",
+    "name": "HYDRA KISS LIP OIL 03 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942195",
+    "name": "HEART CORE fruity baume Ã  lÃ¨vres 05 ESSENCE",
+    "stock": 10,
+    "price": 10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942206",
+    "name": "HUILE Ã LÃVRES HYDRA KISS ESSENCE â 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942211",
+    "name": "TINTED kiss hydratante pour les lÃ¨vres LIP TINT 102",
+    "stock": -22,
+    "price": -22,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942213",
+    "name": "TESTEUR TINTED kiss hydratante pour les lÃ¨vres LIP TINT 102",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942214",
+    "name": "TESTEUR HEART CORE fruity baume Ã  lÃ¨vres 05 ESSENCE",
+    "stock": 535,
+    "price": 535,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942215",
+    "name": "Gloss WHAT THE FAKE! Extreme plumping lip filler 02 ESSENCE",
+    "stock": 203,
+    "price": 203,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942219",
+    "name": "Vernis Ã  ongles gel nail colour 62 ESSENCE",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942226",
+    "name": "Vernis Ã  ongles gel nail colour 59 ESSENCE",
+    "stock": 14,
+    "price": 14,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942227",
+    "name": "Vernis Ã  ongles French MANICURE SHEER BEAUTY 01 ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942243",
+    "name": "Vernis Ã  ongles French MANICURE TIP PAINTER 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942265",
+    "name": "BAUME A LEVRES & JOUES COLOUR CHANGING PINK IS THE NEW BLACK ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942266",
+    "name": "STICKERS ONGLES 01 COLOUR CHANGING PINK IS THE NEW BLACK ESSENCE",
+    "stock": 21,
+    "price": 21,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942267",
+    "name": "FAUX ONGLES 01 COLOUR CHANGING PINK IS THE NEW BLACK ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942743",
+    "name": "TINTED kiss hydratante pour les lÃ¨vres LIP TINT 106",
+    "stock": -21,
+    "price": -21,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#942744",
+    "name": "TINTED kiss hydratante pour les lÃ¨vres LIP TINT 107",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943585",
+    "name": "TESTEUR TINTED kiss hydratante pour les lÃ¨vres LIP TINT 106",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943591",
+    "name": "TESTEUR TINTED kiss hydratante pour les lÃ¨vres LIP TINT 107",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943679",
+    "name": "FAUX CILS 3x LASH LIKE A BOSS set 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943682",
+    "name": "FAUX CILS 3x LASH LIKE A BOSS set 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943878",
+    "name": "Fond de teint I LOVE FLAWLESS SKIN 130 ESSENCE",
+    "stock": -2,
+    "price": -2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943882",
+    "name": "TESTEUR Fond de teint I LOVE FLAWLESS SKIN 130 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943885",
+    "name": "PALETTE FARD A PAUPIERES EMILY IN PARIS 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943886",
+    "name": "TESTEUR PALETTE FARD A PAUPIERES EMILY IN PARIS 01 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943887",
+    "name": "CREAMY EYELINER 01 EMILY IN PARIS ESSENCE",
+    "stock": 21,
+    "price": 21,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943888",
+    "name": "MASCARA THE FALSE LASHES EXTREME VOLUME & CURL 01 EMILY IN PARIS 01 E",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943889",
+    "name": "PATCHS HYDRATANT EMILY IN PARIS ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943890",
+    "name": "BLUSHLIGHTER BAKED EMILY IN PARIS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943891",
+    "name": "ROUGE A LEVRES MATTE EMILY IN PARIS ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943892",
+    "name": "BAUME A LEVRES HYDRATANT EMILY IN PARIS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#943893",
+    "name": "GLOSS PLUMPING EMILY IN PARIS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944197",
+    "name": "MASCARA CALL ME QUEEN DRAMATIC FALSE LASH EFFECT ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944341",
+    "name": "EASY & WOW BROW SET MEDIUM ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944343",
+    "name": "THE NUDE LIP SET HEAVENLY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944344",
+    "name": "THE NUDE LIP SET ROMANTIC ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944648",
+    "name": "PINCEAU FARD A PAUPIERES 01 ESSENCE",
+    "stock": -5,
+    "price": -5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944649",
+    "name": "RECOURBE CILS 01 ESSENCE",
+    "stock": 369,
+    "price": 369,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944654",
+    "name": "TESTEUR FARD A JOUE LIQUIDE BABY GOT BLUSH 40 ESSENCE",
+    "stock": 501,
+    "price": 501,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944655",
+    "name": "FARD A JOUE LIQUIDE BABY GOT BLUSH 40 ESSENCE",
+    "stock": 297,
+    "price": 297,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944661",
+    "name": "EYELINER LINE IT LIKE A PRO 01 ESSENCE",
+    "stock": 72,
+    "price": 72,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944662",
+    "name": "EYELINER LIQUIDE SPARKLE ! 01 ESSENCE",
+    "stock": -82,
+    "price": -82,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944664",
+    "name": "EYELINER YEUX STAY & PLAY 01 POT ESSENCE",
+    "stock": 419,
+    "price": 419,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944665",
+    "name": "EYELINER YEUX STAY & PLAY 02 POT ESSENCE",
+    "stock": 366,
+    "price": 366,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944667",
+    "name": "GEL LIFTING SOURCIL ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944669",
+    "name": "FARD A PAUPIERES LIQUIDE DEWY 01 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944673",
+    "name": "FARD A JOUE CRUSH 70 ESSENCE",
+    "stock": 423,
+    "price": 423,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944674",
+    "name": "TESTEUR FARD A JOUE CRUSH 70 ESSENCE",
+    "stock": 797,
+    "price": 797,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944675",
+    "name": "FARD A JOUE CRUSH 80 ESSENCE",
+    "stock": 36,
+    "price": 36,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944676",
+    "name": "TESTEUR FARD A JOUE CRUSH 80 ESSENCE",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944681",
+    "name": "FARD A JOUE CRUSH 20 ESSENCE",
+    "stock": 23,
+    "price": 23,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944682",
+    "name": "TESTEUR FARD A JOUE CRUSH 20 ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944683",
+    "name": "FARD A JOUE CRUSH 30 ESSENCE",
+    "stock": 342,
+    "price": 342,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944684",
+    "name": "TESTEUR FARD A JOUE CRUSH 30 ESSENCE",
+    "stock": 627,
+    "price": 627,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944693",
+    "name": "CREME HYDRATANTE TEINTEE SKIN 20 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944694",
+    "name": "TESTEUR CREME HYDRATANTE TEINTEE SKIN 20 ESSENCE",
+    "stock": 452,
+    "price": 452,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944697",
+    "name": "CREME HYDRATANTE TEINTEE SKIN 40 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944698",
+    "name": "TESTEUR CREME HYDRATANTE TEINTEE SKIN 40 ESSENCE",
+    "stock": 675,
+    "price": 675,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944699",
+    "name": "CONCEALER I LOVE FLAWLESS SKIN 20 ESSENCE",
+    "stock": -164,
+    "price": -164,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944700",
+    "name": "TESTEUR CONCEALER I LOVE FLAWLESS SKIN 20 ESSENCE",
+    "stock": 415,
+    "price": 415,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944701",
+    "name": "CONCEALER I LOVE FLAWLESS SKIN 30 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944702",
+    "name": "TESTEUR CONCEALER I LOVE FLAWLESS SKIN 30 ESSENCE",
+    "stock": 611,
+    "price": 611,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944703",
+    "name": "CONCEALER I LOVE FLAWLESS SKIN 40 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944704",
+    "name": "TESTEUR CONCEALER I LOVE FLAWLESS SKIN 40 ESSENCE",
+    "stock": 629,
+    "price": 629,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944705",
+    "name": "CONCEALER I LOVE FLAWLESS SKIN 50 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944706",
+    "name": "TESTEUR CONCEALER I LOVE FLAWLESS SKIN 50 ESSENCE",
+    "stock": 367,
+    "price": 367,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944716",
+    "name": "CREME HYDRATANTE TEINTEE SKIN 60 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944717",
+    "name": "TESTEUR CREME HYDRATANTE TEINTEE SKIN 60 ESSENCE",
+    "stock": 477,
+    "price": 477,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944733",
+    "name": "HIGHLIGHTER LIQUIDE BABY GOT GLOW 20 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944734",
+    "name": "TESTEUR HIGHLIGHTER LIQUIDE BABY GOT GLOW 20 ESSENCE",
+    "stock": 642,
+    "price": 642,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944737",
+    "name": "FARD A JOUE LIQUIDE BABY GOT BLUSH 20 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944738",
+    "name": "TESTEUR FARD A JOUE LIQUIDE BABY GOT BLUSH 20 ESSENCE",
+    "stock": 534,
+    "price": 534,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944739",
+    "name": "FARD A JOUE LIQUIDE BABY GOT BLUSH 30 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944740",
+    "name": "TESTEUR FARD A JOUE LIQUIDE BABY GOT BLUSH 30 ESSENCE",
+    "stock": 565,
+    "price": 565,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944741",
+    "name": "BRONZEUR STICK BABY GOT BRONZE LIQUIDE 10 ESSENCE",
+    "stock": 490,
+    "price": 490,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#944742",
+    "name": "TESTEUR BRONZEUR STICK BABY GOT BRONZE LIQUIDE 10 ESSENCE",
+    "stock": 435,
+    "price": 435,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946446",
+    "name": "PRESENTOIR MENA ESSENCE 6.0 145CM 23-09",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946620",
+    "name": "FOND DE TEINT MOUSSE NATUREL MATTE 15 ESSENCE",
+    "stock": 32,
+    "price": 32,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946621",
+    "name": "TESTEUR FOND DE TEINT MOUSSE NATUREL MATTE 15 ESSENCE",
+    "stock": 525,
+    "price": 525,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946624",
+    "name": "PRIMER JELLY GRIP HYDRATING ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946626",
+    "name": "TESTEUR HIGHLIGHTER LIQUIDE BABY GOT GLOW 30 ESSENCE",
+    "stock": 437,
+    "price": 437,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946645",
+    "name": "GLOSS META GLOW MULTI REFLECTIVE 01 ESSENCE",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946646",
+    "name": "Gloss WHAT THE FAKE! Extreme plumping lip filler 03 ESSENCE",
+    "stock": 152,
+    "price": 152,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946647",
+    "name": "TESTEUR Gloss WHAT THE FAKE! Extreme plumping lip filler 03 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946648",
+    "name": "ROUGE A LEVRES META GLOW COLOUR CHANGING ESSENCE",
+    "stock": -3,
+    "price": -3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946649",
+    "name": "TESTEUR ROUGE A LEVRES META GLOW COLOUR CHANGING ESSENCE",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946662",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 09 ESSENCE",
+    "stock": 52,
+    "price": 52,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946663",
+    "name": "CRAYON Ã LÃVRES MAT CONFORT 8H ESSENCE  15",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946667",
+    "name": "HIGHLIGHTER LIQUIDE BABY GOT GLOW 30 ESSENCE",
+    "stock": 183,
+    "price": 183,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946674",
+    "name": "TOP COAT META GLOW TRANSFORMING ESSENCE",
+    "stock": 387,
+    "price": 387,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946675",
+    "name": "TOP COAT GLAZED DONUT TRANSFORMING ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946679",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 67 ESSENCE",
+    "stock": 324,
+    "price": 324,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946680",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 68 ESSENCE",
+    "stock": 473,
+    "price": 473,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946681",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 69 ESSENCE",
+    "stock": -16,
+    "price": -16,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946682",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 70 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946687",
+    "name": "BASE & TOP COAT 2 IN 1 ESSENCE",
+    "stock": -38,
+    "price": -38,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#946688",
+    "name": "TOP COAT SUPER MATTE TRANSFORMING ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#947011",
+    "name": "CASSETTES UPD. MENA 24-01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#947656",
+    "name": "CASSETTES UPD. MENA 24-02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#947669",
+    "name": "JUICY BOMB LIP OIL SET 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#947672",
+    "name": "PALETTE DE FARDS A PAUPIERES 01 Disney Pixar Up ESSENCE",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#947673",
+    "name": "FARD A JOUES LIQUIDE JOUES ET LEVRES 03 ESSENCE",
+    "stock": 958,
+    "price": 958,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#947674",
+    "name": "PALETTE DE FARDS A PAUPIERES 02 Disney Pixar Up ESSENCE",
+    "stock": 19,
+    "price": 19,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948434",
+    "name": "LASH & BROW HELLO KITTY ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948435",
+    "name": "PINCE A EPILER HELLO KITTY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948436",
+    "name": "AUTOCOLLANTPOUR ONGLES HELLO KITTY",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948438",
+    "name": "BLUSHLIGHTER HELLO KITTY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948439",
+    "name": "ROLL-ON HIGHLIGHTER HELLO KITTY ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948440",
+    "name": "PAPIER MATIFIANT HELLO KITTY ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948441",
+    "name": "ROUGE A LEVRES CARING HELLO KITTY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948442",
+    "name": "GLOSS GLOWING HELLO KITTY ESSENCE 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948443",
+    "name": "GLOSS GLOWING HELLO KITTY ESSENCE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948444",
+    "name": "JUICY BOMB SHINY LIPGLOSS 001 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#9484775",
+    "name": "MIROIR DE POCHE HELLO KITTY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948592",
+    "name": "GEL FIXATEUR POUR SOURCILS TRANSPARENT FIX IT LIKE A PRO ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948706",
+    "name": "EDITION LIMITEE JUICY BOMB PINEAPPLE MINI DISPLAY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948751",
+    "name": "EDITION LIMITEE HELLO KITTY HS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948755",
+    "name": "FLOOR UNIT 100 H25 ESSENCE",
+    "stock": 14,
+    "price": 14,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948770",
+    "name": "MASCARA I LOVE EXTREME BLEU CRAZY VOLUME ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948775",
+    "name": "MIROIR DE POCHE HELLO KITTY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#948776",
+    "name": "BOX CALL ME QUEEN ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949020",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 10 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949022",
+    "name": "CRAYON Ã LÃVRES MAT CONFORT 8H ESSENCE  12",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949028",
+    "name": "FARD A JOUES STICK BABY GOT BLUSH 50 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949029",
+    "name": "BRONZEUR STICK BABY GOT BRONZE 40 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949032",
+    "name": "MASCARA CALL ME QUEEN DRAMATIC FALSE LASH WATERPROOF ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949034",
+    "name": "CORRECTEURS CONCEAL UNDER EYE BRIGHTENING 10 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949036",
+    "name": "EYELINER LIQUIDE COLOUR IT! 01 ESSENCE",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949037",
+    "name": "EYELINER LIQUIDE COLOUR IT! 02 ESSENCE",
+    "stock": 129,
+    "price": 129,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949043",
+    "name": "SPRAY FIXATEUR DE MAQUILLAGE 18H FIX & LAST ESSENCE",
+    "stock": 498,
+    "price": 498,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949045",
+    "name": "SPRAY FIXATEUR PERFECT FIX & LAST ESSENCE",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949048",
+    "name": "BAUME A LEVRES BRILLANT JUICY BOMB 01 ESSENCE",
+    "stock": -22,
+    "price": -22,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949049",
+    "name": "BAUME A LEVRES BRILLANT JUICY BOMB 02 ESSENCE",
+    "stock": 249,
+    "price": 249,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949050",
+    "name": "BAUME A LEVRES BRILLANT JUICY BOMB 03 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949055",
+    "name": "MASCARA LASH WITHOUT LIMITS WATERPROOF EXTREME LENGTHENING & VOLUME",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949060",
+    "name": "EYELINER STAMP QUICK WING! 01 ESSENCE",
+    "stock": 77,
+    "price": 77,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949067",
+    "name": "BAUME TEINTE LEVRES & JOUES JUICY MELON ESSENCE",
+    "stock": 18,
+    "price": 18,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949068",
+    "name": "FARD A JOUES LIQUIDE JOUES ET LEVRES 02 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949085",
+    "name": "SET THE NUDE LIP PRO CATRICE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949088",
+    "name": "MAKE MY HEART SPARKLE ADVENT CALENDAR ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949097",
+    "name": "PRIMER JELLY GRIP STICK UNDER EYE ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949114",
+    "name": "PRIMER 5 IN 1 WONDER FULL 10 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949115",
+    "name": "TESTEUR PRIMER 5 IN 1 WONDER FULL 10 ESSENCE",
+    "stock": 504,
+    "price": 504,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949125",
+    "name": "TESTEUR PALETTE CORRECTEURS CONCEAL UNDER EYE BRIGHTENING 10 ESSENCE",
+    "stock": 732,
+    "price": 732,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949127",
+    "name": "FARD A JOUES STICK BABY GOT BLUSH 40 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949129",
+    "name": "TESTEUR BAUME TEINTE LEVRES & JOUES JUICY MELON ESSENCE",
+    "stock": 747,
+    "price": 747,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949138",
+    "name": "GLOSS EXTREME SHINE VOLUME 13 ESSENCE",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949140",
+    "name": "TESTEUR BAUME A LEVRES BRILLANT JUICY BOMB 01 ESSENCE",
+    "stock": 423,
+    "price": 423,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949141",
+    "name": "TESTEUR BAUME A LEVRES BRILLANT JUICY BOMB 02 ESSENCE",
+    "stock": 428,
+    "price": 428,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949142",
+    "name": "TESTEUR BAUME A LEVRES BRILLANT JUICY BOMB 03 ESSENCE",
+    "stock": 458,
+    "price": 458,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949164",
+    "name": "GLOSS STAY 8H MATTE LIQUID 16 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949165",
+    "name": "TESTEUR GLOSS STAY 8H MATTE LIQUID 16 ESSENCE",
+    "stock": 501,
+    "price": 501,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949167",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 71 ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949168",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 72 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949169",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 73 ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949191",
+    "name": "SET HAPPY BRUSHES TO YOU ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949214",
+    "name": "TESTEUR PALETTE DE FARDS A PAUPIERES 01 Disney Pixar Up ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949215",
+    "name": "TESTEUR PALETTE DE FARDS A PAUPIERES 02 Disney Pixar Up ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949216",
+    "name": "PINCEAU A PAUPIERES Disney Pixar Up ESSENCE",
+    "stock": -2,
+    "price": -2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949217",
+    "name": "POUDRE COMPACTE CORRECTRICE DE COULEUR Disney Pixar Up ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949218",
+    "name": "TESTEUR HIGHLIGHTER LIQUIDE 01 Disney Pixar Up ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949221",
+    "name": "MASQUE FACIAL HOLO PEEL-OFF Disney Pixar Up ESSENCE",
+    "stock": 9,
+    "price": 9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949226",
+    "name": "HIGHLIGHTER LIQUIDE 01 Disney Pixar Up ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949227",
+    "name": "BLUSHLIGHTER LIQUIDE 01 Disney Pixar Up ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949229",
+    "name": "TESTEUR BLUSHLIGHTER LIQUIDE 01 Disney Pixar Up ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949231",
+    "name": "ROUGE A LEVRES LIQUIDE PAILLETE 01 Disney Pixar Up ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949232",
+    "name": "ROUGE A LEVRES LIQUIDE PAILLETE 02 Disney Pixar Up ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949234",
+    "name": "TESTEUR ROUGE A LEVRES LIQUIDE PAILLETE 01 Disney Pixar Up ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949235",
+    "name": "TESTEUR ROUGE A LEVRES LIQUIDE PAILLETE 02 Disney Pixar Up ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949237",
+    "name": "HUILE A LEVRES HYDRA KISS 01 Disney Pixar Up ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949238",
+    "name": "HUILE A LEVRES HYDRA KISS 02 Disney Pixar Up ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949239",
+    "name": "BAUME A LEVRES BRILLANT Disney Pixar Up ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949414",
+    "name": "CASSETTES UPD. MENA 24-08 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949895",
+    "name": "CORRECTEURS CONCEAL UNDER EYE BRIGHTENING 20 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#949897",
+    "name": "BLUSH CHEEKY LOVE LIQUID 01 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#950566",
+    "name": "CASSETTES UPD. MENA 24-09 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#950853",
+    "name": "TESTEUR PALETTE CORRECTEURS CONCEAL UNDER EYE BRIGHTENING 20 ESSENCE",
+    "stock": 704,
+    "price": 704,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951082",
+    "name": "EDITION LIMITEE JUICY MELON MINI DISPLAY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951149",
+    "name": "SET JUICY BOMB SHINY LIPGLOSS 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951171",
+    "name": "FARD A PAUPIERES STICK LOVE IT A CHOCO LOT! ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951172",
+    "name": "MASCARA LASH WITHOUT LIMITS BROWN EXTREME LOVE IT A CHOCO LOT! ESSENC",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951173",
+    "name": "FARD A JOUES MOUSSE 01 LOVE IT A CHOCO LOT! ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951174",
+    "name": "BRACELET TRIO 01 LOVE IT A CHOCO LOT! ESSENCE",
+    "stock": 10,
+    "price": 10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951175",
+    "name": "HIGHLIGHTER GLAZE 01 LOVE IT A CHOCO LOT! ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951176",
+    "name": "TESTEUR FARD A JOUES MOUSSE 01 LOVE IT A CHOCO LOT! ESSENCE",
+    "stock": 26,
+    "price": 26,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951177",
+    "name": "LIP GLOSS 01 LOVE IT A CHOCO LOT! ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951178",
+    "name": "LIP OIL 01 LOVE IT A CHOCO LOT! ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951179",
+    "name": "TESTEUR LIP GLOSS 01 LOVE IT A CHOCO LOT! ESSENCE",
+    "stock": 30,
+    "price": 30,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951216",
+    "name": "MY ARTSY DROPS CONCELEAR SPONGES 01 ESSENCE",
+    "stock": 202,
+    "price": 202,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951220",
+    "name": "MY ARTSY DROPS MAKEUP SPONGE 01 ESSENCE",
+    "stock": 242,
+    "price": 242,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951224",
+    "name": "MY ARTSY DROPS MAKEUP SPONGE 02 ESSENCE",
+    "stock": 210,
+    "price": 210,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951228",
+    "name": "MY ARTSY DROPS MAKEUP SPONGE 03 ESSENCE",
+    "stock": 207,
+    "price": 207,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951232",
+    "name": "MY ARTSY DROPS MAKEUP SPONGE 04 ESSENCE",
+    "stock": 222,
+    "price": 222,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951236",
+    "name": "MY ARTSY DROPS MAKEUP SPONGE 05 ESSENCE",
+    "stock": 232,
+    "price": 232,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951651",
+    "name": "EYELINER LIQUIDE COLOUR IT! 04 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951652",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND TROUSSE DE MAQUILLAGE FLUFFY 01",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951663",
+    "name": "LIP BALM ALOHA BABES 01 ESSENCE",
+    "stock": 107,
+    "price": 107,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951669",
+    "name": "POUDRE A SOURCILS DUO SET 02 ESSENCE",
+    "stock": 735,
+    "price": 735,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951670",
+    "name": "POUDRE A SOURCILS DUO SET 03 ESSENCE",
+    "stock": 725,
+    "price": 725,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951676",
+    "name": "TESTEUR POUDRE A SOURCILS DUO SET 02 ESSENCE",
+    "stock": 851,
+    "price": 851,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951677",
+    "name": "TESTEUR POUDRE A SOURCILS DUO SET 03 ESSENCE",
+    "stock": 823,
+    "price": 823,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951682",
+    "name": "BAUME TEINTE LEVRES & JOUES JUICY BERRY ESSENCE",
+    "stock": 959,
+    "price": 959,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951683",
+    "name": "TESTEUR BAUME TEINTE LEVRES & JOUES JUICY BERRY ESSENCE",
+    "stock": 372,
+    "price": 372,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951689",
+    "name": "FARD A JOUES SOFT TOUCH MOUSSE 10 ESSENCE",
+    "stock": 552,
+    "price": 552,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951690",
+    "name": "TESTEUR FARD A JOUES SOFT TOUCH MOUSSE 10 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951691",
+    "name": "FARD A JOUES SOFT TOUCH MOUSSE 20 ESSENCE",
+    "stock": 587,
+    "price": 587,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951692",
+    "name": "TESTEUR FARD A JOUES SOFT TOUCH MOUSSE 20 ESSENCE",
+    "stock": 890,
+    "price": 890,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951693",
+    "name": "FARD A JOUES SOFT TOUCH MOUSSE 30 ESSENCE",
+    "stock": -24,
+    "price": -24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951694",
+    "name": "TESTEUR FARD A JOUES SOFT TOUCH MOUSSE 30 ESSENCE",
+    "stock": 588,
+    "price": 588,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951703",
+    "name": "PRIMER SILKY BLUR PORELESS ESSENCE",
+    "stock": 81,
+    "price": 81,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951735",
+    "name": "FOND DE TEINT STICK 100 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951736",
+    "name": "TESTEUR FOND DE TEINT STICK 100 ESSENCE",
+    "stock": 966,
+    "price": 966,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951739",
+    "name": "FOND DE TEINT STICK 120 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951740",
+    "name": "TESTEUR FOND DE TEINT STICK 120 ESSENCE",
+    "stock": 832,
+    "price": 832,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951741",
+    "name": "FOND DE TEINT STICK 130 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951742",
+    "name": "TESTEUR FOND DE TEINT STICK 130 ESSENCE",
+    "stock": 832,
+    "price": 832,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951743",
+    "name": "FOND DE TEINT STICK 140 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951744",
+    "name": "TESTEUR FOND DE TEINT STICK 140 ESSENCE",
+    "stock": 719,
+    "price": 719,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951751",
+    "name": "FOND DE TEINT STICK 180 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951752",
+    "name": "TESTEUR FOND DE TEINT STICK 180 ESSENCE",
+    "stock": 814,
+    "price": 814,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951800",
+    "name": "CONCEALER CAMOUFLAGE+MATTE 180 ESSENCE",
+    "stock": 512,
+    "price": 512,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951801",
+    "name": "TESTEUR CONCEALER CAMOUFLAGE+MATTE 180 ESSENCE",
+    "stock": 687,
+    "price": 687,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951822",
+    "name": "CONCEALER CAMOUFLAGE+MATTE 100 ESSENCE",
+    "stock": -27,
+    "price": -27,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951823",
+    "name": "TESTEUR CONCEALER CAMOUFLAGE+MATTE 100 ESSENCE",
+    "stock": 821,
+    "price": 821,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951824",
+    "name": "CONCEALER CAMOUFLAGE+MATTE 120 ESSENCE",
+    "stock": 492,
+    "price": 492,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951825",
+    "name": "TESTEUR CONCEALER CAMOUFLAGE+MATTE 120 ESSENCE",
+    "stock": 491,
+    "price": 491,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951830",
+    "name": "CONCEALER CAMOUFLAGE+MATTE 150 ESSENCE",
+    "stock": 531,
+    "price": 531,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951831",
+    "name": "TESTEUR CONCEALER CAMOUFLAGE+MATTE 150 ESSENCE",
+    "stock": 671,
+    "price": 671,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951832",
+    "name": "CONCEALER CAMOUFLAGE+MATTE 160 ESSENCE",
+    "stock": 343,
+    "price": 343,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951833",
+    "name": "TESTEUR CONCEALER CAMOUFLAGE+MATTE 160 ESSENCE",
+    "stock": 664,
+    "price": 664,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951850",
+    "name": "CRAYON A LEVRES LINE N' STAIN TATTOO 01 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951852",
+    "name": "CRAYON A LEVRES LINE N' STAIN TATTOO 02 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951859",
+    "name": "ROUGE A LEVRES AQUA JELLY CHANGEANT DE COULEUR ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951860",
+    "name": "TESTEUR ROUGE A LEVRES AQUA JELLY CHANGEANT DE COULEUR ESSENCE",
+    "stock": 640,
+    "price": 640,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951861",
+    "name": "GLOSS BOMB BIRTHDAY SHINY BRILLANT 01 ESSENCE",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951862",
+    "name": "SOIN LÃVRES GLOSSY AUX SUPER PEPTIDES ESSENCE  02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951863",
+    "name": "ESSENCE TESTER THE SUPER PEPTIDE GLOSSY LIP TREATMENT 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951864",
+    "name": "SOIN LÃVRES GLOSSY AUX SUPER PEPTIDES ESSENCE  03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951865",
+    "name": "ESSENCE TESTER THE SUPER PEPTIDE GLOSSY LIP TREATMENT 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951868",
+    "name": "GLOSS WHAT THE FAKE LIP FILLER 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951869",
+    "name": "TESTEUR GLOSS WHAT THE FAKE LIP FILLER 01 ESSENCE",
+    "stock": 460,
+    "price": 460,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951871",
+    "name": "HYDRA KISS LIP OIL 06 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951872",
+    "name": "HYDRA KISS LIP OIL 07 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951873",
+    "name": "HYDRA KISS LIP OIL 08 ESSENCE",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951889",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 75 ESSENCE",
+    "stock": 59,
+    "price": 59,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951891",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 77 ESSENCE",
+    "stock": 122,
+    "price": 122,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951914",
+    "name": "EDITION LIMITEE CHEEKY LOVE liquid blush mini display (worldwide) ESS",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951918",
+    "name": "EDITION LIMITEE MY ARTSY DROPS ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951946",
+    "name": "Eid Beauty Calendar ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951969",
+    "name": "KISS ON PH-REACTING LIP & CHEEK STICK 01 ESSENCE",
+    "stock": 290,
+    "price": 290,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951978",
+    "name": "ESSENCE BASE 100X15 CM",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951980",
+    "name": "BASE 100 H35 ESSENCE",
+    "stock": 88,
+    "price": 88,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#951981",
+    "name": "CATRICE BASE 100X15 CM",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952097",
+    "name": "ROUGE A LEVRES GLOSSY GLAZE 01 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952098",
+    "name": "ROUGE A LEVRES GLOSSY GLAZE 02 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952100",
+    "name": "ROUGE A LEVRES GLOSSY GLAZE 04 ESSENCE",
+    "stock": 951,
+    "price": 951,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952101",
+    "name": "TESTEUR ROUGE A LEVRES GLOSSY GLAZE 01 ESSENCE",
+    "stock": 602,
+    "price": 602,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952102",
+    "name": "TESTEUR ROUGE A LEVRES GLOSSY GLAZE 02 ESSENCE",
+    "stock": 623,
+    "price": 623,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952104",
+    "name": "TESTEUR ROUGE A LEVRES GLOSSY GLAZE 04 ESSENCE",
+    "stock": 636,
+    "price": 636,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952105",
+    "name": "MASCARA SOURCILS MAKE ME BROW 07 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952108",
+    "name": "MASCARA LASH WITHOUT LIMITS TUBING EXTREME LENGTHENING & VOLUME 04 ES",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952137",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 80 ESSENCE",
+    "stock": 53,
+    "price": 53,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952143",
+    "name": "CRAYON Ã LÃVRES TATOUAGE LINE N' STAIN! ESSENCE  03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952148",
+    "name": "TESTEUR CRAYON A LEVRES LINE N' STAIN TATTOO 01 ESSENCE",
+    "stock": 787,
+    "price": 787,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952149",
+    "name": "TESTEUR CRAYON A LEVRES LINE N' STAIN TATTOO 02 ESSENCE",
+    "stock": 765,
+    "price": 765,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952150",
+    "name": "CRAYON Ã LÃVRES TESTER TATOUAGE LINE N' STAIN! ESSENCE  03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952186",
+    "name": "BLUSHLIGHTER SO CHERRY HAPPY ESSENCE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952190",
+    "name": "SPRAY CORPOREL SO CHERRY HAPPY ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952194",
+    "name": "PRIMER FACE SO CHERRY HAPPY ESSENCE",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952198",
+    "name": "BAUME A LEVRES SO CHERRY HAPPY ESSENCE",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952202",
+    "name": "LIPGLOSS PEPTIDE 01 SO CHERRY HAPPY ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952206",
+    "name": "LIPGLOSS PEPTIDE 02 SO CHERRY HAPPY ESSENCE",
+    "stock": 950,
+    "price": 950,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952210",
+    "name": "ROUGE A LEVRES LIQUIDE MATTE SO CHERRY HAPPY ESSENCE",
+    "stock": 43,
+    "price": 43,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952217",
+    "name": "AUTOCOLLANTS POUR ONGLES SO CHERRY HAPPY ESSENCE",
+    "stock": 154,
+    "price": 154,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952221",
+    "name": "GLOSS SOMEBUNNY LIKE YOU ESSENCE",
+    "stock": 10,
+    "price": 10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952245",
+    "name": "BLUSH JELLY SHINY JUICY BOMB PARTY 01 ESSENCE",
+    "stock": 67,
+    "price": 67,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952269",
+    "name": "LIPGLOSS JUMBO JUICY BOMB PARTY 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952273",
+    "name": "LIP OIL SHINY JUICY BOMB PARTY 01 ESSENCE",
+    "stock": 12,
+    "price": 12,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952277",
+    "name": "LIP OIL SHINY JUICY BOMB PARTY 02 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952281",
+    "name": "LIP OIL SHINY JUICY BOMB PARTY 03 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952289",
+    "name": "LIPGLOSS SHINY JUICY BOMB PARTY 01 ESSENCE",
+    "stock": 26,
+    "price": 26,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952297",
+    "name": "LIPGLOSS SHINY JUICY BOMB PARTY 03 ESSENCE",
+    "stock": 53,
+    "price": 53,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952301",
+    "name": "LIPGLOSS SHINY JUICY BOMB PARTY 04 ESSENCE",
+    "stock": 89,
+    "price": 89,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952305",
+    "name": "LIPGLOSS SHINY JUICY BOMB PARTY 05 ESSENCE",
+    "stock": 51,
+    "price": 51,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#952500",
+    "name": "EDITION LIMITEE JUICY BOMB PARTY HOTSPOT ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953042",
+    "name": "EDITION LIMITEE SOMBUNNY LIKE YOU ESSENCE",
+    "stock": 27,
+    "price": 27,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953066",
+    "name": "TESTEUR PRIMER SILKY BLUR PORELESS ESSENCE",
+    "stock": 720,
+    "price": 720,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953149",
+    "name": "CASSETTES UPD. MENA CW100 25-02 ESSENCE",
+    "stock": 11,
+    "price": 11,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953955",
+    "name": "EDITION LIMITEE SO CHERRY HAPPY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953972",
+    "name": "FARD A JOUES STICK CHANGEANT DE COULEUR POLLY POCKET ESSENCE",
+    "stock": 68,
+    "price": 68,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953973",
+    "name": "HIGHLIGHTER POLLY POCKET 01 ESSENCE",
+    "stock": 55,
+    "price": 55,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953975",
+    "name": "PEIGNE A CHEVEUX 01 POLLY POCKET ESSENCE",
+    "stock": 131,
+    "price": 131,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953976",
+    "name": "SPRAY HYDRO FIXATEUR 01 POLLY POCKET ESSENCE",
+    "stock": 78,
+    "price": 78,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953977",
+    "name": "LIPGLOSS GLAZE 01 POLLY POCKET ESSENCE",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953978",
+    "name": "LIPGLOSS GLAZE 02 POLLY POCKET ESSENCE",
+    "stock": 24,
+    "price": 24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953979",
+    "name": "LIPGLOSS GLAZE 03 POLLY POCKET ESSENCE",
+    "stock": 28,
+    "price": 28,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953980",
+    "name": "PEPTIDE LIP MASK 01 POLLY POCKET ESSENCE",
+    "stock": 71,
+    "price": 71,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#953981",
+    "name": "AUTOCOLLANTS POUR LES ONGLES POLLY POCKET ESSENCE",
+    "stock": 203,
+    "price": 203,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954081",
+    "name": "EDITION LIMITEE DISNEY ALICE IN WONDERLAND 1M HOTSPOT ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954170",
+    "name": "MASCARA LASH PRINCESS FALSE LASH EFFECT BLACK PURPLE ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954175",
+    "name": "HYDRA KISS LIP TINT 07 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954176",
+    "name": "HIGHLIGHTER FLOWER ALOHA BABES 01 ESSENCE",
+    "stock": 126,
+    "price": 126,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954177",
+    "name": "BLUSH LIQUIDE ALOHA BABES 01 ESSENCE",
+    "stock": 84,
+    "price": 84,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954178",
+    "name": "LIP OIL ALOHA BABES 01 ESSENCE",
+    "stock": 120,
+    "price": 120,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954185",
+    "name": "GEL SOURCILS LIFT & FREEZE GLUE 01 ESSENCE",
+    "stock": 343,
+    "price": 343,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954188",
+    "name": "CRAYON INNER EYE KHOL KAJAL 01 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954192",
+    "name": "GLOSS IN STICK ALOHA BABES STICK 01 ESSENCE",
+    "stock": 101,
+    "price": 101,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954235",
+    "name": "PRIMER BOUNCY PLUMP SMOOTHING ESSENCE",
+    "stock": 811,
+    "price": 811,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954239",
+    "name": "GLOW SOFT TOUCH BOUNCY 20 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954240",
+    "name": "TESTEUR GLOW SOFT TOUCH BOUNCY 20 ESSENCE",
+    "stock": 804,
+    "price": 804,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954252",
+    "name": "HIGHLIGHTER STICK BABY GOT GLOW 10 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954253",
+    "name": "HIGHLIGHTER STICK BABY GOT GLOW 20 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954254",
+    "name": "FARD A JOUES LIQUIDE JOUES ET LEVRES WHAT A TINT STAIN 10 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954257",
+    "name": "FARD A JOUES LIQUIDE JOUES ET LEVRES WHAT A TINT STAIN 20 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954258",
+    "name": "SPRAY REFRESHING ALOE JELLY GRIP ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954282",
+    "name": "CRAYON A LEVRES 8H MATTE COMFORT 19 ESSENCE",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954286",
+    "name": "HYDRA KISS LIP TINT 01 ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954287",
+    "name": "TESTEUR HYDRA KISS LIP TINT 01 ESSENCE",
+    "stock": 782,
+    "price": 782,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954288",
+    "name": "HYDRA KISS LIP TINT 02 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954289",
+    "name": "TESTEUR HYDRA KISS LIP TINT 02 ESSENCE",
+    "stock": 755,
+    "price": 755,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954290",
+    "name": "HYDRA KISS LIP TINT 03 ESSENCE",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954291",
+    "name": "TESTEUR HYDRA KISS LIP TINT 03 ESSENCE",
+    "stock": 881,
+    "price": 881,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954292",
+    "name": "HYDRA KISS LIP TINT 04 ESSENCE",
+    "stock": 886,
+    "price": 886,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954293",
+    "name": "TESTEUR HYDRA KISS LIP TINT 04 ESSENCE",
+    "stock": 794,
+    "price": 794,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954296",
+    "name": "HUILE Ã LÃVRES HYDRA KISS ESSENCE â 09",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954297",
+    "name": "HYDRA KISS LIP TINT 06 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954298",
+    "name": "TESTEUR HYDRA KISS LIP TINT 06 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954299",
+    "name": "GLOSS EXTREME SHINE VOLUME 16 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954301",
+    "name": "GLOSS CHILI BOMB SHINY ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954320",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 84 ESSENCE",
+    "stock": -33,
+    "price": -33,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954322",
+    "name": "VERNIS A ONGLES GEL NAIL COLOUR 86 ESSENCE",
+    "stock": -5,
+    "price": -5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954361",
+    "name": "MASCARA LASH & BROW GEL ALOHA BABES 01 ESSENCE",
+    "stock": 123,
+    "price": 123,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954372",
+    "name": "SEPARATEURS D'ORTEILS ALOHA BABES 01 ESSENCE",
+    "stock": 135,
+    "price": 135,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954619",
+    "name": "EDITION LIMITEE POLLY POCKET HOTSPOT ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954625",
+    "name": "EDITION LIMITEE ALOHA BABES HOTSPOT ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954636",
+    "name": "EDITION LIMITEE SUMMER LIPS Mini Display CATRICE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954638",
+    "name": "EDITION LIMITEE XMAS TREASURE BOX DIY ADVENT CALENDAR ESSENCE",
+    "stock": -13,
+    "price": -13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954693",
+    "name": "FARD A JOUESSOFT TOUCH BOUNCY 10 ESSENCE",
+    "stock": 922,
+    "price": 922,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954694",
+    "name": "TESTEUR FARD A JOUES SOFT TOUCH BOUNCY 10 ESSENCE",
+    "stock": 500,
+    "price": 500,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954695",
+    "name": "FARD A JOUESSOFT TOUCH BOUNCY 20 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954696",
+    "name": "TESTEUR FARD A JOUES SOFT TOUCH BOUNCY 20 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954697",
+    "name": "FARD Ã JOUES SOFT TOUCH BOUNCY ESSENCE  30",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954698",
+    "name": "ESSENCE TESTER SOFT TOUCH BOUNCY BLUSH 30",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954797",
+    "name": "ESSENCE EDITION LIMITE DISNEY ALICE IN WONDERLAND FLOORSTAND EN SET",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954807",
+    "name": "ESSENCE THE MOST WONDERFUL KISS OF THE YEAR HYDRA KISS LIP OIL SET 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954815",
+    "name": "LIPGLOSS SPOOKY BOMB 01 ESSENCE",
+    "stock": 269,
+    "price": 269,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954871",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND PALETTE DE FARDS A PAUPIERES 01",
+    "stock": -4,
+    "price": -4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954875",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND PALETTE DE FARDS A PAUPIERES 02",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954891",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND JELLY JEWELS TOPPER DE FARD Ã PAU",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954895",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND MASCARA EFFET FAUX CILS LASH PRINC",
+    "stock": 36,
+    "price": 36,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954899",
+    "name": "ESSENCE TESTER DISNEY ALICE IN WONDERLAND PALETTE DE FARDS Ã PAUPIÃ",
+    "stock": 57,
+    "price": 57,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954902",
+    "name": "ESSENCE TESTER DISNEY ALICE IN WONDERLAND PALETTE DE FARDS Ã PAUPIÃ",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954927",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND ÃPONGE DE MAQUILLAGE CHANGEANT DE",
+    "stock": 132,
+    "price": 132,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954935",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND PINCEAU ESTOMPEUR POUR FARDS Ã PA",
+    "stock": -18,
+    "price": -18,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954942",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND BLUSH MOUSSE MATTE FLUFFY 01",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954946",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND BLUSH MOUSSE MATTE FLUFFY 02",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954950",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND CRÃME POUR LES MAINS 01",
+    "stock": -7,
+    "price": -7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954958",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND HIGHLIGHTER LIQUIDE 01",
+    "stock": 62,
+    "price": 62,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954962",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND HIGHLIGHTER LIQUIDE 02",
+    "stock": 22,
+    "price": 22,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954982",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND PINCEAU ESTOMPEUR POUR MAQUILLAGE",
+    "stock": -9,
+    "price": -9,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954986",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND GANT DÃMAQUILLANT 01",
+    "stock": 30,
+    "price": 30,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#954990",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND BANDEAU DE MAQUILLAGE 01",
+    "stock": 15,
+    "price": 15,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955007",
+    "name": "ESSENCE TESTER DISNEY ALICE IN WONDERLAND BLUSH MOUSSE MATTE FLUFFY 0",
+    "stock": 57,
+    "price": 57,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955010",
+    "name": "ESSENCE TESTER DISNEY ALICE IN WONDERLAND BLUSH MOUSSE MATTE FLUFFY 0",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955034",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND BAUME Ã LÃVRES TRANSPARENT AVEC",
+    "stock": 26,
+    "price": 26,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955038",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND BAUME Ã LÃVRES TRANSPARENT AVEC",
+    "stock": -13,
+    "price": -13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955042",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND MASQUE Ã LÃVRES 01",
+    "stock": -6,
+    "price": -6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955046",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND GOMMAGE Ã LÃVRES 01",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955050",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND BAUME LÃVRES & JOUES PH-RÃACTIF",
+    "stock": 54,
+    "price": 54,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955054",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND GLOSS REPULPANT ET BRILLANT 01",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955058",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND GLOSS REPULPANT ET BRILLANT 02",
+    "stock": -5,
+    "price": -5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955070",
+    "name": "ESSENCE DISNEY ALICE IN WONDERLAND LIP GLOW CHANGEANT DE COULEUR 01",
+    "stock": 33,
+    "price": 33,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955243",
+    "name": "LIP OIL HYDRA KISS 101 ESSENCE",
+    "stock": -25,
+    "price": -25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955246",
+    "name": "LIP OIL HYDRA KISS 102 ESSENCE",
+    "stock": -25,
+    "price": -25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#955249",
+    "name": "LIP OIL HYDRA KISS 103 ESSENCE",
+    "stock": -25,
+    "price": -25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#956139",
+    "name": "EDITION LIMITEE SPOOKY BOMB MINI DISPLAY ESSENCE",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#956142",
+    "name": "FARD A PAUPIERES STICK JELLY JEWELS GLITTER 01 ESSENCE",
+    "stock": 842,
+    "price": 842,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#956143",
+    "name": "FARD A PAUPIERES STICK JELLY JEWELS GLITTER 02 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#956144",
+    "name": "FARD A PAUPIERES STICK JELLY JEWELS GLITTER 03 ESSENCE",
+    "stock": 816,
+    "price": 816,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#956779",
+    "name": "EDITION LIMITEE MASCARA LASH WITHOUT LIMITS DISPLAY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#956908",
+    "name": "PRESENTOIR MENA ESSENCE 6.1 145CM 23-09",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#957055",
+    "name": "PRESENTOIR MENA ESSENCE 6.1 145cm 24-02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#957327",
+    "name": "BOX UPD  24-02 CW100MENA ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#957440",
+    "name": "PRESENTOIR MENA ESSENCE 6.1 145cm 24-09",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#957635",
+    "name": "BOX UPD  09-24 CW100MENA ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#957731",
+    "name": "PRESENTOIR MENA ESSENCE 6.1 145cm 25-02",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958328",
+    "name": "CRAYON Ã SOURCILS ULTRA PRÃCIS ESSENCE â TEINTE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958329",
+    "name": "CRAYON Ã SOURCILS ULTRA PRÃCIS ESSENCE â TEINTE 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958330",
+    "name": "CRAYON Ã SOURCILS ULTRA PRÃCIS ESSENCE â TEINTE 04",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958332",
+    "name": "CRAYON Ã SOURCILS ULTRA PRÃCIS ESSENCE â TEINTE 05",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958342",
+    "name": "MASCARA ESSENCE GET BIG! LASHES EFFET RECOURBANT CURL BOOST",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958344",
+    "name": "FARD Ã PAUPIÃRES MONO MAT ESSENCE â TEINTE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958345",
+    "name": "FARD Ã PAUPIÃRES MONO MAT ESSENCE â TEINTE 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958348",
+    "name": "FARD Ã PAUPIÃRES MONO MAT ESSENCE â TEINTE 04",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958349",
+    "name": "TESTER FARD Ã PAUPIÃRES MONO PEARLY ESSENCE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958358",
+    "name": "TESTER FARD Ã PAUPIÃRES MONO MAT ESSENCE MATTE 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958360",
+    "name": "TESTER FARD Ã PAUPIÃRES MONO MAT ESSENCE MATTE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958396",
+    "name": "CROWNER 100 H20 ESSENCE",
+    "stock": -2,
+    "price": -2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958431",
+    "name": "LIMITED EDITION HOTSPOT WHAT THE FLUFF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958451",
+    "name": "ESSENCE SILKY BLUR TRANSLUCENT LOOSE SETTING POWDER 11",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958455",
+    "name": "ESSENCE SOFT BAKED FARD Ã JOUES 10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958456",
+    "name": "ESSENCE TESTER SOFT BAKED BLUSH 10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958457",
+    "name": "ESSENCE SOFT BAKED FARD Ã JOUES 20",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958458",
+    "name": "ESSENCE TESTER SOFT BAKED BLUSH 20",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958459",
+    "name": "ESSENCE SOFT BAKED FARD Ã JOUES 30",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958460",
+    "name": "ESSENCE TESTER SOFT BAKED BLUSH 30",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958465",
+    "name": "ESSENCE SOFT BAKED FARD Ã JOUES 60",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958466",
+    "name": "ESSENCE TESTER SOFT BAKED BLUSH 60",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958467",
+    "name": "ESSENCE BLUSH CRUSH! 120",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958471",
+    "name": "ESSENCE GLOW LIKE HONEY DEWY PRIMER",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958472",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE  08",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958476",
+    "name": "GLOSS VOLUME BRILLANCE EXTRÃME ESSENCE  21",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958484",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958485",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958486",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958487",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958488",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE  03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958489",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958492",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE  05",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958493",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 05",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958494",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE  06",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958495",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 06",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958496",
+    "name": "HUILE Ã LÃVRES HYDRA KISS ESSENCE â 10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958497",
+    "name": "HUILE Ã LÃVRES HYDRA KISS ESSENCE â 11",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958509",
+    "name": "GLOSS VOLUME BRILLANCE EXTRÃME ESSENCE  20",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958512",
+    "name": "GLOSS REPULPANT WHAT THE FAKE! ESSENCE 100",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958513",
+    "name": "GLOSS REPULPANT WHAT THE FAKE! ESSENCE 101",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958514",
+    "name": "GLOSS REPULPANT WHAT THE FAKE! ESSENCE 102",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958515",
+    "name": "GLOSS REPULPANT WHAT THE FAKE! ESSENCE 103",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958516",
+    "name": "LIPGLOSS SHINY CHOCO BOMB 01 ESSENCE",
+    "stock": 253,
+    "price": 253,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958517",
+    "name": "CRAYON Ã LÃVRES MAT CONFORT 8H ESSENCE  21",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958518",
+    "name": "CRAYON Ã LÃVRES MAT CONFORT 8H ESSENCE  22",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958519",
+    "name": "CRAYON Ã LÃVRES POUTLINE GLISSE DOUCE ESSENCE 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958520",
+    "name": "CRAYON Ã LÃVRES POUTLINE GLISSE DOUCE ESSENCE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958521",
+    "name": "CRAYON Ã LÃVRES POUTLINE GLISSE DOUCE ESSENCE 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958522",
+    "name": "CRAYON Ã LÃVRES POUTLINE GLISSE DOUCE ESSENCE 04",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958523",
+    "name": "CRAYON Ã LÃVRES POUTLINE GLISSE DOUCE ESSENCE 05",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958610",
+    "name": "EDITION LIMITEE HYDRA KISS LIP OIL TRIO 01 ESSENCE",
+    "stock": 628,
+    "price": 628,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958663",
+    "name": "ESSENCE BLUSH CRUSH! 120",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958664",
+    "name": "ESSENCE TESTER BLUSH CRUSH! 120",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958958",
+    "name": "I LOVE EXTREME eye set 01 ESSENCE",
+    "stock": -2,
+    "price": -2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958961",
+    "name": "LASH PRINCESS LENGTHENING EYE set 01 ESSENCE",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958973",
+    "name": "EDITION LIMITEE LIPGLOSS SHINY CHOCO BOMB MINI DISPLAY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#958999",
+    "name": "RECOURBE CILS FEELIN COMFY ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959042",
+    "name": "TESTEUR HYDRA KISS LIP TINT 07 ESSENCE",
+    "stock": 768,
+    "price": 768,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959052",
+    "name": "Lipgloss & Balm Kiss Bomb Shiny 01",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959140",
+    "name": "ESSENCE EDITION LIMITEE KISS BOMB MINI DISPLAY",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959301",
+    "name": "ESSENCE LASH PRINCESS MASCARA EFFET FAUX CILS EXTRÃME WATERPROOF",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959302",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 07",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959303",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 08",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959304",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE  10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959305",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE  09",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959306",
+    "name": "SOIN LÃVRES GLOSSY AUX SUPER PEPTIDES ESSENCE  05",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959307",
+    "name": "ESSENCE TESTER THE SUPER PEPTIDE GLOSSY LIP TREATMENT 05",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959329",
+    "name": "SOIN LÃVRES GLOSSY AUX SUPER PEPTIDES ESSENCE  06",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959362",
+    "name": "ESSENCE TESTER THE SUPER PEPTIDE GLOSSY LIP TREATMENT 06",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959365",
+    "name": "GLOSS REPULPANT JUICY BOMB ESSENCE 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959366",
+    "name": "GLOSS REPULPANT JUICY BOMB ESSENCE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959367",
+    "name": "GLOSS REPULPANT JUICY BOMB ESSENCE 03",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959368",
+    "name": "GLOSS REPULPANT JUICY BOMB ESSENCE 04",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959369",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE  07",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959370",
+    "name": "GLOSS REPULPANT JUICY BOMB ESSENCE 08",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959372",
+    "name": "TESTER â GLOSS REPULPANT JUICY BOMB ESSENCE 01",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959373",
+    "name": "TESTER â GLOSS REPULPANT JUICY BOMB ESSENCE 02",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959374",
+    "name": "TESTER â GLOSS REPULPANT JUICY BOMB ESSENCE 04",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959375",
+    "name": "TESTER â GLOSS REPULPANT JUICY BOMB ESSENCE 05",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959377",
+    "name": "TESTER â GLOSS REPULPANT JUICY BOMB ESSENCE 08",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959385",
+    "name": "ESSENCE TESTER BLUSH CRUSH! 150",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959389",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 09",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959390",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 10",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959394",
+    "name": "LIMITED EDITION THE MOST WONDERFUL EID HOTSPOT ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959395",
+    "name": "LIP OIL THE MOST WONDERFUL EID HYDRA KISS 101 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959399",
+    "name": "LIP OIL THE MOST WONDERFUL EID HYDRA KISS 102 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959403",
+    "name": "LIP OIL THE MOST WONDERFUL EID HYDRA KISS 103 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959697",
+    "name": "TESTER EYESHADOW PALETTE WHAT THE FLUFF 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959700",
+    "name": "EYESHADOW PALETTE WHAT THE FLUFF 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959704",
+    "name": "MATTIFYING FACE BALM WHAT THE FLUFF 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959708",
+    "name": "POWDER PUFF WHAT THE FLUFF 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959720",
+    "name": "LIP GLAZE WHAT THE FLUFF 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959724",
+    "name": "LIP SCRUB WHAT THE FLUFF 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#959728",
+    "name": "LIP TINT WHAT THE FLUFF 01 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#960858",
+    "name": "GLOSS BRILLANT JUICY BOMB ESSENCE  109",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#961441",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 11",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#961444",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE 11",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#961448",
+    "name": "CRÃME Ã LÃVRES MATE EFFET FLOUTÃ BLUR SOUFFLÃ ESSENCE 12",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#961452",
+    "name": "ESSENCE TESTER BLUR SOUFFLÃ MATTE LIP CREAM 12",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#968175",
+    "name": "PRESENTOIRE BUBBLE ESSENCE",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#9729",
+    "name": "TROUSSE ESSENTIELS BEAUTÃ ESSENCE 2023",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#D13390",
+    "name": "EDITION LIMITEE POLLY POCKET HOTSPOT DISPLAY ONLY ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#D13436",
+    "name": "essence limited edition Disney Alice in Wonderland 1m hotspot display",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#D13441",
+    "name": "DISPLAY ESS. LTD. ALICE IN W. FS W/O CHEP DSP",
+    "stock": 23,
+    "price": 23,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#D13480",
+    "name": "LIMITED EDITION HOTSPOT DISPLAY ONLY WHAT THE FLUFF ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#DISP.ESS.2025",
+    "name": "DISPLAY SECOND PLACEMENT (MASCARA) ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ET02159",
+    "name": "TESTER INSERT 4 T 28X165 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ET02170",
+    "name": "PUSH FEED 1 T 28X175 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ET02171",
+    "name": "PUSH FEED 3 T 80X169 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ET02193",
+    "name": "BOWL 1 T 26X196 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ET02194",
+    "name": "BOWL 3 T 74X196 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0011",
+    "name": "SLIDE 1 T 66X200 ESSENCE",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0017",
+    "name": "SLIDE 2 T 81X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0069",
+    "name": "BOWL 1 NT 25X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0072",
+    "name": "QUIVER 2 NT 49X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0101",
+    "name": "BOWL 3 NT 71X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0126",
+    "name": "PUSH FEED 3 NT 57X197 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0143",
+    "name": "PUSH FEED 1 NT 23X197 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0221",
+    "name": "SLIDE 4 NT 130X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0223",
+    "name": "SLIDE 6 NT 194X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0231",
+    "name": "BOWL 1 NT 45X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0236",
+    "name": "BOWL 6 NT 263X200  ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0247",
+    "name": "SLIDE 1 T 103X197 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0277",
+    "name": "PUSH FEED 3 T 68X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0279",
+    "name": "PUSH FEED 1 T 24X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0286",
+    "name": "PUSH FEED 1 NT 33X200 ESSENCE",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0293",
+    "name": "PUSH FEED 1 NT 41X199 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0312",
+    "name": "QUIVER 4 NT 35X169 ESSENCE",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0340",
+    "name": "BOWL 2 T 49X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0346",
+    "name": "BOWL 3 T 72X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0509",
+    "name": "STICK INSERT 1 NT 24X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0666",
+    "name": "STICK INSERT 4 T 140X200 ESSENCE",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0846",
+    "name": "STICK INSERT 1 T 43X200 ESSENCE",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW0919",
+    "name": "SLIDE 1 NT 38X200 ESSENCE",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW1009",
+    "name": "STICK INSERT 1 T 35X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW9024",
+    "name": "SLIDE 1 NT 60X200 ESSENCE",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW9026",
+    "name": "TESTER INSERT 1 T 56X200 ESSENCE",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW9027",
+    "name": "SLIDE 1 NT 80X200 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#ETW9030",
+    "name": "TESTER INSERT 1 T 80X200 ESSENCE",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#M22531",
+    "name": "PRESENTOIR ESSENCE CW100 03-22",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#M24255",
+    "name": "MARKETING PACKAGING MENA 24-09 ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#M24629",
+    "name": "MARKETING PACKAGING MENA  CW100 25-02 ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#MAJ.0925.ESS",
+    "name": "MISE A JOUR ESSENCE SEPTEMBRE 2025",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#N00214",
+    "name": "ESSENCE STICKER FLOORSTAND 2/3",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.67.69.GLAZED",
+    "name": "PACK VERNIS GEL NAIL 69+67+TOP COAT GLAZED DONUT ESSENCE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.AAESSENCE",
+    "name": "PACK I Love Extreme +Brillant+ JUICY MELON",
+    "stock": 67,
+    "price": 67,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ABESSENCE",
+    "name": "PACK Lash Princess +  Brillant + JUICY MELON",
+    "stock": 35,
+    "price": 35,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ACESSENCE",
+    "name": "PACK Fard à Joue + Mascara Lash Princess +Juicy Bomb",
+    "stock": 26,
+    "price": 26,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.BF.BEUTY",
+    "name": "PACK BEAUTY ESSENTIALS 5 ESSENCE",
+    "stock": 40,
+    "price": 40,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ESSENCE.1",
+    "name": "PACK ESSENCE MASCARA EYELINER LASH CURLER JUICYMELON",
+    "stock": -3,
+    "price": -3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ESSENCE.2",
+    "name": "PACK ESSENCE MASCARA THICK AND WOW ET JUICYMELON",
+    "stock": 12,
+    "price": 12,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ESSENCE.3",
+    "name": "PACK ESSENCE MASCARA + COLOURIT + JUICYMELON + FAJ LIQUIDE",
+    "stock": -7,
+    "price": -7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ESSENCE.4",
+    "name": "PACK ESSENCE MASCARA DRAMATIC + DEWY + KAJAL 01",
+    "stock": 21,
+    "price": 21,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ESSENCE.5",
+    "name": "PACK ESSENCE CORRECTEUR FLAWLESS + POUDRE + JUICYBERRY + BIRTHDAY BOM",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ESSENCE.6",
+    "name": "PACK ESSENCE MASCARA BLEU + BAUME JUICY 03 + KAJAL 30",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.ESSENCE.9",
+    "name": "PACK ESSENCE BAUME JUICY 03 + COMFORT 10",
+    "stock": 15,
+    "price": 15,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.EXT.WHAT.STAI",
+    "name": "PACK LIPS ESSENTIALS ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.FARDEW.EYEL.Q",
+    "name": "PACK EYES ESSENTIALS ESSENCE",
+    "stock": 78,
+    "price": 78,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.FARDEW.LASH.B",
+    "name": "PACK PRINCESS LOOK ESSENCE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.REPRISE",
+    "name": "TROUSSE ESSENTIEL BEAUTE ESSENCE",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PR.BOX.ESS",
+    "name": "PR BOX ESSENCE 2025",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#SAC.TS.ESS",
+    "name": "Sacs essence en tissu",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  }
+]

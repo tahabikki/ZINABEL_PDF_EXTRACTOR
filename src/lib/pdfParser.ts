@@ -1,5 +1,6 @@
 import * as pdfjsLib from 'pdfjs-dist';
 import type { ParsedOrder, OrderHeader, OrderLine } from '@/types/order';
+import { enrichLinesWithCartonData } from '@/lib/cartonLookup';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
@@ -106,6 +107,10 @@ export async function parsePDF(file: File): Promise<ParsedOrder> {
 
   const header = extractHeader(headerItems);
   const lines = extractTableLines(tableItems);
+  
+  // Enrich lines with carton data (brand and carton_Qte)
+  await enrichLinesWithCartonData(lines);
+  
   const totalQty = lines.reduce((sum, l) => sum + l.qte, 0);
 
   return {

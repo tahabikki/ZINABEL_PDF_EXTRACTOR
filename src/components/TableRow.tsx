@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import type { OrderLine } from '@/types/order';
 import { cn } from '@/lib/utils';
 import { Check } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface TableRowProps {
   line: OrderLine;
@@ -11,6 +12,9 @@ interface TableRowProps {
   getRowClass: (stock: number, hasEmptyCell: boolean) => string;
   onRowClick: (e: React.MouseEvent, id: string) => void;
   onCheckboxChange: (id: string) => void;
+  qtePrepared: number;
+  onQtePreparedChange: (rowId: string, value: number) => void;
+  brandColor: string;
 }
 
 /**
@@ -25,7 +29,12 @@ const TableRow = memo<TableRowProps>(
     getRowClass,
     onRowClick,
     onCheckboxChange,
+    qtePrepared,
+    onQtePreparedChange,
+    brandColor,
   }) => {
+    const { toast } = useToast();
+
     const handleCheckboxClick = (e: React.MouseEvent) => {
       e.stopPropagation();
     };
@@ -110,6 +119,61 @@ const TableRow = memo<TableRowProps>(
             <span className="text-muted-foreground italic text-xs">—</span>
           )}
         </td>
+        <td className="px-3 py-2 text-left border-r border-table-border">
+          {line.brand ? (
+            <span className={cn('inline-block px-2 py-1 rounded text-xs font-medium border', brandColor)}>
+              {line.brand}
+            </span>
+          ) : (
+            <span className="text-muted-foreground italic text-xs">—</span>
+          )}
+        </td>
+        <td className="px-3 py-2 text-right font-semibold">
+          {line.carton_Qte !== undefined ? (
+            <span className="inline-block px-2 py-1 rounded text-xs font-bold bg-indigo-100 text-indigo-800">
+              {line.carton_Qte}
+            </span>
+          ) : (
+            <span className="text-muted-foreground italic text-xs">—</span>
+          )}
+        </td>
+        <td className="px-3 py-2 text-right">
+          <input
+            type="number"
+            min="0"
+            value={qtePrepared}
+            onChange={(e) => {
+              const val = Number(e.target.value) || 0;
+              if (val > line.qte) {
+                toast({
+                  title: 'Erreur',
+                  description: `Qte Validée ne peut pas dépasser Qté (${line.qte})`,
+                  variant: 'destructive',
+                });
+                return;
+              }
+              onQtePreparedChange(id, val);
+            }}
+            onClick={(e) => e.stopPropagation()}
+            disabled={isValidated}
+            className={cn(
+              'w-16 h-7 px-1 rounded border text-right font-semibold text-sm focus:outline-none',
+              isValidated
+                ? 'border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed'
+                : 'border-sky-300 bg-sky-50/50 text-sky-900 focus:ring-2 focus:ring-sky-500'
+            )}
+          />
+        </td>
+        <td className="px-3 py-2 text-right font-bold">
+          <span className={cn(
+            'inline-block px-2 py-1 rounded text-xs font-bold',
+            isValidated && Math.max(0, line.qte - qtePrepared) !== 0
+              ? 'bg-red-100 text-red-800'
+              : 'bg-orange-100 text-orange-800'
+          )}>
+            {Math.max(0, line.qte - qtePrepared)}
+          </span>
+        </td>
       </tr>
     );
   },
@@ -120,7 +184,9 @@ const TableRow = memo<TableRowProps>(
       prevProps.isSelected === nextProps.isSelected &&
       prevProps.isValidated === nextProps.isValidated &&
       prevProps.line === nextProps.line &&
-      prevProps.getRowClass === nextProps.getRowClass
+      prevProps.getRowClass === nextProps.getRowClass &&
+      prevProps.qtePrepared === nextProps.qtePrepared &&
+      prevProps.brandColor === nextProps.brandColor
     );
   }
 );

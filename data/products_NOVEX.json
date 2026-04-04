@@ -1,0 +1,554 @@
+[
+  {
+    "reference": "#14158",
+    "name": "Selfie Light Influencer NOVEX",
+    "stock": 12,
+    "price": 12,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#14173",
+    "name": "TOTEBAG NOVEX",
+    "stock": 37,
+    "price": 37,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#14194",
+    "name": "Brosse Exfoliant Novex",
+    "stock": 204,
+    "price": 204,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#14200",
+    "name": "Trousse Novex Rose",
+    "stock": 8,
+    "price": 8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#14201",
+    "name": "Trousse Novex Rouge",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#14202",
+    "name": "Trousse Novex Vert",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#142033",
+    "name": "Trousse Novex Bleu",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#14213",
+    "name": "TROUSSE NOVEX DOREE",
+    "stock": 14,
+    "price": 14,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#14221",
+    "name": "BAG NOVEX",
+    "stock": 247,
+    "price": 247,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#2023",
+    "name": "BROSSE BLINDAGEM NOVEX",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#40721",
+    "name": "PROTECTEUR THERMIQUE BLINDAGEM 400G NOVEX",
+    "stock": 344,
+    "price": 344,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#47631",
+    "name": "PROTECTEUR THERMIQUE BLINDAGEM 200G NOVEX",
+    "stock": 410,
+    "price": 410,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#5052",
+    "name": "MASQUE CHEVEUX D'HYDRATAION BOMBAR 1KG NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#5130",
+    "name": "PROTECTEUR THERMIQUE BLINDAGEM 90G NOVEX",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#5890",
+    "name": "SHAMPOING PRA BOMBAR 200 ML NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6057",
+    "name": "SHAMPOING AU HUILE DE COCO 300 ML NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6058",
+    "name": "APRES-SHAMPOING AU HUILE DE COCO 300 ML NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6079",
+    "name": "MASQUE CHEVEUX DEEP CONDITIONNG KERATIN 400 G NOVEX",
+    "stock": 21,
+    "price": 21,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6081",
+    "name": "MASQUE CHEVEUX A L'HUILE D'ARGAN 400 G NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6082",
+    "name": "'MASQUE CHEVEUX DEEP CONDITIONNG MY CURLS 400 G NOVEX",
+    "stock": 33,
+    "price": 33,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6084",
+    "name": "MASQUE CHEVEUX DEEP CONDITIONNG KERATIN 1 KG NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6087",
+    "name": "MASQUE CHEVEUX DEEP CONDITIONNG MY CURLS 1 KG NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6089",
+    "name": "SHAMPOING BRESILIEN KERATIN 300 ML NOVEX",
+    "stock": 45,
+    "price": 45,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6090",
+    "name": "SHAMPOING AU HUILE D'ARGAN 300 ML NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6092",
+    "name": "SHAMPOING MY CURLS 300 ML NOVEX",
+    "stock": 185,
+    "price": 185,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#60941",
+    "name": "MASQUE CHEVEUX AU HUILE D'ARGAN 1 KG NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6096",
+    "name": "APRES-SHAMPOING BRESILIEN KERATIN 300 ML NOVEX",
+    "stock": 142,
+    "price": 142,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6097",
+    "name": "APRES-SHAMPOING MY CURLS 300 ML NOVEX",
+    "stock": 54,
+    "price": 54,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6102",
+    "name": "LEAVE IN SANS RINCAGE MY CURLS 500G VERT NOVEX",
+    "stock": 26,
+    "price": 26,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6104",
+    "name": "LEAVE IN SANS RINCAGE MY CURLS 500G NOVEX",
+    "stock": 431,
+    "price": 431,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6105",
+    "name": "LIQUIDE MAX KERATIN 250 ML NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6157",
+    "name": "MASQUE CHEVEUX AU HUILE DE COCO 400G NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6301",
+    "name": "GEL POUR LES BOUCLES DES CHEVEUX  500 G NOVEX",
+    "stock": 11,
+    "price": 11,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6334",
+    "name": "APRES SHAMPOOING MYSTIC BLACK NOVEX 300 ML",
+    "stock": 60,
+    "price": 60,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6335",
+    "name": "SHAMPOOING MYSTIC BLACK NOVEX 300ML",
+    "stock": 34,
+    "price": 34,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6337",
+    "name": "LEAVE IN MYSTIC BLACK 500 G NOVEX",
+    "stock": 18,
+    "price": 18,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6338",
+    "name": "MASQUE CHEVEUX  MYSTIC BLACK NOVEX 400 G",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#63480",
+    "name": "BROSSE NOVEX BLINDAGEM BR",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6710",
+    "name": "APRES SHAMPOO SUPERFOOD FRUIT PASSION BLUEBERRY NOVEX 300 ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6734",
+    "name": "SHAMPOING PETITE BOUCLES KIDS 300ML NOVEX",
+    "stock": 46,
+    "price": 46,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6735",
+    "name": "APRES SHAMPOING PETITE BOUCLES KIDS 300ML NOVEX",
+    "stock": 66,
+    "price": 66,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6736",
+    "name": "SPRAY DEMELANT PETITES BOUCLES 120ML KIDS NOVEX",
+    "stock": 37,
+    "price": 37,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6737",
+    "name": "ACTIVATEUR PETITE BOUCLES SANS RINCAGE KIDS 300G NOVEX",
+    "stock": 174,
+    "price": 174,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#6881",
+    "name": "SHAMPOOING SUPERFOOD FRUIT PASSION BLUEBERRY NOVEX 300 ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7008",
+    "name": "KERATIN RECHARGE 80G NOVEX",
+    "stock": 100,
+    "price": 100,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7106",
+    "name": "Shampoing collagen fortifiant et brillance Novex 300 ml",
+    "stock": 16,
+    "price": 16,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7107",
+    "name": "AprÃ¨s-Shampoing collagen fortifiant et brillance Novex 300 ml",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7108",
+    "name": "Masque traitement ultraprofond infusion de collagen 1KG NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7109",
+    "name": "CrÃ¨me de Soin sans rinÃ§age Collagene Novex 300 ml",
+    "stock": -10,
+    "price": -10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7111",
+    "name": "Masque traitement ultraprofond infusion de collagen NOVEX 400 gr",
+    "stock": 28,
+    "price": 28,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7245",
+    "name": "APRES SHAMPOOING SUPERFOOD CACAO AMANDE NOVEX 300 ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7248",
+    "name": "SHAMPOOING SUPERFOOD CACAO AMANDE NOVEX 300ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7250",
+    "name": "APRES SHAMPOOING SUPERFOOD PITAYA GOJI NOVEX 300 ML",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7252",
+    "name": "MASQUE CHEVEUX SUPERFOOD PITAYA GOJI NOVEX 400G",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7408",
+    "name": "Collagen Infusion Recharge 80G",
+    "stock": 30,
+    "price": 30,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#7469",
+    "name": "Recharge de masque capillaire hydratation profonde Mystic Black  80g",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#76055",
+    "name": "MASQUE CHEVEUX AU HUILE DE COCO 1KG NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.COLLAGENE",
+    "name": "MasqueÂ + RechargeÂ Collagene + Brosse (gratuite)",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.GRA.NOV",
+    "name": "PACK GRATUITE NOVEX",
+    "stock": 10,
+    "price": 10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.KER.RECH",
+    "name": "SHAMPOING + RECHARGE KERATINE = BROSSE BLINDAGEM NOVEX GRATUITE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.KERATINE",
+    "name": "MasqueÂ + RechargeÂ KERATINE + Brosse (gratuite)",
+    "stock": -2,
+    "price": -2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.M.BLACK",
+    "name": "Masque + Recharge M.Black + Brosse (gratuite)",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.MY.CURL",
+    "name": "Masque my curls + leave in my curls NOVEX + BROSSE",
+    "stock": -2,
+    "price": -2,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.MYSTIC.RECH",
+    "name": "SHAMPOING + RECHARGE MYSTIC BLACK = BROSSE MASSAGE NOVEX GRATUITE",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.NOVEX.20",
+    "name": "PACK NOVEX BLINDAGEM 400 + BROSSE",
+    "stock": 10,
+    "price": 10,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#SAC.MV.NOVEX",
+    "name": "SAC MAUVE NOVEX",
+    "stock": 223,
+    "price": 223,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#TEST.BLINDA",
+    "name": "PROTECTEUR THERMIQUE BLINDAGEM 10G NOVEX",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#TEST.KERAT",
+    "name": "RECHARGE KERATIN 10g NOVEX",
+    "stock": 24,
+    "price": 24,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#VNO",
+    "name": "VENTES DES ARTICLES DE LA MARQUE NOVEX",
+    "stock": -7,
+    "price": -7,
+    "quantity": 0,
+    "free_quantity": 0
+  }
+]

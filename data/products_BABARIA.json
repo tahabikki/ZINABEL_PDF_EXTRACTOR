@@ -1,0 +1,554 @@
+[
+  {
+    "reference": "#21104",
+    "name": "BALON PLAYA BABARIA",
+    "stock": 11,
+    "price": 11,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#30601",
+    "name": "PRESENTOIR SOLAR CARTON NEW BABARIA",
+    "stock": 46,
+    "price": 46,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31537",
+    "name": "SHAMPOING OIGNON 700ML BABARIA",
+    "stock": -8,
+    "price": -8,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31539",
+    "name": "MASQUE OIGNON 400ML BABARIA",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31709",
+    "name": "CREME CORPORELLE APRES SOLEIL FRAICHE A L'ALOE VERA BABARIA 400ml",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31799",
+    "name": "SPRAY SOLAIRE MIST SPORT SPF 50  200ML BABARIA",
+    "stock": 86,
+    "price": 86,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31802",
+    "name": "CREME VISAGE NORMAL FLUIDE PROTECTION SOLAIRE SPF 50 BABARIA",
+    "stock": 895,
+    "price": 895,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31808",
+    "name": "BB CREME SOLAIRE SPF50",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31815",
+    "name": "Protecteur Cheveux Spray Aloe Vera 100ml BABARIA",
+    "stock": 65,
+    "price": 65,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31855",
+    "name": "ECRAN SOLAIRE PEAU NATURE SPF50",
+    "stock": 304,
+    "price": 304,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31918",
+    "name": "BABARIA LOTION SOLAIRE A L' ALOE VERA SPF20 200 ML",
+    "stock": 7,
+    "price": 7,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31935",
+    "name": "SPRAY LOTION SOLAIRE ALOE BABARIA SPF-50 200ml",
+    "stock": 46,
+    "price": 46,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31937",
+    "name": "SPRAY HUILE SOLAIRE PROTECTRICE CAROTTINE  BABARIA SPF 6 300ml",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31938",
+    "name": "SPRAY HUILE SOLAIRE PROTECTRICE AU MONOÃ DE TAHITI  BABARIA SPF 15 3",
+    "stock": 528,
+    "price": 528,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31940",
+    "name": "SPRAY SOLAIRE PROTECTEUR Ã LA NOIX DE COCO BABARIA SPF 20 200ml",
+    "stock": 13,
+    "price": 13,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31941",
+    "name": "HUILE PROTECTIVE SPRAY DE NOIX DE COCO SPF 30 200ML BABARIA",
+    "stock": 83,
+    "price": 83,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31943",
+    "name": "GEL HUILE GLOW BRONZANT EFFET ECLAT  BABARIA 200ml",
+    "stock": 372,
+    "price": 372,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31959",
+    "name": "SPRAY SOLAIRE PROTECTRICE ALOE VERA SPF 30 BABARIA",
+    "stock": 98,
+    "price": 98,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31960",
+    "name": "CREME SOLAIRE VISAGE INVISIBLE SPF50",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31961",
+    "name": "CREME VISAGE SENSITIVE FLUIDE PROTECTION SOLAIRE SPF 50 BABARIA",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31962",
+    "name": "CREME SOLAIRE SPORT PROTECTION SPF 50 BABARIA",
+    "stock": 303,
+    "price": 303,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31967",
+    "name": "GELÃE BRONZANTE Ã LA NOIX DE COCO BRONZE EXOTIQUE BABARIA SPF 0 300",
+    "stock": 732,
+    "price": 732,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31968",
+    "name": "GELÃE BRONZANTE Ã LA CAROTTINE REFLET SOLEIL BABARIA SPF 15 300ml",
+    "stock": 957,
+    "price": 957,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31970",
+    "name": "STICK SOLAIRE POUR VISAGE SPF50  BABARIA 20g",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31972",
+    "name": "Spray rÃ©parateur aprÃ¨s soleil 250ml",
+    "stock": 36,
+    "price": 36,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31985",
+    "name": "SPRAY SOLAIRE BI-PHASE SPF50 PEAUX SENSIBLE 200Ml",
+    "stock": 420,
+    "price": 420,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#31999",
+    "name": "ECRAN SOLAIRE MINERALE PEAU SENSIBLE SPF50",
+    "stock": 12,
+    "price": 12,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#32503",
+    "name": "CREME VISAGE A L'ACIDE HYALURONIQUE SOLAIRE SPF 50 BABARIA",
+    "stock": 125,
+    "price": 125,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#32504",
+    "name": "SERUM VISAGE A L'ACID HYALURONIC SPF 50+",
+    "stock": 402,
+    "price": 402,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#32998",
+    "name": "EXOTIC BRONZE TANNING JELLY COCONUT F-0 TRAVEL SIZE",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#32999",
+    "name": "DRY OIL MONOI TAHITI SPF 15 VAPORISATEUR 200ml BABARIA",
+    "stock": 996,
+    "price": 996,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#38166",
+    "name": "ECRAN SOLAIRE TEINTE PEAU NATURE SPF50",
+    "stock": 239,
+    "price": 239,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#41061",
+    "name": "PRESENTOIRE SOLAR VIAJE 42U PROMO babaria",
+    "stock": 20,
+    "price": 20,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#41062",
+    "name": "PRESENTOIR SOLAR FACIAL GRA",
+    "stock": 17,
+    "price": 17,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#41065",
+    "name": "PRESENTOIR SOLAR FACIAL PEQ",
+    "stock": 6,
+    "price": 6,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#41085",
+    "name": "PRESENTOIR BABARIA GRANDE XX23",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#41089",
+    "name": "PRESENTOIRE SOLAR VIAJE 42U babaria",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#41090",
+    "name": "PRESENTOIR SOLAR GRANDE 36U BABARIA",
+    "stock": 40,
+    "price": 40,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50000684",
+    "name": "BABARIA AQUA UV SUNSCREEN SPRAY SPF 50 200ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001912",
+    "name": "ECRAN SOLAIRE STICK GLOW SPF50+  BABARIA",
+    "stock": 34,
+    "price": 34,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001914",
+    "name": "SPRAY VISAGE PROTECTEUR MIST  SPF50+ 75ML BABARIA",
+    "stock": 170,
+    "price": 170,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001915",
+    "name": "SERUM SOLAIRE VISAGE VITAMIN D SPF 50 30ML BABARIA",
+    "stock": 331,
+    "price": 331,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001916",
+    "name": "SERUM VITAMIN D SPRAY SOLAIRE SPF 30 200ML BABARIA",
+    "stock": 91,
+    "price": 91,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001917",
+    "name": "GEL APRES SOLEIL ALOE VERA VISAGE 75ML BABARIA",
+    "stock": 630,
+    "price": 630,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001919",
+    "name": "BABARIA  ADVENTURE FACIAL AND BODY SUNSCREEN MIST 50 SPF 75 ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001920",
+    "name": "BABARIA ADVENTURE FACE SUNSCREEN 50 SPF 50ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001921",
+    "name": "BABARIA ADVENTURE ROLL ON SUNSCREEN 50+ SPF 50 ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50001922",
+    "name": "BABARIA ADVENTURE SUBSCREEN LOTION 30 SPF 100 ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50002039",
+    "name": "BABARIA BRONZE SUN PROTECTION FACE FLUID 50+ SPF 40ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50002049",
+    "name": "BABARIA SUN PROTECTIVE SUN OIL SPF 30 200ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50002052",
+    "name": "BABARIA BRONZE SUN PROTECTION OIL SPRAY 50 SPF 200 ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#50002056",
+    "name": "BABARIA FACE SUN PROTECTION ROLL ON 50+ 50 ML",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#60000684",
+    "name": "BADGE SOLAR BABARIA",
+    "stock": 213,
+    "price": 213,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#60664",
+    "name": "PACK NEW ROSA MOSQUETA BABARIA",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#606837",
+    "name": "SAC PLAYA BABARIA",
+    "stock": 436,
+    "price": 436,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#80236",
+    "name": "BOUCHETTE TELEPHONE BABARIA",
+    "stock": 75,
+    "price": 75,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#90000296",
+    "name": "CHAPEAUX SOLAR  XX25 BABARIA",
+    "stock": 356,
+    "price": 356,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#90000297",
+    "name": "SAC PLAYA XX25 BABARIA",
+    "stock": 399,
+    "price": 399,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#90000303",
+    "name": "PRESENTOIR COMPTOIRE FACE CARTON  XX25  BABARIA",
+    "stock": 58,
+    "price": 58,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#90000326",
+    "name": "PRESENTOIR CARTON STICK FACIAL SOLAR XX25 BABARIA",
+    "stock": 49,
+    "price": 49,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#90000339",
+    "name": "BABARIA EXPOSITOR SOLAR LE 25 VACIO",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#90000340",
+    "name": "BABARIA DISPLAY SOLAR L.E 25 VACIO",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#90000361",
+    "name": "BABARIA CAJA DISPLAY ABANICOS SOLAR 2026",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#90000364",
+    "name": "BABARIA CAJA BIKINI BAG SOLAR 2026",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.BAB.SOLAIRE",
+    "name": "SPRAY HUILE SOLAIRE PROTECTRICE AU MONOÃ DE TAHITIÂ  BABARIA SPF 15",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PACK.BABARIA.21",
+    "name": "PACK SOLAIRE BABARIA CRÈME VISAGE SPF 50 + SPRAY PROTECTEUR SOLEIL CH",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PRES.GRAND.BABARIA",
+    "name": "PRESENTOIR METALLIQUE GRAND FORMAT BABARIA",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#PRES.PETIT.BABARIA",
+    "name": "PRESENTOIR METALLIQUE PETIT FORMAT BABARIA",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0
+  },
+  {
+    "reference": "#VBA",
+    "name": "VENTES DES ARTICLES DE LA MARQUE BABARIA",
+    "stock": -7,
+    "price": -7,
+    "quantity": 0,
+    "free_quantity": 0
+  }
+]
