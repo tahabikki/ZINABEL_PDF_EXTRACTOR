@@ -537,6 +537,13 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     });
   };
 
+  const handleRowClick = (e: React.MouseEvent, id: string) => {
+    const target = e.target as HTMLElement;
+    // don't toggle when clicking interactive controls inside the row
+    if (target.closest('input,button,a,label')) return;
+    toggleSelectRow(id);
+  };
+
   const resetFilters = () => {
     setSearch('');
     setStockFilter('all');
@@ -1332,17 +1339,26 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-table-header">
-                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border w-10">
-                    <input
-                      type="checkbox"
-                      checked={allSelected}
-                      onChange={() => toggleSelectAllVisible()}
-                      aria-label="Select all visible"
-                      className={cn(
-                        'h-5 w-5 rounded-md border-2 border-border transition-transform duration-150 hover:scale-110',
-                        'checked:bg-emerald-600 checked:border-emerald-600 checked:text-white focus:ring-2 focus:ring-emerald-200 cursor-pointer'
-                      )}
-                    />
+                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border w-12">
+                    <label className="inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="sr-only"
+                        checked={allSelected}
+                        onChange={() => toggleSelectAllVisible()}
+                        aria-label="Select all visible"
+                      />
+                      <span
+                        className={cn(
+                          'h-6 w-6 rounded-md flex items-center justify-center transition-transform transform duration-150',
+                          allSelected
+                            ? 'bg-emerald-600 border-emerald-600 text-white shadow-md ring-2 ring-emerald-200'
+                            : 'bg-white border border-border text-muted-foreground hover:scale-105'
+                        )}
+                      >
+                        {allSelected && <Check className="h-4 w-4" />}
+                      </span>
+                    </label>
                   </th>
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Code à barre</th>
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Référence</th>
@@ -1360,22 +1376,35 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
                   return (
                     <tr
                       key={id}
+                      onClick={(e) => handleRowClick(e, id)}
                       className={cn(
-                        'border-b border-table-border last:border-b-0 transition-colors',
+                        'border-b border-table-border last:border-b-0 transition-colors cursor-pointer',
                         getRowClass(line.stock, line.hasEmptyCell),
                         isValidated ? 'ring-1 ring-primary/20 bg-primary/5' : ''
                       )}
                     >
                       <td className="px-3 py-2">
-                        <input
-                          type="checkbox"
-                          checked={isSelected}
-                          onChange={() => toggleSelectRow(id)}
-                          className={cn(
-                            'h-5 w-5 rounded-md border-2 border-border transition-transform duration-150 hover:scale-110',
-                            'checked:bg-emerald-600 checked:border-emerald-600 checked:text-white focus:ring-2 focus:ring-emerald-200 cursor-pointer'
-                          )}
-                        />
+                        <label className="inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            className="sr-only"
+                            checked={isSelected}
+                            onChange={(e) => {
+                              e.stopPropagation();
+                              toggleSelectRow(id);
+                            }}
+                          />
+                          <span
+                            className={cn(
+                              'h-6 w-6 rounded-md flex items-center justify-center transition-transform transform duration-150',
+                              isSelected
+                                ? 'bg-emerald-600 border-emerald-600 text-white shadow-lg ring-2 ring-emerald-200 scale-100'
+                                : 'bg-white border border-border text-muted-foreground hover:scale-105'
+                            )}
+                          >
+                            {isSelected ? <Check className="h-4 w-4" /> : null}
+                          </span>
+                        </label>
                       </td>
 
                       <td className={cn('px-3 py-2 font-mono text-xs text-muted-foreground', line.emptyCells.codeABarre && emptyCellClass)}>
