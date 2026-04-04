@@ -91,6 +91,10 @@ function getRowId(line: OrderLine) {
   return `${line.codeABarre || ''}||${line.reference || ''}||${line.designation || ''}||${line.emplacement || ''}`;
 }
 
+function safeLower(s?: string) {
+  return (s || '').toLowerCase();
+}
+
 const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [search, setSearch] = useState('');
   const [stockFilter, setStockFilter] = useState<StockFilter>('all');
@@ -167,10 +171,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       const q = search.toLowerCase();
       result = result.filter(
         (l) =>
-          l.codeABarre.toLowerCase().includes(q) ||
-          l.reference.toLowerCase().includes(q) ||
-          l.designation.toLowerCase().includes(q) ||
-          l.emplacement.toLowerCase().includes(q)
+          safeLower(l.codeABarre).includes(q) ||
+          safeLower(l.reference).includes(q) ||
+          safeLower(l.designation).includes(q) ||
+          safeLower(l.emplacement).includes(q)
       );
     }
 
@@ -304,10 +308,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       const q = search.toLowerCase();
       result = result.filter(
         (l) =>
-          l.codeABarre.toLowerCase().includes(q) ||
-          l.reference.toLowerCase().includes(q) ||
-          l.designation.toLowerCase().includes(q) ||
-          l.emplacement.toLowerCase().includes(q)
+          safeLower(l.codeABarre).includes(q) ||
+          safeLower(l.reference).includes(q) ||
+          safeLower(l.designation).includes(q) ||
+          safeLower(l.emplacement).includes(q)
       );
     }
 
@@ -538,9 +542,11 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   };
 
   const handleRowClick = (e: React.MouseEvent, id: string) => {
-    const target = e.target as HTMLElement;
+    // normalize event target to an Element (avoid Text nodes which have no `closest`)
+    let node: Element | null = (e.target as Element) ?? null;
+    if (node && node.nodeType !== Node.ELEMENT_NODE) node = node.parentElement;
     // don't toggle when clicking interactive controls inside the row
-    if (target.closest('input,button,a,label')) return;
+    if (node && typeof (node as Element).closest === 'function' && node.closest('input,button,a,label')) return;
     toggleSelectRow(id);
   };
 
