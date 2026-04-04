@@ -18,9 +18,29 @@ export async function loadCartonData(): Promise<Map<string, CartonData>> {
   if (cartonCache) return cartonCache;
 
   try {
-    const response = await fetch('/data/carton_Qte.json');
-    if (!response.ok) {
-      console.warn('Failed to load carton data:', response.status);
+    // Try multiple candidate paths because dev server and production may serve static assets differently.
+    const base = (import.meta && (import.meta as any).env && (import.meta as any).env.BASE_URL) || '/';
+    const candidates = [
+      `${base}data/carton_Qte.json`,
+      `${base}carton_Qte.json`,
+      '/data/carton_Qte.json',
+      '/carton_Qte.json',
+    ];
+
+    let response: Response | null = null;
+    for (const p of candidates) {
+      try {
+        response = await fetch(p);
+        if (response && response.ok) {
+          break;
+        }
+      } catch (err) {
+        // ignore and try next candidate
+      }
+    }
+
+    if (!response || !response.ok) {
+      console.warn('Failed to load carton data from any candidate path:', candidates);
       return new Map();
     }
 
