@@ -14,6 +14,23 @@ const SafeOrderTable: React.FC<SafeOrderTableProps> = ({ lines }) => {
   const [renderError, setRenderError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
 
+  // Guard against invalid input
+  if (!lines || !Array.isArray(lines)) {
+    return (
+      <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+        <p>Aucune donnée de tableau à afficher</p>
+      </div>
+    );
+  }
+
+  if (lines.length === 0) {
+    return (
+      <div style={{ padding: '20px', textAlign: 'center', color: '#999' }}>
+        <p>Pas de lignes à afficher</p>
+      </div>
+    );
+  }
+
   if (renderError) {
     return (
       <div style={{ padding: '20px', textAlign: 'center' }}>

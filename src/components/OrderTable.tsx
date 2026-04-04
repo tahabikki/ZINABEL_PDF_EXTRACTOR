@@ -131,7 +131,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [autoValidateOnCheck, setAutoValidateOnCheck] = useState<boolean>(true);
 
   // Create safe versions of all setters to prevent DOM race condition crashes on mobile
-  const safeSetSearch = createSafeSetState(setSearch, 'search');
+  const safeSetRawSearch = createSafeSetState(setRawSearch, 'search');
   const safeSetStockFilter = createSafeSetState(setStockFilter, 'stockFilter');
   const safeSetStockMode = createSafeSetState(setStockMode, 'stockMode');
   const safeSetStockValueFilter = createSafeSetState(setStockValueFilter, 'stockValueFilter');

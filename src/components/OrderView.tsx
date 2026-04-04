@@ -19,13 +19,30 @@ const OrderView: React.FC<OrderViewProps> = ({ order }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const orderName =
-    order.header.reference ||
-    order.header.noPiece ||
-    order.fileName.replace(/\.pdf$/i, '');
+    order?.header?.reference ||
+    order?.header?.noPiece ||
+    (order?.fileName || 'Commande').replace(/\.pdf$/i, '');
+
+  const handleCollapsibleChange = (open: boolean) => {
+    try {
+      setIsOpen(open);
+    } catch (err) {
+      console.warn('Error changing collapsible state:', err);
+    }
+  };
+
+  // Guard against missing order data
+  if (!order) {
+    return (
+      <div className="bg-card rounded-xl border border-border shadow-sm p-6 text-center text-muted-foreground">
+        Données de commande indisponibles
+      </div>
+    );
+  }
 
   return (
     <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
-      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <Collapsible open={isOpen} onOpenChange={handleCollapsibleChange}>
         <CollapsibleTrigger asChild>
           <button
             type="button"
@@ -34,14 +51,14 @@ const OrderView: React.FC<OrderViewProps> = ({ order }) => {
             aria-label={isOpen ? 'Reduire les sections' : 'Afficher les sections'}
           >
             <FileText className="h-5 w-5 text-primary" />
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <h2 className="text-lg font-bold text-foreground flex flex-wrap items-center gap-2">
                 <span>Bon de preparation (Commande)</span>
-                <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
-                  {orderName}
+                <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary truncate">
+                  {orderName || 'Commande'}
                 </span>
               </h2>
-              <p className="text-xs text-muted-foreground">{order.fileName}</p>
+              <p className="text-xs text-muted-foreground truncate">{order?.fileName || '—'}</p>
             </div>
             <span className="inline-flex items-center gap-1 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground">
               {isOpen ? 'Masquer' : 'Afficher'}
@@ -57,16 +74,22 @@ const OrderView: React.FC<OrderViewProps> = ({ order }) => {
 
         <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
           <div className="p-6 space-y-6">
-            <OrderHeaderCard header={order.header} />
+            {order?.header && (
+              <OrderHeaderCard header={order.header} />
+            )}
 
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-3">Analyse approfondie</h3>
-              <OrderAnalytics order={order} />
+              <div className="min-h-[100px]">
+                <OrderAnalytics order={order} />
+              </div>
             </div>
 
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-3">Details de la preparation</h3>
-              <SafeOrderTable lines={order.lines} />
+              <div className="min-h-[100px]">
+                <SafeOrderTable lines={order?.lines || []} />
+              </div>
             </div>
           </div>
         </CollapsibleContent>

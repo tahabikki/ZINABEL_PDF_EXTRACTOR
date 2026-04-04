@@ -25,20 +25,29 @@ interface OrderAnalyticsProps {
 const OrderAnalytics: React.FC<OrderAnalyticsProps> = ({ order }) => {
   const { lines } = order;
 
-  const stockZero = lines.filter((l) => l.stock === 0);
-  const stockNegative = lines.filter((l) => l.stock < 0);
-  const stockPositive = lines.filter((l) => l.stock > 0);
-  const stockLow = lines.filter((l) => l.stock > 0 && l.stock < 10);
+  // Guard against undefined lines
+  if (!lines || !Array.isArray(lines) || lines.length === 0) {
+    return (
+      <div className="rounded-lg border border-border bg-card p-8 text-center text-muted-foreground">
+        <p>Aucune donnée disponible pour l'analyse</p>
+      </div>
+    );
+  }
 
-  const totalStockValue = lines.reduce((sum, l) => sum + l.stock, 0);
-  const totalQtyOrdered = lines.reduce((sum, l) => sum + l.qte, 0);
-  const uniqueEmplacements = new Set(lines.map((l) => l.emplacement)).size;
-  const overOrderedItems = lines.filter((l) => l.qte > l.stock && l.stock >= 0);
-  const topByQty = [...lines].sort((a, b) => b.qte - a.qte).slice(0, 5);
+  const stockZero = lines.filter((l) => (l?.stock ?? 0) === 0);
+  const stockNegative = lines.filter((l) => (l?.stock ?? 0) < 0);
+  const stockPositive = lines.filter((l) => (l?.stock ?? 0) > 0);
+  const stockLow = lines.filter((l) => (l?.stock ?? 0) > 0 && (l?.stock ?? 0) < 10);
+
+  const totalStockValue = lines.reduce((sum, l) => sum + (l?.stock ?? 0), 0);
+  const totalQtyOrdered = lines.reduce((sum, l) => sum + (l?.qte ?? 0), 0);
+  const uniqueEmplacements = new Set(lines.map((l) => l?.emplacement || '')).size;
+  const overOrderedItems = lines.filter((l) => (l?.qte ?? 0) > (l?.stock ?? 0) && (l?.stock ?? 0) >= 0);
+  const topByQty = [...lines].sort((a, b) => (b?.qte ?? 0) - (a?.qte ?? 0)).slice(0, 5);
   const criticalItems = stockNegative.length;
-  const fulfillableItems = lines.filter((l) => l.stock >= l.qte).length;
+  const fulfillableItems = lines.filter((l) => (l?.stock ?? 0) >= (l?.qte ?? 0)).length;
   const fulfillmentRate = lines.length > 0 ? Math.round((fulfillableItems / lines.length) * 100) : 0;
-  const qtyGroupCount = new Set(lines.map((l) => Math.round(l.qte))).size;
+  const qtyGroupCount = new Set(lines.map((l) => Math.round(l?.qte ?? 0))).size;
 
   const [ruptureSearch, setRuptureSearch] = useState('');
   const [negativeSearch, setNegativeSearch] = useState('');
@@ -46,13 +55,29 @@ const OrderAnalytics: React.FC<OrderAnalyticsProps> = ({ order }) => {
   const filteredRupture = useMemo(() => {
     if (!ruptureSearch.trim()) return stockZero;
     const q = ruptureSearch.toLowerCase();
-    return stockZero.filter((l) => l.reference.toLowerCase().includes(q) || l.designation.toLowerCase().includes(q));
+    return stockZero.filter((l) => {
+      try {
+        const ref = (l.reference || '').toLowerCase();
+        const des = (l.designation || '').toLowerCase();
+        return ref.includes(q) || des.includes(q);
+      } catch (e) {
+        return false;
+      }
+    });
   }, [stockZero, ruptureSearch]);
 
   const filteredNegative = useMemo(() => {
     if (!negativeSearch.trim()) return stockNegative;
     const q = negativeSearch.toLowerCase();
-    return stockNegative.filter((l) => l.reference.toLowerCase().includes(q) || l.designation.toLowerCase().includes(q));
+    return stockNegative.filter((l) => {
+      try {
+        const ref = (l.reference || '').toLowerCase();
+        const des = (l.designation || '').toLowerCase();
+        return ref.includes(q) || des.includes(q);
+      } catch (e) {
+        return false;
+      }
+    });
   }, [stockNegative, negativeSearch]);
 
   return (
@@ -315,25 +340,25 @@ function StockCardGrid({
             {displayItems.map((item, i) => (
               <div key={i} className={`rounded-xl border bg-card p-4 shadow-sm transition-all ${cardHover} hover:shadow-md`}>
                 <div className="flex items-start justify-between mb-2">
-                  <span className="font-mono text-sm font-black text-foreground">{item.reference}</span>
+                  <span className="font-mono text-sm font-black text-foreground">{item?.reference || '—'}</span>
                   <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${badgeCls}`}>
-                    {stockType === 'negative' ? `Stock: ${item.stock.toLocaleString('fr-FR')}` : 'Stock: 0'}
+                    {stockType === 'negative' ? `Stock: ${(item?.stock ?? 0).toLocaleString('fr-FR')}` : 'Stock: 0'}
                   </span>
                 </div>
-                <p className="text-xs text-muted-foreground line-clamp-2 mb-3 min-h-[2rem]">{item.designation}</p>
+                <p className="text-xs text-muted-foreground line-clamp-2 mb-3 min-h-[2rem]">{item?.designation || '—'}</p>
                 <div className="flex items-center justify-between border-t border-border pt-2">
                   <div className="flex items-center gap-1.5">
                     <Package className="h-3 w-3 text-muted-foreground" />
                     <span className="text-[10px] text-muted-foreground uppercase">Qté</span>
                   </div>
-                  <span className="text-sm font-black text-foreground">{item.qte}</span>
+                  <span className="text-sm font-black text-foreground">{item?.qte ?? 0}</span>
                 </div>
                 <div className="flex items-center justify-between mt-1">
                   <div className="flex items-center gap-1.5">
                     <MapPin className="h-3 w-3 text-muted-foreground" />
                     <span className="text-[10px] text-muted-foreground uppercase">Empl.</span>
                   </div>
-                  <span className="font-mono text-[10px] text-muted-foreground">{item.emplacement}</span>
+                  <span className="font-mono text-[10px] text-muted-foreground">{item?.emplacement || '—'}</span>
                 </div>
               </div>
             ))}
