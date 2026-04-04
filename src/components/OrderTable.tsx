@@ -118,7 +118,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [stockValueFilter, setStockValueFilter] = useState<string>('all');
   const [emptyFilter, setEmptyFilter] = useState<EmptyFilter>('all');
   const [sortFilter, setSortFilter] = useState<SortFilter>('default');
-  const [qtyFilter, setQtyFilter] = useState<string>('all');
+  const [qtyFilter, setQtyFilter] = useState<Set<string>>(new Set());
   const [qtyMode, setQtyMode] = useState<QtyMode>('exact');
   const [empFilter, setEmpFilter] = useState<string>('all');
   const [empSections, setEmpSections] = useState<Set<string>>(new Set());
@@ -253,12 +253,17 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       else result = result.filter((l) => !l.emptyCells.stock && l.stock < targetStock);
     }
 
-    const hasQtyValue = qtyFilter !== 'all' && qtyFilter.trim() !== '' && !Number.isNaN(Number(qtyFilter));
+    const hasQtyValue = qtyFilter.size > 0;
     if (hasQtyValue) {
-      const targetQty = Number(qtyFilter);
-      if (qtyMode === 'exact') result = result.filter((l) => Math.round(l.qte) === targetQty);
-      else if (qtyMode === 'gt') result = result.filter((l) => Math.round(l.qte) > targetQty);
-      else result = result.filter((l) => Math.round(l.qte) < targetQty);
+      if (qtyMode === 'exact') result = result.filter((l) => qtyFilter.has(String(Math.round(l.qte))));
+      else if (qtyMode === 'gt') result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty > Number(q));
+      });
+      else result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty < Number(q));
+      });
     }
 
     if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
@@ -310,6 +315,113 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     empEmplacements,
   ]);
 
+  // Same as filteredAll but without quantity filter - used for quantity group counts so all quantities always show
+  const filteredAllWithoutQtyFilter = useMemo(() => {
+    let result = lines;
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (l) =>
+          safeLower(l.codeABarre).includes(q) ||
+          safeLower(l.reference).includes(q) ||
+          safeLower(l.designation).includes(q) ||
+          safeLower(l.emplacement).includes(q)
+      );
+    }
+
+    if (empFilter !== 'all') {
+      result = result.filter((l) => getFirstLetter(l.emplacement) === empFilter);
+    }
+
+    if (empEmplacements.size > 0) {
+      result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
+    }
+
+    if (empSections.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empSections.has(parts[1] || '');
+      });
+    }
+
+    if (empRows.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empRows.has(parts[2] || '');
+      });
+    }
+
+    if (empLevels.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empLevels.has(parts[3] || '');
+      });
+    }
+
+    if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
+    else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
+    else if (stockFilter === 'negative') result = result.filter((l) => !l.emptyCells.stock && l.stock < 0);
+
+    const hasStockValue =
+      stockValueFilter !== 'all' && stockValueFilter.trim() !== '' && !Number.isNaN(Number(stockValueFilter));
+    if (hasStockValue) {
+      const targetStock = Number(stockValueFilter);
+      if (stockMode === 'exact') result = result.filter((l) => !l.emptyCells.stock && l.stock === targetStock);
+      else if (stockMode === 'gt') result = result.filter((l) => !l.emptyCells.stock && l.stock > targetStock);
+      else result = result.filter((l) => !l.emptyCells.stock && l.stock < targetStock);
+    }
+
+    // NOTE: Quantity filter is NOT applied here - that's intentional!
+    // This allows qtyGroups to show all available quantities with their counts
+
+    if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
+    else if (emptyFilter === 'without-empty') result = result.filter((l) => !l.hasEmptyCell);
+    else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
+
+    if (sortFilter !== 'default') {
+      result = [...result].sort((a, b) => {
+        switch (sortFilter) {
+          case 'stock-asc':
+            return a.stock - b.stock;
+          case 'stock-desc':
+            return b.stock - a.stock;
+          case 'qte-asc':
+            return a.qte - b.qte;
+          case 'qte-desc':
+            return b.qte - a.qte;
+          case 'emplacement-asc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          case 'emplacement-desc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return result;
+  }, [
+    lines,
+    search,
+    stockFilter,
+    stockMode,
+    stockValueFilter,
+    emptyFilter,
+    sortFilter,
+    empFilter,
+    empSections,
+    empRows,
+    empLevels,
+    empEmplacements,
+  ]);
+
   const filteredNonValidated = useMemo(() => {
     return filteredAll.filter((l) => !validatedRows.includes(getRowId(l)));
   }, [filteredAll, validatedRows]);
@@ -319,7 +431,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     stockFilter !== 'all' ||
     stockValueFilter !== 'all' ||
     stockMode !== 'exact' ||
-    qtyFilter !== 'all' ||
+    qtyFilter.size > 0 ||
     qtyMode !== 'exact' ||
     emptyFilter !== 'all' ||
     sortFilter !== 'default' ||
@@ -390,12 +502,188 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       else result = result.filter((l) => !l.emptyCells.stock && l.stock < targetStock);
     }
 
-    const hasQtyValue = qtyFilter !== 'all' && qtyFilter.trim() !== '' && !Number.isNaN(Number(qtyFilter));
+    const hasQtyValue = qtyFilter.size > 0;
     if (hasQtyValue) {
-      const targetQty = Number(qtyFilter);
-      if (qtyMode === 'exact') result = result.filter((l) => Math.round(l.qte) === targetQty);
-      else if (qtyMode === 'gt') result = result.filter((l) => Math.round(l.qte) > targetQty);
-      else result = result.filter((l) => Math.round(l.qte) < targetQty);
+      if (qtyMode === 'exact') result = result.filter((l) => qtyFilter.has(String(Math.round(l.qte))));
+      else if (qtyMode === 'gt') result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty > Number(q));
+      });
+      else result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty < Number(q));
+      });
+    }
+
+    if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
+    else if (emptyFilter === 'without-empty') result = result.filter((l) => !l.hasEmptyCell);
+    else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
+
+    if (sortFilter !== 'default') {
+      result = [...result].sort((a, b) => {
+        switch (sortFilter) {
+          case 'stock-asc':
+            return a.stock - b.stock;
+          case 'stock-desc':
+            return b.stock - a.stock;
+          case 'qte-asc':
+            return a.qte - b.qte;
+          case 'qte-desc':
+            return b.qte - a.qte;
+          case 'emplacement-asc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          case 'emplacement-desc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return result;
+  };
+
+  // Same as applyFilters but without quantity filter - used for displaying available quantities
+  const applyFiltersWithoutQty = (baseLines: OrderLine[]) => {
+    let result = baseLines;
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (l) =>
+          safeLower(l.codeABarre).includes(q) ||
+          safeLower(l.reference).includes(q) ||
+          safeLower(l.designation).includes(q) ||
+          safeLower(l.emplacement).includes(q)
+      );
+    }
+
+    if (empFilter !== 'all') {
+      result = result.filter((l) => getFirstLetter(l.emplacement) === empFilter);
+    }
+
+    if (empEmplacements.size > 0) {
+      result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
+    }
+
+    if (empSections.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empSections.has(parts[1] || '');
+      });
+    }
+
+    if (empRows.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empRows.has(parts[2] || '');
+      });
+    }
+
+    if (empLevels.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empLevels.has(parts[3] || '');
+      });
+    }
+
+    if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
+    else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
+    else if (stockFilter === 'negative') result = result.filter((l) => !l.emptyCells.stock && l.stock < 0);
+
+    const hasStockValue =
+      stockValueFilter !== 'all' && stockValueFilter.trim() !== '' && !Number.isNaN(Number(stockValueFilter));
+    if (hasStockValue) {
+      const targetStock = Number(stockValueFilter);
+      if (stockMode === 'exact') result = result.filter((l) => !l.emptyCells.stock && l.stock === targetStock);
+      else if (stockMode === 'gt') result = result.filter((l) => !l.emptyCells.stock && l.stock > targetStock);
+      else result = result.filter((l) => !l.emptyCells.stock && l.stock < targetStock);
+    }
+
+    // NOTE: Quantity filter is NOT applied here - intentional for counting available quantities
+
+    if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
+    else if (emptyFilter === 'without-empty') result = result.filter((l) => !l.hasEmptyCell);
+    else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
+
+    if (sortFilter !== 'default') {
+      result = [...result].sort((a, b) => {
+        switch (sortFilter) {
+          case 'stock-asc':
+            return a.stock - b.stock;
+          case 'stock-desc':
+            return b.stock - a.stock;
+          case 'qte-asc':
+            return a.qte - b.qte;
+          case 'qte-desc':
+            return b.qte - a.qte;
+          case 'emplacement-asc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          case 'emplacement-desc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return result;
+  };
+
+  // Same as applyFiltersWithoutQty but also without emplacement filters - for showing all available emplacements
+  const applyFiltersWithoutEmp = (baseLines: OrderLine[]) => {
+    let result = baseLines;
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (l) =>
+          safeLower(l.codeABarre).includes(q) ||
+          safeLower(l.reference).includes(q) ||
+          safeLower(l.designation).includes(q) ||
+          safeLower(l.emplacement).includes(q)
+      );
+    }
+
+    // NOTE: All emplacement filters are NOT applied here - intentional for showing all available locations
+    // Skipping: empFilter, empEmplacements, empSections, empRows, empLevels
+
+    if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
+    else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
+    else if (stockFilter === 'negative') result = result.filter((l) => !l.emptyCells.stock && l.stock < 0);
+
+    const hasStockValue =
+      stockValueFilter !== 'all' && stockValueFilter.trim() !== '' && !Number.isNaN(Number(stockValueFilter));
+    if (hasStockValue) {
+      const targetStock = Number(stockValueFilter);
+      if (stockMode === 'exact') result = result.filter((l) => !l.emptyCells.stock && l.stock === targetStock);
+      else if (stockMode === 'gt') result = result.filter((l) => !l.emptyCells.stock && l.stock > targetStock);
+      else result = result.filter((l) => !l.emptyCells.stock && l.stock < targetStock);
+    }
+
+    const hasQtyValue = qtyFilter.size > 0;
+    if (hasQtyValue) {
+      if (qtyMode === 'exact') result = result.filter((l) => qtyFilter.has(String(Math.round(l.qte))));
+      else if (qtyMode === 'gt') result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty > Number(q));
+      });
+      else result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty < Number(q));
+      });
     }
 
     if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
@@ -452,51 +740,195 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
 
   const baseForCounts = activeView === 'validated' ? filteredValidated : activeView === 'nonValidated' ? filteredNonValidated : filteredAll;
 
+  // For quantity options - exclude qty filter so all quantities always available
+  const filteredValidatedWithoutQty = useMemo(() => applyFiltersWithoutQty(validatedLines), [
+    validatedLines,
+    search,
+    empFilter,
+    empSections,
+    empRows,
+    empLevels,
+    empEmplacements,
+    stockFilter,
+    stockMode,
+    stockValueFilter,
+    emptyFilter,
+    sortFilter,
+  ]);
+
+  const filteredNonValidatedWithoutQty = useMemo(() => {
+    return filteredAllWithoutQtyFilter.filter((l) => !validatedRows.includes(getRowId(l)));
+  }, [filteredAllWithoutQtyFilter, validatedRows]);
+
+  const baseForCountsWithoutQty = useMemo(
+    () =>
+      activeView === 'validated'
+        ? filteredValidatedWithoutQty
+        : activeView === 'nonValidated'
+          ? filteredNonValidatedWithoutQty
+          : filteredAllWithoutQtyFilter,
+    [activeView, filteredValidatedWithoutQty, filteredNonValidatedWithoutQty, filteredAllWithoutQtyFilter]
+  );
+
   const qtyGroups = useMemo(() => {
     const map = new Map<number, number>();
-    baseForCounts.forEach((l) => {
+    baseForCountsWithoutQty.forEach((l) => {
       const qty = Math.round(l.qte);
       map.set(qty, (map.get(qty) ?? 0) + 1);
     });
     return [...map.entries()].sort((a, b) => a[0] - b[0]);
-  }, [baseForCounts]);
+  }, [baseForCountsWithoutQty]);
+
+  // For emplacement options - exclude all emplacement filters so all locations always available
+  const filteredAllWithoutEmp = useMemo(() => {
+    let result = lines;
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (l) =>
+          safeLower(l.codeABarre).includes(q) ||
+          safeLower(l.reference).includes(q) ||
+          safeLower(l.designation).includes(q) ||
+          safeLower(l.emplacement).includes(q)
+      );
+    }
+
+    // NOTE: All emplacement filters are NOT applied here - intentional for showing all available locations
+    // Skipping: empFilter, empEmplacements, empSections, empRows, empLevels
+
+    if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
+    else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
+    else if (stockFilter === 'negative') result = result.filter((l) => !l.emptyCells.stock && l.stock < 0);
+
+    const hasStockValue =
+      stockValueFilter !== 'all' && stockValueFilter.trim() !== '' && !Number.isNaN(Number(stockValueFilter));
+    if (hasStockValue) {
+      const targetStock = Number(stockValueFilter);
+      if (stockMode === 'exact') result = result.filter((l) => !l.emptyCells.stock && l.stock === targetStock);
+      else if (stockMode === 'gt') result = result.filter((l) => !l.emptyCells.stock && l.stock > targetStock);
+      else result = result.filter((l) => !l.emptyCells.stock && l.stock < targetStock);
+    }
+
+    const hasQtyValue = qtyFilter.size > 0;
+    if (hasQtyValue) {
+      if (qtyMode === 'exact') result = result.filter((l) => qtyFilter.has(String(Math.round(l.qte))));
+      else if (qtyMode === 'gt') result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty > Number(q));
+      });
+      else result = result.filter((l) => {
+        const qty = Math.round(l.qte);
+        return Array.from(qtyFilter).some(q => qty < Number(q));
+      });
+    }
+
+    if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
+    else if (emptyFilter === 'without-empty') result = result.filter((l) => !l.hasEmptyCell);
+    else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
+
+    if (sortFilter !== 'default') {
+      result = [...result].sort((a, b) => {
+        switch (sortFilter) {
+          case 'stock-asc':
+            return a.stock - b.stock;
+          case 'stock-desc':
+            return b.stock - a.stock;
+          case 'qte-asc':
+            return a.qte - b.qte;
+          case 'qte-desc':
+            return b.qte - a.qte;
+          case 'emplacement-asc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          case 'emplacement-desc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return result;
+  }, [
+    lines,
+    search,
+    stockFilter,
+    stockMode,
+    stockValueFilter,
+    qtyFilter,
+    qtyMode,
+    emptyFilter,
+    sortFilter,
+  ]);
+
+  const filteredValidatedWithoutEmp = useMemo(() => applyFiltersWithoutEmp(validatedLines), [
+    validatedLines,
+    search,
+    stockFilter,
+    stockMode,
+    stockValueFilter,
+    qtyFilter,
+    qtyMode,
+    emptyFilter,
+    sortFilter,
+  ]);
+
+  const filteredNonValidatedWithoutEmp = useMemo(() => {
+    return filteredAllWithoutEmp.filter((l) => !validatedRows.includes(getRowId(l)));
+  }, [filteredAllWithoutEmp, validatedRows]);
+
+  const baseForCountsWithoutEmp = useMemo(
+    () =>
+      activeView === 'validated'
+        ? filteredValidatedWithoutEmp
+        : activeView === 'nonValidated'
+          ? filteredNonValidatedWithoutEmp
+          : filteredAllWithoutQtyFilter,
+    [activeView, filteredValidatedWithoutEmp, filteredNonValidatedWithoutEmp, filteredAllWithoutQtyFilter]
+  );
 
   const sectionsAvailable = useMemo(() => {
     const s = new Set<string>();
-    for (const l of baseForCounts) {
+    for (const l of baseForCountsWithoutEmp) {
       const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
       if (parts[1]) s.add(parts[1]);
     }
     return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [baseForCounts]);
+  }, [baseForCountsWithoutEmp]);
 
   const rowsAvailable = useMemo(() => {
     const s = new Set<string>();
-    for (const l of baseForCounts) {
+    for (const l of baseForCountsWithoutEmp) {
       const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
       if (parts[2]) s.add(parts[2]);
     }
     return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [baseForCounts]);
+  }, [baseForCountsWithoutEmp]);
 
   const levelsAvailable = useMemo(() => {
     const s = new Set<string>();
-    for (const l of baseForCounts) {
+    for (const l of baseForCountsWithoutEmp) {
       const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
       if (parts[3]) s.add(parts[3]);
     }
     return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [baseForCounts]);
+  }, [baseForCountsWithoutEmp]);
 
   const emplacementsAvailable = useMemo(() => {
     const map = new Map<string, number>();
-    for (const l of baseForCounts) {
+    for (const l of baseForCountsWithoutEmp) {
       const key = (l.emplacement || '').trim();
       if (!key) continue;
       map.set(key, (map.get(key) || 0) + 1);
     }
     return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
-  }, [baseForCounts]);
+  }, [baseForCountsWithoutEmp]);
 
   const letterGroups = useMemo(() => {
     const map = new Map<string, number>();
@@ -951,15 +1383,15 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
           <div className="rounded-lg border border-border bg-background/60 p-3">
             <div className="flex items-center justify-between mb-2">
               <p className="text-xs font-semibold text-foreground">Filtre Qté</p>
-              {qtyFilter !== 'all' && (
+              {qtyFilter.size > 0 && (
                 <span className="text-xs rounded-full px-2 py-0.5 bg-primary/10 text-primary font-semibold">
-                  Mode: {qtyMode === 'exact' ? '=' : qtyMode === 'gt' ? '>' : '<'} {qtyFilter}
+                  {qtyFilter.size} quantité{qtyFilter.size > 1 ? 's' : ''} sélectionnée{qtyFilter.size > 1 ? 's' : ''}
                 </span>
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-10 gap-2 mb-3 md:items-center">
-              <div className="md:col-span-7 self-center rounded-md border border-primary/20 bg-primary/5 p-2">
+            <div className="grid grid-cols-1 gap-2 mb-3">
+              <div className="rounded-md border border-primary/20 bg-primary/5 p-2">
                 <span className="text-xs text-muted-foreground font-medium block mb-1">Mode Qté</span>
                 <div className="grid gap-2.5 [grid-template-columns:repeat(auto-fit,minmax(130px,1fr))]">
                   {qtyModes.map((m) => (
@@ -976,39 +1408,14 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
                   ))}
                 </div>
               </div>
-
-              <div className="md:col-span-3 self-center rounded-md border border-primary/20 bg-primary/5 p-2">
-                <span className="text-xs text-muted-foreground font-medium block mb-1">Valeur Qté</span>
-                <div className="flex items-center gap-1.5">
-                  <Input
-                    type="number"
-                    inputMode="numeric"
-                    min={0}
-                    step={1}
-                    value={qtyFilter === 'all' ? '' : qtyFilter}
-                    onChange={(e) => {
-                      const v = e.target.value.trim();
-                      setQtyFilter(v === '' ? 'all' : v);
-                    }}
-                    placeholder="Ex: 12"
-                    className="h-8"
-                  />
-                  <button
-                    onClick={() => setQtyFilter('all')}
-                    className="px-3 h-8 rounded-md border border-primary/30 bg-primary/10 text-xs font-semibold text-primary hover:bg-primary/20"
-                  >
-                    Effacer
-                  </button>
-                </div>
-              </div>
             </div>
 
             <div className="grid gap-2 [grid-template-columns:repeat(auto-fit,minmax(110px,1fr))]">
               <button
-                onClick={() => setQtyFilter('all')}
+                onClick={() => setQtyFilter(new Set())}
                 className={cn(
                   'rounded-lg border p-2 text-center transition-colors duration-150',
-                  qtyFilter === 'all'
+                  qtyFilter.size === 0
                     ? 'border-primary/40 bg-primary/10 text-primary'
                     : 'border-border bg-secondary/30 hover:bg-secondary/50 text-foreground'
                 )}
@@ -1019,12 +1426,22 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
 
               {qtyGroups.map(([qty, count], index) => {
                 const tone = QTY_TONES[index % QTY_TONES.length];
-                const isActive = qtyFilter === String(qty);
+                const isActive = qtyFilter.has(String(qty));
 
                 return (
                   <button
                     key={qty}
-                    onClick={() => setQtyFilter(String(qty))}
+                    onClick={() => {
+                      setQtyFilter((prev) => {
+                        const newSet = new Set(prev);
+                        if (newSet.has(String(qty))) {
+                          newSet.delete(String(qty));
+                        } else {
+                          newSet.add(String(qty));
+                        }
+                        return newSet;
+                      });
+                    }}
                     className={cn(
                       'rounded-lg border p-2 text-center transition-colors duration-150',
                       isActive ? `${tone.active} shadow-sm ring-2 ring-current/20` : tone.idle
@@ -1278,9 +1695,9 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
             Stock filtre: {STOCK_FILTER_LABELS[stockFilter]}
           </span>
         )}
-        {qtyFilter !== 'all' && (
+        {qtyFilter.size > 0 && (
           <span className="inline-flex items-center rounded-full px-2 py-0.5 bg-primary/10 text-primary font-semibold">
-            Qté active: {qtyMode === 'exact' ? '=' : qtyMode === 'gt' ? '>' : '<'} {qtyFilter}
+            Qté active: {qtyMode === 'exact' ? '=' : qtyMode === 'gt' ? '>' : '<'} {Array.from(qtyFilter).sort((a, b) => Number(a) - Number(b)).join(', ')}
           </span>
         )}
         {stockValueFilter !== 'all' && (
