@@ -114,9 +114,9 @@ export function downloadOrderPDF(order: ParsedOrder, tab: TabType, validatedRows
     const options = {
       margin: [10, 10, 10, 10] as [number, number, number, number],
       filename: filename,
-      image: { type: 'jpeg', quality: 0.98 },
+      image: { type: 'jpeg' as const, quality: 0.98 },
       html2canvas: { scale: 2 },
-      jsPDF: { orientation: 'landscape', unit: 'mm', format: 'a4' },
+      jsPDF: { orientation: 'landscape' as const, unit: 'mm' as const, format: 'a4' as const },
     };
 
     html2pdf().set(options).from(element).save();
