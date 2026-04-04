@@ -1,8 +1,9 @@
-﻿import React, { useMemo, useState } from 'react';
+﻿import React, { useMemo, useState, useEffect, useRef } from 'react';
 import type { OrderLine } from '@/types/order';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
-import { RotateCcw, Search, X } from 'lucide-react';
+import { RotateCcw, Search, X, Check } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 interface OrderTableProps {
   lines: OrderLine[];
@@ -86,6 +87,10 @@ function getFirstLetter(emplacement: string) {
   return s[0].toUpperCase();
 }
 
+function getRowId(line: OrderLine) {
+  return `${line.codeABarre || ''}||${line.reference || ''}||${line.designation || ''}||${line.emplacement || ''}`;
+}
+
 const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [search, setSearch] = useState('');
   const [stockFilter, setStockFilter] = useState<StockFilter>('all');
@@ -100,89 +105,62 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [empRows, setEmpRows] = useState<Set<string>>(new Set());
   const [empLevels, setEmpLevels] = useState<Set<string>>(new Set());
   const [empEmplacements, setEmpEmplacements] = useState<Set<string>>(new Set());
+  const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
+  const [validatedRows, setValidatedRows] = useState<string[]>([]);
+  const [removeValidatedFromMaster, setRemoveValidatedFromMaster] = useState<boolean>(false);
+  const [autoValidateOnCheck, setAutoValidateOnCheck] = useState<boolean>(true);
+  const [activeView, setActiveView] = useState<'principal' | 'nonValidated' | 'validated'>('principal');
+  const [preserveValidatedAcrossUploads, setPreserveValidatedAcrossUploads] = useState<boolean>(false);
 
-  const qtyGroups = useMemo(() => {
-    const map = new Map<number, number>();
-    lines.forEach((l) => {
-      const qty = Math.round(l.qte);
-      map.set(qty, (map.get(qty) ?? 0) + 1);
-    });
-    return [...map.entries()].sort((a, b) => a[0] - b[0]);
-  }, [lines]);
-
-  const sectionsAvailable = useMemo(() => {
-    const s = new Set<string>();
-    for (const l of lines) {
-      const letter = getFirstLetter(l.emplacement);
-      if (empFilter !== 'all' && letter !== empFilter) continue;
-      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-      if (parts[1]) s.add(parts[1]);
+  useEffect(() => {
+    if (!preserveValidatedAcrossUploads) {
+      try {
+        localStorage.removeItem('validatedRows');
+      } catch (e) {}
+      setValidatedRows([]);
+      return;
     }
-    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [lines, empFilter]);
 
-  const rowsAvailable = useMemo(() => {
-    const s = new Set<string>();
-    for (const l of lines) {
-      const letter = getFirstLetter(l.emplacement);
-      if (empFilter !== 'all' && letter !== empFilter) continue;
-      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-      if (empSections.size > 0 && !empSections.has(parts[1] || '')) continue;
-      if (parts[2]) s.add(parts[2]);
+    try {
+      const raw = localStorage.getItem('validatedRows');
+      if (raw) {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) setValidatedRows(arr);
+      }
+    } catch (e) {
+      // ignore
     }
-    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [lines, empFilter, empSections]);
+  }, [preserveValidatedAcrossUploads]);
 
-  const levelsAvailable = useMemo(() => {
-    const s = new Set<string>();
-    for (const l of lines) {
-      const letter = getFirstLetter(l.emplacement);
-      if (empFilter !== 'all' && letter !== empFilter) continue;
-      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-      if (empSections.size > 0 && !empSections.has(parts[1] || '')) continue;
-      if (empRows.size > 0 && !empRows.has(parts[2] || '')) continue;
-      if (parts[3]) s.add(parts[3]);
+  useEffect(() => {
+    try {
+      if (preserveValidatedAcrossUploads) localStorage.setItem('validatedRows', JSON.stringify(validatedRows));
+      else localStorage.removeItem('validatedRows');
+    } catch (e) {}
+  }, [validatedRows, preserveValidatedAcrossUploads]);
+
+  const linesSignatureRef = useRef<string>('');
+  useEffect(() => {
+    const sig = lines.map((l) => getRowId(l)).join('||');
+    if (linesSignatureRef.current && linesSignatureRef.current !== sig) {
+      // lines changed (new upload)
+      if (!preserveValidatedAcrossUploads) {
+        setValidatedRows([]);
+        try {
+          localStorage.removeItem('validatedRows');
+        } catch (e) {}
+      } else {
+        // keep only validated ids that exist in the new lines
+        setValidatedRows((prev) => prev.filter((id) => lines.some((l) => getRowId(l) === id)));
+      }
+      setSelectedRows(new Set());
     }
-    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
-  }, [lines, empFilter, empSections, empRows]);
+    linesSignatureRef.current = sig;
+  }, [lines, preserveValidatedAcrossUploads]);
 
-  const emplacementsAvailable = useMemo(() => {
-    const map = new Map<string, number>();
-    for (const l of lines) {
-      const letter = getFirstLetter(l.emplacement);
-      if (empFilter !== 'all' && letter !== empFilter) continue;
-      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
-      if (empSections.size > 0 && !empSections.has(parts[1] || '')) continue;
-      if (empRows.size > 0 && !empRows.has(parts[2] || '')) continue;
-      if (empLevels.size > 0 && !empLevels.has(parts[3] || '')) continue;
-      const key = (l.emplacement || '').trim();
-      if (!key) continue;
-      map.set(key, (map.get(key) || 0) + 1);
-    }
-    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
-  }, [lines, empFilter, empSections, empRows, empLevels]);
+  
 
-  const letterGroups = useMemo(() => {
-    const map = new Map<string, number>();
-    for (const l of lines) {
-      const letter = getFirstLetter(l.emplacement);
-      if (!letter) continue;
-      map.set(letter, (map.get(letter) ?? 0) + 1);
-    }
-    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
-  }, [lines]);
-
-  const stockCounts = useMemo(
-    () => ({
-      all: lines.length,
-      positive: lines.filter((l) => !l.emptyCells.stock && l.stock > 0).length,
-      zero: lines.filter((l) => !l.emptyCells.stock && l.stock === 0).length,
-      negative: lines.filter((l) => !l.emptyCells.stock && l.stock < 0).length,
-    }),
-    [lines]
-  );
-
-  const filtered = useMemo(() => {
+  const filteredAll = useMemo(() => {
     let result = lines;
 
     if (search.trim()) {
@@ -251,30 +229,30 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
 
     if (sortFilter !== 'default') {
-        result = [...result].sort((a, b) => {
-          switch (sortFilter) {
-            case 'stock-asc':
-              return a.stock - b.stock;
-            case 'stock-desc':
-              return b.stock - a.stock;
-            case 'qte-asc':
-              return a.qte - b.qte;
-            case 'qte-desc':
-              return b.qte - a.qte;
-            case 'emplacement-asc': {
-              if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
-              if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
-              return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
-            }
-            case 'emplacement-desc': {
-              if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
-              if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
-              return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
-            }
-            default:
-              return 0;
+      result = [...result].sort((a, b) => {
+        switch (sortFilter) {
+          case 'stock-asc':
+            return a.stock - b.stock;
+          case 'stock-desc':
+            return b.stock - a.stock;
+          case 'qte-asc':
+            return a.qte - b.qte;
+          case 'qte-desc':
+            return b.qte - a.qte;
+          case 'emplacement-asc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
           }
-        });
+          case 'emplacement-desc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          default:
+            return 0;
+        }
+      });
     }
 
     return result;
@@ -295,6 +273,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     empEmplacements,
   ]);
 
+  const filteredNonValidated = useMemo(() => {
+    return filteredAll.filter((l) => !validatedRows.includes(getRowId(l)));
+  }, [filteredAll, validatedRows]);
+
   const hasActiveFilters =
     search.trim().length > 0 ||
     stockFilter !== 'all' ||
@@ -310,6 +292,251 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     empLevels.size > 0 ||
     empEmplacements.size > 0;
 
+  const validatedLines = useMemo(() => {
+    return lines.filter((l) => validatedRows.includes(getRowId(l)));
+  }, [lines, validatedRows]);
+
+  // Apply current filters to an arbitrary list (used for validated view counts)
+  const applyFilters = (baseLines: OrderLine[]) => {
+    let result = baseLines;
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (l) =>
+          l.codeABarre.toLowerCase().includes(q) ||
+          l.reference.toLowerCase().includes(q) ||
+          l.designation.toLowerCase().includes(q) ||
+          l.emplacement.toLowerCase().includes(q)
+      );
+    }
+
+    if (empFilter !== 'all') {
+      result = result.filter((l) => getFirstLetter(l.emplacement) === empFilter);
+    }
+
+    if (empEmplacements.size > 0) {
+      result = result.filter((l) => empEmplacements.has((l.emplacement || '').trim()));
+    }
+
+    if (empSections.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empSections.has(parts[1] || '');
+      });
+    }
+
+    if (empRows.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empRows.has(parts[2] || '');
+      });
+    }
+
+    if (empLevels.size > 0) {
+      result = result.filter((l) => {
+        const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+        return empLevels.has(parts[3] || '');
+      });
+    }
+
+    if (stockFilter === 'positive') result = result.filter((l) => !l.emptyCells.stock && l.stock > 0);
+    else if (stockFilter === 'zero') result = result.filter((l) => !l.emptyCells.stock && l.stock === 0);
+    else if (stockFilter === 'negative') result = result.filter((l) => !l.emptyCells.stock && l.stock < 0);
+
+    const hasStockValue =
+      stockValueFilter !== 'all' && stockValueFilter.trim() !== '' && !Number.isNaN(Number(stockValueFilter));
+    if (hasStockValue) {
+      const targetStock = Number(stockValueFilter);
+      if (stockMode === 'exact') result = result.filter((l) => !l.emptyCells.stock && l.stock === targetStock);
+      else if (stockMode === 'gt') result = result.filter((l) => !l.emptyCells.stock && l.stock > targetStock);
+      else result = result.filter((l) => !l.emptyCells.stock && l.stock < targetStock);
+    }
+
+    const hasQtyValue = qtyFilter !== 'all' && qtyFilter.trim() !== '' && !Number.isNaN(Number(qtyFilter));
+    if (hasQtyValue) {
+      const targetQty = Number(qtyFilter);
+      if (qtyMode === 'exact') result = result.filter((l) => Math.round(l.qte) === targetQty);
+      else if (qtyMode === 'gt') result = result.filter((l) => Math.round(l.qte) > targetQty);
+      else result = result.filter((l) => Math.round(l.qte) < targetQty);
+    }
+
+    if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
+    else if (emptyFilter === 'without-empty') result = result.filter((l) => !l.hasEmptyCell);
+    else if (emptyFilter === 'barcode-empty') result = result.filter((l) => l.emptyCells.codeABarre);
+
+    if (sortFilter !== 'default') {
+      result = [...result].sort((a, b) => {
+        switch (sortFilter) {
+          case 'stock-asc':
+            return a.stock - b.stock;
+          case 'stock-desc':
+            return b.stock - a.stock;
+          case 'qte-asc':
+            return a.qte - b.qte;
+          case 'qte-desc':
+            return b.qte - a.qte;
+          case 'emplacement-asc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (a.emplacement || '').localeCompare(b.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          case 'emplacement-desc': {
+            if (a.emptyCells.emplacement && !b.emptyCells.emplacement) return 1;
+            if (!a.emptyCells.emplacement && b.emptyCells.emplacement) return -1;
+            return (b.emplacement || '').localeCompare(a.emplacement || '', 'fr-FR', { sensitivity: 'base' });
+          }
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return result;
+  };
+
+  // filtered (existing) is the master-filtered list; compute a filtered view for validated lines
+  const filteredValidated = useMemo(() => applyFilters(validatedLines), [
+    validatedLines,
+    search,
+    empFilter,
+    empSections,
+    empRows,
+    empLevels,
+    empEmplacements,
+    stockFilter,
+    stockMode,
+    stockValueFilter,
+    qtyFilter,
+    qtyMode,
+    emptyFilter,
+    sortFilter,
+  ]);
+
+  const baseForCounts = activeView === 'validated' ? filteredValidated : activeView === 'nonValidated' ? filteredNonValidated : filteredAll;
+
+  const qtyGroups = useMemo(() => {
+    const map = new Map<number, number>();
+    baseForCounts.forEach((l) => {
+      const qty = Math.round(l.qte);
+      map.set(qty, (map.get(qty) ?? 0) + 1);
+    });
+    return [...map.entries()].sort((a, b) => a[0] - b[0]);
+  }, [baseForCounts]);
+
+  const sectionsAvailable = useMemo(() => {
+    const s = new Set<string>();
+    for (const l of baseForCounts) {
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      if (parts[1]) s.add(parts[1]);
+    }
+    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
+  }, [baseForCounts]);
+
+  const rowsAvailable = useMemo(() => {
+    const s = new Set<string>();
+    for (const l of baseForCounts) {
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      if (parts[2]) s.add(parts[2]);
+    }
+    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
+  }, [baseForCounts]);
+
+  const levelsAvailable = useMemo(() => {
+    const s = new Set<string>();
+    for (const l of baseForCounts) {
+      const parts = (l.emplacement || '').split(/\s*-\s*/).map((p) => p.trim());
+      if (parts[3]) s.add(parts[3]);
+    }
+    return Array.from(s).sort((a, b) => a.localeCompare(b, 'fr-FR', { sensitivity: 'base' }));
+  }, [baseForCounts]);
+
+  const emplacementsAvailable = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const l of baseForCounts) {
+      const key = (l.emplacement || '').trim();
+      if (!key) continue;
+      map.set(key, (map.get(key) || 0) + 1);
+    }
+    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
+  }, [baseForCounts]);
+
+  const letterGroups = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const l of baseForCounts) {
+      const letter = getFirstLetter(l.emplacement);
+      if (!letter) continue;
+      map.set(letter, (map.get(letter) ?? 0) + 1);
+    }
+    return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr-FR'));
+  }, [baseForCounts]);
+
+  const stockCounts = useMemo(
+    () => ({
+      all: baseForCounts.length,
+      positive: baseForCounts.filter((l) => !l.emptyCells.stock && l.stock > 0).length,
+      zero: baseForCounts.filter((l) => !l.emptyCells.stock && l.stock === 0).length,
+      negative: baseForCounts.filter((l) => !l.emptyCells.stock && l.stock < 0).length,
+    }),
+    [baseForCounts]
+  );
+
+  useEffect(() => {
+    // clear selection when switching views
+    setSelectedRows(new Set());
+  }, [activeView]);
+
+  const visibleRows = activeView === 'principal' ? filteredAll : activeView === 'nonValidated' ? filteredNonValidated : filteredValidated;
+  const visibleRowIds = visibleRows.map((l) => getRowId(l));
+  const allVisibleSelected =
+    visibleRowIds.length > 0 && visibleRowIds.every((id) => (autoValidateOnCheck ? validatedRows.includes(id) : selectedRows.has(id)));
+  const someVisibleSelected = visibleRowIds.some((id) => (autoValidateOnCheck ? validatedRows.includes(id) : selectedRows.has(id)));
+
+  const toggleSelectAllVisible = () => {
+    const allNow = allVisibleSelected;
+    if (allNow) {
+      if (autoValidateOnCheck) {
+        // unvalidate all visible
+        setValidatedRows((prev) => prev.filter((id) => !visibleRowIds.includes(id)));
+      } else {
+        setSelectedRows(new Set());
+      }
+      return;
+    }
+
+    if (autoValidateOnCheck) {
+      // validate all visible (keep user on principal)
+      setValidatedRows((prev) => {
+        const next = [...prev];
+        for (const id of visibleRowIds) {
+          if (!next.includes(id)) next.push(id);
+        }
+        return next;
+      });
+      return;
+    }
+
+    setSelectedRows(new Set(visibleRowIds));
+  };
+
+  const toggleSelectRow = (id: string) => {
+    if (autoValidateOnCheck) {
+      // toggle validation directly (do not switch view, keep in principal)
+      setValidatedRows((prev) => {
+        if (prev.includes(id)) return prev.filter((x) => x !== id);
+        return [...prev, id];
+      });
+      return;
+    }
+
+    setSelectedRows((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
   const resetFilters = () => {
     setSearch('');
     setStockFilter('all');
@@ -324,6 +551,26 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
     setEmpRows(new Set());
     setEmpLevels(new Set());
     setEmpEmplacements(new Set());
+  };
+
+  const handleValidate = () => {
+    setValidatedRows((prev) => {
+      const next = [...prev];
+      for (const id of selectedRows) {
+        if (!next.includes(id)) next.push(id);
+      }
+      return next;
+    });
+    setSelectedRows(new Set());
+  };
+
+  useEffect(() => {
+    // persist validated rows
+  }, [validatedRows]);
+
+  const handleUnvalidate = (ids: string[]) => {
+    if (ids.length === 0) return;
+    setValidatedRows((prev) => prev.filter((id) => !ids.includes(id)));
   };
 
   const getRowClass = (stock: number, hasEmptyCell: boolean) => {
@@ -494,19 +741,53 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
             <h4 className="text-sm font-black text-foreground tracking-wide">FILTER MASTER</h4>
             <p className="text-xs text-muted-foreground">Tous les filtres en une seule section, organisés par rôle.</p>
           </div>
-          <button
-            onClick={resetFilters}
-            disabled={!hasActiveFilters}
-            className={cn(
-              'inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition-all',
-              hasActiveFilters
-                ? 'border-primary/40 bg-gradient-to-r from-primary/10 to-primary/20 text-primary hover:from-primary/20 hover:to-primary/30 hover:scale-[1.02]'
-                : 'border-border bg-secondary/40 text-muted-foreground cursor-not-allowed'
-            )}
-          >
-            <RotateCcw className="h-4 w-4" />
-            Réinitialiser filtres
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleValidate}
+              disabled={selectedRows.size === 0}
+              className={cn(
+                'inline-flex items-center justify-center gap-2 rounded-xl border px-3 py-2 text-sm font-semibold transition-all',
+                selectedRows.size > 0
+                  ? 'border-emerald-500/40 bg-emerald-500/12 text-emerald-700 hover:scale-[1.02]'
+                  : 'border-border bg-secondary/40 text-muted-foreground cursor-not-allowed'
+              )}
+            >
+              <Check className="h-4 w-4" />
+              Valider ({selectedRows.size})
+            </button>
+
+            <label className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm text-muted-foreground bg-card">
+              <input
+                type="checkbox"
+                checked={removeValidatedFromMaster}
+                onChange={(e) => setRemoveValidatedFromMaster(e.target.checked)}
+              />
+              <span className="text-xs">Retirer validés</span>
+            </label>
+
+            <label className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm text-muted-foreground bg-card">
+              <input
+                type="checkbox"
+                checked={preserveValidatedAcrossUploads}
+                onChange={(e) => setPreserveValidatedAcrossUploads(e.target.checked)}
+              />
+              <span className="text-xs">Conserver validés entre uploads</span>
+            </label>
+
+            <button
+              onClick={resetFilters}
+              disabled={!hasActiveFilters}
+              className={cn(
+                'inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition-all',
+                hasActiveFilters
+                  ? 'border-primary/40 bg-gradient-to-r from-primary/10 to-primary/20 text-primary hover:from-primary/20 hover:to-primary/30 hover:scale-[1.02]'
+                  : 'border-border bg-secondary/40 text-muted-foreground cursor-not-allowed'
+              )}
+            >
+              <RotateCcw className="h-4 w-4" />
+              Réinitialiser filtres
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-4">
@@ -665,7 +946,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
                 )}
               >
                 <p className="text-xs font-bold">Toutes</p>
-                <p className="text-[10px] opacity-80">{lines.length} articles</p>
+                <p className="text-[10px] opacity-80">{baseForCounts.length} articles</p>
               </button>
 
               {qtyGroups.map(([qty, count], index) => {
@@ -732,7 +1013,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
                 )}
               >
                 <p className="text-xs font-bold">Toutes</p>
-                <p className="text-[10px] opacity-80">{lines.length} articles</p>
+                <p className="text-[10px] opacity-80">{baseForCounts.length} articles</p>
               </button>
 
               {letterGroups.map(([letter, count], index) => {
@@ -912,7 +1193,13 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
       </section>
 
       <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-        <p>{filtered.length} / {lines.length} article(s)</p>
+        <p>
+          {activeView === 'principal'
+            ? `${filteredAll.length} / ${lines.length} article(s)`
+            : activeView === 'nonValidated'
+            ? `${filteredNonValidated.length} non-validé(s)`
+            : `${filteredValidated.length} / ${validatedLines.length} validé(s)`}
+        </p>
         {search.trim().length > 0 && (
           <span className="inline-flex items-center rounded-full px-2 py-0.5 bg-slate-500/10 text-slate-700 font-semibold">
             Recherche: {search.trim()}
@@ -953,67 +1240,193 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
         </span>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-table-border">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-table-header">
-              <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Code à barre</th>
-              <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Référence</th>
-              <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Désignation</th>
-              <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qté</th>
-              <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Emplacement</th>
-              <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Stock</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((line, idx) => (
-              <tr
-                key={`${line.codeABarre}-${idx}`}
-                className={cn(
-                  'border-b border-table-border last:border-b-0 transition-colors',
-                  getRowClass(line.stock, line.hasEmptyCell)
-                )}
-              >
-                <td className={cn('px-3 py-2 font-mono text-xs text-muted-foreground', line.emptyCells.codeABarre && emptyCellClass)}>
-                  {line.emptyCells.codeABarre ? renderEmptyValue() : line.codeABarre}
-                </td>
-                <td className={cn('px-3 py-2 font-mono text-xs', line.emptyCells.reference && emptyCellClass)}>
-                  {line.emptyCells.reference ? renderEmptyValue() : line.reference}
-                </td>
-                <td className={cn('px-3 py-2 text-foreground', line.emptyCells.designation && emptyCellClass)}>
-                  {line.emptyCells.designation ? renderEmptyValue() : line.designation}
-                </td>
-                <td className={cn('px-3 py-2 text-right font-semibold', line.emptyCells.qte && emptyCellClass)}>
-                  {line.emptyCells.qte ? renderEmptyValue() : line.qte.toFixed(2).replace('.', ',')}
-                </td>
-                <td className={cn('px-3 py-2 font-mono text-xs text-muted-foreground', line.emptyCells.emplacement && emptyCellClass)}>
-                  {line.emptyCells.emplacement ? renderEmptyValue() : line.emplacement}
-                </td>
-                <td
-                  className={cn(
-                    'px-3 py-2 text-right font-mono text-xs font-bold',
-                    line.emptyCells.stock
-                      ? emptyCellClass
-                      : line.stock < 0
-                        ? 'text-destructive'
-                        : line.stock === 0
-                          ? 'text-warning'
-                          : 'text-success'
-                  )}
-                >
-                  {line.emptyCells.stock ? renderEmptyValue() : line.stock.toLocaleString('fr-FR')}
-                </td>
-              </tr>
-            ))}
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan={6} className="px-3 py-8 text-center text-muted-foreground">
-                  Aucun article trouvé
-                </td>
-              </tr>
+      <Tabs value={activeView} onValueChange={(v) => setActiveView(v as 'principal' | 'nonValidated' | 'validated')}>
+        <TabsList className="w-full grid grid-cols-3 gap-2 p-1 bg-card rounded-lg border border-border">
+          <TabsTrigger
+            value="principal"
+            className={cn(
+              'w-full rounded-md py-2 flex items-center justify-center text-sm font-semibold transition-transform hover:scale-[1.02]',
+              'data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-sm'
             )}
-          </tbody>
-        </table>
+          >
+            Principal
+          </TabsTrigger>
+
+          <TabsTrigger
+            value="nonValidated"
+            className={cn(
+              'w-full rounded-md py-2 flex items-center justify-center gap-2 text-sm font-semibold transition-transform hover:scale-[1.02]',
+              'data-[state=active]:bg-amber-100 data-[state=active]:text-amber-800 data-[state=active]:shadow-sm'
+            )}
+          >
+            <span>Non Validés</span>
+            <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold rounded-full bg-amber-100 text-amber-800">
+              {filteredNonValidated.length}
+            </span>
+          </TabsTrigger>
+
+          <TabsTrigger
+            value="validated"
+            className={cn(
+              'w-full rounded-md py-2 flex items-center justify-center gap-2 text-sm font-semibold transition-transform hover:scale-[1.02]',
+              'data-[state=active]:bg-emerald-100 data-[state=active]:text-emerald-800 data-[state=active]:shadow-sm'
+            )}
+          >
+            <span>Validés</span>
+            <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800">
+              {filteredValidated.length}
+            </span>
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+
+      <div className="flex items-center justify-between gap-2 mt-3 mb-2">
+        {activeView === 'validated' ? (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleUnvalidate([...selectedRows])}
+              disabled={selectedRows.size === 0}
+              className={cn(
+                'inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm font-semibold',
+                selectedRows.size > 0 ? 'border-rose-500/40 bg-rose-500/12 text-rose-700' : 'border-border bg-card text-muted-foreground'
+              )}
+            >
+              Dévalider ({selectedRows.size})
+            </button>
+
+            <button
+              onClick={() => setValidatedRows([])}
+              disabled={validatedRows.length === 0}
+              className={cn(
+                'inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm font-semibold',
+                validatedRows.length > 0 ? 'border-border bg-card text-foreground' : 'border-border bg-card text-muted-foreground'
+              )}
+            >
+              Vider validés
+            </button>
+          </div>
+        ) : activeView === 'nonValidated' ? (
+          <div className="text-xs text-muted-foreground">Affichage Non Validés</div>
+        ) : (
+          <div className="text-xs text-muted-foreground">Affichage principal</div>
+        )}
+
+        <div className="text-xs text-muted-foreground">
+          {activeView === 'principal'
+            ? `${filteredAll.length} / ${lines.length} article(s)`
+            : activeView === 'nonValidated'
+            ? `${filteredNonValidated.length} non-validé(s)`
+            : `${validatedLines.length} validé(s)`}
+        </div>
+      </div>
+
+        {/* debug panel removed */}
+
+      <div className="overflow-x-auto rounded-lg border border-table-border">
+        {(() => {
+          const visible = visibleRows;
+          const visibleIds = visible.map((l) => getRowId(l));
+          const allSelected = visibleIds.length > 0 && visibleIds.every((id) => (autoValidateOnCheck ? validatedRows.includes(id) : selectedRows.has(id)));
+
+          return (
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-table-header">
+                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border w-10">
+                    <input
+                      type="checkbox"
+                      checked={allSelected}
+                      onChange={() => toggleSelectAllVisible()}
+                      aria-label="Select all visible"
+                      className={cn(
+                        'h-5 w-5 rounded-md border-2 border-border transition-transform duration-150 hover:scale-110',
+                        'checked:bg-emerald-600 checked:border-emerald-600 checked:text-white focus:ring-2 focus:ring-emerald-200 cursor-pointer'
+                      )}
+                    />
+                  </th>
+                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Code à barre</th>
+                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Référence</th>
+                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Désignation</th>
+                  <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qté</th>
+                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Emplacement</th>
+                  <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Stock</th>
+                </tr>
+              </thead>
+              <tbody>
+                {visible.map((line) => {
+                  const id = getRowId(line);
+                  const isSelected = autoValidateOnCheck ? validatedRows.includes(id) : selectedRows.has(id);
+                  const isValidated = validatedRows.includes(id);
+                  return (
+                    <tr
+                      key={id}
+                      className={cn(
+                        'border-b border-table-border last:border-b-0 transition-colors',
+                        getRowClass(line.stock, line.hasEmptyCell),
+                        isValidated ? 'ring-1 ring-primary/20 bg-primary/5' : ''
+                      )}
+                    >
+                      <td className="px-3 py-2">
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => toggleSelectRow(id)}
+                          className={cn(
+                            'h-5 w-5 rounded-md border-2 border-border transition-transform duration-150 hover:scale-110',
+                            'checked:bg-emerald-600 checked:border-emerald-600 checked:text-white focus:ring-2 focus:ring-emerald-200 cursor-pointer'
+                          )}
+                        />
+                      </td>
+
+                      <td className={cn('px-3 py-2 font-mono text-xs text-muted-foreground', line.emptyCells.codeABarre && emptyCellClass)}>
+                        {line.emptyCells.codeABarre ? renderEmptyValue() : line.codeABarre}
+                      </td>
+                      <td className={cn('px-3 py-2 font-mono text-xs', line.emptyCells.reference && emptyCellClass)}>
+                        {line.emptyCells.reference ? renderEmptyValue() : line.reference}
+                      </td>
+                      <td className={cn('px-3 py-2 text-foreground', line.emptyCells.designation && emptyCellClass)}>
+                        {line.emptyCells.designation ? renderEmptyValue() : line.designation}
+                      </td>
+                      <td className={cn('px-3 py-2 text-right font-semibold', line.emptyCells.qte && emptyCellClass)}>
+                        {line.emptyCells.qte ? renderEmptyValue() : line.qte.toFixed(2).replace('.', ',')}
+                      </td>
+                      <td className={cn('px-3 py-2 font-mono text-xs text-muted-foreground', line.emptyCells.emplacement && emptyCellClass)}>
+                        {line.emptyCells.emplacement ? renderEmptyValue() : line.emplacement}
+                        {isValidated && (
+                          <span className="ml-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-800">
+                            Validé
+                          </span>
+                        )}
+                      </td>
+                      <td
+                        className={cn(
+                          'px-3 py-2 text-right font-mono text-xs font-bold',
+                          line.emptyCells.stock
+                            ? emptyCellClass
+                            : line.stock < 0
+                              ? 'text-destructive'
+                              : line.stock === 0
+                                ? 'text-warning'
+                                : 'text-success'
+                        )}
+                      >
+                        {line.emptyCells.stock ? renderEmptyValue() : line.stock.toLocaleString('fr-FR')}
+                      </td>
+                    </tr>
+                  );
+                })}
+
+                {visible.length === 0 && (
+                  <tr>
+                    <td colSpan={7} className="px-3 py-8 text-center text-muted-foreground">
+                      Aucun article trouvé
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          );
+        })()}
       </div>
     </div>
   );
