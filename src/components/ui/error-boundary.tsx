@@ -45,7 +45,11 @@ class ErrorBoundary extends React.Component<Props, State> {
       return; // don't show error screen
     }
     
-    this.setState({ hasError: true, error: message, info });
+    // Defer setState to avoid "Cannot update during an existing state transition" warning
+    setTimeout(() => {
+      this.setState({ hasError: true, error: message, info });
+    }, 0);
+    
     try {
       localStorage.setItem(
         'lastClientError',
@@ -69,7 +73,11 @@ class ErrorBoundary extends React.Component<Props, State> {
       return;
     }
     
-    this.setState({ hasError: true, error: String(message), info });
+    // Defer setState to avoid render phase update warning
+    setTimeout(() => {
+      this.setState({ hasError: true, error: String(message), info });
+    }, 0);
+    
     try {
       localStorage.setItem(
         'lastClientError',
