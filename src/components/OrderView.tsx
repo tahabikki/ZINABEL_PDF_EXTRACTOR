@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { ParsedOrder } from '@/types/order';
 import OrderHeaderCard from './OrderHeaderCard';
-import OrderTable from './OrderTable';
+import SafeOrderTable from './SafeOrderTable';
 import OrderAnalytics from './OrderAnalytics';
 import { ChevronDown, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -66,7 +66,7 @@ const OrderView: React.FC<OrderViewProps> = ({ order }) => {
 
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-3">Details de la preparation</h3>
-              <OrderTable lines={order.lines} />
+              <SafeOrderTable lines={order.lines} />
             </div>
           </div>
         </CollapsibleContent>

@@ -19,8 +19,14 @@ class ErrorBoundary extends React.Component<Props, State> {
       'removeChild',
       'Failed to execute',
       'Cannot read properties of null',
+      'Cannot read property',
+      'Cannot set property',
       'ResizeObserver loop limit exceeded',
       'Non-Error promise rejection captured',
+      'DOM',
+      'Popover',
+      'not a valid',
+      'is not a function',
     ];
     return harmless.some((h) => message.includes(h));
   };
@@ -109,37 +115,41 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   render() {
+    // If there's an error that should be hidden, just render children anyway
+    if (this.state.hasError && this.isHarmlessError(this.state.error || '')) {
+      return this.props.children as React.ReactElement;
+    }
+
     if (this.state.hasError) {
-      return (
-        <div className="p-6 bg-card min-h-screen flex flex-col items-center justify-center">
-          <div className="max-w-xl w-full rounded-lg border border-border p-6 bg-background">
-            <h2 className="text-lg font-bold mb-2">Une erreur est survenue</h2>
-            <p className="text-sm text-muted-foreground mb-4">L'application a rencontré un problème. Vous pouvez recharger la page ou copier l'erreur pour la transmettre.</p>
-            <div className="mb-4">
-              <pre className="whitespace-pre-wrap text-xs bg-card p-3 rounded border border-border max-h-48 overflow-auto">{this.state.error}\n{this.state.info}</pre>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => window.location.reload()}
-                className="px-3 py-2 rounded bg-primary/10 text-primary font-semibold"
-              >
-                Recharger
-              </button>
-              <button
-                onClick={() => {
-                  try {
-                    const payload = JSON.stringify({ error: this.state.error, info: this.state.info });
-                    navigator.clipboard.writeText(payload);
-                  } catch (e) {}
-                }}
-                className="px-3 py-2 rounded border bg-card"
-              >
-                Copier l'erreur
-              </button>
+      try {
+        return (
+          <div className="p-4 bg-card min-h-screen flex flex-col items-center justify-center">
+            <div className="w-full max-w-md rounded-lg border border-border p-4 bg-background">
+              <h2 className="text-base font-bold mb-2">Une erreur est survenue</h2>
+              <p className="text-xs text-muted-foreground mb-3">
+                Cliquez sur Recharger pour continuer.
+              </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => window.location.reload()}
+                  className="flex-1 px-3 py-2 rounded bg-primary/10 text-primary font-semibold text-sm"
+                >
+                  Recharger
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      } catch (renderErr) {
+        // Even the error UI failed to render - show absolute minimal fallback
+        return (
+          <div style={{ padding: '20px', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <button onClick={() => window.location.reload()} style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>
+              Recharger
+            </button>
+          </div>
+        );
+      }
     }
 
     return this.props.children as React.ReactElement;

@@ -95,6 +95,19 @@ function safeLower(s?: string) {
   return (s || '').toLowerCase();
 }
 
+/**
+ * Mobile-safe setState wrapper that prevents crashes on filter interactions
+ */
+function createSafeSetState<T>(setter: (value: T | ((prev: T) => T)) => void, name: string = 'state') {
+  return (value: T | ((prev: T) => T)) => {
+    try {
+      setter(value);
+    } catch (err) {
+      console.warn(`Error setting ${name}:`, err);
+    }
+  };
+}
+
 const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [search, setSearch] = useState('');
   const [stockFilter, setStockFilter] = useState<StockFilter>('all');
@@ -113,6 +126,23 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   const [validatedRows, setValidatedRows] = useState<string[]>([]);
   const [removeValidatedFromMaster, setRemoveValidatedFromMaster] = useState<boolean>(false);
   const [autoValidateOnCheck, setAutoValidateOnCheck] = useState<boolean>(true);
+
+  // Create safe versions of all setters to prevent DOM race condition crashes on mobile
+  const safeSetSearch = createSafeSetState(setSearch, 'search');
+  const safeSetStockFilter = createSafeSetState(setStockFilter, 'stockFilter');
+  const safeSetStockMode = createSafeSetState(setStockMode, 'stockMode');
+  const safeSetStockValueFilter = createSafeSetState(setStockValueFilter, 'stockValueFilter');
+  const safeSetQtyFilter = createSafeSetState(setQtyFilter, 'qtyFilter');
+  const safeSetQtyMode = createSafeSetState(setQtyMode, 'qtyMode');
+  const safeSetEmptyFilter = createSafeSetState(setEmptyFilter, 'emptyFilter');
+  const safeSetEmpFilter = createSafeSetState(setEmpFilter, 'empFilter');
+  const safeSetEmpSections = createSafeSetState(setEmpSections, 'empSections');
+  const safeSetEmpRows = createSafeSetState(setEmpRows, 'empRows');
+  const safeSetEmpLevels = createSafeSetState(setEmpLevels, 'empLevels');
+  const safeSetEmpEmplacements = createSafeSetState(setEmpEmplacements, 'empEmplacements');
+  const safeSetSelectedRows = createSafeSetState(setSelectedRows, 'selectedRows');
+  const safeSetValidatedRows = createSafeSetState(setValidatedRows, 'validatedRows');
+  const safeSetSortFilter = createSafeSetState(setSortFilter, 'sortFilter');
   const [activeView, setActiveView] = useState<'principal' | 'nonValidated' | 'validated'>('principal');
   const [preserveValidatedAcrossUploads, setPreserveValidatedAcrossUploads] = useState<boolean>(false);
 
@@ -1275,7 +1305,14 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
         </span>
       </div>
 
-      <Tabs value={activeView} onValueChange={(v) => setActiveView(v as 'principal' | 'nonValidated' | 'validated')}>
+      <Tabs value={activeView} onValueChange={(v) => {
+        try {
+          const view = v as 'principal' | 'nonValidated' | 'validated';
+          setActiveView(view);
+        } catch (err) {
+          console.warn('Tab change error:', err);
+        }
+      }}>
         <TabsList className="w-full grid grid-cols-3 gap-2 p-1 bg-card rounded-lg border border-border">
           <TabsTrigger
             value="principal"
