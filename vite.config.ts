@@ -16,8 +16,6 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      // shim Next.js navigation APIs for optional packages (e.g. @vercel/speed-insights)
-      "next/navigation": path.resolve(__dirname, "./src/shims/next-navigation.ts"),
     },
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime", "@tanstack/react-query", "@tanstack/query-core"],
   },
