@@ -106,4 +106,81 @@
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .transition-smooth-lg {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* Optimized animations */
+  @keyframes fadeInSmooth {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeInSmooth 300ms ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInFromLeft 250ms ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInFromRight 250ms ease-out forwards;
+  }
+
+  /* Smooth hover effects */
+  .hover-smooth {
+    @apply transition-all duration-150 ease-out hover:scale-102 active:scale-98;
+  }
+
+  /* Button optimizations */
+  button {
+    @apply transition-all duration-150 ease-out;
+  }
+
+  /* Input optimizations */
+  input, textarea, select {
+    @apply transition-colors duration-150 ease-out;
+  }
+
+  /* Prevent layout shift */
+  * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 }
+

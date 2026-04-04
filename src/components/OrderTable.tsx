@@ -1,9 +1,11 @@
 ﻿import React, { useMemo, useState, useEffect, useRef } from 'react';
 import type { OrderLine } from '@/types/order';
 import { cn } from '@/lib/utils';
+import { useDebounce } from '@/lib/performanceHooks';
 import { Input } from '@/components/ui/input';
 import { RotateCcw, Search, X, Check } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import TableRow from './TableRow';
 
 interface OrderTableProps {
   lines: OrderLine[];
@@ -109,7 +111,8 @@ function createSafeSetState<T>(setter: (value: T | ((prev: T) => T)) => void, na
 }
 
 const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
-  const [search, setSearch] = useState('');
+  const [rawSearch, setRawSearch] = useState('');
+  const search = useDebounce(rawSearch, 250); // debounce search for better performance
   const [stockFilter, setStockFilter] = useState<StockFilter>('all');
   const [stockMode, setStockMode] = useState<StockMode>('exact');
   const [stockValueFilter, setStockValueFilter] = useState<string>('all');
@@ -603,7 +606,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   };
 
   const resetFilters = () => {
-    setSearch('');
+    setRawSearch('');
     setStockFilter('all');
     setStockMode('exact');
     setStockValueFilter('all');
@@ -861,15 +864,15 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={rawSearch}
+                onChange={(e) => setRawSearch(e.target.value)}
                 placeholder="Rechercher par code, référence, désignation, emplacement..."
                 className="pl-9 pr-9"
               />
-              {search && (
+              {rawSearch && (
                 <button
-                  onClick={() => setSearch('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  onClick={() => setRawSearch('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -1439,74 +1442,16 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
                   const isSelected = autoValidateOnCheck ? validatedRows.includes(id) : selectedRows.has(id);
                   const isValidated = validatedRows.includes(id);
                   return (
-                    <tr
+                    <TableRow
                       key={id}
-                      onClick={(e) => handleRowClick(e, id)}
-                      className={cn(
-                        'border-b border-table-border last:border-b-0 transition-colors cursor-pointer',
-                        getRowClass(line.stock, line.hasEmptyCell),
-                        isValidated ? 'ring-1 ring-primary/20 bg-primary/5' : ''
-                      )}
-                    >
-                      <td className="px-3 py-2">
-                        <label className="inline-flex items-center cursor-pointer">
-                          <input
-                            type="checkbox"
-                            className="sr-only"
-                            checked={isSelected}
-                            onChange={(e) => {
-                              e.stopPropagation();
-                              toggleSelectRow(id);
-                            }}
-                          />
-                          <span
-                            className={cn(
-                              'h-6 w-6 rounded-md flex items-center justify-center transition-transform transform duration-150',
-                              isSelected
-                                ? 'bg-emerald-600 border-emerald-600 text-white shadow-lg ring-2 ring-emerald-200 scale-100'
-                                : 'bg-white border border-border text-muted-foreground hover:scale-105'
-                            )}
-                          >
-                            {isSelected ? <Check className="h-4 w-4" /> : null}
-                          </span>
-                        </label>
-                      </td>
-
-                      <td className={cn('px-3 py-2 font-mono text-xs text-muted-foreground', line.emptyCells.codeABarre && emptyCellClass)}>
-                        {line.emptyCells.codeABarre ? renderEmptyValue() : line.codeABarre}
-                      </td>
-                      <td className={cn('px-3 py-2 font-mono text-xs', line.emptyCells.reference && emptyCellClass)}>
-                        {line.emptyCells.reference ? renderEmptyValue() : line.reference}
-                      </td>
-                      <td className={cn('px-3 py-2 text-foreground', line.emptyCells.designation && emptyCellClass)}>
-                        {line.emptyCells.designation ? renderEmptyValue() : line.designation}
-                      </td>
-                      <td className={cn('px-3 py-2 text-right font-semibold', line.emptyCells.qte && emptyCellClass)}>
-                        {line.emptyCells.qte ? renderEmptyValue() : line.qte.toFixed(2).replace('.', ',')}
-                      </td>
-                      <td className={cn('px-3 py-2 font-mono text-xs text-muted-foreground', line.emptyCells.emplacement && emptyCellClass)}>
-                        {line.emptyCells.emplacement ? renderEmptyValue() : line.emplacement}
-                        {isValidated && (
-                          <span className="ml-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-800">
-                            Validé
-                          </span>
-                        )}
-                      </td>
-                      <td
-                        className={cn(
-                          'px-3 py-2 text-right font-mono text-xs font-bold',
-                          line.emptyCells.stock
-                            ? emptyCellClass
-                            : line.stock < 0
-                              ? 'text-destructive'
-                              : line.stock === 0
-                                ? 'text-warning'
-                                : 'text-success'
-                        )}
-                      >
-                        {line.emptyCells.stock ? renderEmptyValue() : line.stock.toLocaleString('fr-FR')}
-                      </td>
-                    </tr>
+                      line={line}
+                      id={id}
+                      isSelected={isSelected}
+                      isValidated={isValidated}
+                      getRowClass={getRowClass}
+                      onRowClick={handleRowClick}
+                      onCheckboxChange={toggleSelectRow}
+                    />
                   );
                 })}
 
