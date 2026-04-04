@@ -28,6 +28,9 @@ const TableRow = memo<TableRowProps>(
   }) => {
     const handleCheckboxClick = (e: React.MouseEvent) => {
       e.stopPropagation();
+    };
+
+    const handleCheckboxChange = () => {
       onCheckboxChange(id);
     };
 
@@ -46,8 +49,8 @@ const TableRow = memo<TableRowProps>(
               type="checkbox"
               className="sr-only"
               checked={isSelected}
-              onChange={handleCheckboxClick}
-              onClick={(e) => e.stopPropagation()}
+              onChange={handleCheckboxChange}
+              onClick={handleCheckboxClick}
               aria-label={`Select ${line.designation || 'row'}`}
             />
             <span
