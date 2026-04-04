@@ -524,30 +524,52 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines }) => {
   };
 
   const toggleSelectRow = (id: string) => {
-    if (autoValidateOnCheck) {
-      // toggle validation directly (do not switch view, keep in principal)
-      setValidatedRows((prev) => {
-        if (prev.includes(id)) return prev.filter((x) => x !== id);
-        return [...prev, id];
-      });
-      return;
-    }
+    try {
+      if (!id) return; // guard against empty IDs
+      if (autoValidateOnCheck) {
+        // toggle validation directly (do not switch view, keep in principal)
+        setValidatedRows((prev) => {
+          try {
+            if (!Array.isArray(prev)) return [id];
+            if (prev.includes(id)) return prev.filter((x) => x !== id);
+            return [...prev, id];
+          } catch (e) {
+            console.warn('toggleSelectRow validation error:', e);
+            return prev;
+          }
+        });
+        return;
+      }
 
-    setSelectedRows((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+      setSelectedRows((prev) => {
+        try {
+          const next = new Set(prev);
+          if (next.has(id)) next.delete(id);
+          else next.add(id);
+          return next;
+        } catch (e) {
+          console.warn('toggleSelectRow selection error:', e);
+          return prev;
+        }
+      });
+    } catch (err) {
+      console.warn('toggleSelectRow error:', err);
+    }
   };
 
   const handleRowClick = (e: React.MouseEvent, id: string) => {
-    // normalize event target to an Element (avoid Text nodes which have no `closest`)
-    let node: Element | null = (e.target as Element) ?? null;
-    if (node && node.nodeType !== Node.ELEMENT_NODE) node = node.parentElement;
-    // don't toggle when clicking interactive controls inside the row
-    if (node && typeof (node as Element).closest === 'function' && node.closest('input,button,a,label')) return;
-    toggleSelectRow(id);
+    try {
+      // normalize event target to an Element (avoid Text nodes which have no `closest`)
+      let node: Element | null = (e.target as Element) ?? null;
+      if (node && node.nodeType !== Node.ELEMENT_NODE) node = node.parentElement;
+      // don't toggle when clicking interactive controls inside the row
+      if (node && typeof (node as Element).closest === 'function' && node.closest('input,button,a,label')) return;
+      toggleSelectRow(id);
+    } catch (err) {
+      // silently fail on event handling errors to prevent DOM race condition crashes
+      // eslint-disable-next-line no-console
+      console.warn('Row click handler error (non-fatal):', err);
+    }
   };
 
   const resetFilters = () => {

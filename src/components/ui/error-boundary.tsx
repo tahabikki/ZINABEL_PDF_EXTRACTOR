@@ -13,9 +13,32 @@ type State = {
 class ErrorBoundary extends React.Component<Props, State> {
   state: State = { hasError: false };
 
+  // List of known harmless errors that should be logged but not shown
+  isHarmlessError = (message: string): boolean => {
+    const harmless = [
+      'removeChild',
+      'Failed to execute',
+      'Cannot read properties of null',
+      'ResizeObserver loop limit exceeded',
+      'Non-Error promise rejection captured',
+    ];
+    return harmless.some((h) => message.includes(h));
+  };
+
   handleWindowError = (ev: ErrorEvent) => {
     const message = `${ev.message} @ ${ev.filename}:${ev.lineno}:${ev.colno}`;
     const info = ev.error ? (ev.error.stack || String(ev.error)) : '';
+    
+    // Log but don't crash for known harmless errors
+    if (this.isHarmlessError(message)) {
+      try {
+        const logs = JSON.parse(localStorage.getItem('appErrorLogs') || '[]') as { message: string; time: string }[];
+        logs.push({ message, time: new Date().toISOString() });
+        localStorage.setItem('appErrorLogs', JSON.stringify(logs.slice(-50))); // keep last 50
+      } catch (e) {}
+      return; // don't show error screen
+    }
+    
     this.setState({ hasError: true, error: message, info });
     try {
       localStorage.setItem(
@@ -29,6 +52,17 @@ class ErrorBoundary extends React.Component<Props, State> {
     let reason: any = ev.reason;
     let message = typeof reason === 'string' ? reason : reason?.message || JSON.stringify(reason);
     const info = reason?.stack || '';
+    
+    // Suppress known harmless errors
+    if (this.isHarmlessError(String(message))) {
+      try {
+        const logs = JSON.parse(localStorage.getItem('appErrorLogs') || '[]') as { message: string; time: string }[];
+        logs.push({ message: String(message), time: new Date().toISOString() });
+        localStorage.setItem('appErrorLogs', JSON.stringify(logs.slice(-50)));
+      } catch (e) {}
+      return;
+    }
+    
     this.setState({ hasError: true, error: String(message), info });
     try {
       localStorage.setItem(
@@ -41,6 +75,17 @@ class ErrorBoundary extends React.Component<Props, State> {
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     const message = String(error?.message || error);
     const stack = info?.componentStack || (error as any)?.stack || '';
+    
+    // Suppress known harmless errors
+    if (this.isHarmlessError(message)) {
+      try {
+        const logs = JSON.parse(localStorage.getItem('appErrorLogs') || '[]') as { message: string; time: string }[];
+        logs.push({ message, time: new Date().toISOString() });
+        localStorage.setItem('appErrorLogs', JSON.stringify(logs.slice(-50)));
+      } catch (e) {}
+      return; // don't show error screen
+    }
+    
     this.setState({ hasError: true, error: message, info: stack });
     try {
       localStorage.setItem(
