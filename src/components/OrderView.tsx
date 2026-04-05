@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import type { ParsedOrder, OrderLine } from '@/types/order';
 import OrderHeaderCard from './OrderHeaderCard';
 import SafeOrderTable from './SafeOrderTable';
-import OrderAnalytics from './OrderAnalytics';
+const OrderAnalytics = React.lazy(() => import('./OrderAnalytics'));
 import { ChevronDown, FileText, Trash2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -61,9 +61,13 @@ const OrderView: React.FC<OrderViewProps> = ({
     setActiveTab(data.activeTab);
   };
 
-  const handleDownloadPrincipal = () => {
+  const [downloading, setDownloading] = useState<null | 'principal' | 'non-validated' | 'validated'>(null);
+
+  const handleDownloadPrincipal = async () => {
+    if (downloading) return;
+    setDownloading('principal');
     try {
-      downloadOrderPDF(order, 'principal', undefined, undefined, principalLines);
+      await downloadOrderPDF(order, 'principal', undefined, undefined, principalLines);
       toast({
         title: 'Succès',
         description: 'PDF Principal téléchargé avec succès.',
@@ -75,12 +79,16 @@ const OrderView: React.FC<OrderViewProps> = ({
         description: 'Impossible de générer le PDF.',
         variant: 'destructive',
       });
+    } finally {
+      setDownloading(null);
     }
   };
 
-  const handleDownloadValidated = () => {
+  const handleDownloadValidated = async () => {
+    if (downloading) return;
+    setDownloading('validated');
     try {
-      downloadOrderPDF(order, 'validated', undefined, undefined, validatedLines);
+      await downloadOrderPDF(order, 'validated', undefined, undefined, validatedLines);
       toast({
         title: 'Succès',
         description: 'PDF Validés téléchargé avec succès.',
@@ -92,12 +100,16 @@ const OrderView: React.FC<OrderViewProps> = ({
         description: 'Impossible de générer le PDF.',
         variant: 'destructive',
       });
+    } finally {
+      setDownloading(null);
     }
   };
 
-  const handleDownloadNonValidated = () => {
+  const handleDownloadNonValidated = async () => {
+    if (downloading) return;
+    setDownloading('non-validated');
     try {
-      downloadOrderPDF(order, 'non-validated', undefined, undefined, nonValidatedLines);
+      await downloadOrderPDF(order, 'non-validated', undefined, undefined, nonValidatedLines);
       toast({
         title: 'Succès',
         description: 'PDF Non Validés téléchargé avec succès.',
@@ -109,6 +121,8 @@ const OrderView: React.FC<OrderViewProps> = ({
         description: 'Impossible de générer le PDF.',
         variant: 'destructive',
       });
+    } finally {
+      setDownloading(null);
     }
   };
 
@@ -162,10 +176,11 @@ const OrderView: React.FC<OrderViewProps> = ({
                     e.stopPropagation();
                     handleDownloadPrincipal();
                   }}
+                  disabled={!!downloading}
                   className="text-orange-600 border-orange-200 hover:bg-orange-50 hover:text-orange-700 text-xs"
                   title="Télécharger Principal"
                 >
-                  Principal
+                  {downloading === 'principal' ? 'Téléchargement...' : 'Principal'}
                 </Button>
                 <Button
                   variant="outline"
@@ -174,10 +189,11 @@ const OrderView: React.FC<OrderViewProps> = ({
                     e.stopPropagation();
                     handleDownloadNonValidated();
                   }}
+                  disabled={!!downloading}
                   className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 text-xs"
                   title="Télécharger Non Validés"
                 >
-                  Non Validés
+                  {downloading === 'non-validated' ? 'Téléchargement...' : 'Non Validés'}
                 </Button>
                 <Button
                   variant="outline"
@@ -186,10 +202,11 @@ const OrderView: React.FC<OrderViewProps> = ({
                     e.stopPropagation();
                     handleDownloadValidated();
                   }}
+                  disabled={!!downloading}
                   className="text-green-600 border-green-200 hover:bg-green-50 hover:text-green-700 text-xs"
                   title="Télécharger Validés"
                 >
-                  Validés
+                  {downloading === 'validated' ? 'Téléchargement...' : 'Validés'}
                 </Button>
               </div>
 
@@ -228,7 +245,9 @@ const OrderView: React.FC<OrderViewProps> = ({
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-3">Analyse approfondie</h3>
               <div className="min-h-[100px]">
-                <OrderAnalytics order={order} />
+                <Suspense fallback={<div className="text-sm text-muted-foreground">Chargement des analytics...</div>}>
+                  <OrderAnalytics order={order} />
+                </Suspense>
               </div>
             </div>
 

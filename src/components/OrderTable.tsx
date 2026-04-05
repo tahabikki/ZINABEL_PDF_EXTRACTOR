@@ -1226,6 +1226,43 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
     setSelectedRows(new Set(visibleRowIds));
   };
 
+  // Progressive rendering for large tables to avoid long blocking renders on low-end devices
+  const [renderedCount, setRenderedCount] = useState<number>(Math.min(200, visibleRows.length));
+  useEffect(() => {
+    // reset when visible rows change
+    setRenderedCount(Math.min(200, visibleRows.length));
+
+    const CHUNK = 200;
+    let idleId: any = null;
+
+    const scheduleChunk = () => {
+      if ((window as any).requestIdleCallback) {
+        idleId = (window as any).requestIdleCallback(() => {
+          setRenderedCount((prev) => {
+            const next = Math.min(visibleRows.length, prev + CHUNK);
+            if (next < visibleRows.length) scheduleChunk();
+            return next;
+          });
+        });
+      } else {
+        idleId = window.setTimeout(() => {
+          setRenderedCount((prev) => {
+            const next = Math.min(visibleRows.length, prev + CHUNK);
+            if (next < visibleRows.length) scheduleChunk();
+            return next;
+          });
+        }, 50);
+      }
+    };
+
+    scheduleChunk();
+
+    return () => {
+      if ((window as any).cancelIdleCallback && idleId) (window as any).cancelIdleCallback(idleId);
+      if (typeof idleId === 'number') clearTimeout(idleId);
+    };
+  }, [visibleRows]);
+
   const toggleSelectRow = (id: string) => {
     try {
       if (!id) return; // guard against empty IDs
@@ -2131,7 +2168,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
 
       <div className="overflow-x-auto rounded-lg border border-table-border">
         {(() => {
-          const visible = visibleRows;
+          const visible = visibleRows.slice(0, renderedCount);
           const visibleIds = visible.map((l) => getRowId(l));
           const allSelected = visibleIds.length > 0 && visibleIds.every((id) => (autoValidateOnCheck ? validatedRows.includes(id) : selectedRows.has(id)));
 
@@ -2200,6 +2237,13 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
                   <tr>
                     <td colSpan={11} className="px-3 py-8 text-center text-muted-foreground">
                       Aucun article trouvé
+                    </td>
+                  </tr>
+                )}
+                {renderedCount < visibleRows.length && (
+                  <tr>
+                    <td colSpan={11} className="px-3 py-4 text-center text-muted-foreground">
+                      Chargement progressif des lignes... ({renderedCount}/{visibleRows.length})
                     </td>
                   </tr>
                 )}

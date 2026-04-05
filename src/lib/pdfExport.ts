@@ -1,4 +1,3 @@
-import html2pdf from 'html2pdf.js';
 import type { ParsedOrder, OrderLine } from '@/types/order';
 
 type TabType = 'principal' | 'non-validated' | 'validated';
@@ -337,22 +336,29 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
   return html;
 }
 
-export function downloadOrderPDF(
-  order: ParsedOrder, 
-  tab: TabType, 
-  validatedRows?: string[], 
+// Dynamic loader for html2pdf to keep initial bundle small
+async function loadHtml2pdf() {
+  // html2pdf may export as default or as module object depending on bundler
+  const mod = await import('html2pdf.js');
+  return (mod as any).default || mod;
+}
+
+export async function downloadOrderPDF(
+  order: ParsedOrder,
+  tab: TabType,
+  validatedRows?: string[],
   qtePreparedMap?: Map<string, number>,
   filteredLines?: OrderLine[]
-): void {
+): Promise<void> {
   try {
     const linesToUse = filteredLines || getFilteredLines(order.lines, tab, validatedRows);
     const html = generateTableHTML(order, linesToUse, tab, qtePreparedMap);
-    
+
     const element = document.createElement('div');
     element.innerHTML = html;
-    
+
     const filename = `${order?.header?.noPiece || 'commande'}_${tab}_${new Date().toISOString().split('T')[0]}.pdf`;
-    
+
     const options = {
       margin: [10, 10, 10, 10] as [number, number, number, number],
       filename: filename,
@@ -361,7 +367,11 @@ export function downloadOrderPDF(
       jsPDF: { orientation: 'landscape' as const, unit: 'mm' as const, format: 'a4' as const },
     };
 
-    html2pdf().set(options).from(element).save();
+    // Allow UI to update before heavy work
+    await new Promise((res) => setTimeout(res, 50));
+
+    const html2pdf = await loadHtml2pdf();
+    await html2pdf().set(options).from(element).save();
   } catch (error) {
     console.error('Error generating PDF:', error);
     throw error;
