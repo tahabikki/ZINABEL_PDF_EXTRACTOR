@@ -49,6 +49,7 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
       <td style="padding: 8px 6px; border: 1px solid #e5e7eb; text-align: center; font-size: 11px; font-weight: bold; color: #1f2937; background: #f9fafb; white-space: nowrap;">${Math.round(line.qte)}</td>
       <td style="padding: 10px; border: 1px solid #e5e7eb; text-align: left; font-size: 10px; font-weight: 600;">${line.emplacement || '—'}</td>
       <td style="padding: 8px 6px; border: 1px solid #e5e7eb; text-align: center; font-size: 11px; white-space: nowrap;">${getStockBadgeHTML(line.stock)}</td>
+      <td style="padding: 8px 6px; border: 1px solid #e5e7eb; text-align: right; font-size: 11px; white-space: nowrap; font-weight: 700;">${typeof line.ttc === 'number' ? (line.ttc).toFixed(2) : '—'}</td>
       <td style="padding: 8px 6px; border: 1px solid #e5e7eb; text-align: center; font-size: 9px; white-space: nowrap;"><span style="display: inline-block; padding: 3px 6px; background: #dbeafe; color: #1e40af; border-radius: 4px; font-weight: 600;">${line.brand || '—'}</span></td>
       <td style="padding: 8px 6px; border: 1px solid #e5e7eb; text-align: center; font-size: 9px; white-space: nowrap;"><span style="display: inline-block; padding: 3px 6px; background: #e0e7ff; color: #3730a3; border-radius: 4px; font-weight: 600;">${line.carton_Qte || '—'}</span></td>
       <td style="padding: 8px 6px; border: 1px solid #e5e7eb; text-align: center; font-size: 11px; font-weight: bold; color: #0369a1; background: #eff6ff; white-space: nowrap;">${qtePrepared}</td>
@@ -263,12 +264,24 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
               <div class="header-item-value">${order?.header?.noPiece || '—'}</div>
             </div>
             <div class="header-item">
+              <div class="header-item-label">N° Demande</div>
+              <div class="header-item-value">${order?.header?.noDemande || '—'}</div>
+            </div>
+            <div class="header-item">
               <div class="header-item-label">Client</div>
               <div class="header-item-value">${order?.header?.client || '—'}</div>
             </div>
             <div class="header-item">
               <div class="header-item-label">Date</div>
               <div class="header-item-value">${order?.header?.date || '—'}</div>
+            </div>
+            <div class="header-item">
+              <div class="header-item-label">Dépôt source</div>
+              <div class="header-item-value">${order?.header?.depotSource || '—'}</div>
+            </div>
+            <div class="header-item">
+              <div class="header-item-label">Dépôt destination</div>
+              <div class="header-item-value">${order?.header?.depotDestination || '—'}</div>
             </div>
           </div>
           <div>
@@ -302,6 +315,7 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
               <th>Qté</th>
               <th>Emplacement</th>
               <th>Stock</th>
+              <th>TTC</th>
               <th>Marque</th>
               <th>Carton Qté</th>
               <th>Qte Validée</th>

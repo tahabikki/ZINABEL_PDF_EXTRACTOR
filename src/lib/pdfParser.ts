@@ -11,8 +11,8 @@ interface TextItem {
   page: number;
 }
 
-// Column X boundaries detected from PDF structure
-const COLUMNS = [
+// Default column X boundaries (used as a fallback)
+const DEFAULT_COLUMNS = [
   { name: 'codeABarre', minX: 30, maxX: 140 },
   { name: 'reference', minX: 140, maxX: 190 },
   { name: 'designation', minX: 190, maxX: 375 },
@@ -21,11 +21,47 @@ const COLUMNS = [
   { name: 'stock', minX: 525, maxX: 600 },
 ];
 
+let activeColumns = DEFAULT_COLUMNS.slice();
+
 function assignColumn(x: number): string | null {
-  for (const col of COLUMNS) {
+  for (const col of activeColumns) {
     if (x >= col.minX && x < col.maxX) return col.name;
   }
   return null;
+}
+
+function mapHeaderToColName(label: string): string {
+  const s = label.toLowerCase();
+  if (s.includes('code')) return 'codeABarre';
+  if (s.includes('référence') || s.includes('reference')) return 'reference';
+  if (s.includes('désignation') || s.includes('designation')) return 'designation';
+  if (s.includes('qt') || s.includes('qty') || s.includes('quant')) return 'qte';
+  if (s.includes('emplacement')) return 'emplacement';
+  if (s.includes('stock')) return 'stock';
+  if (s.includes('ttc')) return 'ttc';
+  if (s.includes('reliquat')) return 'reliquat';
+  return label.replace(/\s+/g, '_');
+}
+
+function buildColumnsFromHeaderRow(items: TextItem[], headerRowY: number) {
+  const Y_TOL = 6;
+  const headerRowItems = items
+    .filter((it) => Math.abs(it.y - headerRowY) <= Y_TOL)
+    .sort((a, b) => a.x - b.x);
+
+  if (headerRowItems.length === 0) return DEFAULT_COLUMNS.slice();
+
+  const xs = headerRowItems.map((h) => h.x);
+  const cols: Array<{ name: string; minX: number; maxX: number }> = [];
+
+  for (let i = 0; i < headerRowItems.length; i++) {
+    const name = mapHeaderToColName(headerRowItems[i].str);
+    const left = i === 0 ? Math.max(0, Math.round(xs[i] - 60)) : Math.round((xs[i - 1] + xs[i]) / 2);
+    const right = i === headerRowItems.length - 1 ? xs[i] + 600 : Math.round((xs[i] + xs[i + 1]) / 2);
+    cols.push({ name, minX: left, maxX: right });
+  }
+
+  return cols;
 }
 
 export async function parsePDF(file: File): Promise<ParsedOrder> {
@@ -53,7 +89,7 @@ export async function parsePDF(file: File): Promise<ParsedOrder> {
   // Use page 1 items for header extraction
   const page1Items = allItems.filter((i) => i.page === 1);
 
-  // Find the "Détails" line on page 1
+  // Find the "Détails" line on page 1 (used to separate header blocks)
   let detailsY = 0;
   for (const item of page1Items) {
     if (item.str.includes('Détails') || item.str.includes('Details')) {
@@ -64,16 +100,46 @@ export async function parsePDF(file: File): Promise<ParsedOrder> {
 
   const headerItems = page1Items.filter((i) => i.y > detailsY);
 
-  // Find the column header row Y
-  let headerRowY = 0;
-  for (const item of page1Items) {
-    if (
-      item.y < detailsY &&
-      (item.str === 'Code à barre' || item.str === 'Code a barre')
-    ) {
-      headerRowY = item.y;
-      break;
+  // Detect title from the top-most text items on page 1
+  const detectTitle = (items: TextItem[]) => {
+    const top = [...items].sort((a, b) => a.y - b.y).slice(0, 6);
+    return top.map((t) => t.str).join(' ').trim();
+  };
+
+  const titleText = detectTitle(page1Items);
+  let detectedDocType = 'preparation';
+  let detectedSourceOrderNumber = '';
+  const lcTitle = titleText.toLowerCase();
+  if (lcTitle.includes('valoris') || lcTitle.includes('valoris') || lcTitle.includes('valoris') || lcTitle.includes('valorisé') || lcTitle.includes('valorise')) {
+    detectedDocType = 'valorise';
+  } else if (lcTitle.includes('reliquat')) {
+    detectedDocType = 'reliquat';
+    const numMatch = titleText.match(/PL\d+/i) || titleText.match(/N\.?\s*°\s*\w+/i);
+    if (numMatch) {
+      detectedSourceOrderNumber = numMatch[0];
     }
+  }
+
+  // Find the column header row Y by looking for common header labels
+  let headerRowY = 0;
+  const HEADER_LABELS = ['Code', 'Code à barre', 'Code a barre', 'Référence', 'Reference', 'Désignation', 'Designation', 'Qté', 'Qte', 'Emplacement', 'Stock', 'TTC', 'Reliquat'];
+  for (const item of page1Items) {
+    const s = item.str.toLowerCase();
+    if (detailsY && item.y >= detailsY) continue;
+    for (const lab of HEADER_LABELS) {
+      if (s.includes(lab.toLowerCase())) {
+        headerRowY = item.y;
+        break;
+      }
+    }
+    if (headerRowY) break;
+  }
+
+  // Build activeColumns from detected header row if possible
+  if (headerRowY) {
+    activeColumns = buildColumnsFromHeaderRow(page1Items, headerRowY);
+  } else {
+    activeColumns = DEFAULT_COLUMNS.slice();
   }
 
   // Collect table items per page, excluding the header row and above
@@ -106,6 +172,10 @@ export async function parsePDF(file: File): Promise<ParsedOrder> {
   }
 
   const header = extractHeader(headerItems);
+  // Attach detection metadata
+  header.title = titleText;
+  header.docType = detectedDocType;
+  if (detectedSourceOrderNumber) header.sourceOrderNumber = detectedSourceOrderNumber;
   const lines = extractTableLines(tableItems);
   
   // Enrich lines with carton data (brand and carton_Qte)
@@ -153,8 +223,14 @@ function extractHeader(items: TextItem[]): OrderHeader {
   const b2bMatch = allText.match(/B2B\s*\d+/);
   const reference = b2bMatch ? b2bMatch[0] : findValue('Référence');
 
+  // Additional header fields
+  const noDemande = findValue('N° Demande') || findValue('N° demande') || findValue('No Demande');
+  const depotSource = findValue('Dépôt source') || findValue('Depot source');
+  const depotDestination = findValue('Dépôt destination') || findValue('Depot destination');
+
   return {
     noPiece,
+    noDemande,
     reference,
     date: findValue('Date') || extractDateFromItems(items),
     dateLivraison: findValue('Date livraison'),
@@ -163,6 +239,8 @@ function extractHeader(items: TextItem[]): OrderHeader {
     code: findValue('Code'),
     adresseLivraison: findValue('Adresse livraison') || findValue('Adresse'),
     depot: findValue('Dépôt') || findValue('Depot'),
+    depotSource,
+    depotDestination,
     preparateur: findValue('Préparateur') || findValue('Preparateur'),
   };
 }
@@ -267,12 +345,26 @@ function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
     .map((i) => i.str)
     .join('');
 
+  const ttcRaw = rowItems
+    .filter((it) => assignColumn(it.x) === 'ttc')
+    .sort((a, b) => a.x - b.x)
+    .map((i) => i.str)
+    .join('');
+
+  const reliquatRaw = rowItems
+    .filter((it) => assignColumn(it.x) === 'reliquat')
+    .sort((a, b) => a.x - b.x)
+    .map((i) => i.str)
+    .join('');
+
   let codeABarre = codeRaw.replace(/\s/g, '').trim();
   let reference = referenceRaw.trim();
   const designation = designationRaw.trim();
   const emplacement = emplacementRaw.trim();
   const qte = parseNumber(qteRaw);
   const stock = parseNumber(stockRaw);
+  const ttc = parseNumber(ttcRaw);
+  const reliquat = parseNumber(reliquatRaw);
 
   // Some PDFs place a non-barcode token in the first column when barcode is empty.
   // In that case, treat it as a reference and keep barcode empty.
@@ -290,16 +382,23 @@ function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
     stock: isBlank(stockRaw),
   };
 
-  return {
+  const line: OrderLine = {
     codeABarre,
     reference,
     designation,
     qte,
     emplacement,
     stock,
+
+    // include optional numeric fields when present
+    ...(ttc ? { ttc } : {}),
+    ...(reliquat ? { reliquat } : {}),
     emptyCells,
     hasEmptyCell: Object.values(emptyCells).some(Boolean),
+    meta: {},
   };
+
+  return line;
 }
 
 function isLikelyDataLine(line: OrderLine): boolean {

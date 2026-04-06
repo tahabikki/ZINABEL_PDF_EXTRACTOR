@@ -126,6 +126,26 @@ const OrderView: React.FC<OrderViewProps> = ({
     }
   };
 
+  const handleDownloadJSON = () => {
+    try {
+      const filename = `${orderName || 'commande'}.json`;
+      const dataStr = JSON.stringify(order, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      toast({ title: 'Succès', description: 'JSON téléchargé.' });
+    } catch (error) {
+      console.error('JSON download error:', error);
+      toast({ title: 'Erreur', description: 'Impossible de télécharger le JSON.', variant: 'destructive' });
+    }
+  };
+
   // Guard against missing order data
   if (!order) {
     return (
@@ -209,6 +229,18 @@ const OrderView: React.FC<OrderViewProps> = ({
                   {downloading === 'validated' ? 'Téléchargement...' : 'Validés'}
                 </Button>
               </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDownloadJSON();
+                  }}
+                  className="text-slate-600 border-slate-200 hover:bg-slate-50 text-xs"
+                  title="Exporter JSON"
+                >
+                  JSON
+                </Button>
 
               <span className="inline-flex items-center gap-1 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground">
                 {isOpen ? 'Masquer' : 'Afficher'}

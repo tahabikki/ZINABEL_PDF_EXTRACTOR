@@ -119,6 +119,13 @@ const TableRow = memo<TableRowProps>(
             <span className="text-muted-foreground italic text-xs">—</span>
           )}
         </td>
+        <td className="px-3 py-2 text-right border-r border-table-border">
+          {typeof line.ttc === 'number' ? (
+            <span className="font-semibold">{line.ttc.toFixed(2)}</span>
+          ) : (
+            <span className="text-muted-foreground italic text-xs">—</span>
+          )}
+        </td>
         <td className="px-3 py-2 text-left border-r border-table-border">
           {line.brand ? (
             <span className={cn('inline-block px-2 py-1 rounded text-xs font-medium border', brandColor)}>

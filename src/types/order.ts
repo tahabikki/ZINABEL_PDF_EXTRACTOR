@@ -1,5 +1,12 @@
 export interface OrderHeader {
   noPiece: string;
+  noDemande?: string;
+  // Detected document type (e.g. 'preparation', 'valorise', 'reliquat')
+  docType?: string;
+  // Raw title text found at the top of the PDF
+  title?: string;
+  // For reliquat documents, extracted source/order number (e.g. PL26002945)
+  sourceOrderNumber?: string;
   reference: string;
   date: string;
   dateLivraison: string;
@@ -8,6 +15,8 @@ export interface OrderHeader {
   code: string;
   adresseLivraison: string;
   depot: string;
+  depotSource?: string;
+  depotDestination?: string;
   preparateur: string;
 }
 
@@ -18,9 +27,15 @@ export interface OrderLine {
   qte: number;
   emplacement: string;
   stock: number;
+  // Optional total price (TTC) for valorisé documents
+  ttc?: number;
+  // Optional missing quantity for reliquat documents
+  reliquat?: number;
   brand?: string;
   carton_Qte?: number;
   qte_prepared?: number;
+  // Flexible metadata for extra fields
+  meta?: Record<string, any>;
   emptyCells: {
     codeABarre: boolean;
     reference: boolean;

@@ -158,6 +158,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
   const [qtyFilter, setQtyFilter] = useState<Set<string>>(new Set());
   const [qtyMode, setQtyMode] = useState<QtyMode>('exact');
   const [brandFilter, setBrandFilter] = useState<Set<string>>(new Set());
+  const [ttcFilterEnabled, setTtcFilterEnabled] = useState<boolean>(false);
+  const [ttcOp, setTtcOp] = useState<'gt' | 'lt' | 'between'>('gt');
+  const [ttcValueMin, setTtcValueMin] = useState<string>('');
+  const [ttcValueMax, setTtcValueMax] = useState<string>('');
   const [empFilter, setEmpFilter] = useState<Set<string>>(new Set());
   
   // Per-letter selections - each letter has its own section/row/level choices
@@ -334,6 +338,23 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
 
     if (brandFilter.size > 0) {
       result = result.filter((l) => brandFilter.has(l.brand || ''));
+    }
+
+    // Apply TTC filter when enabled
+    if (ttcFilterEnabled) {
+      const min = ttcValueMin === '' ? NaN : Number(ttcValueMin);
+      const max = ttcValueMax === '' ? NaN : Number(ttcValueMax);
+      result = result.filter((l) => {
+        const t = typeof l.ttc === 'number' ? l.ttc : NaN;
+        if (Number.isNaN(t)) return false;
+        if (ttcOp === 'gt') return !Number.isNaN(min) ? t > min : true;
+        if (ttcOp === 'lt') return !Number.isNaN(min) ? t < min : true;
+        // between
+        if (!Number.isNaN(min) && !Number.isNaN(max)) return t >= min && t <= max;
+        if (!Number.isNaN(min)) return t >= min;
+        if (!Number.isNaN(max)) return t <= max;
+        return true;
+      });
     }
 
     if (emptyFilter === 'with-empty') result = result.filter((l) => l.hasEmptyCell);
@@ -1799,6 +1820,32 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
 
           <div className="rounded-lg border border-border bg-background/60 p-3">
             <div className="flex items-center justify-between mb-2">
+              <p className="text-xs font-semibold text-foreground">Filtre TTC</p>
+              <label className="inline-flex items-center gap-2 text-xs">
+                <input type="checkbox" checked={ttcFilterEnabled} onChange={(e) => setTtcFilterEnabled(e.target.checked)} />
+                <span className="text-xs">Activer</span>
+              </label>
+            </div>
+
+            <div className="grid gap-2">
+              <div className="flex items-center gap-2">
+                <select value={ttcOp} onChange={(e) => setTtcOp(e.target.value as any)} className="h-8 rounded-md border px-2 text-sm">
+                  <option value="gt">Plus que (&gt;)</option>
+                  <option value="lt">Moins que (&lt;)</option>
+                  <option value="between">Entre</option>
+                </select>
+                <Input type="number" value={ttcValueMin} onChange={(e) => setTtcValueMin(e.target.value)} placeholder="Min TTC" className="h-8" />
+                {ttcOp === 'between' && (
+                  <Input type="number" value={ttcValueMax} onChange={(e) => setTtcValueMax(e.target.value)} placeholder="Max TTC" className="h-8" />
+                )}
+                <button onClick={() => { setTtcValueMin(''); setTtcValueMax(''); setTtcFilterEnabled(false); }} className="px-3 h-8 rounded-md border bg-card text-xs">Effacer</button>
+              </div>
+              <p className="text-[11px] text-muted-foreground">Filtre les articles avec colonne TTC présente.</p>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-border bg-background/60 p-3">
+            <div className="flex items-center justify-between mb-2">
               <p className="text-xs font-semibold text-foreground">Filtre Emplacement</p>
               <div className="flex items-center gap-2">
                 {(empFilter.size > 0 || empSectionsByLetter.size > 0 || empRowsByLetter.size > 0 || empLevelsByLetter.size > 0) && (
@@ -2203,6 +2250,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qté</th>
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Emplacement</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Stock</th>
+                  <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">TTC</th>
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Marque</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Carton Qté</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qte Validée</th>
@@ -2235,14 +2283,14 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
 
                 {visible.length === 0 && (
                   <tr>
-                    <td colSpan={11} className="px-3 py-8 text-center text-muted-foreground">
+                    <td colSpan={12} className="px-3 py-8 text-center text-muted-foreground">
                       Aucun article trouvé
                     </td>
                   </tr>
                 )}
                 {renderedCount < visibleRows.length && (
                   <tr>
-                    <td colSpan={11} className="px-3 py-4 text-center text-muted-foreground">
+                    <td colSpan={12} className="px-3 py-4 text-center text-muted-foreground">
                       Chargement progressif des lignes... ({renderedCount}/{visibleRows.length})
                     </td>
                   </tr>

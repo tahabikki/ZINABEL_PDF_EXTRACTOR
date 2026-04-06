@@ -8,6 +8,7 @@ interface OrderHeaderCardProps {
 const OrderHeaderCard: React.FC<OrderHeaderCardProps> = ({ header }) => {
   const leftFields = [
     { label: 'N° Pièce', value: header.noPiece },
+    { label: 'N° Demande', value: header.noDemande },
     { label: 'Référence', value: header.reference },
     { label: 'Date', value: header.date },
     { label: 'Date livraison', value: header.dateLivraison },
@@ -19,6 +20,8 @@ const OrderHeaderCard: React.FC<OrderHeaderCardProps> = ({ header }) => {
     { label: 'Code', value: header.code },
     { label: 'Adresse livraison', value: header.adresseLivraison },
     { label: 'Dépôt', value: header.depot },
+    { label: 'Dépôt source', value: header.depotSource },
+    { label: 'Dépôt destination', value: header.depotDestination },
     { label: 'Préparateur', value: header.preparateur || '—' },
   ];
 
