@@ -54,4 +54,8 @@ export interface ParsedOrder {
   lines: OrderLine[];
   totalQty: number;
   totalItems: number;
+  // Optional aggregated totals detected from lines
+  totalStock?: number;
+  totalTtc?: number;
+  totalReliquat?: number;
 }

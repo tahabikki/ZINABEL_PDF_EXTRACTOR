@@ -219,6 +219,17 @@ export async function parsePDF(file: File): Promise<ParsedOrder> {
   await enrichLinesWithCartonData(lines);
   
   const totalQty = lines.reduce((sum, l) => sum + l.qte, 0);
+  const totalItems = lines.length;
+
+  // Detect and compute optional totals
+  const hasStock = lines.some((l) => !l.emptyCells.stock);
+  const totalStock = lines.reduce((sum, l) => sum + (l.emptyCells.stock ? 0 : l.stock), 0);
+
+  const hasTtc = lines.some((l) => typeof l.ttc === 'number');
+  const totalTtc = lines.reduce((sum, l) => sum + (typeof l.ttc === 'number' ? l.ttc : 0), 0);
+
+  const hasReliquat = lines.some((l) => typeof l.reliquat === 'number');
+  const totalReliquat = lines.reduce((sum, l) => sum + (typeof l.reliquat === 'number' ? l.reliquat : 0), 0);
 
   return {
     id: crypto.randomUUID(),
@@ -226,7 +237,10 @@ export async function parsePDF(file: File): Promise<ParsedOrder> {
     header,
     lines,
     totalQty,
-    totalItems: lines.length,
+    totalItems,
+    ...(hasStock ? { totalStock } : {}),
+    ...(hasTtc ? { totalTtc } : {}),
+    ...(hasReliquat ? { totalReliquat } : {}),
   };
 }
 

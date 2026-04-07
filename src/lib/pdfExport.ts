@@ -60,7 +60,54 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
 
   const totalQty = Math.round(lines.reduce((sum, line) => sum + line.qte, 0));
   const totalItems = lines.length;
-  const totalStock = Math.round(lines.reduce((sum, line) => sum + line.stock, 0));
+  const hasStock = lines.some((l) => !l.emptyCells.stock);
+  const totalStock = Math.round(lines.reduce((sum, line) => sum + (line.emptyCells.stock ? 0 : line.stock), 0));
+
+  const hasTtc = lines.some((l) => typeof l.ttc === 'number');
+  const totalTtc = lines.reduce((sum, line) => sum + (typeof line.ttc === 'number' ? line.ttc : 0), 0);
+
+  const hasReliquat = lines.some((l) => typeof l.reliquat === 'number');
+  const totalReliquat = lines.reduce((sum, line) => sum + (typeof line.reliquat === 'number' ? line.reliquat : 0), 0);
+
+  // Build metric cards dynamically depending on which totals are present
+  const metricCards: string[] = [];
+  metricCards.push(`
+    <div class="metric-card blue">
+      <div class="metric-value">${totalItems}</div>
+      <div class="metric-label">Articles</div>
+    </div>
+  `);
+  metricCards.push(`
+    <div class="metric-card green">
+      <div class="metric-value">${totalQty}</div>
+      <div class="metric-label">Quantité Totale</div>
+    </div>
+  `);
+  if (hasStock) {
+    metricCards.push(`
+      <div class="metric-card purple">
+        <div class="metric-value">${totalStock >= 0 ? '+' : ''}${totalStock}</div>
+        <div class="metric-label">Stock Global</div>
+      </div>
+    `);
+  }
+  if (hasTtc) {
+    metricCards.push(`
+      <div class="metric-card orange">
+        <div class="metric-value">${totalTtc.toFixed(2)}</div>
+        <div class="metric-label">TTC Total</div>
+      </div>
+    `);
+  }
+  if (hasReliquat) {
+    metricCards.push(`
+      <div class="metric-card amber">
+        <div class="metric-value">${totalReliquat}</div>
+        <div class="metric-label">Reliquat Total</div>
+      </div>
+    `);
+  }
+  const metricsHtml = metricCards.join('\n');
 
   const html = `
     <!DOCTYPE html>
@@ -147,7 +194,7 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
 
         .metrics-section {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
           gap: 12px;
           margin-bottom: 25px;
         }
@@ -161,6 +208,8 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
         .metric-card.blue { border-left-color: #3b82f6; }
         .metric-card.green { border-left-color: #10b981; }
         .metric-card.purple { border-left-color: #8b5cf6; }
+        .metric-card.orange { border-left-color: #f97316; }
+        .metric-card.amber { border-left-color: #f59e0b; }
         .metric-value {
           font-size: 24px;
           font-weight: 700;
@@ -292,18 +341,7 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
         </div>
 
         <div class="metrics-section">
-          <div class="metric-card blue">
-            <div class="metric-value">${totalItems}</div>
-            <div class="metric-label">Articles</div>
-          </div>
-          <div class="metric-card green">
-            <div class="metric-value">${totalQty}</div>
-            <div class="metric-label">Quantité Totale</div>
-          </div>
-          <div class="metric-card purple">
-            <div class="metric-value">${totalStock >= 0 ? '+' : ''}${totalStock}</div>
-            <div class="metric-label">Stock Global</div>
-          </div>
+          ${metricsHtml}
         </div>
 
         <table>
