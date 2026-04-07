@@ -1,14 +1,16 @@
+import type { OrderLine } from '@/types/order';
+
 export type SimpleFilters = {
   brandFilter?: Set<string>;
   search?: string;
 };
 
-export function filterByBrand(lines: any[], brandFilter?: Set<string>) {
+export function filterByBrand(lines: OrderLine[], brandFilter?: Set<string>) {
   if (!brandFilter || brandFilter.size === 0) return lines;
   return lines.filter((l) => brandFilter.has(l.brand || ''));
 }
 
-export function applySimpleFilters(lines: any[], filters: SimpleFilters) {
+export function applySimpleFilters(lines: OrderLine[], filters: SimpleFilters) {
   let result = lines;
   if (filters.brandFilter && filters.brandFilter.size > 0) {
     result = filterByBrand(result, filters.brandFilter);

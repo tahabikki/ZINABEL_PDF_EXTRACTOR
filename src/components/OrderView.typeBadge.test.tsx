@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import OrderView from './OrderView';
+import type { ParsedOrder } from '@/types/order';
 
-const mockOrder: any = {
+const mockOrder: ParsedOrder = {
   id: 'o1',
   fileName: 'file.pdf',
   header: {

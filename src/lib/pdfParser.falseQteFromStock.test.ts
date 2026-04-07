@@ -1,4 +1,5 @@
 import { buildLineFromRowItems } from './pdfParser';
+import type { TextItem } from './pdfParser';
 
 interface TI { str: string; x: number; y: number; page: number }
 
@@ -11,7 +12,7 @@ test('does not pick stock value as qte when qte column is empty', () => {
     { str: '10', x: 540, y: 100, page: 1 },
   ];
 
-  const line = buildLineFromRowItems(items as any);
+  const line = buildLineFromRowItems(items as unknown as TextItem[]);
   expect(line).not.toBeNull();
   // qte should remain empty (no digits near qte column)
   expect(line!.emptyCells.qte).toBe(true);
@@ -29,7 +30,7 @@ test('treats dash/en-dash as empty qte', () => {
     { str: '—', x: 400, y: 100, page: 1 }, // dash in qte column
   ];
 
-  const line = buildLineFromRowItems(items as any);
+  const line = buildLineFromRowItems(items as unknown as TextItem[]);
   expect(line).not.toBeNull();
   expect(line!.emptyCells.qte).toBe(true);
   expect(line!.qte).toBe(0);

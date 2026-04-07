@@ -1,4 +1,5 @@
 import { buildLineFromRowItems } from './pdfParser';
+import type { TextItem } from './pdfParser';
 
 interface TI { str: string; x: number; y: number; page: number }
 
@@ -14,7 +15,7 @@ test('buildLineFromRowItems parses qte when token present in qte column', () => 
     { str: '10', x: 540, y: 100, page: 1 },
   ];
 
-  const line = buildLineFromRowItems(items as any);
+  const line = buildLineFromRowItems(items as unknown as TextItem[]);
   expect(line).not.toBeNull();
   expect(line!.qte).toBe(5);
   expect(line!.emptyCells.qte).toBe(false);

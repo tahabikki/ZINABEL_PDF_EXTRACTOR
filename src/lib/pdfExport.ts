@@ -351,10 +351,13 @@ function generateTableHTML(order: ParsedOrder, lines: OrderLine[], tab: TabType,
 }
 
 // Dynamic loader for html2pdf to keep initial bundle small
-async function loadHtml2pdf() {
+type Html2pdfFactory = () => { set: (opts: unknown) => { from: (el: HTMLElement) => { save: () => Promise<void> } } };
+
+async function loadHtml2pdf(): Promise<Html2pdfFactory> {
   // html2pdf may export as default or as module object depending on bundler
   const mod = await import('html2pdf.js');
-  return (mod as any).default || mod;
+  const loader = (mod as { default?: unknown }).default ?? mod;
+  return loader as unknown as Html2pdfFactory;
 }
 
 export async function downloadOrderPDF(

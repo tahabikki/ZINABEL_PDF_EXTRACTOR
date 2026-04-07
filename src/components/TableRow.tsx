@@ -16,6 +16,9 @@ interface TableRowProps {
   onQtePreparedChange: (rowId: string, value: number) => void;
   brandColor: string;
   compact?: boolean;
+  showEmplacement?: boolean;
+  showStock?: boolean;
+  showReliquat?: boolean;
 }
 
 /**
@@ -34,6 +37,9 @@ const TableRow = memo<TableRowProps>(
     onQtePreparedChange,
     brandColor,
     compact,
+    showEmplacement,
+    showStock,
+    showReliquat,
   }) => {
     const { toast } = useToast();
 
@@ -98,14 +104,14 @@ const TableRow = memo<TableRowProps>(
             <span className="text-muted-foreground italic text-xs">—</span>
           )}
         </td>
-        {!compact && (
+        {(typeof showEmplacement === 'boolean' ? showEmplacement : !compact) && (
           <td className={cn('px-3 py-2 text-left border-r border-table-border max-w-xs truncate', line.emptyCells.emplacement && 'bg-violet-100 text-violet-900')}>
             {line.emplacement || (
               <span className="text-muted-foreground italic text-xs">—</span>
             )}
           </td>
         )}
-        {!compact && (
+        {(typeof showStock === 'boolean' ? showStock : !compact) && (
           <td className={cn('px-3 py-2 text-right font-bold', line.emptyCells.stock && 'bg-violet-100 text-violet-900')}>
             {!line.emptyCells.stock ? (
               <span
@@ -132,6 +138,15 @@ const TableRow = memo<TableRowProps>(
             <span className="text-muted-foreground italic text-xs">—</span>
           )}
         </td>
+        {showReliquat && (
+          <td className="px-3 py-2 text-right border-r border-table-border">
+            {typeof line.reliquat === 'number' ? (
+              <span className="font-semibold text-amber-700">{line.reliquat}</span>
+            ) : (
+              <span className="text-muted-foreground italic text-xs">—</span>
+            )}
+          </td>
+        )}
         <td className="px-3 py-2 text-left border-r border-table-border">
           {line.brand ? (
             <span className={cn('inline-block px-2 py-1 rounded text-xs font-medium border', brandColor)}>
@@ -200,7 +215,10 @@ const TableRow = memo<TableRowProps>(
       prevProps.getRowClass === nextProps.getRowClass &&
       prevProps.qtePrepared === nextProps.qtePrepared &&
       prevProps.brandColor === nextProps.brandColor &&
-      prevProps.compact === nextProps.compact
+      prevProps.compact === nextProps.compact &&
+      prevProps.showEmplacement === nextProps.showEmplacement &&
+      prevProps.showStock === nextProps.showStock &&
+      prevProps.showReliquat === nextProps.showReliquat
     );
   }
 );

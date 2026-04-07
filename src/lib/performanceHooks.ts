@@ -45,14 +45,18 @@ export function useThrottle<T>(value: T, delay: number = 100): T {
 /**
  * Stable callback wrapper that prevents re-renders
  */
-export function useStableCallback<T extends (...args: any[]) => any>(callback: T): T {
-  const callbackRef = useRef(callback);
-  
+export function useStableCallback<T extends (...args: unknown[]) => unknown>(callback: T): T {
+  const callbackRef = useRef<T>(callback);
+
   useEffect(() => {
     callbackRef.current = callback;
   }, [callback]);
 
-  return useCallback((...args: any[]) => callbackRef.current(...args), []) as T;
+  // Return a stable wrapper that forwards arguments and return value with proper types
+  return useCallback(((...args: Parameters<T>): ReturnType<T> => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return (callbackRef.current as T)(...args) as ReturnType<T>;
+  }) as T, []);
 }
 
 /**

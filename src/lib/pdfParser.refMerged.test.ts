@@ -1,4 +1,5 @@
 import { buildLineFromRowItems } from './pdfParser';
+import type { TextItem } from './pdfParser';
 
 interface TI { str: string; x: number; y: number; page: number }
 
@@ -14,7 +15,7 @@ test('splits merged reference+designation when both ended in reference column', 
     { str: '12', x: 400, y: 100, page: 1 },
   ];
 
-  const line = buildLineFromRowItems(items as any);
+  const line = buildLineFromRowItems(items as unknown as TextItem[]);
   expect(line).not.toBeNull();
   expect(line!.reference).toBe('930756');
   expect(line!.designation).toEqual(expect.stringContaining('CRAYON'));

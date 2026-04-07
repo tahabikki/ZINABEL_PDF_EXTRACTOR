@@ -251,8 +251,9 @@ const OrderView: React.FC<OrderViewProps> = ({
     <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
       <Collapsible open={isOpen} onOpenChange={handleCollapsibleChange}>
         <CollapsibleTrigger asChild>
-          <button
-            type="button"
+          <div
+            role="button"
+            tabIndex={0}
             className="flex w-full items-center gap-3 px-6 py-4 border-b border-border bg-primary/5 text-left transition-colors hover:bg-primary/10"
             aria-expanded={isOpen}
             aria-label={isOpen ? 'Reduire les sections' : 'Afficher les sections'}
@@ -360,7 +361,7 @@ const OrderView: React.FC<OrderViewProps> = ({
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
-          </button>
+          </div>
         </CollapsibleTrigger>
 
         <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">

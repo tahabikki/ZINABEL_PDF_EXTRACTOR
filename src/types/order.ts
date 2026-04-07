@@ -35,7 +35,7 @@ export interface OrderLine {
   carton_Qte?: number;
   qte_prepared?: number;
   // Flexible metadata for extra fields
-  meta?: Record<string, any>;
+  meta?: Record<string, unknown>;
   emptyCells: {
     codeABarre: boolean;
     reference: boolean;

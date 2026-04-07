@@ -23,16 +23,11 @@ interface OrderAnalyticsProps {
 }
 
 const OrderAnalytics: React.FC<OrderAnalyticsProps> = ({ order }) => {
-  const { lines } = order;
+  // Normalize lines early and call hooks unconditionally to respect rules-of-hooks
+  const lines = Array.isArray(order?.lines) ? order!.lines : [];
 
-  // Guard against undefined lines
-  if (!lines || !Array.isArray(lines) || lines.length === 0) {
-    return (
-      <div className="rounded-lg border border-border bg-card p-8 text-center text-muted-foreground">
-        <p>Aucune donnée disponible pour l'analyse</p>
-      </div>
-    );
-  }
+  const [ruptureSearch, setRuptureSearch] = useState('');
+  const [negativeSearch, setNegativeSearch] = useState('');
 
   const stockZero = lines.filter((l) => (l?.stock ?? 0) === 0);
   const stockNegative = lines.filter((l) => (l?.stock ?? 0) < 0);
@@ -50,9 +45,6 @@ const OrderAnalytics: React.FC<OrderAnalyticsProps> = ({ order }) => {
   const fulfillmentRate = lines.length > 0 ? Math.round((fulfillableItems / lines.length) * 100) : 0;
   const qtyGroupCount = new Set(lines.map((l) => Math.round(l?.qte ?? 0))).size;
 
-  const [ruptureSearch, setRuptureSearch] = useState('');
-  const [negativeSearch, setNegativeSearch] = useState('');
-
   const filteredRupture = useMemo(() => {
     if (!ruptureSearch.trim()) return stockZero;
     const q = ruptureSearch.toLowerCase();
@@ -61,7 +53,7 @@ const OrderAnalytics: React.FC<OrderAnalyticsProps> = ({ order }) => {
         const ref = (l.reference || '').toLowerCase();
         const des = (l.designation || '').toLowerCase();
         return ref.includes(q) || des.includes(q);
-      } catch (e) {
+      } catch (err) {
         return false;
       }
     });
@@ -75,11 +67,20 @@ const OrderAnalytics: React.FC<OrderAnalyticsProps> = ({ order }) => {
         const ref = (l.reference || '').toLowerCase();
         const des = (l.designation || '').toLowerCase();
         return ref.includes(q) || des.includes(q);
-      } catch (e) {
+      } catch (err) {
         return false;
       }
     });
   }, [stockNegative, negativeSearch]);
+
+  // If no lines available, show an empty state (hooks already initialized above)
+  if (lines.length === 0) {
+    return (
+      <div className="rounded-lg border border-border bg-card p-8 text-center text-muted-foreground">
+        <p>Aucune donnée disponible pour l'analyse</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">

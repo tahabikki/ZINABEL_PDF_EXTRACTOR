@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import SafeOrderTable from './SafeOrderTable';
+import type { ParsedOrder, OrderLine } from '@/types/order';
 
-const lines = [
+const lines: OrderLine[] = [
   {
     codeABarre: '111',
     reference: 'REF1',
@@ -15,7 +16,7 @@ const lines = [
   },
 ];
 
-const order: any = {
+const order: ParsedOrder = {
   id: 'o1',
   fileName: 'file.pdf',
   header: {
@@ -37,9 +38,9 @@ const order: any = {
   totalItems: 1,
 };
 
-test('SafeOrderTable hides Emplacement and Stock columns for reliquat PDFs', () => {
+test('SafeOrderTable shows Emplacement and Stock columns for reliquat PDFs when present in data', () => {
   render(<SafeOrderTable lines={lines} order={order} />);
 
-  expect(screen.queryByText('Emplacement')).toBeNull();
-  expect(screen.queryByText('Stock')).toBeNull();
+  expect(screen.getByText('Emplacement')).toBeInTheDocument();
+  expect(screen.getByText('Stock')).toBeInTheDocument();
 });

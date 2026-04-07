@@ -1,4 +1,5 @@
 import { buildLineFromRowItems } from './pdfParser';
+import type { TextItem } from './pdfParser';
 
 interface TI { str: string; x: number; y: number; page: number }
 
@@ -16,9 +17,9 @@ test('merges three-line designation into a single product row', () => {
   // The real extractor will group these into a single row. We simulate grouping by creating
   // rowItems for the main anchor (y~100) and the two continuation rows and ensuring
   // buildLineFromRowItems merges designation parts when called sequentially.
-  const first = buildLineFromRowItems(items.filter((i) => i.y >= 96) as any);
-  const second = buildLineFromRowItems(items.filter((i) => i.y < 96 && i.y >= 84) as any);
-  const third = buildLineFromRowItems(items.filter((i) => i.y < 84) as any);
+  const first = buildLineFromRowItems(items.filter((i) => i.y >= 96) as unknown as TextItem[]);
+  const second = buildLineFromRowItems(items.filter((i) => i.y < 96 && i.y >= 84) as unknown as TextItem[]);
+  const third = buildLineFromRowItems(items.filter((i) => i.y < 84) as unknown as TextItem[]);
 
   // Emulate merging: third and second should be continuations; assert their designation parts exist
   expect(first).not.toBeNull();

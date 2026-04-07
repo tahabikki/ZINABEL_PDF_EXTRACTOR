@@ -10,6 +10,16 @@ type State = {
   info?: string;
 };
 
+function extractMessage(r: unknown): string {
+  if (typeof r === 'string') return r;
+  if (r && typeof (r as { message?: unknown }).message === 'string') return String((r as { message?: unknown }).message);
+  try {
+    return JSON.stringify(r);
+  } catch {
+    return String(r);
+  }
+}
+
 class ErrorBoundary extends React.Component<Props, State> {
   state: State = { hasError: false };
 
@@ -41,7 +51,9 @@ class ErrorBoundary extends React.Component<Props, State> {
         const logs = JSON.parse(localStorage.getItem('appErrorLogs') || '[]') as { message: string; time: string }[];
         logs.push({ message, time: new Date().toISOString() });
         localStorage.setItem('appErrorLogs', JSON.stringify(logs.slice(-50))); // keep last 50
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Failed to append appErrorLogs (window.error)', e);
+      }
       return; // don't show error screen
     }
     
@@ -55,13 +67,15 @@ class ErrorBoundary extends React.Component<Props, State> {
         'lastClientError',
         JSON.stringify({ source: 'window.error', message, info, time: new Date().toISOString() })
       );
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Failed to persist lastClientError (window.error)', e);
+    }
   };
 
   handleRejection = (ev: PromiseRejectionEvent) => {
-    let reason: any = ev.reason;
-    let message = typeof reason === 'string' ? reason : reason?.message || JSON.stringify(reason);
-    const info = reason?.stack || '';
+    let reason: unknown = ev.reason;
+    const message = extractMessage(reason);
+    const info = reason && typeof (reason as { stack?: unknown }).stack === 'string' ? String((reason as { stack?: unknown }).stack) : '';
     
     // Suppress known harmless errors
     if (this.isHarmlessError(String(message))) {
@@ -69,7 +83,9 @@ class ErrorBoundary extends React.Component<Props, State> {
         const logs = JSON.parse(localStorage.getItem('appErrorLogs') || '[]') as { message: string; time: string }[];
         logs.push({ message: String(message), time: new Date().toISOString() });
         localStorage.setItem('appErrorLogs', JSON.stringify(logs.slice(-50)));
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Failed to append appErrorLogs (unhandledrejection)', e);
+      }
       return;
     }
     
@@ -83,12 +99,14 @@ class ErrorBoundary extends React.Component<Props, State> {
         'lastClientError',
         JSON.stringify({ source: 'unhandledrejection', message, info, time: new Date().toISOString() })
       );
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Failed to persist lastClientError (unhandledrejection)', e);
+    }
   };
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     const message = String(error?.message || error);
-    const stack = info?.componentStack || (error as any)?.stack || '';
+    const stack = info?.componentStack || error.stack || '';
     
     // Suppress known harmless errors
     if (this.isHarmlessError(message)) {
@@ -96,7 +114,9 @@ class ErrorBoundary extends React.Component<Props, State> {
         const logs = JSON.parse(localStorage.getItem('appErrorLogs') || '[]') as { message: string; time: string }[];
         logs.push({ message, time: new Date().toISOString() });
         localStorage.setItem('appErrorLogs', JSON.stringify(logs.slice(-50)));
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Failed to append appErrorLogs (componentDidCatch)', e);
+      }
       return; // don't show error screen
     }
     
@@ -106,7 +126,9 @@ class ErrorBoundary extends React.Component<Props, State> {
         'lastClientError',
         JSON.stringify({ source: 'componentDidCatch', message, stack, time: new Date().toISOString() })
       );
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Failed to persist lastClientError (componentDidCatch)', e);
+    }
     // also log to console
     // eslint-disable-next-line no-console
     console.error(error, info);

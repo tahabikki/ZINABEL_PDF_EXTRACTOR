@@ -202,7 +202,24 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
     return /reliquat/i.test(title) || /reliquat/i.test(docType);
   })();
 
-  const colSpanCount = isReliquat ? 10 : 12;
+  // Determine which optional columns should be displayed.
+  const displayEmplacement = !isReliquat || lines.some((l) => (l.emplacement || '').trim().length > 0);
+  const displayStock = !isReliquat || lines.some((l) => !l.emptyCells.stock);
+  const displayReliquat = lines.some((l) => typeof l.reliquat === 'number');
+
+  const colSpanCount = (() => {
+    // base: checkbox, code, reference, designation, qte
+    let c = 5;
+    if (displayEmplacement) c += 1;
+    if (displayStock) c += 1;
+    // TTC
+    c += 1;
+    // Reliquat (optional)
+    if (displayReliquat) c += 1;
+    // brand, carton_Qte, qtePrepared, qteNonValidated
+    c += 4;
+    return c;
+  })();
 
   const updateQtePrepared = (rowId: string, value: number) => {
     setQtePreparedMap((prev) => {
@@ -220,7 +237,9 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
     if (!preserveValidatedAcrossUploads) {
       try {
         localStorage.removeItem('validatedRows');
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Failed to remove validatedRows from localStorage', e);
+      }
       setValidatedRows([]);
       return;
     }
@@ -232,7 +251,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
         if (Array.isArray(arr)) setValidatedRows(arr);
       }
     } catch (e) {
-      // ignore
+      console.warn('Failed to read validatedRows from localStorage', e);
     }
   }, [preserveValidatedAcrossUploads]);
 
@@ -253,7 +272,9 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
         setValidatedRows([]);
         try {
           localStorage.removeItem('validatedRows');
-        } catch (e) {}
+        } catch (e) {
+          console.warn('Failed to remove validatedRows from localStorage after lines change', e);
+        }
       } else if (hasChanged) {
         // Keep only validated ids that exist in new lines
         setValidatedRows((prev) => prev.filter((id) => lines.some((l) => getRowId(l) === id)));
@@ -932,7 +953,14 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
     sortFilter,
   ]);
 
-  const baseForCounts = activeView === 'validated' ? filteredValidated : activeView === 'nonValidated' ? filteredNonValidated : filteredAll;
+  // Base set used for summary counts. Respect `removeValidatedFromMaster` when on principal view.
+  const baseForCounts = activeView === 'validated'
+    ? filteredValidated
+    : activeView === 'nonValidated'
+      ? filteredNonValidated
+      : removeValidatedFromMaster
+        ? filteredNonValidated
+        : filteredAll;
 
   // For quantity options - exclude qty filter so all quantities always available
   const filteredValidatedWithoutQty = useMemo(() => applyFiltersWithoutQty(validatedLines), [
@@ -960,8 +988,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
         ? filteredValidatedWithoutQty
         : activeView === 'nonValidated'
           ? filteredNonValidatedWithoutQty
-          : filteredAllWithoutQtyFilter,
-    [activeView, filteredValidatedWithoutQty, filteredNonValidatedWithoutQty, filteredAllWithoutQtyFilter]
+          : removeValidatedFromMaster
+            ? filteredNonValidatedWithoutQty
+            : filteredAllWithoutQtyFilter,
+    [activeView, removeValidatedFromMaster, filteredValidatedWithoutQty, filteredNonValidatedWithoutQty, filteredAllWithoutQtyFilter]
   );
 
   const qtyGroups = useMemo(() => {
@@ -1092,8 +1122,10 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
         ? filteredValidatedWithoutEmp
         : activeView === 'nonValidated'
           ? filteredNonValidatedWithoutEmp
-          : filteredAllWithoutEmp,
-    [activeView, filteredValidatedWithoutEmp, filteredNonValidatedWithoutEmp, filteredAllWithoutEmp]
+          : removeValidatedFromMaster
+            ? filteredNonValidatedWithoutEmp
+            : filteredAllWithoutEmp,
+    [activeView, removeValidatedFromMaster, filteredValidatedWithoutEmp, filteredNonValidatedWithoutEmp, filteredAllWithoutEmp]
   );
 
   // For section/row/level options - exclude those filters so all always available
@@ -1126,9 +1158,12 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
         ? filteredValidatedWithoutLocationStructure
         : activeView === 'nonValidated'
           ? filteredNonValidatedWithoutLocationStructure
-          : applyFiltersWithoutLocationStructure(lines),
+          : removeValidatedFromMaster
+            ? filteredNonValidatedWithoutLocationStructure
+            : applyFiltersWithoutLocationStructure(lines),
     [
       activeView,
+      removeValidatedFromMaster,
       filteredValidatedWithoutLocationStructure,
       filteredNonValidatedWithoutLocationStructure,
       search,
@@ -1225,7 +1260,14 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
     setSelectedRows(new Set());
   }, [activeView]);
 
-  const visibleRows = activeView === 'principal' ? filteredAll : activeView === 'nonValidated' ? filteredNonValidated : filteredValidated;
+  const visibleRows =
+    activeView === 'principal'
+      ? removeValidatedFromMaster
+        ? filteredNonValidated
+        : filteredAll
+      : activeView === 'nonValidated'
+        ? filteredNonValidated
+        : filteredValidated;
   const visibleRowIds = visibleRows.map((l) => getRowId(l));
   const allVisibleSelected =
     visibleRowIds.length > 0 && visibleRowIds.every((id) => (autoValidateOnCheck ? validatedRows.includes(id) : selectedRows.has(id)));
@@ -1265,42 +1307,50 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
     setRenderedCount(Math.min(200, visibleRows.length));
 
     const CHUNK = 200;
-    let idleId: any = null;
+    let idleId: number | null = null;
 
     const scheduleChunk = () => {
-      const hasRIC = typeof (globalThis as any).requestIdleCallback === 'function';
-      if (hasRIC) {
-        idleId = (globalThis as any).requestIdleCallback(() => {
+      const globalWithRIC = globalThis as unknown as {
+        requestIdleCallback?: (cb: () => void) => number;
+        cancelIdleCallback?: (id: number) => void;
+      };
+      const hasRIC = typeof globalWithRIC.requestIdleCallback === 'function';
+      if (hasRIC && globalWithRIC.requestIdleCallback) {
+        idleId = globalWithRIC.requestIdleCallback(() => {
           try {
             setRenderedCount((prev) => {
               const next = Math.min(visibleRows.length, prev + CHUNK);
               if (next < visibleRows.length) scheduleChunk();
               return next;
             });
-          } catch (e) {
+          } catch (err) {
             // ignore errors during teardown
           }
-        });
+        }) as number;
       } else {
-        idleId = setTimeout(() => {
+        idleId = window.setTimeout(() => {
           try {
             setRenderedCount((prev) => {
               const next = Math.min(visibleRows.length, prev + CHUNK);
               if (next < visibleRows.length) scheduleChunk();
               return next;
             });
-          } catch (e) {
+          } catch (err) {
             // ignore errors during teardown
           }
-        }, 50);
+        }, 50) as unknown as number;
       }
     };
 
     scheduleChunk();
 
     return () => {
-      if (typeof (globalThis as any).cancelIdleCallback === 'function' && idleId) (globalThis as any).cancelIdleCallback(idleId);
-      if (typeof idleId === 'number') clearTimeout(idleId as number);
+      const globalWithRIC = globalThis as unknown as {
+        requestIdleCallback?: (cb: () => void) => number;
+        cancelIdleCallback?: (id: number) => void;
+      };
+      if (globalWithRIC.cancelIdleCallback && idleId !== null) globalWithRIC.cancelIdleCallback(idleId);
+      if (typeof idleId === 'number') clearTimeout(idleId);
     };
   }, [visibleRows]);
 
@@ -1849,7 +1899,7 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
 
             <div className="grid gap-2">
               <div className="flex items-center gap-2">
-                <select value={ttcOp} onChange={(e) => setTtcOp(e.target.value as any)} className="h-8 rounded-md border px-2 text-sm">
+                <select value={ttcOp} onChange={(e) => setTtcOp(e.target.value as 'gt' | 'lt' | 'between')} className="h-8 rounded-md border px-2 text-sm">
                   <option value="gt">Plus que (&gt;)</option>
                   <option value="lt">Moins que (&lt;)</option>
                   <option value="between">Entre</option>
@@ -2268,13 +2318,16 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Référence</th>
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Désignation</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qté</th>
-                  {!isReliquat && (
+                  {displayEmplacement && (
                     <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Emplacement</th>
                   )}
-                  {!isReliquat && (
+                  {displayStock && (
                     <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Stock</th>
                   )}
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">TTC</th>
+                  {displayReliquat && (
+                    <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Reliquat</th>
+                  )}
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Marque</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Carton Qté</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qte Validée</th>
@@ -2302,6 +2355,9 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady })
                       onQtePreparedChange={updateQtePrepared}
                       brandColor={brandColor}
                       compact={isReliquat}
+                      showEmplacement={displayEmplacement}
+                      showStock={displayStock}
+                      showReliquat={displayReliquat}
                     />
                   );
                 })}

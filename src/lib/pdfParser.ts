@@ -4,7 +4,7 @@ import { enrichLinesWithCartonData } from '@/lib/cartonLookup';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
-interface TextItem {
+export interface TextItem {
   str: string;
   x: number;
   y: number;
@@ -445,7 +445,7 @@ export function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
   const colCenters = colsForCenters.map((c) => ({ name: c.name, center: Math.round((c.minX + c.maxX) / 2), width: c.maxX - c.minX }));
 
   // Group tokens by column using strict bounds first, then nearest-center fallback
-  const tokensByCol: Record<string, TextItem[]> = {} as any;
+  const tokensByCol: Record<string, TextItem[]> = {} as Record<string, TextItem[]>;
   for (const c of colCenters) tokensByCol[c.name] = [];
 
   for (const it of rowItems) {

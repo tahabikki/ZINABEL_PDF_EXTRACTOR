@@ -19,7 +19,8 @@ export async function loadCartonData(): Promise<Map<string, CartonData>> {
 
   try {
     // Try multiple candidate paths because dev server and production may serve static assets differently.
-    const base = (import.meta && (import.meta as any).env && (import.meta as any).env.BASE_URL) || '/';
+    const metaEnv = (import.meta as unknown as { env?: { BASE_URL?: string } })?.env;
+    const base = (metaEnv && metaEnv.BASE_URL) ? metaEnv.BASE_URL : '/';
     const candidates = [
       `${base}data/carton_Qte.json`,
       `${base}carton_Qte.json`,

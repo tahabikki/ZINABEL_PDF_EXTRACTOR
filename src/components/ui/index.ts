@@ -1,0 +1,20 @@
+// Barrel for UI primitives
+export { default as ErrorBoundary } from './error-boundary';
+export * from './button';
+export * from './input';
+export * from './toast';
+export * from './toaster';
+export * from './tabs';
+export * from './collapsible';
+export * from './dialog';
+export * from './accordion';
+export * from './checkbox';
+export * from './label';
+export * from './select';
+export * from './table';
+export * from './card';
+export * from './popover';
+export * from './dropdown-menu';
+export * from './tooltip';
+export * from './avatar';
+export * from './badge';

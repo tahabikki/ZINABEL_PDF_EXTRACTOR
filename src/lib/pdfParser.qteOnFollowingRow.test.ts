@@ -1,5 +1,6 @@
 import { buildLineFromRowItems, parsePDF } from './pdfParser';
 import { buildLineFromRowItems as buildLine } from './pdfParser';
+import type { TextItem } from './pdfParser';
 
 interface TI { str: string; x: number; y: number; page: number }
 
@@ -22,8 +23,8 @@ test('assigns qte from a following anchor row to previous product row', () => {
   const firstRowItems = items.filter((it) => it.y >= 98 && it.y <= 125);
   const secondRowItems = items.filter((it) => it.y <= 80 && it.y > 30);
 
-  const first = buildLine(firstRowItems as any);
-  const second = buildLine(secondRowItems as any);
+  const first = buildLine(firstRowItems as unknown as TextItem[]);
+  const second = buildLine(secondRowItems as unknown as TextItem[]);
 
   expect(first).not.toBeNull();
   expect(second).not.toBeNull();
