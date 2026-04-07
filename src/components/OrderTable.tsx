@@ -147,7 +147,7 @@ function createSafeSetState<T>(setter: (value: T | ((prev: T) => T)) => void, na
   };
 }
 
-const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
+const OrderTable: React.FC<OrderTableProps> = ({ lines, order, onFiltersReady }) => {
   const [rawSearch, setRawSearch] = useState('');
   const search = useDebounce(rawSearch, 250); // debounce search for better performance
   const [stockFilter, setStockFilter] = useState<StockFilter>('all');
@@ -192,6 +192,17 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
   const safeSetSortFilter = createSafeSetState(setSortFilter, 'sortFilter');
   const [activeView, setActiveView] = useState<'principal' | 'nonValidated' | 'validated'>('principal');
   const [preserveValidatedAcrossUploads, setPreserveValidatedAcrossUploads] = useState<boolean>(false);
+
+  // Determine if this upload is a "reliquat" PDF (some PDFs include a "Reliquat" column
+  // and do not include emplacement/stock columns). We use header info when available
+  // and fall back to scanning the title string for robustness.
+  const isReliquat = (() => {
+    const title = (order?.header?.title || '').toString();
+    const docType = (order?.header?.docType || '').toString();
+    return /reliquat/i.test(title) || /reliquat/i.test(docType);
+  })();
+
+  const colSpanCount = isReliquat ? 10 : 12;
 
   const updateQtePrepared = (rowId: string, value: number) => {
     setQtePreparedMap((prev) => {
@@ -1257,21 +1268,30 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
     let idleId: any = null;
 
     const scheduleChunk = () => {
-      if ((window as any).requestIdleCallback) {
-        idleId = (window as any).requestIdleCallback(() => {
-          setRenderedCount((prev) => {
-            const next = Math.min(visibleRows.length, prev + CHUNK);
-            if (next < visibleRows.length) scheduleChunk();
-            return next;
-          });
+      const hasRIC = typeof (globalThis as any).requestIdleCallback === 'function';
+      if (hasRIC) {
+        idleId = (globalThis as any).requestIdleCallback(() => {
+          try {
+            setRenderedCount((prev) => {
+              const next = Math.min(visibleRows.length, prev + CHUNK);
+              if (next < visibleRows.length) scheduleChunk();
+              return next;
+            });
+          } catch (e) {
+            // ignore errors during teardown
+          }
         });
       } else {
-        idleId = window.setTimeout(() => {
-          setRenderedCount((prev) => {
-            const next = Math.min(visibleRows.length, prev + CHUNK);
-            if (next < visibleRows.length) scheduleChunk();
-            return next;
-          });
+        idleId = setTimeout(() => {
+          try {
+            setRenderedCount((prev) => {
+              const next = Math.min(visibleRows.length, prev + CHUNK);
+              if (next < visibleRows.length) scheduleChunk();
+              return next;
+            });
+          } catch (e) {
+            // ignore errors during teardown
+          }
         }, 50);
       }
     };
@@ -1279,8 +1299,8 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
     scheduleChunk();
 
     return () => {
-      if ((window as any).cancelIdleCallback && idleId) (window as any).cancelIdleCallback(idleId);
-      if (typeof idleId === 'number') clearTimeout(idleId);
+      if (typeof (globalThis as any).cancelIdleCallback === 'function' && idleId) (globalThis as any).cancelIdleCallback(idleId);
+      if (typeof idleId === 'number') clearTimeout(idleId as number);
     };
   }, [visibleRows]);
 
@@ -2248,8 +2268,12 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Référence</th>
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Désignation</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Qté</th>
-                  <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Emplacement</th>
-                  <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Stock</th>
+                  {!isReliquat && (
+                    <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Emplacement</th>
+                  )}
+                  {!isReliquat && (
+                    <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Stock</th>
+                  )}
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">TTC</th>
                   <th className="px-3 py-2.5 text-left font-semibold text-foreground border-b border-table-border">Marque</th>
                   <th className="px-3 py-2.5 text-right font-semibold text-foreground border-b border-table-border">Carton Qté</th>
@@ -2277,20 +2301,21 @@ const OrderTable: React.FC<OrderTableProps> = ({ lines, onFiltersReady }) => {
                       qtePrepared={qtePrepared}
                       onQtePreparedChange={updateQtePrepared}
                       brandColor={brandColor}
+                      compact={isReliquat}
                     />
                   );
                 })}
 
                 {visible.length === 0 && (
                   <tr>
-                    <td colSpan={12} className="px-3 py-8 text-center text-muted-foreground">
+                    <td colSpan={colSpanCount} className="px-3 py-8 text-center text-muted-foreground">
                       Aucun article trouvé
                     </td>
                   </tr>
                 )}
                 {renderedCount < visibleRows.length && (
                   <tr>
-                    <td colSpan={12} className="px-3 py-4 text-center text-muted-foreground">
+                    <td colSpan={colSpanCount} className="px-3 py-4 text-center text-muted-foreground">
                       Chargement progressif des lignes... ({renderedCount}/{visibleRows.length})
                     </td>
                   </tr>

@@ -35,6 +35,95 @@ const OrderView: React.FC<OrderViewProps> = ({
     order?.header?.noPiece ||
     (order?.fileName || 'Commande').replace(/\.pdf$/i, '');
 
+  // Use the PDF's top title when available; otherwise fallback to detected type labels
+  const rawDocType = (order?.header?.docType || '').toString().toLowerCase().trim();
+  const rawHeaderTitle = (order?.header?.title || '').toString().trim();
+
+  // Detect when the parser returned a columns header row (e.g. "Référence Désignation Emplacement Stock")
+  // and avoid using it as the document title.
+  const looksLikeColumnHeader = (() => {
+    if (!rawHeaderTitle) return false;
+    const t = rawHeaderTitle.toLowerCase();
+    // If it contains both reference and designation, it's very likely a columns header
+    if (t.includes('référence') || t.includes('reference')) {
+      if (t.includes('désignation') || t.includes('designation')) return true;
+    }
+    // also treat headers that contain emplacement+stock as columns header
+    if (t.includes('emplacement') && t.includes('stock')) return true;
+    return false;
+  })();
+
+  const baseTitleMap: Record<string, string> = {
+    preparation: 'Bon de préparation',
+    commande: 'Bon de préparation',
+    valorise: 'Bon valorisé',
+    valorisé: 'Bon valorisé',
+    reliquat: 'Bon de reliquat',
+    transfert: 'Bon de transfert',
+    transfer: 'Bon de transfert',
+  };
+
+  const typeLabelMap: Record<string, string> = {
+    preparation: 'Commande',
+    commande: 'Commande',
+    valorise: 'Valorisé',
+    valorisé: 'Valorisé',
+    reliquat: 'Reliquat',
+    transfert: 'Transfert',
+    transfer: 'Transfert',
+  };
+
+  const capitalize = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+
+  const detectedFromDocType = rawDocType || '';
+  let detectedFromTitle = '';
+  if (!detectedFromDocType && rawHeaderTitle) {
+    const t = rawHeaderTitle.toLowerCase();
+    if (t.includes('reliqu')) detectedFromTitle = 'reliquat';
+    else if (t.includes('transf')) detectedFromTitle = 'transfert';
+    else if (t.includes('valor')) detectedFromTitle = 'valorise';
+    else if (t.includes('prepar')) detectedFromTitle = 'preparation';
+    else if (t.includes('commande')) detectedFromTitle = 'commande';
+  }
+
+  // final detected type (prefer explicit docType, otherwise heuristics from title)
+  const detected = detectedFromDocType || detectedFromTitle;
+  // Compute doc kind for color/badge: prefer detected type, fallback to title heuristic or 'commande'
+  const docKindForBadge = detected || (rawHeaderTitle && /reliqu/i.test(rawHeaderTitle) ? 'reliquat' : 'commande');
+
+  const typeColorClasses: Record<string, string> = {
+    preparation: 'bg-sky-100 text-sky-800 border-sky-200',
+    commande: 'bg-blue-100 text-blue-800 border-blue-200',
+    valorise: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+    'valorisé': 'bg-indigo-100 text-indigo-800 border-indigo-200',
+    reliquat: 'bg-rose-100 text-rose-800 border-rose-200',
+    transfert: 'bg-amber-100 text-amber-800 border-amber-200',
+    transfer: 'bg-amber-100 text-amber-800 border-amber-200',
+  };
+
+  // Compute the display title. Avoid using a columns header as the document title.
+  let displayTitle = '';
+  if (rawHeaderTitle && !looksLikeColumnHeader) {
+    displayTitle = rawHeaderTitle;
+    // if it's a reliquat and a sourceOrderNumber is present but not shown, append it
+    const isReliquat = /reliqu/i.test(rawHeaderTitle);
+    const sourceNum = order?.header?.sourceOrderNumber;
+    if (isReliquat && sourceNum && !rawHeaderTitle.includes(sourceNum)) {
+      displayTitle = `${rawHeaderTitle} N° ${sourceNum}`;
+    }
+  } else {
+    const detected = detectedFromDocType || detectedFromTitle;
+    // Prefer a constructed reliquat title that includes the original PL number when available
+    if (detected === 'reliquat') {
+      const src = order?.header?.sourceOrderNumber;
+      displayTitle = src ? `Reliquat de commande N° ${src}` : `${baseTitleMap['reliquat']} (${typeLabelMap['reliquat']})`;
+    } else {
+      displayTitle = detected
+        ? `${baseTitleMap[detected] ?? 'Bon de préparation'} (${typeLabelMap[detected] ?? capitalize(detected)})`
+        : 'Bon de préparation (Commande)';
+    }
+  }
+
   const handleCollapsibleChange = (open: boolean) => {
     try {
       setIsOpen(open);
@@ -42,6 +131,9 @@ const OrderView: React.FC<OrderViewProps> = ({
       console.warn('Error changing collapsible state:', err);
     }
   };
+
+  // Build colored badge classes for the detected doc kind
+  const docBadgeClass = `${typeColorClasses[docKindForBadge] ?? 'bg-primary/10 text-primary border-primary/20'} inline-flex items-center rounded-md px-2 py-0.5 text-xs font-semibold`;
 
   const handleDelete = () => {
     if (onDelete) {
@@ -168,7 +260,10 @@ const OrderView: React.FC<OrderViewProps> = ({
             <FileText className="h-5 w-5 text-primary" />
             <div className="flex-1 min-w-0">
               <h2 className="text-lg font-bold text-foreground flex flex-wrap items-center gap-2">
-                <span>Bon de preparation (Commande)</span>
+                <span className="inline-flex items-center gap-2">
+                  <span className={cn(docBadgeClass, 'mr-2')}>{typeLabelMap[docKindForBadge] ?? capitalize(docKindForBadge)}</span>
+                  <span>{displayTitle}</span>
+                </span>
                 <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary truncate">
                   {orderName || 'Commande'}
                 </span>

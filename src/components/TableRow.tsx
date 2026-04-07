@@ -15,6 +15,7 @@ interface TableRowProps {
   qtePrepared: number;
   onQtePreparedChange: (rowId: string, value: number) => void;
   brandColor: string;
+  compact?: boolean;
 }
 
 /**
@@ -32,6 +33,7 @@ const TableRow = memo<TableRowProps>(
     qtePrepared,
     onQtePreparedChange,
     brandColor,
+    compact,
   }) => {
     const { toast } = useToast();
 
@@ -96,29 +98,33 @@ const TableRow = memo<TableRowProps>(
             <span className="text-muted-foreground italic text-xs">—</span>
           )}
         </td>
-        <td className={cn('px-3 py-2 text-left border-r border-table-border max-w-xs truncate', line.emptyCells.emplacement && 'bg-violet-100 text-violet-900')}>
-          {line.emplacement || (
-            <span className="text-muted-foreground italic text-xs">—</span>
-          )}
-        </td>
-        <td className={cn('px-3 py-2 text-right font-bold', line.emptyCells.stock && 'bg-violet-100 text-violet-900')}>
-          {!line.emptyCells.stock ? (
-            <span
-              className={cn(
-                'inline-block px-2 py-0.5 rounded text-xs font-bold transition-colors duration-150',
-                line.stock > 0
-                  ? 'bg-emerald-100 text-emerald-700'
-                  : line.stock === 0
-                    ? 'bg-amber-100 text-amber-700'
-                    : 'bg-rose-100 text-rose-700'
-              )}
-            >
-              {line.stock}
-            </span>
-          ) : (
-            <span className="text-muted-foreground italic text-xs">—</span>
-          )}
-        </td>
+        {!compact && (
+          <td className={cn('px-3 py-2 text-left border-r border-table-border max-w-xs truncate', line.emptyCells.emplacement && 'bg-violet-100 text-violet-900')}>
+            {line.emplacement || (
+              <span className="text-muted-foreground italic text-xs">—</span>
+            )}
+          </td>
+        )}
+        {!compact && (
+          <td className={cn('px-3 py-2 text-right font-bold', line.emptyCells.stock && 'bg-violet-100 text-violet-900')}>
+            {!line.emptyCells.stock ? (
+              <span
+                className={cn(
+                  'inline-block px-2 py-0.5 rounded text-xs font-bold transition-colors duration-150',
+                  line.stock > 0
+                    ? 'bg-emerald-100 text-emerald-700'
+                    : line.stock === 0
+                      ? 'bg-amber-100 text-amber-700'
+                      : 'bg-rose-100 text-rose-700'
+                )}
+              >
+                {line.stock}
+              </span>
+            ) : (
+              <span className="text-muted-foreground italic text-xs">—</span>
+            )}
+          </td>
+        )}
         <td className="px-3 py-2 text-right border-r border-table-border">
           {typeof line.ttc === 'number' ? (
             <span className="font-semibold">{line.ttc.toFixed(2)}</span>
@@ -184,7 +190,7 @@ const TableRow = memo<TableRowProps>(
       </tr>
     );
   },
-  (prevProps, nextProps) => {
+    (prevProps, nextProps) => {
     // Custom comparison for optimal memoization
     return (
       prevProps.id === nextProps.id &&
@@ -193,7 +199,8 @@ const TableRow = memo<TableRowProps>(
       prevProps.line === nextProps.line &&
       prevProps.getRowClass === nextProps.getRowClass &&
       prevProps.qtePrepared === nextProps.qtePrepared &&
-      prevProps.brandColor === nextProps.brandColor
+      prevProps.brandColor === nextProps.brandColor &&
+      prevProps.compact === nextProps.compact
     );
   }
 );

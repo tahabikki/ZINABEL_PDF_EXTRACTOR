@@ -11,6 +11,13 @@ interface TextItem {
   page: number;
 }
 
+function cleanText(s: string): string {
+  if (!s) return s;
+  // Normalize unicode, remove control chars, collapse whitespace, replace NBSP
+  const norm = s.normalize ? s.normalize('NFKC') : s;
+  return norm.replace(/\u00A0/g, ' ').replace(/[\u0000-\u001f\u007f-\u009f]/g, '').replace(/\s+/g, ' ').trim();
+}
+
 // Default column X boundaries (used as a fallback)
 const DEFAULT_COLUMNS = [
   { name: 'codeABarre', minX: 30, maxX: 140 },
@@ -76,9 +83,11 @@ export async function parsePDF(file: File): Promise<ParsedOrder> {
     const items = content.items as Array<{ str: string; transform: number[] }>;
 
     for (const item of items) {
-      if (!item.str.trim()) continue;
+      const raw = item.str || '';
+      const txt = cleanText(raw);
+      if (!txt) continue;
       allItems.push({
-        str: item.str.trim(),
+        str: txt,
         x: Math.round(item.transform[4]),
         y: Math.round(item.transform[5]),
         page: i,
@@ -100,11 +109,39 @@ export async function parsePDF(file: File): Promise<ParsedOrder> {
 
   const headerItems = page1Items.filter((i) => i.y > detailsY);
 
-  // Detect title from the top-most text items on page 1
+  // Detect title: prefer an explicit title row (e.g. "Bon de préparation...", "Reliquat...")
+  // Fallback to joining the first few top items when no explicit title is found.
   const detectTitle = (items: TextItem[]) => {
+    if (!items || items.length === 0) return '';
+
+    const Y_TOL = 6;
+    const rows = new Map<number, TextItem[]>();
+    for (const it of items) {
+      const y = Math.round(it.y / Y_TOL) * Y_TOL;
+      if (!rows.has(y)) rows.set(y, []);
+      rows.get(y)!.push(it);
+    }
+
+    const rowEntries = Array.from(rows.entries())
+      .map(([y, rowItems]) => ({ y, text: rowItems.sort((a, b) => a.x - b.x).map((r) => r.str).join(' ').trim() }))
+      .sort((a, b) => a.y - b.y);
+
+    // Known title patterns (look for these first)
+    const titlePatterns = [/bon\s+de\s+prépar/i, /bon\s+de\s+préparation/i, /reliquat/i, /bon\s+de\s+transf/i, /transf/i, /valoris?/i];
+
+    for (const r of rowEntries) {
+      const s = r.text;
+      if (!s) continue;
+      for (const p of titlePatterns) {
+        if (p.test(s)) return s;
+      }
+    }
+
+    // If no explicit title row found, fall back to joining the top-most items (previous behavior)
     const top = [...items].sort((a, b) => a.y - b.y).slice(0, 6);
     return top.map((t) => t.str).join(' ').trim();
   };
+    
 
   const titleText = detectTitle(page1Items);
   let detectedDocType = 'preparation';
@@ -265,10 +302,16 @@ function extractTableLines(items: TextItem[]): OrderLine[] {
       return /^\d{13}$/.test(item.str.replace(/\s/g, ''));
     }
     if (col === 'reference') {
-      return !isBlank(item.str);
+      // treat reference anchors conservatively: single token, reasonably short, contains alnum
+      const s = item.str.trim();
+      if (s.includes(' ')) return false;
+      if (s.length > 40) return false;
+      if (!/[A-Za-z0-9]/.test(s)) return false;
+      return true;
     }
     if (col === 'stock') {
-      return /[\d]/.test(item.str);
+      // only anchor stock if purely numeric (no letters)
+      return /^[\d]+([.,]\d+)?$/.test(item.str.replace(/\s/g, ''));
     }
     return false;
   });
@@ -285,7 +328,7 @@ function extractTableLines(items: TextItem[]): OrderLine[] {
     }
   }
 
-  const rows: Array<{ y: number; line: OrderLine }> = [];
+  const rows: Array<{ y: number; minY: number; maxY: number; centerX: number; rowItems: TextItem[]; line: OrderLine }> = [];
 
   for (let i = 0; i < anchorYs.length; i++) {
     const anchorY = anchorYs[i];
@@ -295,73 +338,261 @@ function extractTableLines(items: TextItem[]): OrderLine[] {
     const yBottom = (anchorY + yBelow) / 2;
 
     const rowItems = items.filter((item) => item.y <= yTop && item.y > yBottom);
+    if (rowItems.length === 0) continue;
     const line = buildLineFromRowItems(rowItems);
 
     if (line && isLikelyDataLine(line)) {
-      rows.push({ y: anchorY, line });
+      const minY = Math.min(...rowItems.map((r) => r.y));
+      const maxY = Math.max(...rowItems.map((r) => r.y));
+      // compute a representative center X using tokens likely belonging to designation
+      const desCandidates = rowItems.filter((it) => {
+        const col = assignColumn(it.x);
+        return col === 'designation' || col === null || (col !== 'codeABarre' && col !== 'qte' && col !== 'stock' && col !== 'ttc' && col !== 'reliquat');
+      });
+      const centerX = desCandidates.length > 0 ? Math.round(desCandidates.reduce((s, r) => s + r.x, 0) / desCandidates.length) : Math.round(rowItems.reduce((s, r) => s + r.x, 0) / rowItems.length);
+      rows.push({ y: anchorY, minY, maxY, centerX, rowItems, line });
     }
   }
 
   rows.sort((a, b) => b.y - a.y);
-  return rows.map((r) => r.line);
+
+  // Merge continuation rows (multi-line designations) into the previous product row.
+  // A continuation row is typically: no code, no reference, no qte, but has designation text
+  // and is vertically close to the previous row.
+  const merged: Array<{ y: number; minY: number; maxY: number; centerX: number; rowItems: TextItem[]; line: OrderLine }> = [];
+  const Y_CONTINUATION_GAP = 30; // allow slightly larger gaps for multi-line descriptions
+  const X_CENTER_TOL = 60;
+  for (const r of rows) {
+    if (merged.length > 0) {
+      const prev = merged[merged.length - 1];
+      const prevLine = prev.line;
+      const line = r.line;
+      const verticalGap = r.minY - prev.maxY; // positive if r is below prev
+      const centerDiff = Math.abs(prev.centerX - r.centerX);
+
+      const isContinuation = isBlank(line.codeABarre) && isBlank(line.reference) && (line.emptyCells.qte || line.qte === 0) && !isBlank(line.designation) && verticalGap <= Y_CONTINUATION_GAP && centerDiff <= X_CENTER_TOL;
+      const isQteOnlyForPrev = isBlank(line.codeABarre) && isBlank(line.reference) && !line.emptyCells.qte && (prevLine.emptyCells.qte || prevLine.qte === 0) && verticalGap <= 60 && centerDiff <= 80;
+
+      // Fallback: if the current row contains mostly designation-like tokens and lacks qte/code,
+      // consider it a continuation even if centerDiff is larger (handles multi-line with different X offsets)
+      const rowItems = r.rowItems || [];
+      const codeRefCount = rowItems.filter((it) => {
+        const c = assignColumn(it.x);
+        return c === 'codeABarre' || c === 'reference';
+      }).length;
+      const qteTokenCount = rowItems.filter((it) => /\d/.test(it.str) && !/^\d{11,}$/.test(it.str) && assignColumn(it.x) !== 'stock').length;
+      const desLikeCount = rowItems.filter((it) => {
+        const c = assignColumn(it.x);
+        return c === 'designation' || c === null || (c !== 'codeABarre' && c !== 'qte' && c !== 'stock' && c !== 'ttc' && c !== 'reliquat');
+      }).length;
+      const fallbackContinuation = codeRefCount <= 1 && qteTokenCount === 0 && desLikeCount >= 1 && verticalGap <= 80;
+
+      if (isContinuation || fallbackContinuation) {
+        // handle hyphenation at line break
+        if (prev.line.designation && prev.line.designation.endsWith('-')) {
+          prev.line.designation = prev.line.designation.slice(0, -1) + line.designation;
+        } else {
+          prev.line.designation = (prev.line.designation + ' ' + line.designation).trim();
+        }
+        prev.line.emptyCells.designation = isBlank(prev.line.designation);
+        prev.line.hasEmptyCell = Object.values(prev.line.emptyCells).some(Boolean);
+        // expand prev span and recompute centerX conservatively
+        prev.maxY = Math.max(prev.maxY, r.maxY);
+        prev.minY = Math.min(prev.minY, r.minY);
+        prev.centerX = Math.round((prev.centerX + r.centerX) / 2);
+        continue; // skip adding this as a separate row
+      }
+
+      if (isQteOnlyForPrev) {
+        // Move quantitative fields into previous line when the current row looks like a numeric-only continuation
+        prev.line.qte = line.qte;
+        prev.line.emptyCells.qte = false;
+        // move stock if previous has none
+        if (prev.line.emptyCells.stock && !line.emptyCells.stock && line.stock) {
+          prev.line.stock = line.stock;
+          prev.line.emptyCells.stock = false;
+        }
+        // move ttc/reliquat if present
+        if (typeof line.ttc === 'number' && !prev.line.ttc) prev.line.ttc = line.ttc;
+        if (typeof line.reliquat === 'number' && !prev.line.reliquat) prev.line.reliquat = line.reliquat;
+        // merge designation if current has any
+        if (!isBlank(line.designation)) {
+          if (prev.line.designation && prev.line.designation.endsWith('-')) {
+            prev.line.designation = prev.line.designation.slice(0, -1) + line.designation;
+          } else {
+            prev.line.designation = (prev.line.designation + ' ' + line.designation).trim();
+          }
+          prev.line.emptyCells.designation = isBlank(prev.line.designation);
+        }
+        prev.line.hasEmptyCell = Object.values(prev.line.emptyCells).some(Boolean);
+        prev.maxY = Math.max(prev.maxY, r.maxY);
+        prev.minY = Math.min(prev.minY, r.minY);
+        prev.centerX = Math.round((prev.centerX + r.centerX) / 2);
+        continue; // skip adding this numeric-only row
+      }
+    }
+    merged.push({ y: r.y, minY: r.minY, maxY: r.maxY, centerX: r.centerX, line: r.line });
+  }
+
+  return merged.map((r) => r.line);
 }
 
-function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
+export function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
   if (rowItems.length === 0) return null;
 
-  const codeRaw = rowItems
-    .filter((it) => assignColumn(it.x) === 'codeABarre')
-    .sort((a, b) => a.x - b.x)
-    .map((i) => i.str)
-    .join('');
+  // Use active columns when available, otherwise fall back to defaults
+  const colsForCenters = (activeColumns && activeColumns.length) ? activeColumns : DEFAULT_COLUMNS;
+  const colCenters = colsForCenters.map((c) => ({ name: c.name, center: Math.round((c.minX + c.maxX) / 2), width: c.maxX - c.minX }));
 
-  const referenceRaw = rowItems
-    .filter((it) => assignColumn(it.x) === 'reference')
-    .sort((a, b) => a.x - b.x)
-    .map((i) => i.str)
-    .join('');
+  // Group tokens by column using strict bounds first, then nearest-center fallback
+  const tokensByCol: Record<string, TextItem[]> = {} as any;
+  for (const c of colCenters) tokensByCol[c.name] = [];
 
-  const designationRaw = rowItems
-    .filter((it) => assignColumn(it.x) === 'designation')
-    .sort((a, b) => b.y - a.y)
-    .map((i) => i.str)
-    .join(' ');
+  for (const it of rowItems) {
+    const colName = assignColumn(it.x);
+    if (colName && tokensByCol[colName]) {
+      tokensByCol[colName].push(it);
+    } else {
+      // nearest center
+      let best: { name: string; center: number; width: number } | null = null;
+      let bestDist = Infinity;
+      for (const c of colCenters) {
+        const d = Math.abs(it.x - c.center);
+        if (d < bestDist) {
+          bestDist = d;
+          best = c;
+        }
+      }
+      if (best) {
+        tokensByCol[best.name] = tokensByCol[best.name] || [];
+        tokensByCol[best.name].push(it);
+      }
+    }
+  }
 
-  const qteRaw = rowItems
-    .filter((it) => assignColumn(it.x) === 'qte')
-    .sort((a, b) => a.x - b.x)
-    .map((i) => i.str)
-    .join('');
+  const codeRaw = (tokensByCol['codeABarre'] || []).sort((a, b) => a.x - b.x).map((i) => i.str).join('');
+  let referenceRaw = (tokensByCol['reference'] || []).sort((a, b) => a.x - b.x).map((i) => i.str).join(' ');
+  // Preserve top-to-bottom ordering for multi-line designation
+  const designationRaw = (tokensByCol['designation'] || []).sort((a, b) => a.y - b.y).map((i) => i.str).join(' ');
+  const qteRaw = (tokensByCol['qte'] || []).sort((a, b) => a.x - b.x).map((i) => i.str).join('');
+  const emplacementRaw = (tokensByCol['emplacement'] || []).sort((a, b) => a.x - b.x).map((i) => i.str).join(' ');
+  const stockRaw = (tokensByCol['stock'] || []).sort((a, b) => a.x - b.x).map((i) => i.str).join(' ');
+  const ttcRaw = (tokensByCol['ttc'] || []).sort((a, b) => a.x - b.x).map((i) => i.str).join('');
+  const reliquatRaw = (tokensByCol['reliquat'] || []).sort((a, b) => a.x - b.x).map((i) => i.str).join(' ');
 
-  const emplacementRaw = rowItems
-    .filter((it) => assignColumn(it.x) === 'emplacement')
-    .sort((a, b) => a.x - b.x)
-    .map((i) => i.str)
-    .join('');
-
-  const stockRaw = rowItems
-    .filter((it) => assignColumn(it.x) === 'stock')
-    .sort((a, b) => a.x - b.x)
-    .map((i) => i.str)
-    .join('');
-
-  const ttcRaw = rowItems
-    .filter((it) => assignColumn(it.x) === 'ttc')
-    .sort((a, b) => a.x - b.x)
-    .map((i) => i.str)
-    .join('');
-
-  const reliquatRaw = rowItems
-    .filter((it) => assignColumn(it.x) === 'reliquat')
-    .sort((a, b) => a.x - b.x)
-    .map((i) => i.str)
-    .join('');
+  let finalQteRaw = qteRaw;
+  if (isBlank(finalQteRaw)) {
+    try {
+      const qCol = colCenters.find((c) => c.name === 'qte') || colsForCenters.find((c) => c.name === 'qte');
+      if (qCol) {
+        const qCenter = qCol.center;
+        const candidates = rowItems
+          .filter((it) => /\d/.test(it.str) && !/^\d{11,}$/.test(it.str))
+          // exclude tokens clearly inside stock/ttc/reliquat columns
+          .filter((it) => {
+            const assigned = assignColumn(it.x);
+            return assigned !== 'stock' && assigned !== 'ttc' && assigned !== 'reliquat';
+          })
+          .map((it) => ({ it, dist: Math.abs(it.x - qCenter) }))
+          .sort((a, b) => a.dist - b.dist);
+        if (candidates.length > 0) {
+          // accept candidate only if it's reasonably close to the qte column center
+          const maxAccept = Math.max(60, Math.round((qCol.width || 40) / 2) + 20);
+          if (candidates[0].dist <= maxAccept) finalQteRaw = candidates[0].it.str;
+        }
+      } else {
+        // without a q-column definition, avoid picking arbitrary numeric tokens (too risky)
+      }
+    } catch (e) {
+      // ignore fallback errors
+    }
+  }
 
   let codeABarre = codeRaw.replace(/\s/g, '').trim();
   let reference = referenceRaw.trim();
-  const designation = designationRaw.trim();
+  let designation = designationRaw.trim();
+
+  // Heuristic: if `reference` is empty but the first token of `designation`
+  // looks like a reference (short numeric or alnum code) move it to `reference`.
+  if (!reference) {
+    const desTokens = (tokensByCol['designation'] || []).slice().sort((a, b) => a.x - b.x);
+    if (desTokens.length > 0) {
+      const firstTokRaw = desTokens[0].str.replace(/\s+/g, '').trim();
+      const isNumRef = /^[0-9]{3,12}$/.test(firstTokRaw);
+      const isAlphaNumRef = /^[A-Z0-9\-_.]{2,15}$/.test(firstTokRaw);
+      const restHasAlpha = desTokens.slice(1).some((t) => /[A-Za-zÀ-ÖØ-öø-ÿ]/.test(t.str));
+      if ((isNumRef || isAlphaNumRef) && restHasAlpha) {
+        reference = firstTokRaw;
+        // remove first token from designation tokens and rebuild designation
+        desTokens.shift();
+        designation = desTokens.map((i) => i.str).join(' ').trim();
+      }
+    }
+  }
+
+  // Additional heuristic: sometimes tokens that belong to `designation` are
+  // assigned to the `reference` column due to tight column boundaries. If
+  // `designation` may be empty when tokens belonging to it were assigned to
+  // the `reference` column due to tight column boundaries. If that is the
+  // case, and the reference contains multiple tokens where some look like
+  // alphabetic designation text, split the reference into `reference` and
+  // `designation` parts.
+  if (isBlank(designation) && reference) {
+    const refTokens = (tokensByCol['reference'] || []).slice().sort((a, b) => a.x - b.x);
+    if (refTokens.length > 1) {
+      let splitIdx = -1;
+      for (let i = 0; i < refTokens.length; i++) {
+        const tok = refTokens[i].str.replace(/\s+/g, '').trim();
+        const isNumRef = /^[0-9]{3,12}$/.test(tok);
+        const isAlphaNumRef = /^[A-Z0-9\-_.]{2,15}$/.test(tok);
+        const tokenHasAlpha = /[A-Za-zÀ-ÖØ-öø-ÿ]/.test(refTokens[i].str);
+        if (tokenHasAlpha && !isAlphaNumRef) {
+          splitIdx = i;
+          break;
+        }
+        // If current token looks like a ref and next token has alphabetic chars,
+        // split after current token.
+        if ((isNumRef || isAlphaNumRef) && i + 1 < refTokens.length) {
+          const nextHasAlpha = /[A-Za-zÀ-ÖØ-öø-ÿ]/.test(refTokens[i + 1].str);
+          if (nextHasAlpha) {
+            splitIdx = i + 1;
+            break;
+          }
+        }
+      }
+      if (splitIdx > 0) {
+        const refPart = refTokens.slice(0, splitIdx).map((t) => t.str.replace(/\s+/g, '').trim()).join(' ');
+        const desPart = refTokens.slice(splitIdx).map((t) => t.str).join(' ');
+        reference = refPart;
+        designation = desPart.trim();
+      }
+    }
+  }
+
+  // If designation already has content but some alphabetic tokens ended up
+  // assigned to the `reference` column (often a mis-assignment due to tight
+  // column boundaries), move trailing alphabetic tokens from `reference`
+  // to the front of `designation` so the product name is contiguous.
+  if (!isBlank(designation) && reference) {
+    const refTokens = (tokensByCol['reference'] || []).slice().sort((a, b) => a.x - b.x);
+    if (refTokens.length > 1) {
+      let firstAlphaIdx = -1;
+      for (let i = 1; i < refTokens.length; i++) {
+        if (/[A-Za-zÀ-ÖØ-öø-ÿ]/.test(refTokens[i].str)) {
+          firstAlphaIdx = i;
+          break;
+        }
+      }
+      if (firstAlphaIdx > 0) {
+        const refPart = refTokens.slice(0, firstAlphaIdx).map((t) => t.str.replace(/\s+/g, '').trim()).join(' ');
+        const desPart = refTokens.slice(firstAlphaIdx).map((t) => t.str).join(' ');
+        reference = refPart;
+        designation = (desPart + ' ' + designation).trim();
+      }
+    }
+  }
   const emplacement = emplacementRaw.trim();
-  const qte = parseNumber(qteRaw);
+  const qte = parseNumber(finalQteRaw);
   const stock = parseNumber(stockRaw);
   const ttc = parseNumber(ttcRaw);
   const reliquat = parseNumber(reliquatRaw);
@@ -373,13 +604,16 @@ function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
     codeABarre = '';
   }
 
+  const hasQteDigit = /\d/.test(finalQteRaw || '');
+  const hasStockDigit = /\d/.test(stockRaw || '');
+
   const emptyCells = {
     codeABarre: isBlank(codeABarre),
     reference: isBlank(reference),
     designation: isBlank(designation),
-    qte: isBlank(qteRaw),
+    qte: !hasQteDigit,
     emplacement: isBlank(emplacement),
-    stock: isBlank(stockRaw),
+    stock: !hasStockDigit,
   };
 
   const line: OrderLine = {
@@ -389,8 +623,6 @@ function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
     qte,
     emplacement,
     stock,
-
-    // include optional numeric fields when present
     ...(ttc ? { ttc } : {}),
     ...(reliquat ? { reliquat } : {}),
     emptyCells,

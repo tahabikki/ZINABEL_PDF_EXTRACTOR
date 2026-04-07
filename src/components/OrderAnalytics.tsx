@@ -85,7 +85,7 @@ const OrderAnalytics: React.FC<OrderAnalyticsProps> = ({ order }) => {
     <div className="space-y-5">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         <KPICard icon={<Package className="h-5 w-5" />} label="Total Articles" value={lines.length} color="primary" />
-        <KPICard icon={<ShoppingCart className="h-5 w-5" />} label="Total TTC" value={`${totalTTC.toFixed(2)} €`} color="primary" />
+        <KPICard icon={<ShoppingCart className="h-5 w-5" />} label="Total TTC" value={`${totalTTC.toFixed(2)} Dhs`} color="primary" />
         <KPICard icon={<Layers className="h-5 w-5" />} label="Qté Commandée" value={totalQtyOrdered} color="primary" />
         <KPICard icon={<CheckCircle className="h-5 w-5" />} label="Stock Positif" value={stockPositive.length} color="success" />
         <KPICard icon={<AlertTriangle className="h-5 w-5" />} label="Stock = 0" value={stockZero.length} color="warning" />
