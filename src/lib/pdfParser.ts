@@ -597,6 +597,9 @@ export function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
   const ttc = parseNumber(ttcRaw);
   const reliquat = parseNumber(reliquatRaw);
 
+  const hasTtcDigit = /\d/.test(ttcRaw || '');
+  const hasReliquatDigit = /\d/.test(reliquatRaw || '');
+
   // Some PDFs place a non-barcode token in the first column when barcode is empty.
   // In that case, treat it as a reference and keep barcode empty.
   if (codeABarre && !/^\d{13}$/.test(codeABarre) && isBlank(reference)) {
@@ -623,8 +626,8 @@ export function buildLineFromRowItems(rowItems: TextItem[]): OrderLine | null {
     qte,
     emplacement,
     stock,
-    ...(ttc ? { ttc } : {}),
-    ...(reliquat ? { reliquat } : {}),
+    ...(hasTtcDigit ? { ttc } : {}),
+    ...(hasReliquatDigit ? { reliquat } : {}),
     emptyCells,
     hasEmptyCell: Object.values(emptyCells).some(Boolean),
     meta: {},
