@@ -432,3 +432,169 @@ export async function downloadOrderPDF(
     throw error;
   }
 }
+
+export async function downloadLinesPDF(
+  lines: OrderLine[],
+  filename: string,
+  title?: string,
+  qtePreparedMap?: Map<string, number>
+): Promise<void> {
+  try {
+    const totalQty = Math.round(lines.reduce((s, l) => s + (l.qte || 0), 0));
+    const dummyOrder: ParsedOrder = {
+      id: 'brands-export',
+      fileName: filename,
+      header: {
+        noPiece: filename,
+        reference: title || filename,
+        date: new Date().toLocaleDateString(),
+        dateLivraison: '',
+        statut: '',
+        client: '',
+        code: '',
+        adresseLivraison: '',
+        depot: '',
+        preparateur: '',
+      },
+      lines,
+      totalQty,
+      totalItems: lines.length,
+    };
+
+    const html = generateTableHTML(dummyOrder, lines, 'principal', qtePreparedMap);
+    const element = document.createElement('div');
+    element.innerHTML = html;
+
+    const options = {
+      margin: [10, 10, 10, 10] as [number, number, number, number],
+      filename,
+      image: { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { orientation: 'landscape' as const, unit: 'mm' as const, format: 'a4' as const },
+    };
+
+    await new Promise((res) => setTimeout(res, 50));
+    const html2pdf = await loadHtml2pdf();
+    await html2pdf().set(options).from(element).save();
+  } catch (error) {
+    console.error('Error generating brand PDF:', error);
+    throw error;
+  }
+}
+
+export async function downloadMinimalLinesPDF(
+  lines: OrderLine[],
+  filename: string,
+  title?: string,
+  qtePreparedMap?: Map<string, number>
+): Promise<void> {
+  try {
+    // Totals per brand
+    const brandTotals = new Map<string, number>();
+    let totalQty = 0;
+    for (const l of lines) {
+      const b = (l.brand || 'Sans marque') as string;
+      const q = Math.round((l.qte || 0) as number);
+      brandTotals.set(b, (brandTotals.get(b) || 0) + q);
+      totalQty += q;
+    }
+
+    function escapeHtml(s: string) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    const brandCards = Array.from(brandTotals.entries())
+      .map(([b, q]) => `
+        <div class="brand-card">
+          <div class="brand-name">${escapeHtml(b)}</div>
+          <div class="brand-qty">${q}</div>
+        </div>
+      `)
+      .join('\n');
+
+    const rows = lines
+      .map((line) => {
+        const q = Math.round(line.qte || 0);
+        return `
+          <tr>
+            <td style="padding:8px;border:1px solid #e5e7eb;font-family:monospace;">${escapeHtml(line.reference || '—')}</td>
+            <td style="padding:8px;border:1px solid #e5e7eb;text-align:center;font-weight:700;">${q}</td>
+          </tr>
+        `;
+      })
+      .join('\n');
+
+    const html = `
+      <!doctype html>
+      <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>${escapeHtml(title || 'Export')}</title>
+        <style>
+          body{font-family:Segoe UI, Roboto, Arial, sans-serif;color:#0f172a;background:#ffffff}
+          .header{margin-bottom:14px}
+          .title{font-size:20px;font-weight:800;color:#0b1220}
+          .meta{font-size:12px;color:#475569;margin-top:6px}
+          .brands-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+          .brand-card{background:linear-gradient(135deg,#eef2ff 0%,#e6fffa 100%);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(13,27,62,0.06);text-align:center}
+          .brand-name{font-size:13px;font-weight:700;color:#0f172a}
+          .brand-qty{font-size:18px;font-weight:800;color:#0f172a;margin-top:6px}
+          .total-card{background:linear-gradient(90deg,#fee2e2 0%,#fff1f2 100%);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(13,27,62,0.06);text-align:center}
+          table{width:100%;border-collapse:collapse;margin-top:12px;border-radius:8px;overflow:hidden}
+          thead th{background:#f8fafc;text-align:left;padding:10px;border-bottom:1px solid #e6edf3;font-weight:700;color:#0b1220}
+          td{padding:10px;border-bottom:1px solid #eef2f6;font-size:12px}
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div class="title">${escapeHtml(title || 'Export')}</div>
+          <div class="meta">Lignes: ${lines.length} — Quantité totale: ${totalQty} — Généré le ${new Date().toLocaleString('fr-FR')}</div>
+        </div>
+
+        <div class="brands-grid">
+          ${brandCards}
+          <div class="total-card">
+            <div class="brand-name">Total</div>
+            <div class="brand-qty">${totalQty}</div>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Référence</th>
+              <th style="text-align:center;">Qté</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+      </body>
+      </html>
+    `;
+
+    const element = document.createElement('div');
+    element.innerHTML = html;
+
+    const options = {
+      margin: [10, 10, 10, 10] as [number, number, number, number],
+      filename,
+      image: { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { orientation: 'portrait' as const, unit: 'mm' as const, format: 'a4' as const },
+    };
+
+    await new Promise((res) => setTimeout(res, 50));
+    const html2pdf = await loadHtml2pdf();
+    await html2pdf().set(options).from(element).save();
+  } catch (error) {
+    console.error('Error generating minimal brand PDF:', error);
+    throw error;
+  }
+}

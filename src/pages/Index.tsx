@@ -1,16 +1,33 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PDFDropZone from '@/components/PDFDropZone';
 import OrderView from '@/components/OrderView';
 import { parsePDF } from '@/lib/pdfParser';
 import type { ParsedOrder } from '@/types/order';
 import { FileText, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
-  const [orders, setOrders] = useState<ParsedOrder[]>([]);
+  const [orders, setOrders] = useState<ParsedOrder[]>(() => {
+    try {
+      const raw = localStorage.getItem('parsedOrders');
+      if (raw) return JSON.parse(raw) as ParsedOrder[];
+    } catch (e) {
+      console.warn('Failed to read parsedOrders from localStorage', e);
+    }
+    return [];
+  });
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('parsedOrders', JSON.stringify(orders));
+    } catch (e) {
+      console.warn('Failed to persist parsedOrders to localStorage', e);
+    }
+  }, [orders]);
 
   const handleFilesSelected = useCallback(
     async (files: File[]) => {
@@ -62,12 +79,19 @@ const Index = () => {
               <p className="text-xs text-muted-foreground">Analyse approfondie des bons de commande</p>
             </div>
           </div>
-          {orders.length > 0 && (
-            <Button variant="outline" size="sm" onClick={clearAll}>
-              <Trash2 className="h-4 w-4 mr-1" />
-              Tout effacer
-            </Button>
-          )}
+          <div className="flex items-center gap-2">
+            {orders.length > 0 && (
+              <Button variant="outline" size="sm" onClick={clearAll}>
+                <Trash2 className="h-4 w-4 mr-1" />
+                Tout effacer
+              </Button>
+            )}
+            <Link to="/brands">
+              <Button variant="ghost" size="sm">
+                Marques
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 
