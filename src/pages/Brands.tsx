@@ -41,6 +41,49 @@ const Brands: React.FC = () => {
   const [fileName, setFileName] = useState<string>('');
   const [searchRaw, setSearchRaw] = useState<string>('');
   const search = useDebounce(searchRaw, 250);
+  const [globalResults, setGlobalResults] = useState<Product[]>([]);
+  const [isGlobalSearch, setIsGlobalSearch] = useState(false);
+  const [prevActiveBrand, setPrevActiveBrand] = useState<string | null>(null);
+
+  const doGlobalSearch = () => {
+    const qRaw = searchRaw || '';
+    const q = qRaw.toLowerCase().trim();
+    if (!q) {
+      setGlobalResults([]);
+      setIsGlobalSearch(false);
+      return;
+    }
+    const terms = q.split(/\s+/).filter(Boolean);
+    const results = products.filter((p) => {
+      const ref = (p.reference || '').toLowerCase();
+      const name = (p.name || '').toLowerCase();
+      return terms.every((t) => ref.includes(t) || name.includes(t));
+    });
+    setGlobalResults(results);
+    setIsGlobalSearch(true);
+    setPrevActiveBrand(activeBrand);
+    setActiveBrand(null);
+    setQteMap((prev) => {
+      const m = new Map(prev);
+      for (const p of results) {
+        const id = getItemId(p);
+        if (!m.has(id)) {
+          const initial = typeof p.quantity === 'number' ? Math.round(p.quantity) : 0;
+          m.set(id, initial);
+        }
+      }
+      return m;
+    });
+  };
+
+  const clearGlobalSearch = (restorePrev = true) => {
+    setGlobalResults([]);
+    setIsGlobalSearch(false);
+    if (restorePrev && prevActiveBrand) {
+      setActiveBrand(prevActiveBrand);
+    }
+    setPrevActiveBrand(null);
+  };
 
   // Load products from public/carton_Qte.json (served by Vite from /carton_Qte.json)
   useEffect(() => {
@@ -78,7 +121,12 @@ const Brands: React.FC = () => {
   const filteredLines = useMemo(() => {
     if (!search || search.trim() === '') return brandLines;
     const q = search.toLowerCase().trim();
-    return brandLines.filter((p) => (p.reference || '').toLowerCase().includes(q));
+    const terms = q.split(/\s+/).filter(Boolean);
+    return brandLines.filter((p) => {
+      const ref = (p.reference || '').toLowerCase();
+      const name = ((p.name || '') as string).toLowerCase();
+      return terms.every((t) => ref.includes(t) || name.includes(t));
+    });
   }, [brandLines, search]);
 
   useEffect(() => {
@@ -160,15 +208,8 @@ const Brands: React.FC = () => {
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-sm">
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                if (activeBrand) setActiveBrand(null);
-                else navigate('/');
-              }}
-            >
+            <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" onClick={() => { navigate(-1); }}>
               <ArrowLeft className="h-4 w-4" /> Retour
             </Button>
             <div>
@@ -214,7 +255,16 @@ const Brands: React.FC = () => {
         <div className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div className="w-full">
-              <Input className="w-full" placeholder="Rechercher référence" value={searchRaw} onChange={(e) => setSearchRaw(e.target.value)} />
+              <div className="flex gap-2">
+                <Input
+                  className="flex-1"
+                  placeholder="Rechercher référence / désignation"
+                  value={searchRaw}
+                  onChange={(e) => setSearchRaw(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') doGlobalSearch(); }}
+                />
+                <Button variant="outline" onClick={doGlobalSearch}>Rechercher</Button>
+              </div>
             </div>
             <div className="w-full">
               <Input className="w-full" placeholder="Nom du fichier PDF" value={fileName} onChange={(e) => setFileName(e.target.value)} />
@@ -226,9 +276,9 @@ const Brands: React.FC = () => {
 
           <div className="flex items-center gap-4 mb-6">
             <div className="w-1/3">
-              {activeBrand ? (
+              {(activeBrand || isGlobalSearch) ? (
                 <div className="text-left">
-                  <Button variant="secondary" size="sm" onClick={() => setActiveBrand(null)} className="flex items-center gap-2">
+                  <Button variant="secondary" size="sm" onClick={() => { clearGlobalSearch(false); setActiveBrand(null); }} className="flex items-center gap-2">
                     <ArrowLeft className="h-3 w-3" />
                     Retour grille
                   </Button>
@@ -272,6 +322,51 @@ const Brands: React.FC = () => {
                   })}
                 </tbody>
               </table>
+            </div>
+          )}
+
+          {isGlobalSearch && (
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold mb-2">Résultats de recherche</h3>
+              {globalResults.length === 0 ? (
+                <div className="text-sm text-muted-foreground">Aucun résultat.</div>
+              ) : (
+                <div className="overflow-auto border rounded-md mb-6">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="text-left text-sm text-muted-foreground">
+                        <th className="px-3 py-2">#</th>
+                        <th className="px-3 py-2">Référence</th>
+                        <th className="px-3 py-2">Désignation</th>
+                        <th className="px-3 py-2">Marque</th>
+                        <th className="px-3 py-2">Qté</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {globalResults.map((p) => {
+                        const id = getItemId(p);
+                        return (
+                          <tr key={id} className="border-t">
+                            <td className="px-3 py-2">
+                              <Checkbox checked={selectedRows.has(id)} onCheckedChange={() => toggleRow(id)} />
+                            </td>
+                            <td className="px-3 py-2 font-mono text-sm">{p.reference}</td>
+                            <td className="px-3 py-2 text-sm truncate">{p.name || ''}</td>
+                            <td className="px-3 py-2">{p.brand}</td>
+                            <td className="px-3 py-2 w-32">
+                              <Input value={String(qteMap.get(id) ?? 0)} onChange={(e) => handleQtyChange(id, e.target.value)} />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              <div className="flex gap-2">
+                <Button variant="ghost" size="sm" onClick={() => { clearGlobalSearch(); }}>Fermer</Button>
+                <Button variant="outline" size="sm" onClick={() => { setSearchRaw(''); clearGlobalSearch(true); }}>Effacer</Button>
+              </div>
             </div>
           )}
 
