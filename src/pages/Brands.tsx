@@ -136,8 +136,8 @@ const Brands: React.FC = () => {
       const id = getItemId(p);
       const q = qteMap.get(id) ?? (typeof p.quantity === 'number' ? Math.round(p.quantity) : 0);
       preparedMap.set(id, q);
-      // Include brand so exporter can compute per-brand totals
-      return { reference: p.reference, qte: q, brand: p.brand || 'Sans marque' } as any;
+      // Include brand and designation so exporter can compute per-brand totals and show names
+      return { reference: p.reference, qte: q, brand: p.brand || 'Sans marque', designation: p.name || '' } as any;
     });
     const title = Array.from(new Set(selected.map((p) => (p.brand || 'Marques')))).join(', ') || 'Marques';
     const filename = (fileName || `${title}_${new Date().toISOString().split('T')[0]}`).replace(/\s+/g, '_') + '.pdf';
@@ -250,6 +250,7 @@ const Brands: React.FC = () => {
                   <tr className="text-left text-sm text-muted-foreground">
                     <th className="px-3 py-2">#</th>
                     <th className="px-3 py-2">Référence</th>
+                    <th className="px-3 py-2">Désignation</th>
                     <th className="px-3 py-2">Qté</th>
                   </tr>
                 </thead>
@@ -262,6 +263,7 @@ const Brands: React.FC = () => {
                           <Checkbox checked={selectedRows.has(id)} onCheckedChange={() => toggleRow(id)} />
                         </td>
                         <td className="px-3 py-2 font-mono text-sm">{p.reference}</td>
+                        <td className="px-3 py-2 text-sm truncate">{p.name || ''}</td>
                         <td className="px-3 py-2 w-32">
                           <Input value={String(qteMap.get(id) ?? 0)} onChange={(e) => handleQtyChange(id, e.target.value)} />
                         </td>
@@ -283,8 +285,9 @@ const Brands: React.FC = () => {
                   <thead>
                     <tr className="text-left text-sm text-muted-foreground">
                       <th className="px-3 py-2">#</th>
-                      <th className="px-3 py-2">Référence</th>
-                      <th className="px-3 py-2">Qté</th>
+                        <th className="px-3 py-2">Référence</th>
+                        <th className="px-3 py-2">Désignation</th>
+                        <th className="px-3 py-2">Qté</th>
                       <th className="px-3 py-2">Marque</th>
                       <th className="px-3 py-2">Action</th>
                     </tr>
@@ -297,11 +300,12 @@ const Brands: React.FC = () => {
                           <td className="px-3 py-2">
                             <Checkbox checked={true} onCheckedChange={() => toggleRow(id)} />
                           </td>
-                          <td className="px-3 py-2 font-mono text-sm">{p.reference}</td>
-                          <td className="px-3 py-2 w-32">
-                            <Input value={String(qteMap.get(id) ?? 0)} onChange={(e) => handleQtyChange(id, e.target.value)} />
-                          </td>
-                          <td className="px-3 py-2">{p.brand}</td>
+                            <td className="px-3 py-2 font-mono text-sm">{p.reference}</td>
+                            <td className="px-3 py-2 text-sm truncate">{p.name || ''}</td>
+                            <td className="px-3 py-2 w-32">
+                              <Input value={String(qteMap.get(id) ?? 0)} onChange={(e) => handleQtyChange(id, e.target.value)} />
+                            </td>
+                            <td className="px-3 py-2">{p.brand}</td>
                           <td className="px-3 py-2">
                             <Button variant="ghost" size="sm" onClick={() => toggleRow(id)}>Retirer</Button>
                           </td>

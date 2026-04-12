@@ -520,9 +520,11 @@ export async function downloadMinimalLinesPDF(
     const rows = lines
       .map((line) => {
         const q = Math.round(line.qte || 0);
+        const designation = (line as any).designation || '';
         return `
           <tr>
             <td style="padding:8px;border:1px solid #e5e7eb;font-family:monospace;">${escapeHtml(line.reference || '—')}</td>
+            <td style="padding:8px;border:1px solid #e5e7eb;">${escapeHtml(designation)}</td>
             <td style="padding:8px;border:1px solid #e5e7eb;text-align:center;font-weight:700;">${q}</td>
           </tr>
         `;
@@ -567,14 +569,15 @@ export async function downloadMinimalLinesPDF(
         <table>
           <thead>
             <tr>
-              <th>Référence</th>
-              <th style="text-align:center;">Qté</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows}
-          </tbody>
-        </table>
+                  <th>Référence</th>
+                  <th>Désignation</th>
+                  <th style="text-align:center;">Qté</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows}
+              </tbody>
+            </table>
       </body>
       </html>
     `;
