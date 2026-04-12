@@ -49289,4 +49289,345 @@
     "brand": "PETITE_MAISON",
     "carton_Qte": 0
   }
+  {
+    "reference": "350035",
+    "name": "GEL DOUCHE NOURRISSANT LACTOVIT 600ML",
+    "stock": 818,
+    "price": 818,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350055",
+    "name": "GEL DOUCHE NOURRISSANT LACTOVIT 250 ML",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350153",
+    "name": "GEL DOUCHE REPARATEUR LACTOVIT 600+120ML",
+    "stock": 44,
+    "price": 44,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350154",
+    "name": "GEL DOUCHE REPARATEUR LACTOVIT 250 ML",
+    "stock": 4,
+    "price": 4,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350173",
+    "name": "GEL DOUCHE REPARATEUR LACTOVIT 600ML",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350403",
+    "name": "LOTION NOURISSANTE LACTOVIT 400ML",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350405",
+    "name": "LOTION NOURISSANTE LACTOVIT 250ML",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350475",
+    "name": "LOTION REPARATRICE LACTOVIT 250 ML",
+    "stock": 159,
+    "price": 159,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350476",
+    "name": "GEL DOUCHE LACTOUREA REPARATEUR 90ML",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350477",
+    "name": "LOTION REPARATRICE LACTOVIT 400ML",
+    "stock": 14,
+    "price": 14,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "350478",
+    "name": "LOTION REPARATRICE LACTOVIT 400+100ML",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "499046",
+    "name": "PRESENTOIR LACTOVIT",
+    "stock": 65,
+    "price": 65,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "EP.LACT",
+    "name": "EPONGE LACTOVIT",
+    "stock": 2,
+    "price": 2,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.GRA.LAC",
+    "name": "PACK GRATUITE LACTOVIT",
+    "stock": 25,
+    "price": 25,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.LAC.REP",
+    "name": "PACK LACTOVIT RÉPARATEUR LOTION REPPARATRICE 400 ML+ GEL DOUCHE 250 M",
+    "stock": 207,
+    "price": 207,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.LACT.INE",
+    "name": "PACK LACTOVIT X INECTOO",
+    "stock": 21,
+    "price": 21,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.LACT.NOUR",
+    "name": "Lot GEL DOUCHE LACTOVIT NOURRISSANT 250ML + 2EME OFFERT",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.LACT.PREPA",
+    "name": "Lot GEL DOUCHE LACTOVIT REPARATEUR 250ML + 2EME OFFERT",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.LACTO",
+    "name": "LOT GEL DOUCHE 600 ml +LOTION 400 ml LACRTOUREA = TROUSSE GRT",
+    "stock": 441,
+    "price": 441,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.LACTOUREA",
+    "name": "PACK GEL DOUCHE REPAIR 600 ML + LOTION REPAIR 400 ML + TROUSSE LACTOV",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.LACTOVIT.BLEU",
+    "name": "PACK LOTION 400 + GEL DOUCHE 600 + CREME MAIN INECTO + GOMMAGE INECTO",
+    "stock": -1,
+    "price": -1,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PACK.NOURRI.BLEU",
+    "name": "PACK NOURRISANT GEL DOUCHE 600 ML + LOTION 400ML + TOTBAG BLEU GRATUI",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "PEIGN.LACTO",
+    "name": "PEIGNOIR BORDE LACTOVIT",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "SAC.LAC.BLEU",
+    "name": "SAC LACTOVIT BLEU",
+    "stock": -22,
+    "price": -22,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "SAC.LAC.RGE",
+    "name": "TROUSSE LACTOVIT",
+    "stock": 5,
+    "price": 5,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "SAC.LAC.ROUGE",
+    "name": "SAC LACTOVIT ROUGE",
+    "stock": 3,
+    "price": 3,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "SERV.LACT",
+    "name": "SERVIETTE BRINDE LACTOVIT",
+    "stock": 11,
+    "price": 11,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "SUPPORT.LACT",
+    "name": "SUPPORT LACTOUREA REPARATEUR",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "SUPPORT.LACT.LAIT",
+    "name": "SUPPORT LACTOVIT AVEC LAIT DE CORPS",
+    "stock": null,
+    "price": null,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "TEST.GEL.NOUR",
+    "name": "Lactovit Sachet Gel Douche nourissant",
+    "stock": 240,
+    "price": 240,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "TEST.GEL.REPAR",
+    "name": "Lactourea Sachet Gel Douche RÃ©parateur",
+    "stock": 113,
+    "price": 113,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "TEST.LOT.REPAR",
+    "name": "Lactourea Sachet Lotion RÃ©paratrice",
+    "stock": 34,
+    "price": 34,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "TROUSSE.LAC",
+    "name": "TROUSSE LACTOUREA BLANC 2024",
+    "stock": 1,
+    "price": 1,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  },
+  {
+    "reference": "VLA",
+    "name": "VENTES DES ARTICLES DE LA MARQUE  LACTOVIT",
+    "stock": -8,
+    "price": -8,
+    "quantity": 0,
+    "free_quantity": 0,
+    "brand": "LACTOVIT",
+    "carton_Qte": 0
+  }  
+
 ]
