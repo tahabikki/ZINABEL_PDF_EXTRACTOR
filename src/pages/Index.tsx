@@ -86,6 +86,11 @@ const Index = () => {
                 Tout effacer
               </Button>
             )}
+            <Link to="/analyse">
+              <Button variant="ghost" size="sm">
+                Analyse
+              </Button>
+            </Link>
             <Link to="/brands">
               <Button variant="ghost" size="sm">
                 Marques
