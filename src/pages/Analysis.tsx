@@ -566,31 +566,62 @@ const Analysis: React.FC = () => {
 
                 {allLetters.length > 0 && (
                   <div className="mt-3 border-t border-border/50 pt-3">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-semibold text-foreground">Emplacement:</span>
-                      {(empFilter.size > 0 || empSectionsByLetter.size > 0 || empRowsByLetter.size > 0 || empLevelsByLetter.size > 0) && (
-                        <span className="text-xs rounded-full px-1.5 py-0.5 bg-primary/10 text-primary font-semibold">
-                          {empFilter.size > 0 && `Lettres: ${Array.from(empFilter).sort().join(', ')}`}
-                          {empSectionsByLetter.size > 0 && ` | Sections: ${empSectionsByLetter.size}`}
-                          {empRowsByLetter.size > 0 && ` | Rangées: ${empRowsByLetter.size}`}
-                          {empLevelsByLetter.size > 0 && ` | Niveaux: ${empLevelsByLetter.size}`}
-                        </span>
-                      )}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-foreground">Emplacement</span>
+                        {(empFilter.size > 0 || empSectionsByLetter.size > 0 || empRowsByLetter.size > 0 || empLevelsByLetter.size > 0) && (
+                          <div className="flex gap-1.5">
+                            {empFilter.size > 0 && (
+                              <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">
+                                <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                Lettres: {Array.from(empFilter).sort().join(', ')}
+                              </span>
+                            )}
+                            {empSectionsByLetter.size > 0 && (
+                              <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                Sections: {empSectionsByLetter.size}
+                              </span>
+                            )}
+                            {empRowsByLetter.size > 0 && (
+                              <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 font-medium">
+                                <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                                Rangées: {empRowsByLetter.size}
+                              </span>
+                            )}
+                            {empLevelsByLetter.size > 0 && (
+                              <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">
+                                <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                                Niveaux: {empLevelsByLetter.size}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex flex-wrap gap-1 mb-3">
+                    
+                    <div className="flex flex-wrap gap-1.5 mb-4">
                       {allLetters.map((letter) => {
                         const isActive = empFilter.has(letter);
+                        const letterCount = (availableSectionsByLetter.get(letter)?.size || 0) + 
+                                          (availableRowsByLetter.get(letter)?.size || 0) + 
+                                          (availableLevelsByLetter.get(letter)?.size || 0);
                         return (
                           <button
                             key={letter}
                             onClick={() => toggleEmpLetter(letter)}
-                            className={`w-7 h-7 rounded text-xs font-medium transition-colors ${
+                            className={`relative px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                               isActive
-                                ? 'bg-primary text-primary-foreground'
-                                : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                                ? 'bg-primary text-primary-foreground shadow-md ring-2 ring-primary/30'
+                                : 'bg-card hover:bg-secondary text-foreground border border-border hover:border-primary/50 shadow-sm'
                             }`}
                           >
                             {letter}
+                            {!isActive && letterCount > 0 && (
+                              <span className="absolute -top-1 -right-1 w-4 h-4 text-[10px] bg-muted-foreground/20 rounded-full flex items-center justify-center">
+                                {letterCount}
+                              </span>
+                            )}
                           </button>
                         );
                       })}
@@ -602,13 +633,23 @@ const Analysis: React.FC = () => {
                       const letterLevels = availableLevelsByLetter.get(letter) || new Set();
 
                       return (
-                        <div key={letter} className="mb-4 pb-4 border-b border-border/50 last:border-0">
-                          <p className="text-xs font-bold text-primary mb-2.5">{letter}</p>
+                        <div key={letter} className="mb-4 p-3 bg-muted/30 rounded-lg border border-border/50">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-primary text-primary-foreground text-sm font-bold shadow-sm">
+                              {letter}
+                            </span>
+                            <span className="text-xs font-medium text-muted-foreground">
+                              {letterSections.size} section{letterSections.size !== 1 ? 's' : ''} · {letterRows.size} rangée{letterRows.size !== 1 ? 's' : ''} · {letterLevels.size} niveau{letterLevels.size !== 1 ? 'x' : ''}
+                            </span>
+                          </div>
                           
                           {letterSections.size > 0 && (
-                            <div className="mb-2">
-                              <p className="text-xs font-semibold text-foreground mb-1.5">Section (2ème)</p>
-                              <div className="flex flex-wrap gap-2">
+                            <div className="mb-3">
+                              <div className="flex items-center gap-1.5 mb-2">
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                                <span className="text-xs font-semibold text-green-700">Section (2ème)</span>
+                              </div>
+                              <div className="flex flex-wrap gap-1.5">
                                 {Array.from(letterSections).sort().map((s) => {
                                   const currentSections = empSectionsByLetter.get(letter) || new Set();
                                   const isActive = currentSections.has(s);
@@ -623,10 +664,10 @@ const Analysis: React.FC = () => {
                                         setEmpRowsByLetter(prev => new Map(prev).set(letter, new Set()));
                                         setEmpLevelsByLetter(prev => new Map(prev).set(letter, new Set()));
                                       }}
-                                      className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                                      className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-200 ${
                                         isActive
-                                          ? 'bg-primary text-primary-foreground'
-                                          : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                                          ? 'bg-green-500 text-white shadow-sm'
+                                          : 'bg-card hover:bg-green-50 text-foreground border border-border hover:border-green-300'
                                       }`}
                                     >
                                       {s}
@@ -638,9 +679,12 @@ const Analysis: React.FC = () => {
                           )}
 
                           {letterRows.size > 0 && letterSections.size === 0 && (
-                            <div className="mb-2">
-                              <p className="text-xs font-semibold text-foreground mb-1.5">Rangée (3ème)</p>
-                              <div className="flex flex-wrap gap-2">
+                            <div className="mb-3">
+                              <div className="flex items-center gap-1.5 mb-2">
+                                <div className="w-1.5 h-1.5 rounded-full bg-orange-500"></div>
+                                <span className="text-xs font-semibold text-orange-700">Rangée (3ème)</span>
+                              </div>
+                              <div className="flex flex-wrap gap-1.5">
                                 {Array.from(letterRows).sort().map((r) => {
                                   const currentRows = empRowsByLetter.get(letter) || new Set();
                                   const isActive = currentRows.has(r);
@@ -653,10 +697,10 @@ const Analysis: React.FC = () => {
                                         else next.add(r);
                                         setEmpRowsByLetter(prev => new Map(prev).set(letter, next));
                                       }}
-                                      className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                                      className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-200 ${
                                         isActive
-                                          ? 'bg-primary text-primary-foreground'
-                                          : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                                          ? 'bg-orange-500 text-white shadow-sm'
+                                          : 'bg-card hover:bg-orange-50 text-foreground border border-border hover:border-orange-300'
                                       }`}
                                     >
                                       {r}
@@ -668,9 +712,12 @@ const Analysis: React.FC = () => {
                           )}
 
                           {letterLevels.size > 0 && letterSections.size === 0 && letterRows.size === 0 && (
-                            <div className="mb-2">
-                              <p className="text-xs font-semibold text-foreground mb-1.5">Niveau (4ème)</p>
-                              <div className="flex flex-wrap gap-2">
+                            <div className="mb-3">
+                              <div className="flex items-center gap-1.5 mb-2">
+                                <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
+                                <span className="text-xs font-semibold text-purple-700">Niveau (4ème)</span>
+                              </div>
+                              <div className="flex flex-wrap gap-1.5">
                                 {Array.from(letterLevels).sort().map((l) => {
                                   const currentLevels = empLevelsByLetter.get(letter) || new Set();
                                   const isActive = currentLevels.has(l);
@@ -683,10 +730,10 @@ const Analysis: React.FC = () => {
                                         else next.add(l);
                                         setEmpLevelsByLetter(prev => new Map(prev).set(letter, next));
                                       }}
-                                      className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                                      className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-200 ${
                                         isActive
-                                          ? 'bg-primary text-primary-foreground'
-                                          : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                                          ? 'bg-purple-500 text-white shadow-sm'
+                                          : 'bg-card hover:bg-purple-50 text-foreground border border-border hover:border-purple-300'
                                       }`}
                                     >
                                       {l}
