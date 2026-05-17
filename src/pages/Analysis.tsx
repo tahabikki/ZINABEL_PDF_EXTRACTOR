@@ -183,7 +183,7 @@ const Analysis: React.FC = () => {
       }
       return true;
     });
-  }, [refData, sortKey, sortDir, filterEmplacement, filterDesignation, filterClient, filterQtyMin, filterQtyMax]);
+  }, [refData, sortKey, sortDir, filterEmplacement, filterDesignation, filterClient, filterQtyMin, filterQtyMax, empFilter]);
 
   const toggleSort = (key: SortKey) => {
     if (sortKey === key) {
