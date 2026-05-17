@@ -15,7 +15,7 @@ type Product = {
   client?: string;
   orderNumber?: string;
   emplacement?: string;
-  destination?: string;
+  
 };
 
 type RefData = {
@@ -23,12 +23,11 @@ type RefData = {
   mainBrand: string;
   mainDesignation: string;
   mainEmplacement: string;
-  mainDestination: string;
   orders: Map<string, { qty: number; client: string }>;
   brands: Map<string, number>;
 };
 
-type SortKey = 'reference' | 'brand' | 'emplacement' | 'destination' | 'designation' | 'totalQty';
+type SortKey = 'reference' | 'brand' | 'emplacement' | 'designation' | 'totalQty';
 type SortDir = 'asc' | 'desc';
 
 const Analysis: React.FC = () => {
@@ -77,7 +76,6 @@ const Analysis: React.FC = () => {
         const brand = line.brand || 'Sans marque';
         const designation = line.designation || '';
         const emplacement = line.emplacement || '';
-        const destination = line.meta?.destination as string || '';
 
         if (ref === '') continue;
 
@@ -87,7 +85,6 @@ const Analysis: React.FC = () => {
             mainBrand: brand,
             mainDesignation: designation,
             mainEmplacement: emplacement,
-            mainDestination: destination,
             orders: new Map(),
             brands: new Map(),
           });
@@ -104,9 +101,6 @@ const Analysis: React.FC = () => {
         }
         if (!data.mainEmplacement && emplacement) {
           data.mainEmplacement = emplacement;
-        }
-        if (!data.mainDestination && destination) {
-          data.mainDestination = destination;
         }
 
         const existingOrder = data.orders.get(orderNumber);
@@ -139,9 +133,6 @@ const Analysis: React.FC = () => {
           break;
         case 'emplacement':
           cmp = a[1].mainEmplacement.localeCompare(b[1].mainEmplacement);
-          break;
-        case 'destination':
-          cmp = a[1].mainDestination.localeCompare(b[1].mainDestination);
           break;
         case 'totalQty':
           cmp = a[1].totalQty - b[1].totalQty;
@@ -204,7 +195,6 @@ const Analysis: React.FC = () => {
             client: order.header.client,
             orderNumber,
             emplacement: line.emplacement,
-            destination: line.meta?.destination as string || '',
           });
         }
       }
@@ -437,9 +427,6 @@ const Analysis: React.FC = () => {
                         <th className="px-3 py-2 cursor-pointer hover:text-foreground" onClick={() => toggleSort('emplacement')}>
                           Emplacement <SortIcon column="emplacement" />
                         </th>
-                        <th className="px-3 py-2 cursor-pointer hover:text-foreground" onClick={() => toggleSort('destination')}>
-                          Destination <SortIcon column="destination" />
-                        </th>
                         <th className="px-3 py-2 cursor-pointer hover:text-foreground" onClick={() => toggleSort('brand')}>
                           Marque <SortIcon column="brand" />
                         </th>
@@ -467,13 +454,12 @@ const Analysis: React.FC = () => {
                               <td className="px-3 py-2 font-mono text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{ref}</td>
                               <td className="px-3 py-2 text-sm max-w-[200px] truncate cursor-pointer" onClick={() => toggleExpand(ref)} title={data.mainDesignation}>{data.mainDesignation || '-'}</td>
                               <td className="px-3 py-2 text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{data.mainEmplacement || '-'}</td>
-                              <td className="px-3 py-2 text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{data.mainDestination || '-'}</td>
                               <td className="px-3 py-2 text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{data.mainBrand}</td>
                               <td className="px-3 py-2 text-right font-medium">{data.totalQty}</td>
                             </tr>
                             {isExpanded && (
                               <tr>
-                                <td colSpan={8} className="p-0 bg-muted/10">
+                                <td colSpan={7} className="p-0 bg-muted/10">
                                   <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                       <h4 className="text-sm font-semibold mb-2">Par Commande</h4>
