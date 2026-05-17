@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ChevronDown, ChevronRight, X, ArrowUp, ArrowDown } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ChevronRight, X, ArrowUp, ArrowDown, Filter } from 'lucide-react';
 import type { ParsedOrder } from '@/types/order';
 
 type Product = {
@@ -15,7 +15,6 @@ type Product = {
   client?: string;
   orderNumber?: string;
   emplacement?: string;
-  
 };
 
 type RefData = {
@@ -41,16 +40,19 @@ const Analysis: React.FC = () => {
   const [globalResults, setGlobalResults] = useState<Product[]>([]);
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [expandedRef, setExpandedRef] = useState<string | null>(null);
-  
+
   const [filterEmplacement, setFilterEmplacement] = useState('');
   const [filterDesignation, setFilterDesignation] = useState('');
   const [filterClient, setFilterClient] = useState('');
+  const [filterBrand, setFilterBrand] = useState('');
+  const [filterOrder, setFilterOrder] = useState('');
   const [filterQtyMin, setFilterQtyMin] = useState('');
   const [filterQtyMax, setFilterQtyMax] = useState('');
   const [empFilter, setEmpFilter] = useState<Set<string>>(new Set());
   
   const [sortKey, setSortKey] = useState<SortKey>('reference');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
+  const [showFilters, setShowFilters] = useState(true);
 
   const getFirstLetter = (emplacement: string) => {
     const s = (emplacement || '').trim();
@@ -67,6 +69,46 @@ const Analysis: React.FC = () => {
       letters.add(letter);
     });
     return Array.from(letters).sort();
+  }, [refData]);
+
+  const allEmplacements = useMemo(() => {
+    const emps = new Set<string>();
+    refData.forEach((data) => {
+      if (data.mainEmplacement) emps.add(data.mainEmplacement);
+    });
+    return Array.from(emps).sort();
+  }, [refData]);
+
+  const allDesignations = useMemo(() => {
+    const desigs = new Set<string>();
+    refData.forEach((data) => {
+      if (data.mainDesignation) desigs.add(data.mainDesignation);
+    });
+    return Array.from(desigs).sort();
+  }, [refData]);
+
+  const allClients = useMemo(() => {
+    const clients = new Set<string>();
+    refData.forEach((data) => {
+      data.orders.forEach((v) => clients.add(v.client));
+    });
+    return Array.from(clients).sort();
+  }, [refData]);
+
+  const allBrands = useMemo(() => {
+    const brands = new Set<string>();
+    refData.forEach((data) => {
+      data.brands.forEach((_, brand) => brands.add(brand));
+    });
+    return Array.from(brands).sort();
+  }, [refData]);
+
+  const allOrders = useMemo(() => {
+    const nums = new Set<string>();
+    refData.forEach((data) => {
+      data.orders.forEach((_, num) => nums.add(num));
+    });
+    return Array.from(nums).sort();
   }, [refData]);
 
   const toggleEmpLetter = (letter: string) => {
@@ -170,10 +212,12 @@ const Analysis: React.FC = () => {
 
     return entries.filter(([ref, data]) => {
       if (empFilter.size > 0 && !empFilter.has(getFirstLetter(data.mainEmplacement))) return false;
-      if (filterEmplacement && !data.mainEmplacement.toLowerCase().includes(filterEmplacement.toLowerCase())) return false;
-      if (filterDesignation && !data.mainDesignation.toLowerCase().includes(filterDesignation.toLowerCase())) return false;
+      if (filterEmplacement && data.mainEmplacement !== filterEmplacement) return false;
+      if (filterDesignation && data.mainDesignation !== filterDesignation) return false;
+      if (filterBrand && !data.brands.has(filterBrand)) return false;
       if (filterQtyMin && data.totalQty < parseInt(filterQtyMin)) return false;
       if (filterQtyMax && data.totalQty > parseInt(filterQtyMax)) return false;
+      
       if (filterClient) {
         let hasClient = false;
         data.orders.forEach((v) => {
@@ -181,9 +225,18 @@ const Analysis: React.FC = () => {
         });
         if (!hasClient) return false;
       }
+      
+      if (filterOrder) {
+        let hasOrder = false;
+        data.orders.forEach((_, num) => {
+          if (num === filterOrder) hasOrder = true;
+        });
+        if (!hasOrder) return false;
+      }
+      
       return true;
     });
-  }, [refData, sortKey, sortDir, filterEmplacement, filterDesignation, filterClient, filterQtyMin, filterQtyMax, empFilter]);
+  }, [refData, sortKey, sortDir, filterEmplacement, filterDesignation, filterClient, filterBrand, filterOrder, filterQtyMin, filterQtyMax, empFilter]);
 
   const toggleSort = (key: SortKey) => {
     if (sortKey === key) {
@@ -262,12 +315,14 @@ const Analysis: React.FC = () => {
     setFilterEmplacement('');
     setFilterDesignation('');
     setFilterClient('');
+    setFilterBrand('');
+    setFilterOrder('');
     setFilterQtyMin('');
     setFilterQtyMax('');
     setEmpFilter(new Set());
   };
 
-  const hasFilters = filterEmplacement || filterDesignation || filterClient || filterQtyMin || filterQtyMax || empFilter.size > 0;
+  const hasFilters = filterEmplacement || filterDesignation || filterClient || filterBrand || filterOrder || filterQtyMin || filterQtyMax || empFilter.size > 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -341,74 +396,124 @@ const Analysis: React.FC = () => {
               </div>
             </div>
 
-            <div className="mb-4 p-3 bg-muted/30 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-sm font-semibold">Filtres:</span>
-                {hasFilters && (
-                  <Button variant="ghost" size="sm" onClick={clearFilters} className="text-xs text-muted-foreground">
-                    Effacer les filtres
-                  </Button>
-                )}
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                <Input
-                  placeholder="Emplacement"
-                  value={filterEmplacement}
-                  onChange={(e) => setFilterEmplacement(e.target.value)}
-                  className="h-8 text-sm"
-                />
-                <Input
-                  placeholder="Désignation"
-                  value={filterDesignation}
-                  onChange={(e) => setFilterDesignation(e.target.value)}
-                  className="h-8 text-sm"
-                />
-                <Input
-                  placeholder="Client"
-                  value={filterClient}
-                  onChange={(e) => setFilterClient(e.target.value)}
-                  className="h-8 text-sm"
-                />
-                <Input
-                  placeholder="Qté min"
-                  type="number"
-                  value={filterQtyMin}
-                  onChange={(e) => setFilterQtyMin(e.target.value)}
-                  className="h-8 text-sm"
-                />
-                <Input
-                  placeholder="Qté max"
-                  type="number"
-                  value={filterQtyMax}
-                  onChange={(e) => setFilterQtyMax(e.target.value)}
-                  className="h-8 text-sm"
-                />
-              </div>
+            <div className="mb-4">
+              <Button variant="outline" size="sm" onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2">
+                <Filter className="h-4 w-4" />
+                {showFilters ? 'Masquer' : 'Afficher'} les filtres
+                {hasFilters && <span className="ml-1 bg-primary text-primary-foreground rounded-full px-1.5 text-xs">!</span>}
+              </Button>
+            </div>
 
-              {allLetters.length > 0 && (
-                <div className="mt-3">
-                  <div className="text-xs text-muted-foreground mb-1">Emplacement (lettre):</div>
-                  <div className="flex flex-wrap gap-1">
-                    {allLetters.map((letter) => {
-                      const isActive = empFilter.has(letter);
-                      return (
-                        <button
-                          key={letter}
-                          onClick={() => toggleEmpLetter(letter)}
-                          className={`w-7 h-7 rounded text-xs font-medium transition-colors ${
-                            isActive
-                              ? 'bg-primary text-primary-foreground'
-                              : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
-                          }`}
-                        >
-                          {letter}
-                        </button>
-                      );
-                    })}
+            {showFilters && (
+              <div className="mb-4 p-3 bg-muted/30 rounded-lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-sm font-semibold">Filtres:</span>
+                  {hasFilters && (
+                    <Button variant="ghost" size="sm" onClick={clearFilters} className="text-xs text-muted-foreground">
+                      Effacer les filtres
+                    </Button>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-2 mb-3">
+                  <select
+                    value={filterEmplacement}
+                    onChange={(e) => setFilterEmplacement(e.target.value)}
+                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
+                  >
+                    <option value="">Emplacement (Tous)</option>
+                    {allEmplacements.map((emp) => (
+                      <option key={emp} value={emp}>{emp}</option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={filterDesignation}
+                    onChange={(e) => setFilterDesignation(e.target.value)}
+                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
+                  >
+                    <option value="">Désignation (Tous)</option>
+                    {allDesignations.map((d) => (
+                      <option key={d} value={d}>{d.substring(0, 30)}{d.length > 30 ? '...' : ''}</option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={filterClient}
+                    onChange={(e) => setFilterClient(e.target.value)}
+                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
+                  >
+                    <option value="">Client (Tous)</option>
+                    {allClients.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={filterBrand}
+                    onChange={(e) => setFilterBrand(e.target.value)}
+                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
+                  >
+                    <option value="">Marque (Tous)</option>
+                    {allBrands.map((b) => (
+                      <option key={b} value={b}>{b}</option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={filterOrder}
+                    onChange={(e) => setFilterOrder(e.target.value)}
+                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
+                  >
+                    <option value="">N° Commande (Tous)</option>
+                    {allOrders.map((o) => (
+                      <option key={o} value={o}>{o}</option>
+                    ))}
+                  </select>
+
+                  <div className="flex gap-1">
+                    <Input
+                      placeholder="Qté min"
+                      type="number"
+                      value={filterQtyMin}
+                      onChange={(e) => setFilterQtyMin(e.target.value)}
+                      className="h-8 text-sm"
+                    />
+                    <Input
+                      placeholder="Qté max"
+                      type="number"
+                      value={filterQtyMax}
+                      onChange={(e) => setFilterQtyMax(e.target.value)}
+                      className="h-8 text-sm"
+                    />
                   </div>
                 </div>
-              )}
-            </div>
+
+                {allLetters.length > 0 && (
+                  <div>
+                    <div className="text-xs text-muted-foreground mb-1">Emplacement (lettre):</div>
+                    <div className="flex flex-wrap gap-1">
+                      {allLetters.map((letter) => {
+                        const isActive = empFilter.has(letter);
+                        return (
+                          <button
+                            key={letter}
+                            onClick={() => toggleEmpLetter(letter)}
+                            className={`w-7 h-7 rounded text-xs font-medium transition-colors ${
+                              isActive
+                                ? 'bg-primary text-primary-foreground'
+                                : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                            }`}
+                          >
+                            {letter}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {isGlobalSearch && (
               <div className="mb-6">
