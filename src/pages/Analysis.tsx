@@ -49,6 +49,9 @@ const Analysis: React.FC = () => {
   const [filterQtyMin, setFilterQtyMin] = useState('');
   const [filterQtyMax, setFilterQtyMax] = useState('');
   const [empFilter, setEmpFilter] = useState<Set<string>>(new Set());
+  const [empSectionsByLetter, setEmpSectionsByLetter] = useState<Map<string, Set<string>>>(new Map());
+  const [empRowsByLetter, setEmpRowsByLetter] = useState<Map<string, Set<string>>>(new Map());
+  const [empLevelsByLetter, setEmpLevelsByLetter] = useState<Map<string, Set<string>>>(new Map());
   
   const [sortKey, setSortKey] = useState<SortKey>('reference');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
@@ -60,6 +63,21 @@ const Analysis: React.FC = () => {
     const first = s.charAt(0).toUpperCase();
     if (/[A-Z]/.test(first)) return first;
     return '#';
+  };
+
+  const getSection = (emplacement: string) => {
+    const parts = (emplacement || '').split(/\s*-\s*/).map(p => p.trim());
+    return parts[1] || '';
+  };
+
+  const getRow = (emplacement: string) => {
+    const parts = (emplacement || '').split(/\s*-\s*/).map(p => p.trim());
+    return parts[2] || '';
+  };
+
+  const getLevel = (emplacement: string) => {
+    const parts = (emplacement || '').split(/\s*-\s*/).map(p => p.trim());
+    return parts[3] || '';
   };
 
   const allLetters = useMemo(() => {
@@ -77,6 +95,45 @@ const Analysis: React.FC = () => {
       if (data.mainEmplacement) emps.add(data.mainEmplacement);
     });
     return Array.from(emps).sort();
+  }, [refData]);
+
+  const availableSectionsByLetter = useMemo(() => {
+    const map = new Map<string, Set<string>>();
+    refData.forEach((data) => {
+      const letter = getFirstLetter(data.mainEmplacement);
+      const section = getSection(data.mainEmplacement);
+      if (section) {
+        if (!map.has(letter)) map.set(letter, new Set());
+        map.get(letter)!.add(section);
+      }
+    });
+    return map;
+  }, [refData]);
+
+  const availableRowsByLetter = useMemo(() => {
+    const map = new Map<string, Set<string>>();
+    refData.forEach((data) => {
+      const letter = getFirstLetter(data.mainEmplacement);
+      const row = getRow(data.mainEmplacement);
+      if (row) {
+        if (!map.has(letter)) map.set(letter, new Set());
+        map.get(letter)!.add(row);
+      }
+    });
+    return map;
+  }, [refData]);
+
+  const availableLevelsByLetter = useMemo(() => {
+    const map = new Map<string, Set<string>>();
+    refData.forEach((data) => {
+      const letter = getFirstLetter(data.mainEmplacement);
+      const level = getLevel(data.mainEmplacement);
+      if (level) {
+        if (!map.has(letter)) map.set(letter, new Set());
+        map.get(letter)!.add(level);
+      }
+    });
+    return map;
   }, [refData]);
 
   const allDesignations = useMemo(() => {
@@ -211,7 +268,22 @@ const Analysis: React.FC = () => {
     });
 
     return entries.filter(([ref, data]) => {
-      if (empFilter.size > 0 && !empFilter.has(getFirstLetter(data.mainEmplacement))) return false;
+      const letter = getFirstLetter(data.mainEmplacement);
+      const section = getSection(data.mainEmplacement);
+      const row = getRow(data.mainEmplacement);
+      const level = getLevel(data.mainEmplacement);
+
+      if (empFilter.size > 0 && !empFilter.has(letter)) return false;
+      
+      const letterSections = empSectionsByLetter.get(letter) || new Set();
+      if (letterSections.size > 0 && section && !letterSections.has(section)) return false;
+      
+      const letterRows = empRowsByLetter.get(letter) || new Set();
+      if (letterRows.size > 0 && row && !letterRows.has(row)) return false;
+      
+      const letterLevels = empLevelsByLetter.get(letter) || new Set();
+      if (letterLevels.size > 0 && level && !letterLevels.has(level)) return false;
+
       if (filterEmplacement && data.mainEmplacement !== filterEmplacement) return false;
       if (filterDesignation && data.mainDesignation !== filterDesignation) return false;
       if (filterBrand && !data.brands.has(filterBrand)) return false;
@@ -236,7 +308,7 @@ const Analysis: React.FC = () => {
       
       return true;
     });
-  }, [refData, sortKey, sortDir, filterEmplacement, filterDesignation, filterClient, filterBrand, filterOrder, filterQtyMin, filterQtyMax, empFilter]);
+  }, [refData, sortKey, sortDir, filterEmplacement, filterDesignation, filterClient, filterBrand, filterOrder, filterQtyMin, filterQtyMax, empFilter, empSectionsByLetter, empRowsByLetter, empLevelsByLetter, availableSectionsByLetter, availableRowsByLetter, availableLevelsByLetter]);
 
   const toggleSort = (key: SortKey) => {
     if (sortKey === key) {
@@ -320,9 +392,12 @@ const Analysis: React.FC = () => {
     setFilterQtyMin('');
     setFilterQtyMax('');
     setEmpFilter(new Set());
+    setEmpSectionsByLetter(new Map());
+    setEmpRowsByLetter(new Map());
+    setEmpLevelsByLetter(new Map());
   };
 
-  const hasFilters = filterEmplacement || filterDesignation || filterClient || filterBrand || filterOrder || filterQtyMin || filterQtyMax || empFilter.size > 0;
+  const hasFilters = filterEmplacement || filterDesignation || filterClient || filterBrand || filterOrder || filterQtyMin || filterQtyMax || empFilter.size > 0 || empSectionsByLetter.size > 0 || empRowsByLetter.size > 0 || empLevelsByLetter.size > 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -490,9 +565,19 @@ const Analysis: React.FC = () => {
                 </div>
 
                 {allLetters.length > 0 && (
-                  <div>
-                    <div className="text-xs text-muted-foreground mb-1">Emplacement (lettre):</div>
-                    <div className="flex flex-wrap gap-1">
+                  <div className="mt-3 border-t border-border/50 pt-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs font-semibold text-foreground">Emplacement:</span>
+                      {(empFilter.size > 0 || empSectionsByLetter.size > 0 || empRowsByLetter.size > 0 || empLevelsByLetter.size > 0) && (
+                        <span className="text-xs rounded-full px-1.5 py-0.5 bg-primary/10 text-primary font-semibold">
+                          {empFilter.size > 0 && `Lettres: ${Array.from(empFilter).sort().join(', ')}`}
+                          {empSectionsByLetter.size > 0 && ` | Sections: ${empSectionsByLetter.size}`}
+                          {empRowsByLetter.size > 0 && ` | Rangées: ${empRowsByLetter.size}`}
+                          {empLevelsByLetter.size > 0 && ` | Niveaux: ${empLevelsByLetter.size}`}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-1 mb-3">
                       {allLetters.map((letter) => {
                         const isActive = empFilter.has(letter);
                         return (
@@ -510,6 +595,110 @@ const Analysis: React.FC = () => {
                         );
                       })}
                     </div>
+
+                    {Array.from(empFilter).sort().map((letter) => {
+                      const letterSections = availableSectionsByLetter.get(letter) || new Set();
+                      const letterRows = availableRowsByLetter.get(letter) || new Set();
+                      const letterLevels = availableLevelsByLetter.get(letter) || new Set();
+
+                      return (
+                        <div key={letter} className="mb-4 pb-4 border-b border-border/50 last:border-0">
+                          <p className="text-xs font-bold text-primary mb-2.5">{letter}</p>
+                          
+                          {letterSections.size > 0 && (
+                            <div className="mb-2">
+                              <p className="text-xs font-semibold text-foreground mb-1.5">Section (2ème)</p>
+                              <div className="flex flex-wrap gap-2">
+                                {Array.from(letterSections).sort().map((s) => {
+                                  const currentSections = empSectionsByLetter.get(letter) || new Set();
+                                  const isActive = currentSections.has(s);
+                                  return (
+                                    <button
+                                      key={s}
+                                      onClick={() => {
+                                        const next = new Set(currentSections);
+                                        if (next.has(s)) next.delete(s);
+                                        else next.add(s);
+                                        setEmpSectionsByLetter(prev => new Map(prev).set(letter, next));
+                                        setEmpRowsByLetter(prev => new Map(prev).set(letter, new Set()));
+                                        setEmpLevelsByLetter(prev => new Map(prev).set(letter, new Set()));
+                                      }}
+                                      className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                                        isActive
+                                          ? 'bg-primary text-primary-foreground'
+                                          : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                                      }`}
+                                    >
+                                      {s}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+
+                          {letterRows.size > 0 && letterSections.size === 0 && (
+                            <div className="mb-2">
+                              <p className="text-xs font-semibold text-foreground mb-1.5">Rangée (3ème)</p>
+                              <div className="flex flex-wrap gap-2">
+                                {Array.from(letterRows).sort().map((r) => {
+                                  const currentRows = empRowsByLetter.get(letter) || new Set();
+                                  const isActive = currentRows.has(r);
+                                  return (
+                                    <button
+                                      key={r}
+                                      onClick={() => {
+                                        const next = new Set(currentRows);
+                                        if (next.has(r)) next.delete(r);
+                                        else next.add(r);
+                                        setEmpRowsByLetter(prev => new Map(prev).set(letter, next));
+                                      }}
+                                      className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                                        isActive
+                                          ? 'bg-primary text-primary-foreground'
+                                          : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                                      }`}
+                                    >
+                                      {r}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+
+                          {letterLevels.size > 0 && letterSections.size === 0 && letterRows.size === 0 && (
+                            <div className="mb-2">
+                              <p className="text-xs font-semibold text-foreground mb-1.5">Niveau (4ème)</p>
+                              <div className="flex flex-wrap gap-2">
+                                {Array.from(letterLevels).sort().map((l) => {
+                                  const currentLevels = empLevelsByLetter.get(letter) || new Set();
+                                  const isActive = currentLevels.has(l);
+                                  return (
+                                    <button
+                                      key={l}
+                                      onClick={() => {
+                                        const next = new Set(currentLevels);
+                                        if (next.has(l)) next.delete(l);
+                                        else next.add(l);
+                                        setEmpLevelsByLetter(prev => new Map(prev).set(letter, next));
+                                      }}
+                                      className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                                        isActive
+                                          ? 'bg-primary text-primary-foreground'
+                                          : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                                      }`}
+                                    >
+                                      {l}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
