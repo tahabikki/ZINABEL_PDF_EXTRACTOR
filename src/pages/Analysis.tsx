@@ -47,9 +47,36 @@ const Analysis: React.FC = () => {
   const [filterClient, setFilterClient] = useState('');
   const [filterQtyMin, setFilterQtyMin] = useState('');
   const [filterQtyMax, setFilterQtyMax] = useState('');
+  const [empFilter, setEmpFilter] = useState<Set<string>>(new Set());
   
   const [sortKey, setSortKey] = useState<SortKey>('reference');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
+
+  const getFirstLetter = (emplacement: string) => {
+    const s = (emplacement || '').trim();
+    if (!s) return '#';
+    const first = s.charAt(0).toUpperCase();
+    if (/[A-Z]/.test(first)) return first;
+    return '#';
+  };
+
+  const allLetters = useMemo(() => {
+    const letters = new Set<string>();
+    refData.forEach((data) => {
+      const letter = getFirstLetter(data.mainEmplacement);
+      letters.add(letter);
+    });
+    return Array.from(letters).sort();
+  }, [refData]);
+
+  const toggleEmpLetter = (letter: string) => {
+    setEmpFilter((prev) => {
+      const s = new Set(prev);
+      if (s.has(letter)) s.delete(letter);
+      else s.add(letter);
+      return s;
+    });
+  };
 
   useEffect(() => {
     try {
@@ -142,6 +169,7 @@ const Analysis: React.FC = () => {
     });
 
     return entries.filter(([ref, data]) => {
+      if (empFilter.size > 0 && !empFilter.has(getFirstLetter(data.mainEmplacement))) return false;
       if (filterEmplacement && !data.mainEmplacement.toLowerCase().includes(filterEmplacement.toLowerCase())) return false;
       if (filterDesignation && !data.mainDesignation.toLowerCase().includes(filterDesignation.toLowerCase())) return false;
       if (filterQtyMin && data.totalQty < parseInt(filterQtyMin)) return false;
@@ -236,9 +264,10 @@ const Analysis: React.FC = () => {
     setFilterClient('');
     setFilterQtyMin('');
     setFilterQtyMax('');
+    setEmpFilter(new Set());
   };
 
-  const hasFilters = filterEmplacement || filterDesignation || filterClient || filterQtyMin || filterQtyMax;
+  const hasFilters = filterEmplacement || filterDesignation || filterClient || filterQtyMin || filterQtyMax || empFilter.size > 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -355,6 +384,30 @@ const Analysis: React.FC = () => {
                   className="h-8 text-sm"
                 />
               </div>
+
+              {allLetters.length > 0 && (
+                <div className="mt-3">
+                  <div className="text-xs text-muted-foreground mb-1">Emplacement (lettre):</div>
+                  <div className="flex flex-wrap gap-1">
+                    {allLetters.map((letter) => {
+                      const isActive = empFilter.has(letter);
+                      return (
+                        <button
+                          key={letter}
+                          onClick={() => toggleEmpLetter(letter)}
+                          className={`w-7 h-7 rounded text-xs font-medium transition-colors ${
+                            isActive
+                              ? 'bg-primary text-primary-foreground'
+                              : 'bg-secondary/50 hover:bg-secondary text-foreground border border-border'
+                          }`}
+                        >
+                          {letter}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             {isGlobalSearch && (
