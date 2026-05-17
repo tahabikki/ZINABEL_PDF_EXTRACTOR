@@ -1,34 +1,56 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ChevronDown, ChevronRight, X } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ChevronRight, X, ArrowUp, ArrowDown } from 'lucide-react';
 import type { ParsedOrder } from '@/types/order';
 
 type Product = {
   reference: string;
-  name?: string;
+  designation?: string;
   quantity?: number | null;
   brand?: string;
   client?: string;
   orderNumber?: string;
+  emplacement?: string;
+  destination?: string;
 };
+
+type RefData = {
+  totalQty: number;
+  mainBrand: string;
+  mainDesignation: string;
+  mainEmplacement: string;
+  mainDestination: string;
+  orders: Map<string, { qty: number; client: string }>;
+  brands: Map<string, number>;
+};
+
+type SortKey = 'reference' | 'brand' | 'emplacement' | 'destination' | 'designation' | 'totalQty';
+type SortDir = 'asc' | 'desc';
 
 const Analysis: React.FC = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [orders, setOrders] = useState<ParsedOrder[]>([]);
-  const [aggregatedByRef, setAggregatedByRef] = useState<Map<string, number>>(new Map());
-  const [orderBreakdown, setOrderBreakdown] = useState<Map<string, Map<string, { qty: number; client: string }>>>(new Map());
-  const [brandBreakdown, setBrandBreakdown] = useState<Map<string, Map<string, number>>>(new Map());
+  const [refData, setRefData] = useState<Map<string, RefData>>(new Map());
   const [fileName, setFileName] = useState<string>('');
   const [searchRaw, setSearchRaw] = useState<string>('');
   const [isGlobalSearch, setIsGlobalSearch] = useState(false);
   const [globalResults, setGlobalResults] = useState<Product[]>([]);
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [expandedRef, setExpandedRef] = useState<string | null>(null);
+  
+  const [filterEmplacement, setFilterEmplacement] = useState('');
+  const [filterDesignation, setFilterDesignation] = useState('');
+  const [filterClient, setFilterClient] = useState('');
+  const [filterQtyMin, setFilterQtyMin] = useState('');
+  const [filterQtyMax, setFilterQtyMax] = useState('');
+  
+  const [sortKey, setSortKey] = useState<SortKey>('reference');
+  const [sortDir, setSortDir] = useState<SortDir>('asc');
 
   useEffect(() => {
     try {
@@ -44,9 +66,7 @@ const Analysis: React.FC = () => {
   }, []);
 
   const processOrders = useCallback((ordersData: ParsedOrder[]) => {
-    const refTotals = new Map<string, number>();
-    const orderMap = new Map<string, Map<string, { qty: number; client: string }>>();
-    const brandMap = new Map<string, Map<string, number>>();
+    const refs = new Map<string, RefData>();
 
     for (const order of ordersData) {
       const orderNumber = order.header.noPiece || order.header.noDemande || order.header.reference || order.id;
@@ -55,28 +75,110 @@ const Analysis: React.FC = () => {
         const ref = line.reference.trim();
         const qty = typeof line.qte === 'number' ? Math.round(line.qte) : 0;
         const brand = line.brand || 'Sans marque';
+        const designation = line.designation || '';
+        const emplacement = line.emplacement || '';
+        const destination = line.meta?.destination as string || '';
 
         if (ref === '') continue;
 
-        refTotals.set(ref, (refTotals.get(ref) || 0) + qty);
-
-        if (!orderMap.has(ref)) orderMap.set(ref, new Map());
-        const existing = orderMap.get(ref)!.get(orderNumber);
-        if (existing) {
-          existing.qty += qty;
-        } else {
-          orderMap.get(ref)!.set(orderNumber, { qty, client: order.header.client || 'Client inconnu' });
+        if (!refs.has(ref)) {
+          refs.set(ref, {
+            totalQty: 0,
+            mainBrand: brand,
+            mainDesignation: designation,
+            mainEmplacement: emplacement,
+            mainDestination: destination,
+            orders: new Map(),
+            brands: new Map(),
+          });
         }
 
-        if (!brandMap.has(ref)) brandMap.set(ref, new Map());
-        brandMap.get(ref)!.set(brand, (brandMap.get(ref)!.get(brand) || 0) + qty);
+        const data = refs.get(ref)!;
+        data.totalQty += qty;
+        
+        if (data.mainBrand === 'Sans marque' && brand !== 'Sans marque') {
+          data.mainBrand = brand;
+        }
+        if (!data.mainDesignation && designation) {
+          data.mainDesignation = designation;
+        }
+        if (!data.mainEmplacement && emplacement) {
+          data.mainEmplacement = emplacement;
+        }
+        if (!data.mainDestination && destination) {
+          data.mainDestination = destination;
+        }
+
+        const existingOrder = data.orders.get(orderNumber);
+        if (existingOrder) {
+          existingOrder.qty += qty;
+        } else {
+          data.orders.set(orderNumber, { qty, client: order.header.client || 'Client inconnu' });
+        }
+
+        data.brands.set(brand, (data.brands.get(brand) || 0) + qty);
       }
     }
 
-    setAggregatedByRef(refTotals);
-    setOrderBreakdown(orderMap);
-    setBrandBreakdown(brandMap);
+    setRefData(refs);
   }, []);
+
+  const sortedRefs = useMemo(() => {
+    const entries = [...refData.entries()];
+    entries.sort((a, b) => {
+      let cmp = 0;
+      switch (sortKey) {
+        case 'reference':
+          cmp = a[0].localeCompare(b[0]);
+          break;
+        case 'brand':
+          cmp = a[1].mainBrand.localeCompare(b[1].mainBrand);
+          break;
+        case 'designation':
+          cmp = a[1].mainDesignation.localeCompare(b[1].mainDesignation);
+          break;
+        case 'emplacement':
+          cmp = a[1].mainEmplacement.localeCompare(b[1].mainEmplacement);
+          break;
+        case 'destination':
+          cmp = a[1].mainDestination.localeCompare(b[1].mainDestination);
+          break;
+        case 'totalQty':
+          cmp = a[1].totalQty - b[1].totalQty;
+          break;
+      }
+      return sortDir === 'asc' ? cmp : -cmp;
+    });
+
+    return entries.filter(([ref, data]) => {
+      if (filterEmplacement && !data.mainEmplacement.toLowerCase().includes(filterEmplacement.toLowerCase())) return false;
+      if (filterDesignation && !data.mainDesignation.toLowerCase().includes(filterDesignation.toLowerCase())) return false;
+      if (filterQtyMin && data.totalQty < parseInt(filterQtyMin)) return false;
+      if (filterQtyMax && data.totalQty > parseInt(filterQtyMax)) return false;
+      if (filterClient) {
+        let hasClient = false;
+        data.orders.forEach((v) => {
+          if (v.client.toLowerCase().includes(filterClient.toLowerCase())) hasClient = true;
+        });
+        if (!hasClient) return false;
+      }
+      return true;
+    });
+  }, [refData, sortKey, sortDir, filterEmplacement, filterDesignation, filterClient, filterQtyMin, filterQtyMax]);
+
+  const toggleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortDir('asc');
+    }
+  };
+
+  const SortIcon = ({ column }: { column: SortKey }) => {
+    if (sortKey !== column) return null;
+    return sortDir === 'asc' ? <ArrowUp className="h-3 w-3 ml-1 inline" /> : <ArrowDown className="h-3 w-3 ml-1 inline" />;
+  };
 
   const doGlobalSearch = () => {
     const qRaw = searchRaw || '';
@@ -96,11 +198,13 @@ const Analysis: React.FC = () => {
         if (terms.every((t) => ref.includes(t) || name.includes(t))) {
           results.push({
             reference: line.reference,
-            name: line.designation,
+            designation: line.designation,
             quantity: line.qte,
             brand: line.brand,
             client: order.header.client,
             orderNumber,
+            emplacement: line.emplacement,
+            destination: line.meta?.destination as string || '',
           });
         }
       }
@@ -136,23 +240,15 @@ const Analysis: React.FC = () => {
     setExpandedRef((prev) => (prev === ref ? null : ref));
   };
 
-  const allSelected = aggregatedByRef.size > 0 && [...aggregatedByRef.keys()].every((ref) => selectedRows.has(ref));
-  const toggleSelectAll = () => {
-    if (allSelected) setSelectedRows(new Set());
-    else setSelectedRows(new Set(aggregatedByRef.keys()));
+  const clearFilters = () => {
+    setFilterEmplacement('');
+    setFilterDesignation('');
+    setFilterClient('');
+    setFilterQtyMin('');
+    setFilterQtyMax('');
   };
 
-  const getOrderBreakdown = (ref: string) => {
-    const map = orderBreakdown.get(ref);
-    if (!map) return [];
-    return [...map.entries()].sort((a, b) => b[1].qty - a[1].qty);
-  };
-
-  const getBrandBreakdown = (ref: string) => {
-    const map = brandBreakdown.get(ref);
-    if (!map) return [];
-    return [...map.entries()].sort((a, b) => b[1] - a[1]);
-  };
+  const hasFilters = filterEmplacement || filterDesignation || filterClient || filterQtyMin || filterQtyMax;
 
   return (
     <div className="min-h-screen bg-background">
@@ -203,11 +299,11 @@ const Analysis: React.FC = () => {
                 <Input className="w-full" placeholder="Nom du fichier PDF" value={fileName} onChange={(e) => setFileName(e.target.value)} />
               </div>
               <div className="w-full flex items-center">
-                <Button className="w-full" onClick={handleDownload} disabled={aggregatedByRef.size === 0}>Télécharger PDF</Button>
+                <Button className="w-full" onClick={handleDownload} disabled={refData.size === 0}>Télécharger PDF</Button>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-4 mb-4">
               <div className="w-1/3">
                 {(isGlobalSearch) ? (
                   <div className="text-left">
@@ -219,10 +315,55 @@ const Analysis: React.FC = () => {
                 ) : <div />}
               </div>
               <div className="w-1/3 text-center">
-                <div className="text-sm font-medium">Références uniques: {aggregatedByRef.size}</div>
+                <div className="text-sm font-medium">Références uniques: {sortedRefs.length}{refData.size !== sortedRefs.length && ` (${refData.size} total)`}</div>
               </div>
               <div className="w-1/3 text-right">
                 <div className="text-sm">Sélectionnées: {selectedRows.size} référence(s)</div>
+              </div>
+            </div>
+
+            <div className="mb-4 p-3 bg-muted/30 rounded-lg">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-sm font-semibold">Filtres:</span>
+                {hasFilters && (
+                  <Button variant="ghost" size="sm" onClick={clearFilters} className="text-xs text-muted-foreground">
+                    Effacer les filtres
+                  </Button>
+                )}
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                <Input
+                  placeholder="Emplacement"
+                  value={filterEmplacement}
+                  onChange={(e) => setFilterEmplacement(e.target.value)}
+                  className="h-8 text-sm"
+                />
+                <Input
+                  placeholder="Désignation"
+                  value={filterDesignation}
+                  onChange={(e) => setFilterDesignation(e.target.value)}
+                  className="h-8 text-sm"
+                />
+                <Input
+                  placeholder="Client"
+                  value={filterClient}
+                  onChange={(e) => setFilterClient(e.target.value)}
+                  className="h-8 text-sm"
+                />
+                <Input
+                  placeholder="Qté min"
+                  type="number"
+                  value={filterQtyMin}
+                  onChange={(e) => setFilterQtyMin(e.target.value)}
+                  className="h-8 text-sm"
+                />
+                <Input
+                  placeholder="Qté max"
+                  type="number"
+                  value={filterQtyMax}
+                  onChange={(e) => setFilterQtyMax(e.target.value)}
+                  className="h-8 text-sm"
+                />
               </div>
             </div>
 
@@ -238,6 +379,8 @@ const Analysis: React.FC = () => {
                         <tr className="text-left text-sm text-muted-foreground">
                           <th className="px-3 py-2">#</th>
                           <th className="px-3 py-2">Référence</th>
+                          <th className="px-3 py-2">Désignation</th>
+                          <th className="px-3 py-2">Emplacement</th>
                           <th className="px-3 py-2">Marque</th>
                           <th className="px-3 py-2">N° Commande</th>
                           <th className="px-3 py-2">Client</th>
@@ -247,13 +390,15 @@ const Analysis: React.FC = () => {
                       <tbody>
                         {globalResults.map((p, index) => {
                           const ref = p.reference.trim();
-                          const totalQty = aggregatedByRef.get(ref) ?? 0;
+                          const data = refData.get(ref);
                           return (
                             <tr key={`${ref}-${index}`} className="border-t">
                               <td className="px-3 py-2">
                                 <Checkbox checked={selectedRows.has(ref)} onCheckedChange={() => toggleRow(ref)} />
                               </td>
                               <td className="px-3 py-2 font-mono text-sm">{ref}</td>
+                              <td className="px-3 py-2 text-sm max-w-[200px] truncate">{p.designation || '-'}</td>
+                              <td className="px-3 py-2 text-sm">{p.emplacement || '-'}</td>
                               <td className="px-3 py-2 text-sm">{p.brand || '-'}</td>
                               <td className="px-3 py-2 text-sm">{p.orderNumber || '-'}</td>
                               <td className="px-3 py-2 text-sm">{p.client || '-'}</td>
@@ -275,25 +420,39 @@ const Analysis: React.FC = () => {
             {!isGlobalSearch && (
               <div className="overflow-auto border rounded-md mb-6">
                 <h3 className="text-lg font-semibold mb-2">Table des références agrégées</h3>
-                {aggregatedByRef.size === 0 ? (
-                  <div className="text-sm text-muted-foreground">Aucune donnée extraite des fichiers PDF.</div>
+                {sortedRefs.length === 0 ? (
+                  <div className="text-sm text-muted-foreground">Aucune donnée.</div>
                 ) : (
                   <table className="w-full">
                     <thead>
                       <tr className="text-left text-sm text-muted-foreground">
                         <th className="px-3 py-2 w-8"></th>
                         <th className="px-3 py-2">#</th>
-                        <th className="px-3 py-2">Référence</th>
-                        <th className="px-3 py-2">Marque</th>
-                        <th className="px-3 py-2 text-right">Total</th>
+                        <th className="px-3 py-2 cursor-pointer hover:text-foreground" onClick={() => toggleSort('reference')}>
+                          Référence <SortIcon column="reference" />
+                        </th>
+                        <th className="px-3 py-2 cursor-pointer hover:text-foreground" onClick={() => toggleSort('designation')}>
+                          Désignation <SortIcon column="designation" />
+                        </th>
+                        <th className="px-3 py-2 cursor-pointer hover:text-foreground" onClick={() => toggleSort('emplacement')}>
+                          Emplacement <SortIcon column="emplacement" />
+                        </th>
+                        <th className="px-3 py-2 cursor-pointer hover:text-foreground" onClick={() => toggleSort('destination')}>
+                          Destination <SortIcon column="destination" />
+                        </th>
+                        <th className="px-3 py-2 cursor-pointer hover:text-foreground" onClick={() => toggleSort('brand')}>
+                          Marque <SortIcon column="brand" />
+                        </th>
+                        <th className="px-3 py-2 text-right cursor-pointer hover:text-foreground" onClick={() => toggleSort('totalQty')}>
+                          Total <SortIcon column="totalQty" />
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {[...aggregatedByRef.entries()].map(([ref, totalQty]) => {
+                      {sortedRefs.map(([ref, data]) => {
                         const isExpanded = expandedRef === ref;
-                        const orders = getOrderBreakdown(ref);
-                        const brands = getBrandBreakdown(ref);
-                        const mainBrand = brands.length > 0 ? brands[0][0] : '-';
+                        const orders = [...data.orders.entries()].sort((a, b) => b[1].qty - a[1].qty);
+                        const brands = [...data.brands.entries()].sort((a, b) => b[1] - a[1]);
                         return (
                           <React.Fragment key={ref}>
                             <tr className="border-t bg-muted/30">
@@ -306,12 +465,15 @@ const Analysis: React.FC = () => {
                                 <Checkbox checked={selectedRows.has(ref)} onCheckedChange={() => toggleRow(ref)} />
                               </td>
                               <td className="px-3 py-2 font-mono text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{ref}</td>
-                              <td className="px-3 py-2 text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{mainBrand}</td>
-                              <td className="px-3 py-2 text-right font-medium">{totalQty}</td>
+                              <td className="px-3 py-2 text-sm max-w-[200px] truncate cursor-pointer" onClick={() => toggleExpand(ref)} title={data.mainDesignation}>{data.mainDesignation || '-'}</td>
+                              <td className="px-3 py-2 text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{data.mainEmplacement || '-'}</td>
+                              <td className="px-3 py-2 text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{data.mainDestination || '-'}</td>
+                              <td className="px-3 py-2 text-sm cursor-pointer" onClick={() => toggleExpand(ref)}>{data.mainBrand}</td>
+                              <td className="px-3 py-2 text-right font-medium">{data.totalQty}</td>
                             </tr>
                             {isExpanded && (
                               <tr>
-                                <td colSpan={5} className="p-0 bg-muted/10">
+                                <td colSpan={8} className="p-0 bg-muted/10">
                                   <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                       <h4 className="text-sm font-semibold mb-2">Par Commande</h4>
@@ -324,11 +486,11 @@ const Analysis: React.FC = () => {
                                           </tr>
                                         </thead>
                                         <tbody>
-                                          {orders.map(([orderNum, data]) => (
+                                          {orders.map(([orderNum, d]) => (
                                             <tr key={orderNum} className="border-t">
                                               <td className="py-1">{orderNum}</td>
-                                              <td className="py-1 text-sm">{data.client}</td>
-                                              <td className="py-1 text-right">{data.qty}</td>
+                                              <td className="py-1 text-sm">{d.client}</td>
+                                              <td className="py-1 text-right">{d.qty}</td>
                                             </tr>
                                           ))}
                                         </tbody>
@@ -383,14 +545,14 @@ const Analysis: React.FC = () => {
                     </thead>
                     <tbody>
                       {[...selectedRows].map((ref) => {
-                        const totalQty = aggregatedByRef.get(ref) ?? 0;
+                        const data = refData.get(ref);
                         return (
                           <tr key={ref} className="border-t">
                             <td className="px-3 py-2">
                               <Checkbox checked={true} onCheckedChange={() => toggleRow(ref)} />
                             </td>
                             <td className="px-3 py-2 font-mono text-sm">{ref}</td>
-                            <td className="px-3 py-2 text-right">{totalQty}</td>
+                            <td className="px-3 py-2 text-right">{data?.totalQty ?? 0}</td>
                             <td className="px-3 py-2">
                               <Button variant="ghost" size="sm" onClick={() => toggleRow(ref)}>
                                 <X className="h-3 w-3" />
