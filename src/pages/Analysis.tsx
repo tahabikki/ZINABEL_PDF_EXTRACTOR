@@ -480,87 +480,110 @@ const Analysis: React.FC = () => {
             </div>
 
             {showFilters && (
-              <div className="mb-4 p-3 bg-muted/30 rounded-lg">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-sm font-semibold">Filtres:</span>
+              <div className="mb-6 p-5 bg-gradient-to-br from-muted/40 to-muted/20 rounded-xl border border-border/60 shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary">
+                      <Filter className="h-4 w-4" />
+                    </div>
+                    <span className="text-base font-bold text-foreground">Filtres Avancés</span>
+                  </div>
                   {hasFilters && (
-                    <Button variant="ghost" size="sm" onClick={clearFilters} className="text-xs text-muted-foreground">
-                      Effacer les filtres
+                    <Button variant="outline" size="sm" onClick={clearFilters} className="text-xs text-muted-foreground hover:text-foreground">
+                      Effacer tout
                     </Button>
                   )}
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-6 gap-2 mb-3">
-                  <select
-                    value={filterEmplacement}
-                    onChange={(e) => setFilterEmplacement(e.target.value)}
-                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
-                  >
-                    <option value="">Emplacement (Tous)</option>
-                    {allEmplacements.map((emp) => (
-                      <option key={emp} value={emp}>{emp}</option>
-                    ))}
-                  </select>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground ml-1">Emplacement</label>
+                    <select
+                      value={filterEmplacement}
+                      onChange={(e) => setFilterEmplacement(e.target.value)}
+                      className="w-full h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    >
+                      <option value="">Tous</option>
+                      {allEmplacements.map((emp) => (
+                        <option key={emp} value={emp}>{emp}</option>
+                      ))}
+                    </select>
+                  </div>
 
-                  <select
-                    value={filterDesignation}
-                    onChange={(e) => setFilterDesignation(e.target.value)}
-                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
-                  >
-                    <option value="">Désignation (Tous)</option>
-                    {allDesignations.map((d) => (
-                      <option key={d} value={d}>{d.substring(0, 30)}{d.length > 30 ? '...' : ''}</option>
-                    ))}
-                  </select>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground ml-1">Désignation</label>
+                    <select
+                      value={filterDesignation}
+                      onChange={(e) => setFilterDesignation(e.target.value)}
+                      className="w-full h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    >
+                      <option value="">Tous</option>
+                      {allDesignations.map((d) => (
+                        <option key={d} value={d}>{d.substring(0, 35)}{d.length > 35 ? '...' : ''}</option>
+                      ))}
+                    </select>
+                  </div>
 
-                  <select
-                    value={filterClient}
-                    onChange={(e) => setFilterClient(e.target.value)}
-                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
-                  >
-                    <option value="">Client (Tous)</option>
-                    {allClients.map((c) => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground ml-1">Client</label>
+                    <select
+                      value={filterClient}
+                      onChange={(e) => setFilterClient(e.target.value)}
+                      className="w-full h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    >
+                      <option value="">Tous</option>
+                      {allClients.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
 
-                  <select
-                    value={filterBrand}
-                    onChange={(e) => setFilterBrand(e.target.value)}
-                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
-                  >
-                    <option value="">Marque (Tous)</option>
-                    {allBrands.map((b) => (
-                      <option key={b} value={b}>{b}</option>
-                    ))}
-                  </select>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground ml-1">Marque</label>
+                    <select
+                      value={filterBrand}
+                      onChange={(e) => setFilterBrand(e.target.value)}
+                      className="w-full h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    >
+                      <option value="">Tous</option>
+                      {allBrands.map((b) => (
+                        <option key={b} value={b}>{b}</option>
+                      ))}
+                    </select>
+                  </div>
 
-                  <select
-                    value={filterOrder}
-                    onChange={(e) => setFilterOrder(e.target.value)}
-                    className="h-8 text-sm rounded-md border border-input bg-background px-2"
-                  >
-                    <option value="">N° Commande (Tous)</option>
-                    {allOrders.map((o) => (
-                      <option key={o} value={o}>{o}</option>
-                    ))}
-                  </select>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground ml-1">N° Commande</label>
+                    <select
+                      value={filterOrder}
+                      onChange={(e) => setFilterOrder(e.target.value)}
+                      className="w-full h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    >
+                      <option value="">Tous</option>
+                      {allOrders.map((o) => (
+                        <option key={o} value={o}>{o}</option>
+                      ))}
+                    </select>
+                  </div>
 
-                  <div className="flex gap-1">
-                    <Input
-                      placeholder="Qté min"
-                      type="number"
-                      value={filterQtyMin}
-                      onChange={(e) => setFilterQtyMin(e.target.value)}
-                      className="h-8 text-sm"
-                    />
-                    <Input
-                      placeholder="Qté max"
-                      type="number"
-                      value={filterQtyMax}
-                      onChange={(e) => setFilterQtyMax(e.target.value)}
-                      className="h-8 text-sm"
-                    />
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground ml-1">Quantité</label>
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="Min"
+                        type="number"
+                        value={filterQtyMin}
+                        onChange={(e) => setFilterQtyMin(e.target.value)}
+                        className="h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                      />
+                      <Input
+                        placeholder="Max"
+                        type="number"
+                        value={filterQtyMax}
+                        onChange={(e) => setFilterQtyMax(e.target.value)}
+                        className="h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                      />
+                    </div>
                   </div>
                 </div>
 
