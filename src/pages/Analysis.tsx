@@ -39,7 +39,7 @@ const Analysis: React.FC = () => {
   const [isGlobalSearch, setIsGlobalSearch] = useState(false);
   const [globalResults, setGlobalResults] = useState<Product[]>([]);
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
-  const [expandedRef, setExpandedRef] = useState<string | null>(null);
+  const [expandedRefs, setExpandedRefs] = useState<Set<string>>(new Set());
 
   const [filterEmplacement, setFilterEmplacement] = useState('');
   const [filterDesignation, setFilterDesignation] = useState('');
@@ -152,6 +152,37 @@ const Analysis: React.FC = () => {
     return Array.from(clients).sort();
   }, [refData]);
 
+  const filteredClients = useMemo(() => {
+    if (!filterBrand) return allClients;
+    const clients = new Set<string>();
+    refData.forEach((data) => {
+      if (data.brands.has(filterBrand)) {
+        data.orders.forEach((v) => clients.add(v.client));
+      }
+    });
+    return Array.from(clients).sort();
+  }, [refData, filterBrand, allClients]);
+
+  const brandOrderCounts = useMemo(() => {
+    const brandOrders = new Map<string, Set<string>>();
+    refData.forEach((data) => {
+      const orderNums = [...data.orders.keys()];
+      data.brands.forEach((_, brand) => {
+        if (!brandOrders.has(brand)) {
+          brandOrders.set(brand, new Set());
+        }
+        orderNums.forEach((orderNum) => {
+          brandOrders.get(brand)!.add(orderNum);
+        });
+      });
+    });
+    const result = new Map<string, number>();
+    brandOrders.forEach((orders, brand) => {
+      result.set(brand, orders.size);
+    });
+    return result;
+  }, [refData]);
+
   const allBrands = useMemo(() => {
     const brands = new Set<string>();
     refData.forEach((data) => {
@@ -167,6 +198,17 @@ const Analysis: React.FC = () => {
     });
     return Array.from(nums).sort();
   }, [refData]);
+
+  const filteredOrders = useMemo(() => {
+    if (!filterBrand) return allOrders;
+    const orders = new Set<string>();
+    refData.forEach((data) => {
+      if (data.brands.has(filterBrand)) {
+        data.orders.forEach((_, num) => orders.add(num));
+      }
+    });
+    return Array.from(orders).sort();
+  }, [refData, filterBrand, allOrders]);
 
   const toggleEmpLetter = (letter: string) => {
     setEmpFilter((prev) => {
@@ -380,7 +422,12 @@ const Analysis: React.FC = () => {
   };
 
   const toggleExpand = (ref: string) => {
-    setExpandedRef((prev) => (prev === ref ? null : ref));
+    setExpandedRefs((prev) => {
+      const s = new Set(prev);
+      if (s.has(ref)) s.delete(ref);
+      else s.add(ref);
+      return s;
+    });
   };
 
   const clearFilters = () => {
@@ -532,7 +579,7 @@ const Analysis: React.FC = () => {
                       className="w-full h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
                     >
                       <option value="">Tous</option>
-                      {allClients.map((c) => (
+                      {filteredClients.map((c) => (
                         <option key={c} value={c}>{c}</option>
                       ))}
                     </select>
@@ -542,7 +589,13 @@ const Analysis: React.FC = () => {
                     <label className="text-xs font-medium text-muted-foreground ml-1">Marque</label>
                     <select
                       value={filterBrand}
-                      onChange={(e) => setFilterBrand(e.target.value)}
+                      onChange={(e) => {
+                        setFilterBrand(e.target.value);
+                        if (e.target.value) {
+                          setFilterClient('');
+                          setFilterOrder('');
+                        }
+                      }}
                       className="w-full h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
                     >
                       <option value="">Tous</option>
@@ -550,6 +603,13 @@ const Analysis: React.FC = () => {
                         <option key={b} value={b}>{b}</option>
                       ))}
                     </select>
+                    {filterBrand && (
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                          {brandOrderCounts.get(filterBrand) || 0} commande(s)
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="space-y-1.5">
@@ -560,7 +620,7 @@ const Analysis: React.FC = () => {
                       className="w-full h-10 text-sm rounded-lg border border-input bg-background px-3 shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
                     >
                       <option value="">Tous</option>
-                      {allOrders.map((o) => (
+                      {filteredOrders.map((o) => (
                         <option key={o} value={o}>{o}</option>
                       ))}
                     </select>
@@ -854,7 +914,7 @@ const Analysis: React.FC = () => {
                     </thead>
                     <tbody>
                       {sortedRefs.map(([ref, data]) => {
-                        const isExpanded = expandedRef === ref;
+                        const isExpanded = expandedRefs.has(ref);
                         const orders = [...data.orders.entries()].sort((a, b) => b[1].qty - a[1].qty);
                         const brands = [...data.brands.entries()].sort((a, b) => b[1] - a[1]);
                         return (
